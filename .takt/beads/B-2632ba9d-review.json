@@ -23,10 +23,16 @@
   ],
   "expected_globs": [],
   "touched_files": [
-    "memory.py"
+    "docs/memory/memory-cli.md",
+    "memory.py",
+    "tests/__pycache__/test_memory_cli.cpython-314-pytest-9.0.2.pyc",
+    "tests/test_memory_cli.py"
   ],
   "changed_files": [
-    "memory.py"
+    "docs/memory/memory-cli.md",
+    "memory.py",
+    "tests/__pycache__/test_memory_cli.cpython-314-pytest-9.0.2.pyc",
+    "tests/test_memory_cli.py"
   ],
   "updated_docs": [],
   "handoff_summary": {
