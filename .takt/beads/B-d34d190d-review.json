@@ -25,11 +25,21 @@
   "expected_globs": [],
   "touched_files": [
     ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
-    ".claude/skills/agent-memory/memory.py"
+    ".claude/skills/agent-memory/memory.py",
+    "SKILL.md",
+    "apm.yml",
+    "tests/__pycache__/__init__.cpython-314.pyc",
+    "tests/__pycache__/test_ingest_chunking.cpython-314-pytest-9.0.2.pyc",
+    "tests/test_ingest_chunking.py"
   ],
   "changed_files": [
     ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
-    ".claude/skills/agent-memory/memory.py"
+    ".claude/skills/agent-memory/memory.py",
+    "SKILL.md",
+    "apm.yml",
+    "tests/__pycache__/__init__.cpython-314.pyc",
+    "tests/__pycache__/test_ingest_chunking.cpython-314-pytest-9.0.2.pyc",
+    "tests/test_ingest_chunking.py"
   ],
   "updated_docs": [],
   "handoff_summary": {
