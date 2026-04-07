@@ -25,10 +25,14 @@
     "*.py"
   ],
   "touched_files": [
-    "memory.py"
+    "memory.py",
+    "specs/planned/agent-memory-query-and-crud-operations.md",
+    "test_commands.py"
   ],
   "changed_files": [
-    "memory.py"
+    "memory.py",
+    "specs/planned/agent-memory-query-and-crud-operations.md",
+    "test_commands.py"
   ],
   "updated_docs": [],
   "handoff_summary": {
