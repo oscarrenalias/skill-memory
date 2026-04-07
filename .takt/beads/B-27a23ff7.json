@@ -6,7 +6,9 @@
   "status": "ready",
   "bead_type": "task",
   "parent_id": "B-266c0a28",
-  "dependencies": [],
+  "dependencies": [
+    "B-2632ba9d"
+  ],
   "acceptance_criteria": [
     "./memory.py init creates the memories and memories_vec tables",
     "Running init twice does not raise an error",
