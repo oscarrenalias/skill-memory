@@ -3,7 +3,7 @@
   "title": "Test query and CRUD commands",
   "agent_type": "tester",
   "description": "Write and run integration tests covering all four new subcommands: search, delete, list, and stats. Tests should use a temporary DB to avoid polluting state. Cover happy paths, edge cases (nonexistent IDs, empty DB for stats, --limit 0 for list), and JSON output shapes.",
-  "status": "blocked",
+  "status": "ready",
   "bead_type": "task",
   "parent_id": "B-cb0b48a1",
   "dependencies": [],
@@ -52,7 +52,7 @@
     "test_coverage_notes": "",
     "known_limitations": ""
   },
-  "block_reason": "Expected implementation file .claude/skills/agent-memory/memory.py is absent. The .claude/skills/agent-memory/ directory does not exist in the worktree HEAD. All developer implementation beads for search, delete, list, and stats commands are in ready/in_progress state with no code committed to the feature branch. This is the same blocking condition that halted review bead B-c780e85e. Testing cannot proceed without the implementation.",
+  "block_reason": "",
   "conflict_risks": "None from this bead; no files were changed.",
   "branch_name": "feature/b-cb0b48a1",
   "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1",
@@ -110,6 +110,13 @@
       "event": "corrective_planned",
       "agent_type": "tester",
       "summary": "Created corrective bead B-4b0b550d-corrective for blocked issue",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T18:56:12.798468+00:00",
+      "event": "retried",
+      "agent_type": "tester",
+      "summary": "Requeued blocked bead after corrective bead B-4b0b550d-corrective completed",
       "details": {}
     }
   ],
@@ -227,7 +234,9 @@
         "attempt": 1
       }
     ],
-    "auto_corrective_bead_id": "B-4b0b550d-corrective"
+    "auto_corrective_bead_id": "B-4b0b550d-corrective",
+    "last_corrective_retry_source": "B-4b0b550d-corrective",
+    "last_corrective_retry_commit": "df3f5dae3fe17188229ac8ca28b3194419573d57"
   },
   "labels": []
 }
