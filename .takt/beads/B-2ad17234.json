@@ -125,6 +125,13 @@
       "agent_type": "developer",
       "summary": "Cannot write to worktree file \u2014 all write attempts (Edit, Write, Bash) to `.claude/skills/agent-memory/memory.py` were denied by the permission system with \"Claude requested permissions to write to \u2026 but you haven't granted it yet.\" The SHA256 of the model was successfully computed (828e1496d7fabb79cfa4dcd84fa38625c0d3d21da474a00f08db0f559940cf35) and the full implementation is ready; only file-write permission is blocking completion.",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:35:09.179844+00:00",
+      "event": "corrective_planned",
+      "agent_type": "developer",
+      "summary": "Created corrective bead B-2ad17234-corrective for blocked issue",
+      "details": {}
     }
   ],
   "metadata": {
@@ -335,7 +342,8 @@
         "source": "provider",
         "attempt": 1
       }
-    ]
+    ],
+    "auto_corrective_bead_id": "B-2ad17234-corrective"
   },
   "labels": []
 }
