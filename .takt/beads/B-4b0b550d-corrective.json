@@ -1,0 +1,68 @@
+{
+  "bead_id": "B-4b0b550d-corrective",
+  "title": "Corrective fix for B-4b0b550d: Test query and CRUD commands",
+  "agent_type": "developer",
+  "description": "Blocked reason: Expected implementation file .claude/skills/agent-memory/memory.py is absent. The .claude/skills/agent-memory/ directory does not exist in the worktree HEAD. All developer implementation beads for search, delete, list, and stats commands are in ready/in_progress state with no code committed to the feature branch. This is the same blocking condition that halted review bead B-c780e85e. Testing cannot proceed without the implementation.\n\nRemaining work: Tests cannot be written or run until memory.py is implemented and committed to the feature branch.",
+  "status": "ready",
+  "bead_type": "task",
+  "parent_id": "B-4b0b550d",
+  "dependencies": [],
+  "acceptance_criteria": [
+    "Implement the minimum fix required to unblock B-4b0b550d.",
+    "Update tests/docs as needed for the corrective change.",
+    "Leave a handoff summary that states how the parent bead can be retried."
+  ],
+  "linked_docs": [
+    "specs/drafts/agent-memory-query-and-crud-operations.md"
+  ],
+  "feature_root_id": "B-cb0b48a1",
+  "execution_branch_name": "feature/b-cb0b48a1",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1",
+  "expected_files": [],
+  "expected_globs": [
+    ".claude/skills/agent-memory/test_*.py",
+    ".claude/skills/agent-memory/*_test.py"
+  ],
+  "touched_files": [],
+  "changed_files": [],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "None from this bead; no files were changed.",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-07T18:43:55.574322+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    }
+  ],
+  "metadata": {
+    "auto_corrective_for": "B-4b0b550d"
+  },
+  "labels": []
+}
