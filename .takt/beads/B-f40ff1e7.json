@@ -91,6 +91,15 @@
       "agent_type": "developer",
       "summary": "Worker started",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T20:39:23.589509+00:00",
+      "event": "guardrails_applied",
+      "agent_type": "developer",
+      "summary": "Applied guardrails from .takt/agent-runs/B-f40ff1e7/repo/templates/agents/developer.md",
+      "details": {
+        "template_path": ".takt/agent-runs/B-f40ff1e7/repo/templates/agents/developer.md"
+      }
     }
   ],
   "metadata": {
@@ -107,7 +116,64 @@
     ],
     "skill_bundle_hash": "3d67820a7fb8135bc362b2b95d14300da249795bcc32c95f5dd45f36e15acfa1",
     "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-f40ff1e7/home",
-    "runner_backend": "claude"
+    "runner_backend": "claude",
+    "guardrails": {
+      "agent_type": "developer",
+      "template_path": ".takt/agent-runs/B-f40ff1e7/repo/templates/agents/developer.md",
+      "template_text": "# Developer Guardrails\n\nPrimary responsibility: Implement only the assigned bead inside the existing architecture and file scope.\n\nAllowed actions:\n- Modify code, configuration, or local docs required to complete the assigned bead.\n- Create sub-beads for discovered follow-up work that should be handled separately.\n- Verify your `Python` changes compile and import correctly with a quick syntax check: `python -m py_compile`.\n\nDisallowed actions:\n- Run any test suite \u2014 not even a targeted `pytest` run or any subset. Test execution is exclusively the tester agent's responsibility. Running tests wastes the agent budget and delays the pipeline.\n- Redesign unrelated architecture or broaden scope beyond the assigned bead.\n- Perform final review signoff in place of a review agent.\n- Silently absorb unrelated test, documentation, or planning work that should be handed off.\n\nExpected outputs:\n- Completed or blocked JSON with concise implementation summary.\n- Accurate touched files, changed files, risks, and follow-up handoff fields.",
+      "captured_at": "2026-04-07T20:39:23.589493+00:00"
+    },
+    "worker_prompt_context": {
+      "bead_id": "B-f40ff1e7",
+      "feature_root_id": "B-266c0a28",
+      "title": "Implement add command",
+      "agent_type": "developer",
+      "description": "Implement the add subcommand: parse <text>, optional --source, optional --meta KEY=VALUE repeatable args, auto-init DB if not present, embed text via _embed, generate UUID v4, wrap both inserts (memories + memories_vec using lastrowid) in a single transaction, print 'Added <uuid>'.",
+      "status": "in_progress",
+      "acceptance_criteria": [
+        "./memory.py add 'hello world' prints 'Added <uuid>' where uuid is a valid UUID v4",
+        "Two add calls with different text produce two distinct UUIDs",
+        "Both memories and memories_vec tables contain a matching row after add",
+        "Running add without prior init auto-initialises the DB",
+        "--source and --meta flags are stored in the memories row",
+        "A simulated failure after the memories insert (e.g. bad vec insert) leaves the DB unchanged (transaction rolled back)"
+      ],
+      "dependencies": [
+        "B-27a23ff7",
+        "B-22336fc3"
+      ],
+      "linked_docs": [
+        "specs/drafts/agent-memory-core-infrastructure.md"
+      ],
+      "execution_branch_name": "feature/b-266c0a28",
+      "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
+      "expected_files": [
+        "memory.py"
+      ],
+      "expected_globs": [],
+      "touched_files": [],
+      "conflict_risks": "",
+      "handoff_summary": {
+        "completed": "",
+        "remaining": "",
+        "risks": "",
+        "verdict": "",
+        "findings_count": 0,
+        "requires_followup": false,
+        "changed_files": [],
+        "updated_docs": [],
+        "next_action": "",
+        "next_agent": "",
+        "block_reason": "",
+        "expected_files": [],
+        "expected_globs": [],
+        "touched_files": [],
+        "conflict_risks": "",
+        "design_decisions": "",
+        "test_coverage_notes": "",
+        "known_limitations": ""
+      }
+    }
   },
   "labels": []
 }
