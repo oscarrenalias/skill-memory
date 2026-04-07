@@ -29,12 +29,14 @@
   "touched_files": [
     ".claude/skills/agent-memory/__pycache__/test_commands.cpython-314-pytest-9.0.3.pyc",
     "__pycache__/memory.cpython-314.pyc",
-    "memory.py"
+    "memory.py",
+    "test_commands.py"
   ],
   "changed_files": [
     ".claude/skills/agent-memory/__pycache__/test_commands.cpython-314-pytest-9.0.3.pyc",
     "__pycache__/memory.cpython-314.pyc",
-    "memory.py"
+    "memory.py",
+    "test_commands.py"
   ],
   "updated_docs": [],
   "handoff_summary": {
