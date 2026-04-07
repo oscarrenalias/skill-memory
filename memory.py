@@ -215,7 +215,38 @@ def cmd_init(args: argparse.Namespace) -> None:
 
 
 def cmd_add(args: argparse.Namespace) -> None:
-    raise NotImplementedError("add not yet implemented")
+    conn, _ = _auto_init(args)
+    memory_id = str(uuid.uuid4())
+    now = datetime.now(timezone.utc).isoformat()
+
+    # Parse --meta KEY=VALUE pairs into a dict
+    meta: dict = {}
+    for kv in args.meta:
+        if "=" not in kv:
+            print(f"error: --meta value must be KEY=VALUE, got: {kv!r}", file=sys.stderr)
+            sys.exit(1)
+        k, v = kv.split("=", 1)
+        meta[k] = v
+
+    # Embed the text
+    embeddings = _embed([args.text])
+    vec_bytes = embeddings[0].tobytes()
+
+    try:
+        with conn:
+            cur = conn.execute(
+                "INSERT INTO memories (id, content, source, metadata, created_at) VALUES (?, ?, ?, ?, ?)",
+                (memory_id, args.text, args.source, json.dumps(meta), now),
+            )
+            rowid = cur.lastrowid
+            conn.execute(
+                "INSERT INTO memories_vec (rowid, embedding) VALUES (?, ?)",
+                (rowid, vec_bytes),
+            )
+    finally:
+        conn.close()
+
+    print(f"Added {memory_id}")
 
 
 def cmd_search(args: argparse.Namespace) -> None:
