@@ -3,7 +3,7 @@
   "title": "Implement stats command",
   "agent_type": "developer",
   "description": "Add the `stats` subcommand to memory.py. Print DB path, total row count via SELECT COUNT(*) FROM memories, and file size via os.path.getsize. If the DB file does not exist, print a descriptive message and exit 0.",
-  "status": "blocked",
+  "status": "ready",
   "bead_type": "task",
   "parent_id": "B-cb0b48a1",
   "dependencies": [],
@@ -58,7 +58,7 @@
     "test_coverage_notes": "",
     "known_limitations": ""
   },
-  "block_reason": "claude -p produced no structured output. is_error=False, stop_reason=end_turn, result='End-to-end confirmed: bootstrap ran, then `stats` on a non-existent DB printed `\"No memory DB found at ...\"` and exited 0. Implementation is complete.'",
+  "block_reason": "",
   "conflict_risks": "",
   "branch_name": "feature/b-cb0b48a1",
   "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1",
@@ -117,6 +117,13 @@
       "event": "corrective_planned",
       "agent_type": "developer",
       "summary": "Created corrective bead B-e2cb1987-corrective for blocked issue",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T18:56:29.287883+00:00",
+      "event": "retried",
+      "agent_type": "developer",
+      "summary": "Requeued blocked bead after corrective bead B-e2cb1987-corrective completed",
       "details": {}
     }
   ],
@@ -196,7 +203,9 @@
       "next_agent": "",
       "block_reason": "claude -p produced no structured output. is_error=False, stop_reason=end_turn, result='End-to-end confirmed: bootstrap ran, then `stats` on a non-existent DB printed `\"No memory DB found at ...\"` and exited 0. Implementation is complete.'"
     },
-    "auto_corrective_bead_id": "B-e2cb1987-corrective"
+    "auto_corrective_bead_id": "B-e2cb1987-corrective",
+    "last_corrective_retry_source": "B-e2cb1987-corrective",
+    "last_corrective_retry_commit": "9d31bee6b15c6c9ff25b09794bb90224a2789ef6"
   },
   "labels": []
 }
