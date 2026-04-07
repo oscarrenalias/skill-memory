@@ -1,0 +1,6 @@
+
+# takt
+.takt/worktrees/
+.takt/telemetry/
+.takt/logs/
+.takt/agent-runs/
