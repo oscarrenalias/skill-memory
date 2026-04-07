@@ -3,7 +3,7 @@
   "title": "Implement DB schema and init command",
   "agent_type": "developer",
   "description": "Add the DB path resolution logic (--db flag, AGENT_MEMORY_DB env var, default ~/.local/share/agent-memory/memories.db) and implement the init command: create parent dirs, load sqlite-vec, CREATE TABLE IF NOT EXISTS memories, CREATE VIRTUAL TABLE IF NOT EXISTS memories_vec. Print confirmation message.",
-  "status": "ready",
+  "status": "in_progress",
   "bead_type": "task",
   "parent_id": "B-266c0a28",
   "dependencies": [
@@ -56,7 +56,10 @@
   "conflict_risks": "None \u2014 only memory.py is modified; no sibling beads touch this file.",
   "branch_name": "feature/b-266c0a28",
   "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
-  "lease": null,
+  "lease": {
+    "owner": "developer:B-27a23ff7",
+    "expires_at": "2026-04-07T19:50:22.323926+00:00"
+  },
   "retries": 0,
   "execution_history": [
     {
@@ -158,6 +161,30 @@
       "event": "retried",
       "agent_type": "developer",
       "summary": "Bead requeued",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:20:23.478772+00:00",
+      "event": "skills_loaded",
+      "agent_type": "developer",
+      "summary": "Loaded 7 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/developer-implementation",
+          "capability/code-edit",
+          "task/corrective-implementation",
+          "task/refactor-safe",
+          "task/migration",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-07T19:20:23.478806+00:00",
+      "event": "started",
+      "agent_type": "developer",
+      "summary": "Worker started",
       "details": {}
     }
   ],
