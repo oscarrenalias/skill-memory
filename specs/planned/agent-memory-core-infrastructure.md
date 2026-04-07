@@ -32,10 +32,10 @@ Build the foundational layer of the `agent-memory` Claude Code skill: a Python C
 
 ### 1. Directory layout
 
-Create `.claude/skills/agent-memory/` with:
+Create the following files at the repo root:
 
 ```
-.claude/skills/agent-memory/
+./
 ├── memory.py            # CLI entry point (executable, shebang #!/usr/bin/env python3)
 ├── .gitignore           # ignores .venv/
 └── assets/              # vendored tokenizer files (small, committed to git)
@@ -88,7 +88,7 @@ On first run, two things happen sequentially before any command executes:
 
 Both are one-time costs. A message is printed to stderr for each so the caller knows why startup is slow.
 
-`.venv/` must be listed in `.claude/skills/agent-memory/.gitignore` so it is never committed.
+`.venv/` must be listed in `.gitignore` so it is never committed.
 
 ### 3. DB schema
 
@@ -171,12 +171,12 @@ Both inserts must be wrapped in a single transaction; roll back on any failure.
 
 | File | Change |
 |---|---|
-| `.claude/skills/agent-memory/memory.py` | New — executable CLI with shebang, bootstrap, init and add commands |
-| `.claude/skills/agent-memory/.gitignore` | New — ignores `.venv/` |
-| `.claude/skills/agent-memory/assets/tokenizer.json` | New — vendored BGE fast tokenizer (~711 KB) |
-| `.claude/skills/agent-memory/assets/tokenizer_config.json` | New — vendored BGE tokenizer config (~366 B) |
-| `.claude/skills/agent-memory/assets/vocab.txt` | New — vendored BGE legacy vocab (~232 KB) |
-| `.claude/skills/agent-memory/assets/special_tokens_map.json` | New — vendored BGE special tokens (~125 B) |
+| `memory.py` | New — executable CLI with shebang, bootstrap, init and add commands |
+| `.gitignore` | New — ignores `.venv/` |
+| `assets/tokenizer.json` | New — vendored BGE fast tokenizer (~711 KB) |
+| `assets/tokenizer_config.json` | New — vendored BGE tokenizer config (~366 B) |
+| `assets/vocab.txt` | New — vendored BGE legacy vocab (~232 KB) |
+| `assets/special_tokens_map.json` | New — vendored BGE special tokens (~125 B) |
 
 ## Acceptance Criteria
 
