@@ -107,7 +107,7 @@ DB size:   1.2 MB
 
 | File | Change |
 |---|---|
-| `.claude/skills/agent-memory/memory.py` | Add search, delete, list, stats subcommand handlers |
+| `memory.py` | Add search, delete, list, stats subcommand handlers |
 
 No new files are introduced by this spec.
 
