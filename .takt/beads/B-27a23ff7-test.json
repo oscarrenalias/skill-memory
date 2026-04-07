@@ -3,7 +3,7 @@
   "title": "Test Implement DB schema and init command",
   "agent_type": "tester",
   "description": "Validate implementation for B-27a23ff7",
-  "status": "in_progress",
+  "status": "done",
   "bead_type": "task",
   "parent_id": "B-27a23ff7",
   "dependencies": [
@@ -17,47 +17,55 @@
   "execution_branch_name": "feature/b-266c0a28",
   "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
   "expected_files": [
-    "__pycache__/memory.cpython-314.pyc",
-    "memory.py"
+    "tests/test_db_init.py"
   ],
   "expected_globs": [],
   "touched_files": [
     "__pycache__/memory.cpython-314.pyc",
-    "memory.py"
+    "tests/__pycache__/test_db_init.cpython-314-pytest-9.0.2.pyc",
+    "tests/test_db_init.py"
   ],
   "changed_files": [
     "__pycache__/memory.cpython-314.pyc",
-    "memory.py"
+    "tests/__pycache__/test_db_init.cpython-314-pytest-9.0.2.pyc",
+    "tests/test_db_init.py"
   ],
   "updated_docs": [],
   "handoff_summary": {
-    "completed": "",
-    "remaining": "",
-    "risks": "",
-    "verdict": "",
+    "completed": "Authored tests/test_db_init.py with 15 tests across 6 test classes. All path-resolution, output-format, and idempotency tests pass using a subprocess stub that avoids the sqlite_vec/vec0 dependency. Integration tests for actual DB/table creation are gated on venv availability via @skipUnless. Confirmed no regressions in tests/test_memory_cli.py (7/7 pass).",
+    "remaining": "6 integration tests (TestInitCreatesDb, TestInitIdempotent) remain skipped until _bootstrap() creates the .venv with sqlite_vec on first real invocation. These will activate automatically once the venv is present.",
+    "risks": "sqlite_vec must be installed in .venv for integration tests to run; _bootstrap() handles this on first run but CI environments need network access. The CREATE VIRTUAL TABLE USING vec0 DDL is only validated in integration tests, so schema correctness for the vector table cannot be verified without the venv.",
+    "verdict": "approved",
     "findings_count": 0,
     "requires_followup": false,
-    "changed_files": [],
+    "changed_files": [
+      "__pycache__/memory.cpython-314.pyc",
+      "tests/__pycache__/test_db_init.cpython-314-pytest-9.0.2.pyc",
+      "tests/test_db_init.py"
+    ],
     "updated_docs": [],
-    "next_action": "",
-    "next_agent": "",
+    "next_action": "Proceed to review agent for B-27a23ff7 feature bead.",
+    "next_agent": "review",
     "block_reason": "",
-    "expected_files": [],
+    "expected_files": [
+      "tests/test_db_init.py"
+    ],
     "expected_globs": [],
-    "touched_files": [],
-    "conflict_risks": "",
-    "design_decisions": "",
-    "test_coverage_notes": "",
-    "known_limitations": ""
+    "touched_files": [
+      "__pycache__/memory.cpython-314.pyc",
+      "tests/__pycache__/test_db_init.cpython-314-pytest-9.0.2.pyc",
+      "tests/test_db_init.py"
+    ],
+    "conflict_risks": "None \u2014 tests/test_db_init.py is a new file; no sibling beads touch it.",
+    "design_decisions": "Used subprocess + temp-file wrapper (not -c one-liner) to patch sys.prefix and stub _init_db, avoiding both the bootstrap exec and the sqlite_vec/vec0 hard dependency for path/output tests. Integration tests use @skipUnless on venv existence so they activate automatically once bootstrapped.",
+    "test_coverage_notes": "Criteria covered: (1) DB file created at --db path (stub + integration); (2) idempotency \u2014 exits 0 and same output on second run (stub + integration); (3) --db flag overrides path and printed in output; (4) AGENT_MEMORY_DB env var overrides path; (5) exact output string 'Initialised memory DB at <path>' with no trailing stderr. Schema coverage (memories, memories_vec tables) gated on venv.",
+    "known_limitations": "6 integration tests skipped until managed venv with sqlite_vec is present. vec0 virtual table schema correctness is untestable without the extension loaded."
   },
-  "block_reason": "Deferred due to file-scope conflict with active bead B-e2cb1987-docs",
-  "conflict_risks": "None \u2014 only memory.py is modified; no sibling beads touch this file.",
+  "block_reason": "",
+  "conflict_risks": "None \u2014 tests/test_db_init.py is a new file; no sibling beads touch it.",
   "branch_name": "feature/b-266c0a28",
   "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
-  "lease": {
-    "owner": "tester:B-27a23ff7-test",
-    "expires_at": "2026-04-07T20:55:05.868503+00:00"
-  },
+  "lease": null,
   "retries": 0,
   "execution_history": [
     {
@@ -196,6 +204,13 @@
       "details": {
         "template_path": ".takt/agent-runs/B-27a23ff7-test/repo/templates/agents/tester.md"
       }
+    },
+    {
+      "timestamp": "2026-04-07T20:28:38.909556+00:00",
+      "event": "completed",
+      "agent_type": "tester",
+      "summary": "Wrote tests/test_db_init.py covering all 5 acceptance criteria for bead B-27a23ff7 (DB schema and init command). 9 of 15 tests pass immediately; 6 integration tests are correctly skipped until the managed venv (sqlite_vec) is bootstrapped.",
+      "details": {}
     }
   ],
   "metadata": {
@@ -264,7 +279,53 @@
         "test_coverage_notes": "",
         "known_limitations": ""
       }
-    }
+    },
+    "last_agent_result": {
+      "outcome": "completed",
+      "summary": "Wrote tests/test_db_init.py covering all 5 acceptance criteria for bead B-27a23ff7 (DB schema and init command). 9 of 15 tests pass immediately; 6 integration tests are correctly skipped until the managed venv (sqlite_vec) is bootstrapped.",
+      "verdict": "approved",
+      "findings_count": 0,
+      "requires_followup": false,
+      "next_agent": "review",
+      "block_reason": ""
+    },
+    "telemetry": {
+      "cost_usd": 0.43313505,
+      "duration_ms": 206932,
+      "duration_api_ms": 192521,
+      "num_turns": 19,
+      "input_tokens": 17,
+      "output_tokens": 12852,
+      "cache_creation_tokens": 30137,
+      "cache_read_tokens": 424301,
+      "stop_reason": "end_turn",
+      "session_id": "b882d4c1-b357-420d-860a-8d24ad8aa482",
+      "permission_denials": [],
+      "prompt_chars": 7509,
+      "prompt_lines": 155,
+      "source": "provider",
+      "attempt": 1
+    },
+    "telemetry_history": [
+      {
+        "cost_usd": 0.43313505,
+        "duration_ms": 206932,
+        "duration_api_ms": 192521,
+        "num_turns": 19,
+        "input_tokens": 17,
+        "output_tokens": 12852,
+        "cache_creation_tokens": 30137,
+        "cache_read_tokens": 424301,
+        "stop_reason": "end_turn",
+        "session_id": "b882d4c1-b357-420d-860a-8d24ad8aa482",
+        "permission_denials": [],
+        "prompt_chars": 7509,
+        "prompt_lines": 155,
+        "source": "provider",
+        "attempt": 1
+      }
+    ],
+    "last_commit": "15f468d5a12982466019fe4fb559daa71a5ce9e5"
   },
   "labels": []
 }
