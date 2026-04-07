@@ -1,0 +1,82 @@
+{
+  "bead_id": "B-d34d190d-review-corrective",
+  "title": "Corrective fix for B-d34d190d-review: Review Ingest command skeleton with txt and md chunking",
+  "agent_type": "developer",
+  "description": "Blocked reason: Finding 1: spec AC \"3 paragraphs \u2192 3 rows (each under chunk_size)\" is violated \u2014 implementation merges them into 1 chunk; test was rewritten to match implementation rather than spec. Requires spec amendment or implementation fix. Finding 2: tests/test_memory.py (mandated by spec) does not exist; TestIngestJson and TestIngestCsv are absent; all DB-operation test classes missing. Spec AC \"python3 -m unittest discover -s tests/ passes\" cannot be validated as green for the full required scope.\n\nRemaining work: Finding 1: resolve paragraph-merge vs 3-rows-per-paragraph AC conflict (spec amendment or code change). Finding 2: add TestIngestJson and TestIngestCsv at minimum; confirm whether DB-operation tests are deferred by explicit sign-off or must be added now. Finding 3 (low, non-blocking): update bead expected_files metadata to reflect memory.py at repo root.",
+  "status": "ready",
+  "bead_type": "task",
+  "parent_id": "B-d34d190d-review",
+  "dependencies": [],
+  "acceptance_criteria": [
+    "Implement the minimum fix required to unblock B-d34d190d-review.",
+    "Update tests/docs as needed for the corrective change.",
+    "Leave a handoff summary that states how the parent bead can be retried."
+  ],
+  "linked_docs": [
+    "specs/drafts/agent-memory-file-ingest-and-skill-packaging.md"
+  ],
+  "feature_root_id": "B-54edeccf",
+  "execution_branch_name": "feature/b-54edeccf",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
+  "expected_files": [
+    "memory.py",
+    "SKILL.md",
+    "apm.yml",
+    "tests/__init__.py",
+    "tests/test_ingest_chunking.py"
+  ],
+  "expected_globs": [],
+  "touched_files": [
+    ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
+    "SKILL.md",
+    "apm.yml",
+    "memory.py",
+    "tests/test_ingest_chunking.py"
+  ],
+  "changed_files": [
+    "memory.py",
+    "SKILL.md",
+    "apm.yml",
+    "tests/test_ingest_chunking.py"
+  ],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "No conflicts expected. memory.py is at repo root; no other active beads claim this file.",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-07T20:10:29.535846+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    }
+  ],
+  "metadata": {
+    "auto_corrective_for": "B-d34d190d-review"
+  },
+  "labels": []
+}
