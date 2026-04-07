@@ -6,7 +6,9 @@
   "status": "ready",
   "bead_type": "task",
   "parent_id": "B-266c0a28",
-  "dependencies": [],
+  "dependencies": [
+    "B-841d81bc"
+  ],
   "acceptance_criteria": [
     "memory.py has shebang #!/usr/bin/env python3 on line 1",
     "memory.py is executable (chmod +x applied)",
