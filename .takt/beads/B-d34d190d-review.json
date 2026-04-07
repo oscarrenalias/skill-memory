@@ -3,7 +3,7 @@
   "title": "Review Ingest command skeleton with txt and md chunking",
   "agent_type": "review",
   "description": "Review implementation for B-d34d190d",
-  "status": "in_progress",
+  "status": "blocked",
   "bead_type": "task",
   "parent_id": "B-d34d190d",
   "dependencies": [
@@ -19,57 +19,73 @@
   "execution_branch_name": "feature/b-54edeccf",
   "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
   "expected_files": [
-    ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
-    ".claude/skills/agent-memory/memory.py"
+    "memory.py",
+    "SKILL.md",
+    "apm.yml",
+    "tests/__init__.py",
+    "tests/test_ingest_chunking.py"
   ],
   "expected_globs": [],
   "touched_files": [
     ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
-    ".claude/skills/agent-memory/memory.py",
     "SKILL.md",
     "apm.yml",
-    "tests/__pycache__/__init__.cpython-314.pyc",
-    "tests/__pycache__/test_ingest_chunking.cpython-314-pytest-9.0.2.pyc",
+    "memory.py",
     "tests/test_ingest_chunking.py"
   ],
   "changed_files": [
-    ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
-    ".claude/skills/agent-memory/memory.py",
+    "memory.py",
     "SKILL.md",
     "apm.yml",
-    "tests/__pycache__/__init__.cpython-314.pyc",
-    "tests/__pycache__/test_ingest_chunking.cpython-314-pytest-9.0.2.pyc",
     "tests/test_ingest_chunking.py"
   ],
-  "updated_docs": [],
+  "updated_docs": [
+    "SKILL.md"
+  ],
   "handoff_summary": {
-    "completed": "",
-    "remaining": "",
-    "risks": "",
-    "verdict": "",
-    "findings_count": 0,
-    "requires_followup": false,
-    "changed_files": [],
-    "updated_docs": [],
-    "next_action": "",
-    "next_agent": "",
-    "block_reason": "",
-    "expected_files": [],
+    "completed": "SKILL.md and apm.yml are correct and complete. Ingest implementation for .txt, .md, .json, .csv is functionally correct with proper error handling. _insert_chunk helper is cleanly extracted. Chunking helpers _chunk_txt and _chunk_md are correct for the merge/boundary behaviour they implement. MIN_CHUNK_LEN filter is present. Unsupported extension exits 1.",
+    "remaining": "Finding 1: resolve paragraph-merge vs 3-rows-per-paragraph AC conflict (spec amendment or code change). Finding 2: add TestIngestJson and TestIngestCsv at minimum; confirm whether DB-operation tests are deferred by explicit sign-off or must be added now. Finding 3 (low, non-blocking): update bead expected_files metadata to reflect memory.py at repo root.",
+    "risks": "Without TestIngestJson and TestIngestCsv the JSON/CSV ingest paths (which contain format validation and sys.exit(1) branches) are unvalidated by the test suite. The paragraph-merge behaviour diverges silently from the spec AC, creating a latent misunderstanding for downstream agents relying on the documented \"1 chunk per paragraph\" behaviour.",
+    "verdict": "needs_changes",
+    "findings_count": 2,
+    "requires_followup": true,
+    "changed_files": [
+      "memory.py",
+      "SKILL.md",
+      "apm.yml",
+      "tests/test_ingest_chunking.py"
+    ],
+    "updated_docs": [
+      "SKILL.md"
+    ],
+    "next_action": "Return to developer to resolve Finding 1 (spec AC alignment for paragraph merging) and Finding 2 (add missing test classes for JSON/CSV ingest).",
+    "next_agent": "developer",
+    "block_reason": "Finding 1: spec AC \"3 paragraphs \u2192 3 rows (each under chunk_size)\" is violated \u2014 implementation merges them into 1 chunk; test was rewritten to match implementation rather than spec. Requires spec amendment or implementation fix. Finding 2: tests/test_memory.py (mandated by spec) does not exist; TestIngestJson and TestIngestCsv are absent; all DB-operation test classes missing. Spec AC \"python3 -m unittest discover -s tests/ passes\" cannot be validated as green for the full required scope.",
+    "expected_files": [
+      "memory.py",
+      "SKILL.md",
+      "apm.yml",
+      "tests/__init__.py",
+      "tests/test_ingest_chunking.py"
+    ],
     "expected_globs": [],
-    "touched_files": [],
-    "conflict_risks": "",
-    "design_decisions": "",
-    "test_coverage_notes": "",
-    "known_limitations": ""
+    "touched_files": [
+      ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
+      "SKILL.md",
+      "apm.yml",
+      "memory.py",
+      "tests/test_ingest_chunking.py"
+    ],
+    "conflict_risks": "No conflicts expected. memory.py is at repo root; no other active beads claim this file.",
+    "design_decisions": "Paragraph merging is implemented (short paragraphs merged up to chunk_size) which diverges from spec AC. Character-based chunking confirmed per spec. user-invocable: true in SKILL.md frontmatter per design decision. _insert_chunk extracted as shared helper.",
+    "test_coverage_notes": "tests/test_ingest_chunking.py covers _chunk_txt, _chunk_md, _chunk_paragraphs, _split_sentences pure functions only. TestIngestJson, TestIngestCsv, TestInit, TestAdd, TestSearch, TestDelete, TestList, TestStats are absent. The spec-mandated tests/test_memory.py does not exist.",
+    "known_limitations": "DB-operation tests absent from this bead's test file. Whether they are deferred to a later bead needs explicit decision."
   },
-  "block_reason": "",
-  "conflict_risks": "No conflicts expected. This bead creates a new file; no other active beads claim .claude/skills/agent-memory/memory.py.",
+  "block_reason": "Finding 1: spec AC \"3 paragraphs \u2192 3 rows (each under chunk_size)\" is violated \u2014 implementation merges them into 1 chunk; test was rewritten to match implementation rather than spec. Requires spec amendment or implementation fix. Finding 2: tests/test_memory.py (mandated by spec) does not exist; TestIngestJson and TestIngestCsv are absent; all DB-operation test classes missing. Spec AC \"python3 -m unittest discover -s tests/ passes\" cannot be validated as green for the full required scope.",
+  "conflict_risks": "No conflicts expected. memory.py is at repo root; no other active beads claim this file.",
   "branch_name": "feature/b-54edeccf",
   "worktree_path": "",
-  "lease": {
-    "owner": "review:B-d34d190d-review",
-    "expires_at": "2026-04-07T20:38:15.656839+00:00"
-  },
+  "lease": null,
   "retries": 0,
   "execution_history": [
     {
@@ -110,6 +126,13 @@
       "details": {
         "template_path": ".takt/agent-runs/B-d34d190d-review/repo/templates/agents/review.md"
       }
+    },
+    {
+      "timestamp": "2026-04-07T20:10:29.282359+00:00",
+      "event": "blocked",
+      "agent_type": "review",
+      "summary": "Review finds 2 blocking issues: spec AC \"3 paragraphs \u2192 3 rows\" violated by paragraph-merge implementation, and mandatory test classes (TestIngestJson, TestIngestCsv, all DB-operation tests) are absent.",
+      "details": {}
     }
   ],
   "metadata": {
@@ -185,7 +208,52 @@
         "test_coverage_notes": "",
         "known_limitations": ""
       }
-    }
+    },
+    "last_agent_result": {
+      "outcome": "blocked",
+      "summary": "Review finds 2 blocking issues: spec AC \"3 paragraphs \u2192 3 rows\" violated by paragraph-merge implementation, and mandatory test classes (TestIngestJson, TestIngestCsv, all DB-operation tests) are absent.",
+      "verdict": "needs_changes",
+      "findings_count": 2,
+      "requires_followup": true,
+      "next_agent": "developer",
+      "block_reason": "Finding 1: spec AC \"3 paragraphs \u2192 3 rows (each under chunk_size)\" is violated \u2014 implementation merges them into 1 chunk; test was rewritten to match implementation rather than spec. Requires spec amendment or implementation fix. Finding 2: tests/test_memory.py (mandated by spec) does not exist; TestIngestJson and TestIngestCsv are absent; all DB-operation test classes missing. Spec AC \"python3 -m unittest discover -s tests/ passes\" cannot be validated as green for the full required scope."
+    },
+    "telemetry": {
+      "cost_usd": 0.29415135000000003,
+      "duration_ms": 126526,
+      "duration_api_ms": 117573,
+      "num_turns": 12,
+      "input_tokens": 143,
+      "output_tokens": 6494,
+      "cache_creation_tokens": 31577,
+      "cache_read_tokens": 259662,
+      "stop_reason": "end_turn",
+      "session_id": "92672ad1-a808-4a88-a0ff-58e63db03fb7",
+      "permission_denials": [],
+      "prompt_chars": 7767,
+      "prompt_lines": 163,
+      "source": "provider",
+      "attempt": 1
+    },
+    "telemetry_history": [
+      {
+        "cost_usd": 0.29415135000000003,
+        "duration_ms": 126526,
+        "duration_api_ms": 117573,
+        "num_turns": 12,
+        "input_tokens": 143,
+        "output_tokens": 6494,
+        "cache_creation_tokens": 31577,
+        "cache_read_tokens": 259662,
+        "stop_reason": "end_turn",
+        "session_id": "92672ad1-a808-4a88-a0ff-58e63db03fb7",
+        "permission_denials": [],
+        "prompt_chars": 7767,
+        "prompt_lines": 163,
+        "source": "provider",
+        "attempt": 1
+      }
+    ]
   },
   "labels": []
 }
