@@ -1,0 +1,69 @@
+{
+  "bead_id": "B-d34d190d",
+  "title": "Ingest command skeleton with txt and md chunking",
+  "agent_type": "developer",
+  "description": "Add the `ingest` subcommand to memory.py. Implement the CLI surface (argparse with --source, --chunk-size, --overlap, --db flags), the dispatcher that routes by file extension, and the chunking logic for .txt (blank-line paragraph boundaries, sentence splitting for oversized paragraphs) and .md (same as .txt but level-2 ## headings are hard chunk boundaries with the heading carried into the next chunk). Wire each chunk into the existing insert/add path. Print progress summary to stderr. Skip chunks shorter than 10 chars and track the skipped count.",
+  "status": "ready",
+  "bead_type": "task",
+  "parent_id": "B-54edeccf",
+  "dependencies": [],
+  "acceptance_criteria": [
+    "memory.py ingest notes.txt adds rows and prints 'Ingesting notes.txt\u2026 N chunks added (M skipped).' to stderr",
+    "A .txt file with 3 paragraphs under chunk-size produces 3 rows",
+    "Paragraph longer than chunk-size is split at sentence boundaries into multiple chunks",
+    "A .md file: ## heading text appears at the start of the chunk following the heading boundary",
+    "Chunks shorter than 10 chars are silently skipped; count appears in summary",
+    "Default --chunk-size is 1000, default --overlap is 100",
+    "--source defaults to the file basename when not supplied"
+  ],
+  "linked_docs": [
+    "specs/drafts/agent-memory-file-ingest-and-skill-packaging.md"
+  ],
+  "feature_root_id": "B-54edeccf",
+  "execution_branch_name": "feature/b-54edeccf",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
+  "expected_files": [
+    ".claude/skills/agent-memory/memory.py"
+  ],
+  "expected_globs": [],
+  "touched_files": [],
+  "changed_files": [],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-07T18:39:54.949172+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    }
+  ],
+  "metadata": {},
+  "labels": []
+}
