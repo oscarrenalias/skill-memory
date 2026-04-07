@@ -3,7 +3,7 @@
   "title": "Test query and CRUD commands",
   "agent_type": "tester",
   "description": "Write and run integration tests covering all four new subcommands: search, delete, list, and stats. Tests should use a temporary DB to avoid polluting state. Cover happy paths, edge cases (nonexistent IDs, empty DB for stats, --limit 0 for list), and JSON output shapes.",
-  "status": "ready",
+  "status": "blocked",
   "bead_type": "task",
   "parent_id": "B-cb0b48a1",
   "dependencies": [],
@@ -49,7 +49,7 @@
     "test_coverage_notes": "",
     "known_limitations": ""
   },
-  "block_reason": "",
+  "block_reason": "Preparing worktree (checking out 'feature/b-cb0b48a1')\nfatal: 'feature/b-cb0b48a1' is already used by worktree at '/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1'",
   "conflict_risks": "",
   "branch_name": "",
   "worktree_path": "",
@@ -61,6 +61,13 @@
       "event": "created",
       "agent_type": "scheduler",
       "summary": "Bead created",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:15:22.870916+00:00",
+      "event": "blocked",
+      "agent_type": "tester",
+      "summary": "Preparing worktree (checking out 'feature/b-cb0b48a1')\nfatal: 'feature/b-cb0b48a1' is already used by worktree at '/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1'",
       "details": {}
     }
   ],
