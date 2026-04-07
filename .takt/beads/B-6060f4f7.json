@@ -90,6 +90,15 @@
       "agent_type": "developer",
       "summary": "Worker started",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:54:51.515795+00:00",
+      "event": "guardrails_applied",
+      "agent_type": "developer",
+      "summary": "Applied guardrails from .takt/agent-runs/B-6060f4f7/repo/templates/agents/developer.md",
+      "details": {
+        "template_path": ".takt/agent-runs/B-6060f4f7/repo/templates/agents/developer.md"
+      }
     }
   ],
   "metadata": {
@@ -106,7 +115,63 @@
     ],
     "skill_bundle_hash": "3d67820a7fb8135bc362b2b95d14300da249795bcc32c95f5dd45f36e15acfa1",
     "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-6060f4f7/home",
-    "runner_backend": "claude"
+    "runner_backend": "claude",
+    "guardrails": {
+      "agent_type": "developer",
+      "template_path": ".takt/agent-runs/B-6060f4f7/repo/templates/agents/developer.md",
+      "template_text": "# Developer Guardrails\n\nPrimary responsibility: Implement only the assigned bead inside the existing architecture and file scope.\n\nAllowed actions:\n- Modify code, configuration, or local docs required to complete the assigned bead.\n- Create sub-beads for discovered follow-up work that should be handled separately.\n- Verify your `Python` changes compile and import correctly with a quick syntax check: `python -m py_compile`.\n\nDisallowed actions:\n- Run any test suite \u2014 not even a targeted `pytest` run or any subset. Test execution is exclusively the tester agent's responsibility. Running tests wastes the agent budget and delays the pipeline.\n- Redesign unrelated architecture or broaden scope beyond the assigned bead.\n- Perform final review signoff in place of a review agent.\n- Silently absorb unrelated test, documentation, or planning work that should be handed off.\n\nExpected outputs:\n- Completed or blocked JSON with concise implementation summary.\n- Accurate touched files, changed files, risks, and follow-up handoff fields.",
+      "captured_at": "2026-04-07T19:54:51.515785+00:00"
+    },
+    "worker_prompt_context": {
+      "bead_id": "B-6060f4f7",
+      "feature_root_id": "B-54edeccf",
+      "title": "Create SKILL.md agent-facing documentation",
+      "agent_type": "developer",
+      "description": "Create .claude/skills/agent-memory/SKILL.md with the required YAML frontmatter (name, description, tools, user-invocable: true) and body sections: Getting Started (how to locate memory.py), When to use this skill (bead start/end patterns and post-feature ingest), Commands reference (one paragraph per command with full CLI signature), DB path conventions (default location, --db flag, per-project vs shared), and What NOT to store (mirrors docs/memory/conventions.md guidance on ephemeral state and CLAUDE.md content).",
+      "status": "in_progress",
+      "acceptance_criteria": [
+        "SKILL.md exists at .claude/skills/agent-memory/SKILL.md",
+        "Frontmatter contains name, description, tools, and user-invocable fields",
+        "Body contains a 'When to use this skill' section",
+        "Body contains a 'Commands reference' section covering init, add, search, delete, list, stats, and ingest",
+        "Body contains a 'What NOT to store' section",
+        "DB path conventions section explains --db flag and when to prefer per-project vs shared DB"
+      ],
+      "dependencies": [
+        "B-d34d190d"
+      ],
+      "linked_docs": [
+        "specs/drafts/agent-memory-file-ingest-and-skill-packaging.md"
+      ],
+      "execution_branch_name": "feature/b-54edeccf",
+      "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
+      "expected_files": [
+        "SKILL.md"
+      ],
+      "expected_globs": [],
+      "touched_files": [],
+      "conflict_risks": "",
+      "handoff_summary": {
+        "completed": "",
+        "remaining": "",
+        "risks": "",
+        "verdict": "",
+        "findings_count": 0,
+        "requires_followup": false,
+        "changed_files": [],
+        "updated_docs": [],
+        "next_action": "",
+        "next_agent": "",
+        "block_reason": "",
+        "expected_files": [],
+        "expected_globs": [],
+        "touched_files": [],
+        "conflict_risks": "",
+        "design_decisions": "",
+        "test_coverage_notes": "",
+        "known_limitations": ""
+      }
+    }
   },
   "labels": []
 }
