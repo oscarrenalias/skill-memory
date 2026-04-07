@@ -22,6 +22,7 @@
   "execution_branch_name": "feature/b-54edeccf",
   "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
   "expected_files": [
+    "SKILL.md",
     "apm.yml",
     "tests/test_memory.py"
   ],
@@ -29,10 +30,12 @@
     "tests/*"
   ],
   "touched_files": [
+    "SKILL.md",
     "apm.yml",
     "tests/test_memory.py"
   ],
   "changed_files": [
+    "SKILL.md",
     "apm.yml",
     "tests/test_memory.py"
   ],
@@ -58,7 +61,7 @@
     "known_limitations": ""
   },
   "block_reason": "",
-  "conflict_risks": "No conflicts expected; only tests/test_memory.py was modified by appending new classes before the integration test section.",
+  "conflict_risks": "No conflicts expected; only tests/test_memory.py was modified by appending new classes before the integration test section.\nNone \u2014 SKILL.md at the worktree root does not conflict with any sibling bead's file scope.",
   "branch_name": "",
   "worktree_path": "",
   "lease": null,
