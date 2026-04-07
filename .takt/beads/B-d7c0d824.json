@@ -6,7 +6,10 @@
   "status": "ready",
   "bead_type": "task",
   "parent_id": "B-54edeccf",
-  "dependencies": [],
+  "dependencies": [
+    "B-d34d190d",
+    "B-812641b9"
+  ],
   "acceptance_criteria": [
     "tests/__init__.py exists and is empty",
     "test_memory.py imports succeed without errors",
