@@ -1,0 +1,72 @@
+{
+  "bead_id": "B-841d81bc-test",
+  "title": "Test Scaffold skill directory and .gitignore",
+  "agent_type": "tester",
+  "description": "Validate implementation for B-841d81bc",
+  "status": "ready",
+  "bead_type": "task",
+  "parent_id": "B-841d81bc",
+  "dependencies": [
+    "B-841d81bc"
+  ],
+  "acceptance_criteria": [],
+  "linked_docs": [
+    "specs/drafts/agent-memory-core-infrastructure.md"
+  ],
+  "feature_root_id": "B-266c0a28",
+  "execution_branch_name": "feature/b-266c0a28",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
+  "expected_files": [
+    ".claude/skills/agent-memory/.gitignore",
+    ".claude/skills/agent-memory/assets/.gitkeep"
+  ],
+  "expected_globs": [
+    ".claude/skills/agent-memory/**"
+  ],
+  "touched_files": [
+    ".claude/skills/agent-memory/.gitignore",
+    ".claude/skills/agent-memory/assets/.gitkeep"
+  ],
+  "changed_files": [
+    ".claude/skills/agent-memory/.gitignore",
+    ".claude/skills/agent-memory/assets/.gitkeep"
+  ],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "None \u2014 only new files added, no existing files modified.",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-07T18:41:11.881066+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    }
+  ],
+  "metadata": {},
+  "labels": []
+}
