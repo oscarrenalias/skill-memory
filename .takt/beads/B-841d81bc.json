@@ -3,7 +3,7 @@
   "title": "Scaffold skill directory and .gitignore",
   "agent_type": "developer",
   "description": "Create the .claude/skills/agent-memory/ directory tree and the .gitignore file that excludes .venv/. Also create the empty assets/ subdirectory so subsequent beads have a target. No Python code yet.",
-  "status": "ready",
+  "status": "blocked",
   "bead_type": "task",
   "parent_id": "B-266c0a28",
   "dependencies": [],
@@ -47,7 +47,7 @@
     "test_coverage_notes": "",
     "known_limitations": ""
   },
-  "block_reason": "",
+  "block_reason": "Preparing worktree (checking out 'feature/b-266c0a28')\nfatal: 'feature/b-266c0a28' is already used by worktree at '/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28'",
   "conflict_risks": "",
   "branch_name": "",
   "worktree_path": "",
@@ -59,6 +59,13 @@
       "event": "created",
       "agent_type": "scheduler",
       "summary": "Bead created",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:15:22.777400+00:00",
+      "event": "blocked",
+      "agent_type": "developer",
+      "summary": "Preparing worktree (checking out 'feature/b-266c0a28')\nfatal: 'feature/b-266c0a28' is already used by worktree at '/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28'",
       "details": {}
     }
   ],
