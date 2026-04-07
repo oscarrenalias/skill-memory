@@ -130,6 +130,15 @@
       "agent_type": "developer",
       "summary": "Worker started",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:35:17.640260+00:00",
+      "event": "guardrails_applied",
+      "agent_type": "developer",
+      "summary": "Applied guardrails from .takt/agent-runs/B-1e31b0df/repo/templates/agents/developer.md",
+      "details": {
+        "template_path": ".takt/agent-runs/B-1e31b0df/repo/templates/agents/developer.md"
+      }
     }
   ],
   "metadata": {
@@ -146,7 +155,61 @@
     ],
     "skill_bundle_hash": "3d67820a7fb8135bc362b2b95d14300da249795bcc32c95f5dd45f36e15acfa1",
     "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-1e31b0df/home",
-    "runner_backend": "claude"
+    "runner_backend": "claude",
+    "guardrails": {
+      "agent_type": "developer",
+      "template_path": ".takt/agent-runs/B-1e31b0df/repo/templates/agents/developer.md",
+      "template_text": "# Developer Guardrails\n\nPrimary responsibility: Implement only the assigned bead inside the existing architecture and file scope.\n\nAllowed actions:\n- Modify code, configuration, or local docs required to complete the assigned bead.\n- Create sub-beads for discovered follow-up work that should be handled separately.\n- Verify your `Python` changes compile and import correctly with a quick syntax check: `python -m py_compile`.\n\nDisallowed actions:\n- Run any test suite \u2014 not even a targeted `pytest` run or any subset. Test execution is exclusively the tester agent's responsibility. Running tests wastes the agent budget and delays the pipeline.\n- Redesign unrelated architecture or broaden scope beyond the assigned bead.\n- Perform final review signoff in place of a review agent.\n- Silently absorb unrelated test, documentation, or planning work that should be handed off.\n\nExpected outputs:\n- Completed or blocked JSON with concise implementation summary.\n- Accurate touched files, changed files, risks, and follow-up handoff fields.",
+      "captured_at": "2026-04-07T19:35:17.640246+00:00"
+    },
+    "worker_prompt_context": {
+      "bead_id": "B-1e31b0df",
+      "feature_root_id": "B-cb0b48a1",
+      "title": "Implement list command",
+      "agent_type": "developer",
+      "description": "Add the `list` subcommand to memory.py. Select from memories ordered by created_at DESC. Support --limit (default 20, 0 = unlimited), --source (exact match filter), --json (array of all columns, no distance), and --db flags. Default output: one line per row with uuid, truncated content (60 chars), source, and created_at.",
+      "status": "in_progress",
+      "acceptance_criteria": [
+        "memory.py list returns results newest-first",
+        "memory.py list --source mytag returns only rows where source = 'mytag'",
+        "memory.py list --json outputs valid JSON array with all columns",
+        "memory.py list --limit 3 returns at most 3 results"
+      ],
+      "dependencies": [],
+      "linked_docs": [
+        "specs/drafts/agent-memory-query-and-crud-operations.md"
+      ],
+      "execution_branch_name": "feature/b-cb0b48a1",
+      "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1",
+      "expected_files": [
+        "memory.py"
+      ],
+      "expected_globs": [
+        "*.py"
+      ],
+      "touched_files": [],
+      "conflict_risks": "",
+      "handoff_summary": {
+        "completed": "",
+        "remaining": "",
+        "risks": "",
+        "verdict": "",
+        "findings_count": 0,
+        "requires_followup": false,
+        "changed_files": [],
+        "updated_docs": [],
+        "next_action": "",
+        "next_agent": "",
+        "block_reason": "",
+        "expected_files": [],
+        "expected_globs": [],
+        "touched_files": [],
+        "conflict_risks": "",
+        "design_decisions": "",
+        "test_coverage_notes": "",
+        "known_limitations": ""
+      }
+    }
   },
   "labels": []
 }
