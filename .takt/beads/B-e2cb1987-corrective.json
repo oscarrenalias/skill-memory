@@ -3,7 +3,7 @@
   "title": "Corrective fix for B-e2cb1987: Implement stats command",
   "agent_type": "developer",
   "description": "Blocked reason: claude -p produced no structured output. is_error=False, stop_reason=end_turn, result='End-to-end confirmed: bootstrap ran, then `stats` on a non-existent DB printed `\"No memory DB found at ...\"` and exited 0. Implementation is complete.'",
-  "status": "ready",
+  "status": "in_progress",
   "bead_type": "task",
   "parent_id": "B-e2cb1987",
   "dependencies": [],
@@ -53,9 +53,12 @@
   },
   "block_reason": "",
   "conflict_risks": "",
-  "branch_name": "",
-  "worktree_path": "",
-  "lease": null,
+  "branch_name": "feature/b-cb0b48a1",
+  "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1",
+  "lease": {
+    "owner": "developer:B-e2cb1987-corrective",
+    "expires_at": "2026-04-07T19:21:12.539840+00:00"
+  },
   "retries": 0,
   "execution_history": [
     {
@@ -64,10 +67,48 @@
       "agent_type": "scheduler",
       "summary": "Bead created",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T18:51:13.281499+00:00",
+      "event": "skills_loaded",
+      "agent_type": "developer",
+      "summary": "Loaded 7 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/developer-implementation",
+          "capability/code-edit",
+          "task/corrective-implementation",
+          "task/refactor-safe",
+          "task/migration",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-07T18:51:13.281529+00:00",
+      "event": "started",
+      "agent_type": "developer",
+      "summary": "Worker started",
+      "details": {}
     }
   ],
   "metadata": {
-    "auto_corrective_for": "B-e2cb1987"
+    "auto_corrective_for": "B-e2cb1987",
+    "execution_root": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-e2cb1987-corrective",
+    "workspace_repo_path": "repo",
+    "loaded_skills": [
+      "core/base-orchestrator",
+      "role/developer-implementation",
+      "capability/code-edit",
+      "task/corrective-implementation",
+      "task/refactor-safe",
+      "task/migration",
+      "memory"
+    ],
+    "skill_bundle_hash": "3d67820a7fb8135bc362b2b95d14300da249795bcc32c95f5dd45f36e15acfa1",
+    "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-e2cb1987-corrective/home",
+    "runner_backend": "claude"
   },
   "labels": []
 }
