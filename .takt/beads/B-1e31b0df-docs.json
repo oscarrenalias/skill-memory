@@ -3,7 +3,7 @@
   "title": "Document Implement list command",
   "agent_type": "documentation",
   "description": "Update docs for B-1e31b0df",
-  "status": "in_progress",
+  "status": "done",
   "bead_type": "task",
   "parent_id": "B-1e31b0df",
   "dependencies": [
@@ -17,52 +17,43 @@
   "execution_branch_name": "feature/b-cb0b48a1",
   "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1",
   "expected_files": [
-    ".claude/skills/agent-memory/__pycache__/test_commands.cpython-314-pytest-9.0.3.pyc",
-    "__pycache__/memory.cpython-314.pyc",
-    "memory.py"
+    ".claude/skills/agent-memory/SKILL.md"
   ],
   "expected_globs": [
-    "*.py"
+    "*.md"
   ],
-  "touched_files": [
-    ".claude/skills/agent-memory/__pycache__/test_commands.cpython-314-pytest-9.0.3.pyc",
-    "__pycache__/memory.cpython-314.pyc",
-    "memory.py"
-  ],
-  "changed_files": [
-    ".claude/skills/agent-memory/__pycache__/test_commands.cpython-314-pytest-9.0.3.pyc",
-    "__pycache__/memory.cpython-314.pyc",
-    "memory.py"
-  ],
+  "touched_files": [],
+  "changed_files": [],
   "updated_docs": [],
   "handoff_summary": {
-    "completed": "",
-    "remaining": "",
-    "risks": "",
-    "verdict": "",
-    "findings_count": 0,
-    "requires_followup": false,
+    "completed": "Identified the correct documentation target (.claude/skills/agent-memory/SKILL.md) and authored full CLI reference covering init, add, search, list, delete, and stats commands with flag tables, output examples, distance-metric notes, and first-run behaviour. The list command documentation covers --limit (default 20, 0=unlimited), --source, --json, and --db flags, ordered newest-first output, and the fact that it does not load the embedding model.",
+    "remaining": "The SKILL.md file could not be written due to file-system permission restrictions on the worktree path. The orchestrator or operator must grant write access to .claude/skills/agent-memory/SKILL.md and re-run this bead, or create the file manually with the content prepared during this run.",
+    "risks": "Without SKILL.md, agents invoking the agent-memory skill have no structured reference for the list command or its flags. The implementation is correct and complete in memory.py; the gap is purely documentation.",
+    "verdict": "needs_changes",
+    "findings_count": 1,
+    "requires_followup": true,
     "changed_files": [],
     "updated_docs": [],
-    "next_action": "",
-    "next_agent": "",
-    "block_reason": "",
-    "expected_files": [],
-    "expected_globs": [],
+    "next_action": "Grant write permission to .claude/skills/agent-memory/SKILL.md and re-run this documentation bead.",
+    "next_agent": "documentation",
+    "block_reason": "File write to .claude/skills/agent-memory/SKILL.md was blocked by permission settings. No code or documentation was changed.",
+    "expected_files": [
+      ".claude/skills/agent-memory/SKILL.md"
+    ],
+    "expected_globs": [
+      "*.md"
+    ],
     "touched_files": [],
-    "conflict_risks": "",
+    "conflict_risks": "None \u2014 no files were modified. SKILL.md is a new file with no overlap with sibling beads.",
     "design_decisions": "",
     "test_coverage_notes": "",
     "known_limitations": ""
   },
-  "block_reason": "Deferred due to file-scope conflict with active bead B-1e31b0df-test",
-  "conflict_risks": "None \u2014 no file modifications made",
+  "block_reason": "File write to .claude/skills/agent-memory/SKILL.md was blocked by permission settings. No code or documentation was changed.",
+  "conflict_risks": "None \u2014 no files were modified. SKILL.md is a new file with no overlap with sibling beads.",
   "branch_name": "feature/b-cb0b48a1",
   "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1",
-  "lease": {
-    "owner": "documentation:B-1e31b0df-docs",
-    "expires_at": "2026-04-07T21:17:23.145468+00:00"
-  },
+  "lease": null,
   "retries": 0,
   "execution_history": [
     {
@@ -243,6 +234,13 @@
       "details": {
         "template_path": ".takt/agent-runs/B-1e31b0df-docs/repo/templates/agents/documentation.md"
       }
+    },
+    {
+      "timestamp": "2026-04-07T20:49:32.328111+00:00",
+      "event": "completed",
+      "agent_type": "documentation",
+      "summary": "Documented the list command and all other agent-memory CLI commands in a new SKILL.md; write was blocked on file permissions.",
+      "details": {}
     }
   ],
   "metadata": {
@@ -315,7 +313,86 @@
         "test_coverage_notes": "",
         "known_limitations": ""
       }
-    }
+    },
+    "last_agent_result": {
+      "outcome": "completed",
+      "summary": "Documented the list command and all other agent-memory CLI commands in a new SKILL.md; write was blocked on file permissions.",
+      "verdict": "needs_changes",
+      "findings_count": 1,
+      "requires_followup": true,
+      "next_agent": "documentation",
+      "block_reason": "File write to .claude/skills/agent-memory/SKILL.md was blocked by permission settings. No code or documentation was changed."
+    },
+    "telemetry": {
+      "cost_usd": 0.31877114999999995,
+      "duration_ms": 126708,
+      "duration_api_ms": 119386,
+      "num_turns": 17,
+      "input_tokens": 88,
+      "output_tokens": 6899,
+      "cache_creation_tokens": 27019,
+      "cache_read_tokens": 379003,
+      "stop_reason": "end_turn",
+      "session_id": "b01bf4ae-5342-4f4c-a1d4-aca8213220e5",
+      "permission_denials": [
+        {
+          "tool_name": "Write",
+          "tool_use_id": "toolu_017D9gFqVJDChAtxdeNVkSer",
+          "tool_input": {
+            "file_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1/.claude/skills/agent-memory/SKILL.md",
+            "content": "---\nname: agent-memory\ndescription: Long-term semantic memory store for agents \u2014 add, search, list, delete, and inspect memories via a CLI backed by sqlite-vec.\ntools: Bash\nuser-invocable: false\n---\n\n# agent-memory\n\n`agent-memory` is a CLI tool (`memory.py`) that gives agents persistent, queryable memory backed by SQLite and the `sqlite-vec` extension. Embeddings are generated locally using the `bge-small-en-v1.5` ONNX model.\n\n**DB location** (resolved in this order):\n1. `--db PATH` flag\n2. `AGENT_MEMORY_DB` environment variable\n3. Default: `~/.local/share/agent-memory/memories.db`\n\n---\n\n## Commands\n\n### `init` \u2014 Initialise the database\n\n```bash\npython memory.py init [--db PATH]\n```\n\nCreates the `memories` table and the `memories_vec` virtual table. Safe to run multiple times (idempotent). Most other commands call `_auto_init` automatically, so an explicit `init` is rarely needed.\n\n---\n\n### `add` \u2014 Store a memory\n\n```bash\npython memory.py add \"<text>\" [--source TAG] [--meta KEY=VALUE ...] [--db PATH]\n```\n\nEmbeds `<text>` and stores it with an auto-generated UUID. Prints `Added <uuid>` on success.\n\n| Flag | Description |\n|---|---|\n| `--source TAG` | Origin label (e.g. a file path, agent name, or category) |\n| `--meta KEY=VALUE` | Arbitrary metadata; repeatable |\n\n**Example:**\n```bash\npython memory.py add \"The deploy pipeline uses GitHub Actions.\" --source infra --meta env=prod\n```\n\n---\n\n### `search` \u2014 Semantic similarity search\n\n```bash\npython memory.py search \"<query>\" [--limit N] [--threshold F] [--source TAG] [--json] [--db PATH]\n```\n\nEmbeds `<query>` and returns the nearest neighbours from `memories_vec`, joined with `memories`.\n\n| Flag | Default | Description |\n|---|---|---|\n| `--limit N` | 5 | Maximum results to return |\n| `--threshold F` | none | Maximum L2 distance to include. Range `[0, 2]` for L2-normalised vectors; lower = more similar. Use `\u22640.5` for high similarity, `\u22641.0` for moderate. |\n| `--source TAG` | none | Post-filter results by exact source match |\n| `--json` | off | Emit a JSON array |\n\n**Default output** (one result per line):\n```\n[0.142] <uuid>  The deploy pipeline uses GitHub Actions\u2026.  (source: infra)\n```\n\n**JSON output** (`--json`):\n```json\n[\n  {\n    \"id\": \"<uuid>\",\n    \"content\": \"The deploy pipeline uses GitHub Actions.\",\n    \"source\": \"infra\",\n    \"metadata\": {\"env\": \"prod\"},\n    \"created_at\": \"2026-04-07T10:00:00Z\",\n    \"distance\": 0.142\n  }\n]\n```\n\n> **Distance metric**: sqlite-vec uses L2 (Euclidean) distance for `float[N]` columns in `vec0` virtual tables. Because embeddings are L2-normalised, the distance range is `[0, 2]` (0 = identical vectors, 2 = maximally opposite). Source filtering is applied as a Python post-filter after the ANN retrieval; it is not pushed into the `vec0` query (sqlite-vec 0.1.x does not support additional column predicates in `vec0` queries).\n\n---\n\n### `list` \u2014 Browse stored memories\n\n```bash\npython memory.py list [--limit N] [--source TAG] [--json] [--db PATH]\n```\n\nReturns memories ordered by `created_at DESC` (newest first). No embedding model is required.\n\n| Flag | Default | Description |\n|---|---|---|\n| `--limit N` | 20 | Maximum results to return; pass `0` for unlimited |\n| `--source TAG` | none | Filter by exact source match |\n| `--json` | off | Emit a JSON array |\n\n**Default output** (one result per line):\n```\n<uuid>  The deploy pipeline uses GitHub Actions\u2026.  (source: infra)  2026-04-07T10:00:00Z\n```\n\n**JSON output** (`--json`):\n```json\n[\n  {\n    \"id\": \"<uuid>\",\n    \"content\": \"The deploy pipeline uses GitHub Actions.\",\n    \"source\": \"infra\",\n    \"metadata\": {\"env\": \"prod\"},\n    \"created_at\": \"2026-04-07T10:00:00Z\"\n  }\n]\n```\n\n> Unlike `search`, `list` does not include a `distance` field and does not load the embedding model.\n\n---\n\n### `delete` \u2014 Remove a memory by ID\n\n```bash\npython memory.py delete <uuid> [--db PATH]\n```\n\nDeletes the row from both `memories` and `memories_vec` in a single transaction. Prints `Deleted <uuid>` on success. Exits with code 1 and writes an error to stderr if the ID is not found.\n\n---\n\n### `stats` \u2014 Database statistics\n\n```bash\npython memory.py stats [--db PATH]\n```\n\nPrints a brief summary without loading the embedding model:\n\n```\nDB path:   ~/.local/share/agent-memory/memories.db\nMemories:  42\nDB size:   1.2 MB\n```\n\nExits 0 with a descriptive message if the DB does not exist.\n\n---\n\n## First-run behaviour\n\nOn first use, `memory.py` creates a managed virtualenv at `.claude/skills/agent-memory/.venv/` and installs the required dependencies (`onnxruntime`, `sqlite-vec`, `tokenizers`, `numpy`). The `bge-small-en-v1.5` ONNX model (~24 MB) is downloaded to `~/.cache/agent-memory/bge-small-en-v1.5/model.onnx` on the first command that needs embeddings (`add` or `search`). Subsequent runs reuse both.\n"
+          }
+        },
+        {
+          "tool_name": "Write",
+          "tool_use_id": "toolu_013kb5JaEfcmBjKouQsup4UQ",
+          "tool_input": {
+            "file_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1/.claude/skills/agent-memory/SKILL.md",
+            "content": "---\nname: agent-memory\ndescription: Long-term semantic memory store for agents \u2014 add, search, list, delete, and inspect memories via a CLI backed by sqlite-vec.\ntools: Bash\nuser-invocable: false\n---\n\n# agent-memory\n\n`agent-memory` is a CLI tool (`memory.py`) that gives agents persistent, queryable memory backed by SQLite and the `sqlite-vec` extension. Embeddings are generated locally using the `bge-small-en-v1.5` ONNX model.\n\n**DB location** (resolved in this order):\n1. `--db PATH` flag\n2. `AGENT_MEMORY_DB` environment variable\n3. Default: `~/.local/share/agent-memory/memories.db`\n\n---\n\n## Commands\n\n### `init` \u2014 Initialise the database\n\n```bash\npython memory.py init [--db PATH]\n```\n\nCreates the `memories` table and the `memories_vec` virtual table. Safe to run multiple times (idempotent). Most other commands call `_auto_init` automatically, so an explicit `init` is rarely needed.\n\n---\n\n### `add` \u2014 Store a memory\n\n```bash\npython memory.py add \"<text>\" [--source TAG] [--meta KEY=VALUE ...] [--db PATH]\n```\n\nEmbeds `<text>` and stores it with an auto-generated UUID. Prints `Added <uuid>` on success.\n\n| Flag | Description |\n|---|---|\n| `--source TAG` | Origin label (e.g. a file path, agent name, or category) |\n| `--meta KEY=VALUE` | Arbitrary metadata; repeatable |\n\n**Example:**\n```bash\npython memory.py add \"The deploy pipeline uses GitHub Actions.\" --source infra --meta env=prod\n```\n\n---\n\n### `search` \u2014 Semantic similarity search\n\n```bash\npython memory.py search \"<query>\" [--limit N] [--threshold F] [--source TAG] [--json] [--db PATH]\n```\n\nEmbeds `<query>` and returns the nearest neighbours from `memories_vec`, joined with `memories`.\n\n| Flag | Default | Description |\n|---|---|---|\n| `--limit N` | 5 | Maximum results to return |\n| `--threshold F` | none | Maximum L2 distance to include. Range `[0, 2]` for L2-normalised vectors; lower = more similar. Use `<=0.5` for high similarity, `<=1.0` for moderate. |\n| `--source TAG` | none | Post-filter results by exact source match |\n| `--json` | off | Emit a JSON array |\n\n**Default output** (one result per line):\n```\n[0.142] <uuid>  The deploy pipeline uses GitHub Actions....  (source: infra)\n```\n\n**JSON output** (`--json`):\n```json\n[\n  {\n    \"id\": \"<uuid>\",\n    \"content\": \"The deploy pipeline uses GitHub Actions.\",\n    \"source\": \"infra\",\n    \"metadata\": {\"env\": \"prod\"},\n    \"created_at\": \"2026-04-07T10:00:00Z\",\n    \"distance\": 0.142\n  }\n]\n```\n\n> **Distance metric**: sqlite-vec uses L2 (Euclidean) distance for `float[N]` columns in `vec0` virtual tables. Because embeddings are L2-normalised, the distance range is `[0, 2]` (0 = identical vectors, 2 = maximally opposite). Source filtering is applied as a Python post-filter after the ANN retrieval; sqlite-vec 0.1.x does not support additional column predicates in `vec0` queries.\n\n---\n\n### `list` \u2014 Browse stored memories\n\n```bash\npython memory.py list [--limit N] [--source TAG] [--json] [--db PATH]\n```\n\nReturns memories ordered by `created_at DESC` (newest first). Does not require or load the embedding model.\n\n| Flag | Default | Description |\n|---|---|---|\n| `--limit N` | 20 | Maximum results to return; pass `0` for unlimited |\n| `--source TAG` | none | Filter by exact source match |\n| `--json` | off | Emit a JSON array |\n\n**Default output** (one result per line):\n```\n<uuid>  The deploy pipeline uses GitHub Actions....  (source: infra)  2026-04-07T10:00:00Z\n```\n\n**JSON output** (`--json`):\n```json\n[\n  {\n    \"id\": \"<uuid>\",\n    \"content\": \"The deploy pipeline uses GitHub Actions.\",\n    \"source\": \"infra\",\n    \"metadata\": {\"env\": \"prod\"},\n    \"created_at\": \"2026-04-07T10:00:00Z\"\n  }\n]\n```\n\n> Unlike `search`, `list` does not include a `distance` field.\n\n---\n\n### `delete` \u2014 Remove a memory by ID\n\n```bash\npython memory.py delete <uuid> [--db PATH]\n```\n\nDeletes the row from both `memories` and `memories_vec` in a single transaction. Prints `Deleted <uuid>` on success. Exits with code 1 and writes an error to stderr if the ID is not found.\n\n---\n\n### `stats` \u2014 Database statistics\n\n```bash\npython memory.py stats [--db PATH]\n```\n\nPrints a brief summary without loading the embedding model:\n\n```\nDB path:   ~/.local/share/agent-memory/memories.db\nMemories:  42\nDB size:   1.2 MB\n```\n\nExits 0 with a descriptive message if the DB does not exist.\n\n---\n\n## First-run behaviour\n\nOn first use, `memory.py` creates a managed virtualenv at `.claude/skills/agent-memory/.venv/` and installs the required dependencies (`onnxruntime`, `sqlite-vec`, `tokenizers`, `numpy`). The `bge-small-en-v1.5` ONNX model (~24 MB) is downloaded to `~/.cache/agent-memory/bge-small-en-v1.5/model.onnx` on the first command that needs embeddings (`add` or `search`). Subsequent runs reuse both.\n"
+          }
+        }
+      ],
+      "prompt_chars": 6612,
+      "prompt_lines": 154,
+      "source": "provider",
+      "attempt": 1
+    },
+    "telemetry_history": [
+      {
+        "cost_usd": 0.31877114999999995,
+        "duration_ms": 126708,
+        "duration_api_ms": 119386,
+        "num_turns": 17,
+        "input_tokens": 88,
+        "output_tokens": 6899,
+        "cache_creation_tokens": 27019,
+        "cache_read_tokens": 379003,
+        "stop_reason": "end_turn",
+        "session_id": "b01bf4ae-5342-4f4c-a1d4-aca8213220e5",
+        "permission_denials": [
+          {
+            "tool_name": "Write",
+            "tool_use_id": "toolu_017D9gFqVJDChAtxdeNVkSer",
+            "tool_input": {
+              "file_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1/.claude/skills/agent-memory/SKILL.md",
+              "content": "---\nname: agent-memory\ndescription: Long-term semantic memory store for agents \u2014 add, search, list, delete, and inspect memories via a CLI backed by sqlite-vec.\ntools: Bash\nuser-invocable: false\n---\n\n# agent-memory\n\n`agent-memory` is a CLI tool (`memory.py`) that gives agents persistent, queryable memory backed by SQLite and the `sqlite-vec` extension. Embeddings are generated locally using the `bge-small-en-v1.5` ONNX model.\n\n**DB location** (resolved in this order):\n1. `--db PATH` flag\n2. `AGENT_MEMORY_DB` environment variable\n3. Default: `~/.local/share/agent-memory/memories.db`\n\n---\n\n## Commands\n\n### `init` \u2014 Initialise the database\n\n```bash\npython memory.py init [--db PATH]\n```\n\nCreates the `memories` table and the `memories_vec` virtual table. Safe to run multiple times (idempotent). Most other commands call `_auto_init` automatically, so an explicit `init` is rarely needed.\n\n---\n\n### `add` \u2014 Store a memory\n\n```bash\npython memory.py add \"<text>\" [--source TAG] [--meta KEY=VALUE ...] [--db PATH]\n```\n\nEmbeds `<text>` and stores it with an auto-generated UUID. Prints `Added <uuid>` on success.\n\n| Flag | Description |\n|---|---|\n| `--source TAG` | Origin label (e.g. a file path, agent name, or category) |\n| `--meta KEY=VALUE` | Arbitrary metadata; repeatable |\n\n**Example:**\n```bash\npython memory.py add \"The deploy pipeline uses GitHub Actions.\" --source infra --meta env=prod\n```\n\n---\n\n### `search` \u2014 Semantic similarity search\n\n```bash\npython memory.py search \"<query>\" [--limit N] [--threshold F] [--source TAG] [--json] [--db PATH]\n```\n\nEmbeds `<query>` and returns the nearest neighbours from `memories_vec`, joined with `memories`.\n\n| Flag | Default | Description |\n|---|---|---|\n| `--limit N` | 5 | Maximum results to return |\n| `--threshold F` | none | Maximum L2 distance to include. Range `[0, 2]` for L2-normalised vectors; lower = more similar. Use `\u22640.5` for high similarity, `\u22641.0` for moderate. |\n| `--source TAG` | none | Post-filter results by exact source match |\n| `--json` | off | Emit a JSON array |\n\n**Default output** (one result per line):\n```\n[0.142] <uuid>  The deploy pipeline uses GitHub Actions\u2026.  (source: infra)\n```\n\n**JSON output** (`--json`):\n```json\n[\n  {\n    \"id\": \"<uuid>\",\n    \"content\": \"The deploy pipeline uses GitHub Actions.\",\n    \"source\": \"infra\",\n    \"metadata\": {\"env\": \"prod\"},\n    \"created_at\": \"2026-04-07T10:00:00Z\",\n    \"distance\": 0.142\n  }\n]\n```\n\n> **Distance metric**: sqlite-vec uses L2 (Euclidean) distance for `float[N]` columns in `vec0` virtual tables. Because embeddings are L2-normalised, the distance range is `[0, 2]` (0 = identical vectors, 2 = maximally opposite). Source filtering is applied as a Python post-filter after the ANN retrieval; it is not pushed into the `vec0` query (sqlite-vec 0.1.x does not support additional column predicates in `vec0` queries).\n\n---\n\n### `list` \u2014 Browse stored memories\n\n```bash\npython memory.py list [--limit N] [--source TAG] [--json] [--db PATH]\n```\n\nReturns memories ordered by `created_at DESC` (newest first). No embedding model is required.\n\n| Flag | Default | Description |\n|---|---|---|\n| `--limit N` | 20 | Maximum results to return; pass `0` for unlimited |\n| `--source TAG` | none | Filter by exact source match |\n| `--json` | off | Emit a JSON array |\n\n**Default output** (one result per line):\n```\n<uuid>  The deploy pipeline uses GitHub Actions\u2026.  (source: infra)  2026-04-07T10:00:00Z\n```\n\n**JSON output** (`--json`):\n```json\n[\n  {\n    \"id\": \"<uuid>\",\n    \"content\": \"The deploy pipeline uses GitHub Actions.\",\n    \"source\": \"infra\",\n    \"metadata\": {\"env\": \"prod\"},\n    \"created_at\": \"2026-04-07T10:00:00Z\"\n  }\n]\n```\n\n> Unlike `search`, `list` does not include a `distance` field and does not load the embedding model.\n\n---\n\n### `delete` \u2014 Remove a memory by ID\n\n```bash\npython memory.py delete <uuid> [--db PATH]\n```\n\nDeletes the row from both `memories` and `memories_vec` in a single transaction. Prints `Deleted <uuid>` on success. Exits with code 1 and writes an error to stderr if the ID is not found.\n\n---\n\n### `stats` \u2014 Database statistics\n\n```bash\npython memory.py stats [--db PATH]\n```\n\nPrints a brief summary without loading the embedding model:\n\n```\nDB path:   ~/.local/share/agent-memory/memories.db\nMemories:  42\nDB size:   1.2 MB\n```\n\nExits 0 with a descriptive message if the DB does not exist.\n\n---\n\n## First-run behaviour\n\nOn first use, `memory.py` creates a managed virtualenv at `.claude/skills/agent-memory/.venv/` and installs the required dependencies (`onnxruntime`, `sqlite-vec`, `tokenizers`, `numpy`). The `bge-small-en-v1.5` ONNX model (~24 MB) is downloaded to `~/.cache/agent-memory/bge-small-en-v1.5/model.onnx` on the first command that needs embeddings (`add` or `search`). Subsequent runs reuse both.\n"
+            }
+          },
+          {
+            "tool_name": "Write",
+            "tool_use_id": "toolu_013kb5JaEfcmBjKouQsup4UQ",
+            "tool_input": {
+              "file_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1/.claude/skills/agent-memory/SKILL.md",
+              "content": "---\nname: agent-memory\ndescription: Long-term semantic memory store for agents \u2014 add, search, list, delete, and inspect memories via a CLI backed by sqlite-vec.\ntools: Bash\nuser-invocable: false\n---\n\n# agent-memory\n\n`agent-memory` is a CLI tool (`memory.py`) that gives agents persistent, queryable memory backed by SQLite and the `sqlite-vec` extension. Embeddings are generated locally using the `bge-small-en-v1.5` ONNX model.\n\n**DB location** (resolved in this order):\n1. `--db PATH` flag\n2. `AGENT_MEMORY_DB` environment variable\n3. Default: `~/.local/share/agent-memory/memories.db`\n\n---\n\n## Commands\n\n### `init` \u2014 Initialise the database\n\n```bash\npython memory.py init [--db PATH]\n```\n\nCreates the `memories` table and the `memories_vec` virtual table. Safe to run multiple times (idempotent). Most other commands call `_auto_init` automatically, so an explicit `init` is rarely needed.\n\n---\n\n### `add` \u2014 Store a memory\n\n```bash\npython memory.py add \"<text>\" [--source TAG] [--meta KEY=VALUE ...] [--db PATH]\n```\n\nEmbeds `<text>` and stores it with an auto-generated UUID. Prints `Added <uuid>` on success.\n\n| Flag | Description |\n|---|---|\n| `--source TAG` | Origin label (e.g. a file path, agent name, or category) |\n| `--meta KEY=VALUE` | Arbitrary metadata; repeatable |\n\n**Example:**\n```bash\npython memory.py add \"The deploy pipeline uses GitHub Actions.\" --source infra --meta env=prod\n```\n\n---\n\n### `search` \u2014 Semantic similarity search\n\n```bash\npython memory.py search \"<query>\" [--limit N] [--threshold F] [--source TAG] [--json] [--db PATH]\n```\n\nEmbeds `<query>` and returns the nearest neighbours from `memories_vec`, joined with `memories`.\n\n| Flag | Default | Description |\n|---|---|---|\n| `--limit N` | 5 | Maximum results to return |\n| `--threshold F` | none | Maximum L2 distance to include. Range `[0, 2]` for L2-normalised vectors; lower = more similar. Use `<=0.5` for high similarity, `<=1.0` for moderate. |\n| `--source TAG` | none | Post-filter results by exact source match |\n| `--json` | off | Emit a JSON array |\n\n**Default output** (one result per line):\n```\n[0.142] <uuid>  The deploy pipeline uses GitHub Actions....  (source: infra)\n```\n\n**JSON output** (`--json`):\n```json\n[\n  {\n    \"id\": \"<uuid>\",\n    \"content\": \"The deploy pipeline uses GitHub Actions.\",\n    \"source\": \"infra\",\n    \"metadata\": {\"env\": \"prod\"},\n    \"created_at\": \"2026-04-07T10:00:00Z\",\n    \"distance\": 0.142\n  }\n]\n```\n\n> **Distance metric**: sqlite-vec uses L2 (Euclidean) distance for `float[N]` columns in `vec0` virtual tables. Because embeddings are L2-normalised, the distance range is `[0, 2]` (0 = identical vectors, 2 = maximally opposite). Source filtering is applied as a Python post-filter after the ANN retrieval; sqlite-vec 0.1.x does not support additional column predicates in `vec0` queries.\n\n---\n\n### `list` \u2014 Browse stored memories\n\n```bash\npython memory.py list [--limit N] [--source TAG] [--json] [--db PATH]\n```\n\nReturns memories ordered by `created_at DESC` (newest first). Does not require or load the embedding model.\n\n| Flag | Default | Description |\n|---|---|---|\n| `--limit N` | 20 | Maximum results to return; pass `0` for unlimited |\n| `--source TAG` | none | Filter by exact source match |\n| `--json` | off | Emit a JSON array |\n\n**Default output** (one result per line):\n```\n<uuid>  The deploy pipeline uses GitHub Actions....  (source: infra)  2026-04-07T10:00:00Z\n```\n\n**JSON output** (`--json`):\n```json\n[\n  {\n    \"id\": \"<uuid>\",\n    \"content\": \"The deploy pipeline uses GitHub Actions.\",\n    \"source\": \"infra\",\n    \"metadata\": {\"env\": \"prod\"},\n    \"created_at\": \"2026-04-07T10:00:00Z\"\n  }\n]\n```\n\n> Unlike `search`, `list` does not include a `distance` field.\n\n---\n\n### `delete` \u2014 Remove a memory by ID\n\n```bash\npython memory.py delete <uuid> [--db PATH]\n```\n\nDeletes the row from both `memories` and `memories_vec` in a single transaction. Prints `Deleted <uuid>` on success. Exits with code 1 and writes an error to stderr if the ID is not found.\n\n---\n\n### `stats` \u2014 Database statistics\n\n```bash\npython memory.py stats [--db PATH]\n```\n\nPrints a brief summary without loading the embedding model:\n\n```\nDB path:   ~/.local/share/agent-memory/memories.db\nMemories:  42\nDB size:   1.2 MB\n```\n\nExits 0 with a descriptive message if the DB does not exist.\n\n---\n\n## First-run behaviour\n\nOn first use, `memory.py` creates a managed virtualenv at `.claude/skills/agent-memory/.venv/` and installs the required dependencies (`onnxruntime`, `sqlite-vec`, `tokenizers`, `numpy`). The `bge-small-en-v1.5` ONNX model (~24 MB) is downloaded to `~/.cache/agent-memory/bge-small-en-v1.5/model.onnx` on the first command that needs embeddings (`add` or `search`). Subsequent runs reuse both.\n"
+            }
+          }
+        ],
+        "prompt_chars": 6612,
+        "prompt_lines": 154,
+        "source": "provider",
+        "attempt": 1
+      }
+    ]
   },
   "labels": []
 }
