@@ -3,7 +3,7 @@
   "title": "Review query and CRUD implementation",
   "agent_type": "review",
   "description": "Review the combined implementation of search, delete, list, and stats commands. Check for correctness of SQL queries, proper transaction handling in delete, accurate distance metric documentation, consistent CLI flag behaviour, and absence of regressions in the add command from spec-a536cb5e.",
-  "status": "blocked",
+  "status": "ready",
   "bead_type": "task",
   "parent_id": "B-cb0b48a1",
   "dependencies": [],
@@ -55,7 +55,7 @@
     "test_coverage_notes": "",
     "known_limitations": ""
   },
-  "block_reason": "Expected implementation file .claude/skills/agent-memory/memory.py is absent. The directory contains only __pycache__ and an empty assets/. Both upstream specs (spec-a536cb5e and spec-9f1b7155) remain unimplemented with no code committed to the feature branch. This is a developer task, not a review task at this stage.",
+  "block_reason": "",
   "conflict_risks": "No conflicts possible until memory.py is created. When a developer creates it, no existing files will conflict.",
   "branch_name": "feature/b-cb0b48a1",
   "worktree_path": "",
@@ -198,6 +198,13 @@
       "event": "blocked",
       "agent_type": "review",
       "summary": "No implementation to review \u2014 memory.py remains absent; both upstream specs (spec-a536cb5e and spec-9f1b7155) are still unimplemented.",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T20:05:53.006507+00:00",
+      "event": "retried",
+      "agent_type": "review",
+      "summary": "Requeued blocked bead after corrective bead B-c780e85e-corrective completed",
       "details": {}
     }
   ],
@@ -355,7 +362,9 @@
         "attempt": 3
       }
     ],
-    "auto_corrective_bead_id": "B-c780e85e-corrective"
+    "auto_corrective_bead_id": "B-c780e85e-corrective",
+    "last_corrective_retry_source": "B-c780e85e-corrective",
+    "last_corrective_retry_commit": "0034ea7ba0baab1386f574eb2977f42d48c458e4"
   },
   "labels": []
 }
