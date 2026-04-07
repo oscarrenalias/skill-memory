@@ -19,23 +19,23 @@
   "execution_branch_name": "feature/b-cb0b48a1",
   "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1",
   "expected_files": [
-    ".claude/skills/agent-memory/memory.py",
-    ".claude/skills/agent-memory/test_commands.py"
+    "memory.py",
+    "test_commands.py"
   ],
   "expected_globs": [
-    ".claude/skills/agent-memory/test_*.py"
+    "test_*.py"
   ],
   "touched_files": [
-    ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
-    ".claude/skills/agent-memory/__pycache__/test_commands.cpython-314.pyc",
-    ".claude/skills/agent-memory/memory.py",
-    ".claude/skills/agent-memory/test_commands.py"
+    "__pycache__/memory.cpython-314.pyc",
+    "__pycache__/test_commands.cpython-314.pyc",
+    "memory.py",
+    "test_commands.py"
   ],
   "changed_files": [
-    ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
-    ".claude/skills/agent-memory/__pycache__/test_commands.cpython-314.pyc",
-    ".claude/skills/agent-memory/memory.py",
-    ".claude/skills/agent-memory/test_commands.py"
+    "__pycache__/memory.cpython-314.pyc",
+    "__pycache__/test_commands.cpython-314.pyc",
+    "memory.py",
+    "test_commands.py"
   ],
   "updated_docs": [],
   "handoff_summary": {
@@ -46,27 +46,27 @@
     "findings_count": 0,
     "requires_followup": true,
     "changed_files": [
-      ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
-      ".claude/skills/agent-memory/__pycache__/test_commands.cpython-314.pyc",
-      ".claude/skills/agent-memory/memory.py",
-      ".claude/skills/agent-memory/test_commands.py"
+      "__pycache__/memory.cpython-314.pyc",
+      "__pycache__/test_commands.cpython-314.pyc",
+      "memory.py",
+      "test_commands.py"
     ],
     "updated_docs": [],
     "next_action": "Schedule tester agent to run pytest .claude/skills/agent-memory/test_commands.py in the venv at .claude/skills/agent-memory/.venv against branch feature/b-cb0b48a1",
     "next_agent": "tester",
     "block_reason": "",
     "expected_files": [
-      ".claude/skills/agent-memory/memory.py",
-      ".claude/skills/agent-memory/test_commands.py"
+      "memory.py",
+      "test_commands.py"
     ],
     "expected_globs": [
-      ".claude/skills/agent-memory/test_*.py"
+      "test_*.py"
     ],
     "touched_files": [
-      ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
-      ".claude/skills/agent-memory/__pycache__/test_commands.cpython-314.pyc",
-      ".claude/skills/agent-memory/memory.py",
-      ".claude/skills/agent-memory/test_commands.py"
+      "__pycache__/memory.cpython-314.pyc",
+      "__pycache__/test_commands.cpython-314.pyc",
+      "memory.py",
+      "test_commands.py"
     ],
     "conflict_risks": "None \u2014 no files were modified. Sibling beads touching memory.py or test_commands.py should be aware both files are stable and passing syntax checks.",
     "design_decisions": "",
@@ -170,11 +170,11 @@
       "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1",
       "expected_files": [],
       "expected_globs": [
-        ".claude/skills/agent-memory/test_*.py",
-        ".claude/skills/agent-memory/*_test.py"
+        "test_*.py",
+        "*_test.py"
       ],
       "touched_files": [
-        ".claude/skills/agent-memory/__pycache__/test_commands.cpython-314-pytest-9.0.3.pyc"
+        "__pycache__/test_commands.cpython-314-pytest-9.0.3.pyc"
       ],
       "conflict_risks": "",
       "handoff_summary": {

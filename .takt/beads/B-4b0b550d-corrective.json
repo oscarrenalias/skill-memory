@@ -19,31 +19,31 @@
   "execution_branch_name": "feature/b-cb0b48a1",
   "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1",
   "expected_files": [
-    ".claude/skills/agent-memory/memory.py",
-    ".claude/skills/agent-memory/assets/tokenizer.json",
-    ".claude/skills/agent-memory/assets/tokenizer_config.json",
-    ".claude/skills/agent-memory/assets/vocab.txt",
-    ".claude/skills/agent-memory/assets/special_tokens_map.json"
+    "memory.py",
+    "assets/tokenizer.json",
+    "assets/tokenizer_config.json",
+    "assets/vocab.txt",
+    "assets/special_tokens_map.json"
   ],
   "expected_globs": [
-    ".claude/skills/agent-memory/test_*.py",
-    ".claude/skills/agent-memory/*_test.py"
+    "test_*.py",
+    "*_test.py"
   ],
   "touched_files": [
-    ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
-    ".claude/skills/agent-memory/assets/special_tokens_map.json",
-    ".claude/skills/agent-memory/assets/tokenizer.json",
-    ".claude/skills/agent-memory/assets/tokenizer_config.json",
-    ".claude/skills/agent-memory/assets/vocab.txt",
-    ".claude/skills/agent-memory/memory.py"
+    "__pycache__/memory.cpython-314.pyc",
+    "assets/special_tokens_map.json",
+    "assets/tokenizer.json",
+    "assets/tokenizer_config.json",
+    "assets/vocab.txt",
+    "memory.py"
   ],
   "changed_files": [
-    ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
-    ".claude/skills/agent-memory/assets/special_tokens_map.json",
-    ".claude/skills/agent-memory/assets/tokenizer.json",
-    ".claude/skills/agent-memory/assets/tokenizer_config.json",
-    ".claude/skills/agent-memory/assets/vocab.txt",
-    ".claude/skills/agent-memory/memory.py"
+    "__pycache__/memory.cpython-314.pyc",
+    "assets/special_tokens_map.json",
+    "assets/tokenizer.json",
+    "assets/tokenizer_config.json",
+    "assets/vocab.txt",
+    "memory.py"
   ],
   "updated_docs": [],
   "handoff_summary": {
@@ -54,35 +54,35 @@
     "findings_count": 0,
     "requires_followup": true,
     "changed_files": [
-      ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
-      ".claude/skills/agent-memory/assets/special_tokens_map.json",
-      ".claude/skills/agent-memory/assets/tokenizer.json",
-      ".claude/skills/agent-memory/assets/tokenizer_config.json",
-      ".claude/skills/agent-memory/assets/vocab.txt",
-      ".claude/skills/agent-memory/memory.py"
+      "__pycache__/memory.cpython-314.pyc",
+      "assets/special_tokens_map.json",
+      "assets/tokenizer.json",
+      "assets/tokenizer_config.json",
+      "assets/vocab.txt",
+      "memory.py"
     ],
     "updated_docs": [],
     "next_action": "Retry tester bead B-4b0b550d \u2014 implementation is now complete and committed to feature/b-cb0b48a1 at commit 58a07a8.",
     "next_agent": "tester",
     "block_reason": "",
     "expected_files": [
-      ".claude/skills/agent-memory/memory.py",
-      ".claude/skills/agent-memory/assets/tokenizer.json",
-      ".claude/skills/agent-memory/assets/tokenizer_config.json",
-      ".claude/skills/agent-memory/assets/vocab.txt",
-      ".claude/skills/agent-memory/assets/special_tokens_map.json"
+      "memory.py",
+      "assets/tokenizer.json",
+      "assets/tokenizer_config.json",
+      "assets/vocab.txt",
+      "assets/special_tokens_map.json"
     ],
     "expected_globs": [
-      ".claude/skills/agent-memory/test_*.py",
-      ".claude/skills/agent-memory/*_test.py"
+      "test_*.py",
+      "*_test.py"
     ],
     "touched_files": [
-      ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
-      ".claude/skills/agent-memory/assets/special_tokens_map.json",
-      ".claude/skills/agent-memory/assets/tokenizer.json",
-      ".claude/skills/agent-memory/assets/tokenizer_config.json",
-      ".claude/skills/agent-memory/assets/vocab.txt",
-      ".claude/skills/agent-memory/memory.py"
+      "__pycache__/memory.cpython-314.pyc",
+      "assets/special_tokens_map.json",
+      "assets/tokenizer.json",
+      "assets/tokenizer_config.json",
+      "assets/vocab.txt",
+      "memory.py"
     ],
     "conflict_risks": "None \u2014 changes are confined to .claude/skills/agent-memory/ which no other in-flight bead touches.",
     "design_decisions": "Used post-filter for --source in search (spec recommended this unless pre-filter is well-supported). _MODEL_SHA256 left as None per spec guidance that the implementing agent must confirm the hash at first run \u2014 a TODO comment is left in code. Distance metric is L2 (sqlite-vec vec0 default), documented in _embed() docstring with the expected [0,2] range for L2-normalised vectors.",
@@ -186,8 +186,8 @@
       "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1",
       "expected_files": [],
       "expected_globs": [
-        ".claude/skills/agent-memory/test_*.py",
-        ".claude/skills/agent-memory/*_test.py"
+        "test_*.py",
+        "*_test.py"
       ],
       "touched_files": [],
       "conflict_risks": "None from this bead; no files were changed.",

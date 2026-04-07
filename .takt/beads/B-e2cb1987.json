@@ -18,18 +18,18 @@
   "execution_branch_name": "feature/b-cb0b48a1",
   "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1",
   "expected_files": [
-    ".claude/skills/agent-memory/memory.py"
+    "memory.py"
   ],
   "expected_globs": [
-    ".claude/skills/agent-memory/*.py"
+    "*.py"
   ],
   "touched_files": [
-    ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
-    ".claude/skills/agent-memory/memory.py"
+    "__pycache__/memory.cpython-314.pyc",
+    "memory.py"
   ],
   "changed_files": [
-    ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
-    ".claude/skills/agent-memory/memory.py"
+    "__pycache__/memory.cpython-314.pyc",
+    "memory.py"
   ],
   "updated_docs": [],
   "handoff_summary": {
@@ -40,22 +40,22 @@
     "findings_count": 0,
     "requires_followup": false,
     "changed_files": [
-      ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
-      ".claude/skills/agent-memory/memory.py"
+      "__pycache__/memory.cpython-314.pyc",
+      "memory.py"
     ],
     "updated_docs": [],
     "next_action": "Hand off to tester agent for acceptance criteria verification",
     "next_agent": "tester",
     "block_reason": "",
     "expected_files": [
-      ".claude/skills/agent-memory/memory.py"
+      "memory.py"
     ],
     "expected_globs": [
-      ".claude/skills/agent-memory/*.py"
+      "*.py"
     ],
     "touched_files": [
-      ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
-      ".claude/skills/agent-memory/memory.py"
+      "__pycache__/memory.cpython-314.pyc",
+      "memory.py"
     ],
     "conflict_risks": "",
     "design_decisions": "",
@@ -210,13 +210,13 @@
       "execution_branch_name": "feature/b-cb0b48a1",
       "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1",
       "expected_files": [
-        ".claude/skills/agent-memory/memory.py"
+        "memory.py"
       ],
       "expected_globs": [
-        ".claude/skills/agent-memory/*.py"
+        "*.py"
       ],
       "touched_files": [
-        ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc"
+        "__pycache__/memory.cpython-314.pyc"
       ],
       "conflict_risks": "",
       "handoff_summary": {
@@ -227,20 +227,20 @@
         "findings_count": 0,
         "requires_followup": false,
         "changed_files": [
-          ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc"
+          "__pycache__/memory.cpython-314.pyc"
         ],
         "updated_docs": [],
         "next_action": "",
         "next_agent": "",
         "block_reason": "claude -p produced no structured output. is_error=False, stop_reason=end_turn, result='End-to-end confirmed: bootstrap ran, then `stats` on a non-existent DB printed `\"No memory DB found at ...\"` and exited 0. Implementation is complete.'",
         "expected_files": [
-          ".claude/skills/agent-memory/memory.py"
+          "memory.py"
         ],
         "expected_globs": [
-          ".claude/skills/agent-memory/*.py"
+          "*.py"
         ],
         "touched_files": [
-          ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc"
+          "__pycache__/memory.cpython-314.pyc"
         ],
         "conflict_risks": "",
         "design_decisions": "",

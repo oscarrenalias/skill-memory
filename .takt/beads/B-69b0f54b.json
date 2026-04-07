@@ -21,14 +21,14 @@
   "execution_branch_name": "feature/b-54edeccf",
   "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
   "expected_files": [
-    ".claude/skills/agent-memory/apm.yml"
+    "apm.yml"
   ],
   "expected_globs": [],
   "touched_files": [
-    ".claude/skills/agent-memory/apm.yml"
+    "apm.yml"
   ],
   "changed_files": [
-    ".claude/skills/agent-memory/apm.yml"
+    "apm.yml"
   ],
   "updated_docs": [],
   "handoff_summary": {
@@ -39,18 +39,18 @@
     "findings_count": 0,
     "requires_followup": false,
     "changed_files": [
-      ".claude/skills/agent-memory/apm.yml"
+      "apm.yml"
     ],
     "updated_docs": [],
     "next_action": "",
     "next_agent": "",
     "block_reason": "",
     "expected_files": [
-      ".claude/skills/agent-memory/apm.yml"
+      "apm.yml"
     ],
     "expected_globs": [],
     "touched_files": [
-      ".claude/skills/agent-memory/apm.yml"
+      "apm.yml"
     ],
     "conflict_risks": "",
     "design_decisions": "",
@@ -154,7 +154,7 @@
       "execution_branch_name": "feature/b-54edeccf",
       "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
       "expected_files": [
-        ".claude/skills/agent-memory/apm.yml"
+        "apm.yml"
       ],
       "expected_globs": [],
       "touched_files": [],

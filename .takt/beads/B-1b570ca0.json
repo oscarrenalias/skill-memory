@@ -22,16 +22,16 @@
   "execution_branch_name": "feature/b-54edeccf",
   "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
   "expected_files": [
-    ".claude/skills/agent-memory/apm.yml"
+    "apm.yml"
   ],
   "expected_globs": [
-    ".claude/skills/agent-memory/tests/*"
+    "tests/*"
   ],
   "touched_files": [
-    ".claude/skills/agent-memory/apm.yml"
+    "apm.yml"
   ],
   "changed_files": [
-    ".claude/skills/agent-memory/apm.yml"
+    "apm.yml"
   ],
   "updated_docs": [],
   "handoff_summary": {

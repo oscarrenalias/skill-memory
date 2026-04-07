@@ -66,7 +66,7 @@ Chunks shorter than 10 characters (after stripping whitespace) are silently skip
 
 ### 2. SKILL.md
 
-Create `.claude/skills/agent-memory/SKILL.md` with frontmatter and agent-facing guidance.
+Create `SKILL.md` at the repo root with frontmatter and agent-facing guidance.
 
 **Frontmatter:**
 
@@ -104,7 +104,7 @@ scripts: {}
 
 ### 4. Test suite
 
-Create `.claude/skills/agent-memory/tests/__init__.py` (empty) and `.claude/skills/agent-memory/tests/test_memory.py`.
+Create `tests/__init__.py` (empty) and `tests/test_memory.py` at the repo root.
 
 Use the same `_TempDirTest` base-class pattern as `skill-spec-management/tests/test_spec.py`: each test `chdir`s into a fresh `tempfile.mkdtemp()`.
 
@@ -135,11 +135,11 @@ Tests that require the embedding model (all tests involving actual embedding) mu
 
 | File | Change |
 |---|---|
-| `.claude/skills/agent-memory/memory.py` | Add ingest subcommand handler |
-| `.claude/skills/agent-memory/SKILL.md` | New — agent-facing skill documentation |
-| `.claude/skills/agent-memory/apm.yml` | New — APM package manifest |
-| `.claude/skills/agent-memory/tests/__init__.py` | New — empty package marker |
-| `.claude/skills/agent-memory/tests/test_memory.py` | New — full test suite |
+| `memory.py` | Add ingest subcommand handler |
+| `SKILL.md` | New — agent-facing skill documentation |
+| `apm.yml` | New — APM package manifest |
+| `tests/__init__.py` | New — empty package marker |
+| `tests/test_memory.py` | New — full test suite |
 
 ## Acceptance Criteria
 

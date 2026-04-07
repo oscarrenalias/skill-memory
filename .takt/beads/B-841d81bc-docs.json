@@ -17,11 +17,11 @@
   "execution_branch_name": "feature/b-266c0a28",
   "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
   "expected_files": [
-    ".claude/skills/agent-memory/.gitignore",
-    ".claude/skills/agent-memory/assets/.gitkeep"
+    ".gitignore",
+    "assets/.gitkeep"
   ],
   "expected_globs": [
-    ".claude/skills/agent-memory/**"
+    "**"
   ],
   "touched_files": [],
   "changed_files": [],
@@ -39,11 +39,11 @@
     "next_agent": "",
     "block_reason": "",
     "expected_files": [
-      ".claude/skills/agent-memory/.gitignore",
-      ".claude/skills/agent-memory/assets/.gitkeep"
+      ".gitignore",
+      "assets/.gitkeep"
     ],
     "expected_globs": [
-      ".claude/skills/agent-memory/**"
+      "**"
     ],
     "touched_files": [],
     "conflict_risks": "None \u2014 only new files added, no existing files modified.",
@@ -149,15 +149,15 @@
       "execution_branch_name": "feature/b-266c0a28",
       "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
       "expected_files": [
-        ".claude/skills/agent-memory/.gitignore",
-        ".claude/skills/agent-memory/assets/.gitkeep"
+        ".gitignore",
+        "assets/.gitkeep"
       ],
       "expected_globs": [
-        ".claude/skills/agent-memory/**"
+        "**"
       ],
       "touched_files": [
-        ".claude/skills/agent-memory/.gitignore",
-        ".claude/skills/agent-memory/assets/.gitkeep"
+        ".gitignore",
+        "assets/.gitkeep"
       ],
       "conflict_risks": "None \u2014 only new files added, no existing files modified.",
       "handoff_summary": {

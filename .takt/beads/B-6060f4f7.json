@@ -24,7 +24,7 @@
   "execution_branch_name": "feature/b-54edeccf",
   "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
   "expected_files": [
-    ".claude/skills/agent-memory/SKILL.md"
+    "SKILL.md"
   ],
   "expected_globs": [],
   "touched_files": [],

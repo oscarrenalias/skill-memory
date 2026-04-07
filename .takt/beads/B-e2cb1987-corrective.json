@@ -19,18 +19,18 @@
   "execution_branch_name": "feature/b-cb0b48a1",
   "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1",
   "expected_files": [
-    ".claude/skills/agent-memory/memory.py"
+    "memory.py"
   ],
   "expected_globs": [
-    ".claude/skills/agent-memory/*.py"
+    "*.py"
   ],
   "touched_files": [
-    ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
-    ".claude/skills/agent-memory/memory.py"
+    "__pycache__/memory.cpython-314.pyc",
+    "memory.py"
   ],
   "changed_files": [
-    ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
-    ".claude/skills/agent-memory/memory.py"
+    "__pycache__/memory.cpython-314.pyc",
+    "memory.py"
   ],
   "updated_docs": [],
   "handoff_summary": {
@@ -41,22 +41,22 @@
     "findings_count": 0,
     "requires_followup": false,
     "changed_files": [
-      ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
-      ".claude/skills/agent-memory/memory.py"
+      "__pycache__/memory.cpython-314.pyc",
+      "memory.py"
     ],
     "updated_docs": [],
     "next_action": "Parent bead B-e2cb1987 can be retried as-is. The stats command is implemented and working. Tester agent can now validate the full stats subcommand behavior.",
     "next_agent": "tester",
     "block_reason": "",
     "expected_files": [
-      ".claude/skills/agent-memory/memory.py"
+      "memory.py"
     ],
     "expected_globs": [
-      ".claude/skills/agent-memory/*.py"
+      "*.py"
     ],
     "touched_files": [
-      ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
-      ".claude/skills/agent-memory/memory.py"
+      "__pycache__/memory.cpython-314.pyc",
+      "memory.py"
     ],
     "conflict_risks": "",
     "design_decisions": "",
@@ -159,13 +159,13 @@
       "execution_branch_name": "feature/b-cb0b48a1",
       "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1",
       "expected_files": [
-        ".claude/skills/agent-memory/memory.py"
+        "memory.py"
       ],
       "expected_globs": [
-        ".claude/skills/agent-memory/*.py"
+        "*.py"
       ],
       "touched_files": [
-        ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc"
+        "__pycache__/memory.cpython-314.pyc"
       ],
       "conflict_risks": "",
       "handoff_summary": {

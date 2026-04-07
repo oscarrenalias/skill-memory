@@ -24,16 +24,16 @@
   "execution_branch_name": "feature/b-266c0a28",
   "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
   "expected_files": [
-    ".claude/skills/agent-memory/memory.py"
+    "memory.py"
   ],
   "expected_globs": [],
   "touched_files": [
-    ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
-    ".claude/skills/agent-memory/memory.py"
+    "__pycache__/memory.cpython-314.pyc",
+    "memory.py"
   ],
   "changed_files": [
-    ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
-    ".claude/skills/agent-memory/memory.py"
+    "__pycache__/memory.cpython-314.pyc",
+    "memory.py"
   ],
   "updated_docs": [],
   "handoff_summary": {
@@ -44,20 +44,20 @@
     "findings_count": 0,
     "requires_followup": false,
     "changed_files": [
-      ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
-      ".claude/skills/agent-memory/memory.py"
+      "__pycache__/memory.cpython-314.pyc",
+      "memory.py"
     ],
     "updated_docs": [],
     "next_action": "Proceed to tester agent to validate init command behavior end-to-end.",
     "next_agent": "tester",
     "block_reason": "",
     "expected_files": [
-      ".claude/skills/agent-memory/memory.py"
+      "memory.py"
     ],
     "expected_globs": [],
     "touched_files": [
-      ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
-      ".claude/skills/agent-memory/memory.py"
+      "__pycache__/memory.cpython-314.pyc",
+      "memory.py"
     ],
     "conflict_risks": "None \u2014 only memory.py is modified; no sibling beads touch this file.",
     "design_decisions": "_resolve_db uses getattr with fallback to handle cases where --db is not defined on the namespace (e.g., called from a subcommand that does not declare it). sqlite-vec load is wrapped in try/except with sys.exit(1) to give a clear error on missing extension.",
@@ -258,7 +258,7 @@
       "execution_branch_name": "feature/b-266c0a28",
       "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
       "expected_files": [
-        ".claude/skills/agent-memory/memory.py"
+        "memory.py"
       ],
       "expected_globs": [],
       "touched_files": [],
@@ -276,7 +276,7 @@
         "next_agent": "developer",
         "block_reason": "All file write attempts (Edit, Write, Bash heredoc) to .takt/worktrees/B-266c0a28/.claude/skills/agent-memory/memory.py were blocked by the permission system. The implementation is complete and correct; it cannot be persisted without user consent to write to the worktree path.",
         "expected_files": [
-          ".claude/skills/agent-memory/memory.py"
+          "memory.py"
         ],
         "expected_globs": [],
         "touched_files": [],

@@ -24,14 +24,14 @@
   "execution_branch_name": "feature/b-266c0a28",
   "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
   "expected_files": [
-    ".claude/skills/agent-memory/memory.py"
+    "memory.py"
   ],
   "expected_globs": [],
   "touched_files": [
-    ".claude/skills/agent-memory/memory.py"
+    "memory.py"
   ],
   "changed_files": [
-    ".claude/skills/agent-memory/memory.py"
+    "memory.py"
   ],
   "updated_docs": [],
   "handoff_summary": {
@@ -42,18 +42,18 @@
     "findings_count": 0,
     "requires_followup": true,
     "changed_files": [
-      ".claude/skills/agent-memory/memory.py"
+      "memory.py"
     ],
     "updated_docs": [],
     "next_action": "Implement cmd_init (DB schema) and cmd_add (embedding + insert) in subsequent beads per the spec.",
     "next_agent": "developer",
     "block_reason": "",
     "expected_files": [
-      ".claude/skills/agent-memory/memory.py"
+      "memory.py"
     ],
     "expected_globs": [],
     "touched_files": [
-      ".claude/skills/agent-memory/memory.py"
+      "memory.py"
     ],
     "conflict_risks": "No conflicts expected. memory.py is a new file with no overlap with sibling beads.",
     "design_decisions": "Used sub.required=True so unknown/missing subcommands exit non-zero automatically. argparse import is placed after _bootstrap() call per spec pattern. cmd_init and cmd_add raise NotImplementedError as stubs.",
@@ -160,7 +160,7 @@
       "execution_branch_name": "feature/b-266c0a28",
       "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
       "expected_files": [
-        ".claude/skills/agent-memory/memory.py"
+        "memory.py"
       ],
       "expected_globs": [],
       "touched_files": [],

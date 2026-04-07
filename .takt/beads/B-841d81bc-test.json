@@ -17,27 +17,27 @@
   "execution_branch_name": "feature/b-266c0a28",
   "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
   "expected_files": [
-    ".claude/skills/agent-memory/.gitignore",
-    ".claude/skills/agent-memory/assets/.gitkeep"
+    ".gitignore",
+    "assets/.gitkeep"
   ],
   "expected_globs": [
-    ".claude/skills/agent-memory/**"
+    "**"
   ],
   "touched_files": [
-    ".claude/skills/agent-memory/.gitignore",
-    ".claude/skills/agent-memory/assets/.gitkeep",
-    ".claude/skills/agent-memory/assets/special_tokens_map.json",
-    ".claude/skills/agent-memory/assets/tokenizer.json",
-    ".claude/skills/agent-memory/assets/tokenizer_config.json",
-    ".claude/skills/agent-memory/assets/vocab.txt"
+    ".gitignore",
+    "assets/.gitkeep",
+    "assets/special_tokens_map.json",
+    "assets/tokenizer.json",
+    "assets/tokenizer_config.json",
+    "assets/vocab.txt"
   ],
   "changed_files": [
-    ".claude/skills/agent-memory/.gitignore",
-    ".claude/skills/agent-memory/assets/.gitkeep",
-    ".claude/skills/agent-memory/assets/special_tokens_map.json",
-    ".claude/skills/agent-memory/assets/tokenizer.json",
-    ".claude/skills/agent-memory/assets/tokenizer_config.json",
-    ".claude/skills/agent-memory/assets/vocab.txt"
+    ".gitignore",
+    "assets/.gitkeep",
+    "assets/special_tokens_map.json",
+    "assets/tokenizer.json",
+    "assets/tokenizer_config.json",
+    "assets/vocab.txt"
   ],
   "updated_docs": [],
   "handoff_summary": {
@@ -48,31 +48,31 @@
     "findings_count": 0,
     "requires_followup": false,
     "changed_files": [
-      ".claude/skills/agent-memory/.gitignore",
-      ".claude/skills/agent-memory/assets/.gitkeep",
-      ".claude/skills/agent-memory/assets/special_tokens_map.json",
-      ".claude/skills/agent-memory/assets/tokenizer.json",
-      ".claude/skills/agent-memory/assets/tokenizer_config.json",
-      ".claude/skills/agent-memory/assets/vocab.txt"
+      ".gitignore",
+      "assets/.gitkeep",
+      "assets/special_tokens_map.json",
+      "assets/tokenizer.json",
+      "assets/tokenizer_config.json",
+      "assets/vocab.txt"
     ],
     "updated_docs": [],
     "next_action": "Proceed to next bead.",
     "next_agent": "",
     "block_reason": "",
     "expected_files": [
-      ".claude/skills/agent-memory/.gitignore",
-      ".claude/skills/agent-memory/assets/.gitkeep"
+      ".gitignore",
+      "assets/.gitkeep"
     ],
     "expected_globs": [
-      ".claude/skills/agent-memory/**"
+      "**"
     ],
     "touched_files": [
-      ".claude/skills/agent-memory/.gitignore",
-      ".claude/skills/agent-memory/assets/.gitkeep",
-      ".claude/skills/agent-memory/assets/special_tokens_map.json",
-      ".claude/skills/agent-memory/assets/tokenizer.json",
-      ".claude/skills/agent-memory/assets/tokenizer_config.json",
-      ".claude/skills/agent-memory/assets/vocab.txt"
+      ".gitignore",
+      "assets/.gitkeep",
+      "assets/special_tokens_map.json",
+      "assets/tokenizer.json",
+      "assets/tokenizer_config.json",
+      "assets/vocab.txt"
     ],
     "conflict_risks": "None \u2014 only new files added, no existing files modified.",
     "design_decisions": "",
@@ -170,15 +170,15 @@
       "execution_branch_name": "feature/b-266c0a28",
       "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
       "expected_files": [
-        ".claude/skills/agent-memory/.gitignore",
-        ".claude/skills/agent-memory/assets/.gitkeep"
+        ".gitignore",
+        "assets/.gitkeep"
       ],
       "expected_globs": [
-        ".claude/skills/agent-memory/**"
+        "**"
       ],
       "touched_files": [
-        ".claude/skills/agent-memory/.gitignore",
-        ".claude/skills/agent-memory/assets/.gitkeep"
+        ".gitignore",
+        "assets/.gitkeep"
       ],
       "conflict_risks": "None \u2014 only new files added, no existing files modified.",
       "handoff_summary": {

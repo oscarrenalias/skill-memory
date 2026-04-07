@@ -23,14 +23,14 @@
   "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1",
   "expected_files": [],
   "expected_globs": [
-    ".claude/skills/agent-memory/test_*.py",
-    ".claude/skills/agent-memory/*_test.py"
+    "test_*.py",
+    "*_test.py"
   ],
   "touched_files": [
-    ".claude/skills/agent-memory/__pycache__/test_commands.cpython-314-pytest-9.0.3.pyc"
+    "__pycache__/test_commands.cpython-314-pytest-9.0.3.pyc"
   ],
   "changed_files": [
-    ".claude/skills/agent-memory/__pycache__/test_commands.cpython-314-pytest-9.0.3.pyc"
+    "__pycache__/test_commands.cpython-314-pytest-9.0.3.pyc"
   ],
   "updated_docs": [],
   "handoff_summary": {
@@ -41,7 +41,7 @@
     "findings_count": 0,
     "requires_followup": false,
     "changed_files": [
-      ".claude/skills/agent-memory/__pycache__/test_commands.cpython-314-pytest-9.0.3.pyc"
+      "__pycache__/test_commands.cpython-314-pytest-9.0.3.pyc"
     ],
     "updated_docs": [],
     "next_action": "",
@@ -49,11 +49,11 @@
     "block_reason": "claude -p produced no structured output. is_error=False, stop_reason=end_turn, result='The background task notification confirms pytest installation completed successfully (exit code 0). This aligns with the test run that already completed \u2014 all 22 tests passed.'",
     "expected_files": [],
     "expected_globs": [
-      ".claude/skills/agent-memory/test_*.py",
-      ".claude/skills/agent-memory/*_test.py"
+      "test_*.py",
+      "*_test.py"
     ],
     "touched_files": [
-      ".claude/skills/agent-memory/__pycache__/test_commands.cpython-314-pytest-9.0.3.pyc"
+      "__pycache__/test_commands.cpython-314-pytest-9.0.3.pyc"
     ],
     "conflict_risks": "",
     "design_decisions": "",
@@ -277,11 +277,11 @@
       "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1",
       "expected_files": [],
       "expected_globs": [
-        ".claude/skills/agent-memory/test_*.py",
-        ".claude/skills/agent-memory/*_test.py"
+        "test_*.py",
+        "*_test.py"
       ],
       "touched_files": [
-        ".claude/skills/agent-memory/__pycache__/test_commands.cpython-314-pytest-9.0.3.pyc"
+        "__pycache__/test_commands.cpython-314-pytest-9.0.3.pyc"
       ],
       "conflict_risks": "",
       "handoff_summary": {
@@ -292,7 +292,7 @@
         "findings_count": 0,
         "requires_followup": false,
         "changed_files": [
-          ".claude/skills/agent-memory/__pycache__/test_commands.cpython-314-pytest-9.0.3.pyc"
+          "__pycache__/test_commands.cpython-314-pytest-9.0.3.pyc"
         ],
         "updated_docs": [],
         "next_action": "",
@@ -300,11 +300,11 @@
         "block_reason": "claude -p produced no structured output. is_error=False, stop_reason=end_turn, result='The background pip install task completed successfully (exit code 0) \u2014 pytest was already installed in the venv by the time it finished. No action needed.'",
         "expected_files": [],
         "expected_globs": [
-          ".claude/skills/agent-memory/test_*.py",
-          ".claude/skills/agent-memory/*_test.py"
+          "test_*.py",
+          "*_test.py"
         ],
         "touched_files": [
-          ".claude/skills/agent-memory/__pycache__/test_commands.cpython-314-pytest-9.0.3.pyc"
+          "__pycache__/test_commands.cpython-314-pytest-9.0.3.pyc"
         ],
         "conflict_risks": "",
         "design_decisions": "",

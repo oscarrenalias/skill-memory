@@ -10,7 +10,7 @@
   "acceptance_criteria": [
     "Directory .claude/skills/agent-memory/ exists",
     "Directory .claude/skills/agent-memory/assets/ exists",
-    ".claude/skills/agent-memory/.gitignore contains a line matching .venv/"
+    ".gitignore contains a line matching .venv/"
   ],
   "linked_docs": [
     "specs/drafts/agent-memory-core-infrastructure.md"
@@ -19,18 +19,18 @@
   "execution_branch_name": "feature/b-266c0a28",
   "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
   "expected_files": [
-    ".claude/skills/agent-memory/.gitignore"
+    ".gitignore"
   ],
   "expected_globs": [
-    ".claude/skills/agent-memory/**"
+    "**"
   ],
   "touched_files": [
-    ".claude/skills/agent-memory/.gitignore",
-    ".claude/skills/agent-memory/assets/.gitkeep"
+    ".gitignore",
+    "assets/.gitkeep"
   ],
   "changed_files": [
-    ".claude/skills/agent-memory/.gitignore",
-    ".claude/skills/agent-memory/assets/.gitkeep"
+    ".gitignore",
+    "assets/.gitkeep"
   ],
   "updated_docs": [],
   "handoff_summary": {
@@ -41,22 +41,22 @@
     "findings_count": 0,
     "requires_followup": false,
     "changed_files": [
-      ".claude/skills/agent-memory/.gitignore",
-      ".claude/skills/agent-memory/assets/.gitkeep"
+      ".gitignore",
+      "assets/.gitkeep"
     ],
     "updated_docs": [],
     "next_action": "Subsequent beads can now place Python code and assets into .claude/skills/agent-memory/",
     "next_agent": "tester",
     "block_reason": "",
     "expected_files": [
-      ".claude/skills/agent-memory/.gitignore"
+      ".gitignore"
     ],
     "expected_globs": [
-      ".claude/skills/agent-memory/**"
+      "**"
     ],
     "touched_files": [
-      ".claude/skills/agent-memory/.gitignore",
-      ".claude/skills/agent-memory/assets/.gitkeep"
+      ".gitignore",
+      "assets/.gitkeep"
     ],
     "conflict_risks": "None \u2014 only new files added, no existing files modified.",
     "design_decisions": "",
@@ -149,7 +149,7 @@
       "acceptance_criteria": [
         "Directory .claude/skills/agent-memory/ exists",
         "Directory .claude/skills/agent-memory/assets/ exists",
-        ".claude/skills/agent-memory/.gitignore contains a line matching .venv/"
+        ".gitignore contains a line matching .venv/"
       ],
       "dependencies": [],
       "linked_docs": [
@@ -158,10 +158,10 @@
       "execution_branch_name": "feature/b-266c0a28",
       "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
       "expected_files": [
-        ".claude/skills/agent-memory/.gitignore"
+        ".gitignore"
       ],
       "expected_globs": [
-        ".claude/skills/agent-memory/**"
+        "**"
       ],
       "touched_files": [],
       "conflict_risks": "",

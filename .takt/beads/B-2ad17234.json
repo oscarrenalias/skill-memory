@@ -23,7 +23,7 @@
   "execution_branch_name": "feature/b-266c0a28",
   "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
   "expected_files": [
-    ".claude/skills/agent-memory/memory.py"
+    "memory.py"
   ],
   "expected_globs": [],
   "touched_files": [],
@@ -42,7 +42,7 @@
     "next_agent": "developer",
     "block_reason": "All write operations to the worktree file were denied by the Claude Code permission system (\"Claude requested permissions to write to \u2026 but you haven't granted it yet\"). This applies to Edit, Write, and Bash tools equally. The implementation is complete and tested locally; only the file write is blocked.",
     "expected_files": [
-      ".claude/skills/agent-memory/memory.py"
+      "memory.py"
     ],
     "expected_globs": [],
     "touched_files": [],
@@ -171,7 +171,7 @@
       "execution_branch_name": "feature/b-266c0a28",
       "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
       "expected_files": [
-        ".claude/skills/agent-memory/memory.py"
+        "memory.py"
       ],
       "expected_globs": [],
       "touched_files": [],
