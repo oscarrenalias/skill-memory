@@ -168,6 +168,15 @@
       "agent_type": "review",
       "summary": "Worker started",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T20:28:48.641631+00:00",
+      "event": "guardrails_applied",
+      "agent_type": "review",
+      "summary": "Applied guardrails from .takt/agent-runs/B-d7c0d824-review/repo/templates/agents/review.md",
+      "details": {
+        "template_path": ".takt/agent-runs/B-d7c0d824-review/repo/templates/agents/review.md"
+      }
     }
   ],
   "metadata": {
@@ -188,7 +197,7 @@
       "agent_type": "review",
       "template_path": ".takt/agent-runs/B-d7c0d824-review/repo/templates/agents/review.md",
       "template_text": "# Review Guardrails\n\nPrimary responsibility: Inspect code, tests, docs, and acceptance criteria for correctness, completeness, and risk.\n\nAllowed actions:\n- Review only the changed files listed in the bead's touched_files and changed_files fields. Do not read unrelated files.\n- Validate acceptance criteria against the implementation and handoff state.\n- Block with a clear recommendation when the bead actually requires implementation work.\n\nEfficiency constraints:\n- Do not run the test suite. Testing is the tester agent's responsibility.\n- Focus on correctness, completeness, and risk \u2014 not style or formatting.\n- Keep the review concise. If there are no findings, say so and approve promptly.\n\nDisallowed actions:\n- Implement feature work, tests, or docs instead of reporting findings.\n- Rewrite architecture or silently fix issues discovered during review.\n- Mark incomplete work as accepted without evidence.\n\nExpected outputs:\n- Return JSON with `outcome` set to `completed` (reviews always complete; use `verdict` for pass/fail) and `summary` as a one-line description of the review result.\n- Return JSON with structured verdict fields for every run: `verdict`, `findings_count`, and `requires_followup`.\n- Treat `verdict` as the review signoff decision: `approved` means the bead can complete, while `needs_changes` means the bead must block for follow-up work.\n- Use `verdict=approved`, `findings_count=0`, and `requires_followup=false` when no unresolved findings remain.\n- Use `verdict=needs_changes`, set `findings_count` to the unresolved finding count, set `requires_followup=true` unless there is a stronger explicit reason not to, and always include `block_reason` when any required fix remains.\n- Keep `completed`, `remaining`, and `risks` as free-form narrative context only. They inform operators, but they do not override the structured verdict or control scheduler state.\n- Review findings ordered by severity, or an explicit statement that no findings were discovered.\n- Clear blocked handoff details when the task belongs to another agent type.",
-      "captured_at": "2026-04-07T20:22:26.370429+00:00"
+      "captured_at": "2026-04-07T20:28:48.641622+00:00"
     },
     "worker_prompt_context": {
       "bead_id": "B-d7c0d824-review",
@@ -211,9 +220,8 @@
       "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
       "expected_files": [
         "tests/__init__.py",
-        "tests/__pycache__/__init__.cpython-314.pyc",
-        "tests/__pycache__/test_memory.cpython-314.pyc",
-        "tests/test_memory.py"
+        "tests/test_memory.py",
+        "docs/memory/conventions.md"
       ],
       "expected_globs": [],
       "touched_files": [
@@ -223,26 +231,40 @@
         "tests/__pycache__/test_memory.cpython-314.pyc",
         "tests/test_memory.py"
       ],
-      "conflict_risks": "None \u2014 tests/test_memory.py is a new file; no overlap with tests/test_ingest_chunking.py.",
+      "conflict_risks": "None \u2014 only docs/memory/conventions.md needs a one-line fix; no overlap with other in-flight beads.",
       "handoff_summary": {
-        "completed": "",
-        "remaining": "",
-        "risks": "",
-        "verdict": "",
-        "findings_count": 0,
-        "requires_followup": false,
-        "changed_files": [],
-        "updated_docs": [],
-        "next_action": "",
-        "next_agent": "",
-        "block_reason": "",
-        "expected_files": [],
+        "completed": "Reviewed test_memory.py (774 lines), tests/__init__.py, and docs/memory/conventions.md. Test logic is correct and complete: deterministic mock embedding, per-test tmpdir isolation, correct sqlite_vec COUNT(*) workaround, ingest coverage across txt/md/json/csv formats, integration tests properly gated.",
+        "remaining": "Fix conventions.md run command to reference the venv Python (`.venv/bin/pytest` or equivalent) and add a note that system Python is insufficient due to missing numpy/sqlite-vec dependencies.",
+        "risks": "Operators following conventions.md will use system Python and encounter ImportError rather than meaningful test results, masking the true test status.",
+        "verdict": "needs_changes",
+        "findings_count": 1,
+        "requires_followup": true,
+        "changed_files": [
+          "docs/memory/conventions.md",
+          "tests/__init__.py",
+          "tests/test_memory.py"
+        ],
+        "updated_docs": [
+          "docs/memory/conventions.md"
+        ],
+        "next_action": "Create a corrective bead to update docs/memory/conventions.md: replace `python3 -m unittest discover -s tests/` with `.venv/bin/pytest tests/` and add a note that the venv is required because system Python lacks numpy and sqlite-vec.",
+        "next_agent": "developer",
+        "block_reason": "docs/memory/conventions.md:39 documents `python3 -m unittest discover -s tests/` as the run command, but system Python lacks numpy/sqlite-vec and will produce ImportError rather than test results. The correct invocation is `.venv/bin/pytest` (or `.venv/bin/python -m pytest tests/`). This misleads operators into thinking tests are broken when the environment is simply wrong.",
+        "expected_files": [
+          "tests/__init__.py",
+          "tests/test_memory.py",
+          "docs/memory/conventions.md"
+        ],
         "expected_globs": [],
-        "touched_files": [],
-        "conflict_risks": "",
-        "design_decisions": "",
-        "test_coverage_notes": "",
-        "known_limitations": ""
+        "touched_files": [
+          "docs/memory/conventions.md",
+          "tests/__init__.py",
+          "tests/test_memory.py"
+        ],
+        "conflict_risks": "None \u2014 only docs/memory/conventions.md needs a one-line fix; no overlap with other in-flight beads.",
+        "design_decisions": "All design decisions from the developer handoff are correctly reflected in the implementation: hash-seeded _mock_embed for deterministic search ranking, direct sqlite3 insert with explicit created_at for TestList ordering, COUNT(*) for memories_vec deletion check.",
+        "test_coverage_notes": "Test classes cover: TestInit (idempotent init, both tables), TestAdd (UUID output, both tables, auto-init), TestSearch (ranking, limit, JSON output), TestDelete (both tables, unknown ID exits 1), TestList (newest-first, source filter, limit 0), TestStats (populated DB, missing DB exits 0), TestIngestTxt, TestIngestMd, TestIngestJson, TestIngestCsv, TestSearchIntegration (env-gated).",
+        "known_limitations": "Integration tests require AGENT_MEMORY_INTEGRATION_TESTS=1 and the real ONNX model \u2014 intentionally skipped by default and documented."
       }
     },
     "last_agent_result": {
