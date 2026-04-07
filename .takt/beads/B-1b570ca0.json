@@ -6,7 +6,11 @@
   "status": "ready",
   "bead_type": "task",
   "parent_id": "B-54edeccf",
-  "dependencies": [],
+  "dependencies": [
+    "B-a27688e2",
+    "B-6060f4f7",
+    "B-69b0f54b"
+  ],
   "acceptance_criteria": [
     "All unittest classes pass with zero failures and zero errors",
     "apm.yml parses without YAML errors",
