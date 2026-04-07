@@ -88,6 +88,15 @@
       "agent_type": "review",
       "summary": "Worker started",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T18:40:20.506913+00:00",
+      "event": "guardrails_applied",
+      "agent_type": "review",
+      "summary": "Applied guardrails from .takt/agent-runs/B-c780e85e/repo/templates/agents/review.md",
+      "details": {
+        "template_path": ".takt/agent-runs/B-c780e85e/repo/templates/agents/review.md"
+      }
     }
   ],
   "metadata": {
@@ -103,7 +112,62 @@
     ],
     "skill_bundle_hash": "ed9a41715a392d1ab5774addd03379551e6cce41fcb09e7160e2a041ea316894",
     "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-c780e85e/home",
-    "runner_backend": "claude"
+    "runner_backend": "claude",
+    "guardrails": {
+      "agent_type": "review",
+      "template_path": ".takt/agent-runs/B-c780e85e/repo/templates/agents/review.md",
+      "template_text": "# Review Guardrails\n\nPrimary responsibility: Inspect code, tests, docs, and acceptance criteria for correctness, completeness, and risk.\n\nAllowed actions:\n- Review only the changed files listed in the bead's touched_files and changed_files fields. Do not read unrelated files.\n- Validate acceptance criteria against the implementation and handoff state.\n- Block with a clear recommendation when the bead actually requires implementation work.\n\nEfficiency constraints:\n- Do not run the test suite. Testing is the tester agent's responsibility.\n- Focus on correctness, completeness, and risk \u2014 not style or formatting.\n- Keep the review concise. If there are no findings, say so and approve promptly.\n\nDisallowed actions:\n- Implement feature work, tests, or docs instead of reporting findings.\n- Rewrite architecture or silently fix issues discovered during review.\n- Mark incomplete work as accepted without evidence.\n\nExpected outputs:\n- Return JSON with `outcome` set to `completed` (reviews always complete; use `verdict` for pass/fail) and `summary` as a one-line description of the review result.\n- Return JSON with structured verdict fields for every run: `verdict`, `findings_count`, and `requires_followup`.\n- Treat `verdict` as the review signoff decision: `approved` means the bead can complete, while `needs_changes` means the bead must block for follow-up work.\n- Use `verdict=approved`, `findings_count=0`, and `requires_followup=false` when no unresolved findings remain.\n- Use `verdict=needs_changes`, set `findings_count` to the unresolved finding count, set `requires_followup=true` unless there is a stronger explicit reason not to, and always include `block_reason` when any required fix remains.\n- Keep `completed`, `remaining`, and `risks` as free-form narrative context only. They inform operators, but they do not override the structured verdict or control scheduler state.\n- Review findings ordered by severity, or an explicit statement that no findings were discovered.\n- Clear blocked handoff details when the task belongs to another agent type.",
+      "captured_at": "2026-04-07T18:40:20.506902+00:00"
+    },
+    "worker_prompt_context": {
+      "bead_id": "B-c780e85e",
+      "feature_root_id": "B-cb0b48a1",
+      "title": "Review query and CRUD implementation",
+      "agent_type": "review",
+      "description": "Review the combined implementation of search, delete, list, and stats commands. Check for correctness of SQL queries, proper transaction handling in delete, accurate distance metric documentation, consistent CLI flag behaviour, and absence of regressions in the add command from spec-a536cb5e.",
+      "status": "in_progress",
+      "acceptance_criteria": [
+        "All four subcommands are implemented per spec with no undocumented deviations",
+        "Delete uses a single transaction covering both tables",
+        "Distance metric is documented in a comment with correct range and direction",
+        "CLI flags and output formats match the spec exactly",
+        "No regressions in the add command or existing DB schema"
+      ],
+      "dependencies": [],
+      "linked_docs": [
+        "specs/drafts/agent-memory-query-and-crud-operations.md"
+      ],
+      "execution_branch_name": "feature/b-cb0b48a1",
+      "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1",
+      "expected_files": [
+        ".claude/skills/agent-memory/memory.py"
+      ],
+      "expected_globs": [
+        ".claude/skills/agent-memory/*.py"
+      ],
+      "touched_files": [],
+      "conflict_risks": "",
+      "handoff_summary": {
+        "completed": "",
+        "remaining": "",
+        "risks": "",
+        "verdict": "",
+        "findings_count": 0,
+        "requires_followup": false,
+        "changed_files": [],
+        "updated_docs": [],
+        "next_action": "",
+        "next_agent": "",
+        "block_reason": "",
+        "expected_files": [],
+        "expected_globs": [],
+        "touched_files": [],
+        "conflict_risks": "",
+        "design_decisions": "",
+        "test_coverage_notes": "",
+        "known_limitations": ""
+      }
+    }
   },
   "labels": []
 }
