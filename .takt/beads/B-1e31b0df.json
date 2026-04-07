@@ -3,7 +3,7 @@
   "title": "Implement list command",
   "agent_type": "developer",
   "description": "Add the `list` subcommand to memory.py. Select from memories ordered by created_at DESC. Support --limit (default 20, 0 = unlimited), --source (exact match filter), --json (array of all columns, no distance), and --db flags. Default output: one line per row with uuid, truncated content (60 chars), source, and created_at.",
-  "status": "ready",
+  "status": "in_progress",
   "bead_type": "task",
   "parent_id": "B-cb0b48a1",
   "dependencies": [],
@@ -50,9 +50,12 @@
   },
   "block_reason": "Deferred due to file-scope conflict with active bead B-2ad17234",
   "conflict_risks": "",
-  "branch_name": "",
-  "worktree_path": "",
-  "lease": null,
+  "branch_name": "feature/b-cb0b48a1",
+  "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1",
+  "lease": {
+    "owner": "developer:B-1e31b0df",
+    "expires_at": "2026-04-07T20:05:16.107427+00:00"
+  },
   "retries": 0,
   "execution_history": [
     {
@@ -103,8 +106,47 @@
       "agent_type": "developer",
       "summary": "Deferred due to file-scope conflict with active bead B-2ad17234",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:35:16.552577+00:00",
+      "event": "skills_loaded",
+      "agent_type": "developer",
+      "summary": "Loaded 7 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/developer-implementation",
+          "capability/code-edit",
+          "task/corrective-implementation",
+          "task/refactor-safe",
+          "task/migration",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-07T19:35:16.552603+00:00",
+      "event": "started",
+      "agent_type": "developer",
+      "summary": "Worker started",
+      "details": {}
     }
   ],
-  "metadata": {},
+  "metadata": {
+    "execution_root": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-1e31b0df",
+    "workspace_repo_path": "repo",
+    "loaded_skills": [
+      "core/base-orchestrator",
+      "role/developer-implementation",
+      "capability/code-edit",
+      "task/corrective-implementation",
+      "task/refactor-safe",
+      "task/migration",
+      "memory"
+    ],
+    "skill_bundle_hash": "3d67820a7fb8135bc362b2b95d14300da249795bcc32c95f5dd45f36e15acfa1",
+    "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-1e31b0df/home",
+    "runner_backend": "claude"
+  },
   "labels": []
 }
