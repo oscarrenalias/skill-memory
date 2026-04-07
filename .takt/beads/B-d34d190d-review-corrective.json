@@ -60,7 +60,7 @@
     "test_coverage_notes": "",
     "known_limitations": ""
   },
-  "block_reason": "Deferred due to file-scope conflict with active bead B-1b570ca0",
+  "block_reason": "Deferred due to file-scope conflict with active bead B-2632ba9d-docs",
   "conflict_risks": "No conflicts expected. memory.py is at repo root; no other active beads claim this file.",
   "branch_name": "",
   "worktree_path": "",
@@ -86,6 +86,13 @@
       "event": "deferred",
       "agent_type": "developer",
       "summary": "Deferred due to file-scope conflict with active bead B-1b570ca0",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T20:17:21.000624+00:00",
+      "event": "deferred",
+      "agent_type": "developer",
+      "summary": "Deferred due to file-scope conflict with active bead B-2632ba9d-docs",
       "details": {}
     }
   ],
