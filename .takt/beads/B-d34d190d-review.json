@@ -133,6 +133,13 @@
       "agent_type": "review",
       "summary": "Review finds 2 blocking issues: spec AC \"3 paragraphs \u2192 3 rows\" violated by paragraph-merge implementation, and mandatory test classes (TestIngestJson, TestIngestCsv, all DB-operation tests) are absent.",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T20:10:29.790697+00:00",
+      "event": "corrective_planned",
+      "agent_type": "review",
+      "summary": "Created corrective bead B-d34d190d-review-corrective for blocked issue",
+      "details": {}
     }
   ],
   "metadata": {
@@ -253,7 +260,8 @@
         "source": "provider",
         "attempt": 1
       }
-    ]
+    ],
+    "auto_corrective_bead_id": "B-d34d190d-review-corrective"
   },
   "labels": []
 }
