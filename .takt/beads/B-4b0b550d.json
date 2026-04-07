@@ -104,6 +104,13 @@
       "agent_type": "tester",
       "summary": "Tester bead B-4b0b550d cannot proceed: .claude/skills/agent-memory/memory.py does not exist in the feature branch. All developer implementation beads (search B-89f6e836, delete B-9a409587, list B-1e31b0df, stats B-e2cb1987) are in ready/in_progress state and have not committed any code. The corrective bead B-c780e85e-corrective is also in ready state. Nothing to test.",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T18:43:55.843263+00:00",
+      "event": "corrective_planned",
+      "agent_type": "tester",
+      "summary": "Created corrective bead B-4b0b550d-corrective for blocked issue",
+      "details": {}
     }
   ],
   "metadata": {
@@ -219,7 +226,8 @@
         "source": "provider",
         "attempt": 1
       }
-    ]
+    ],
+    "auto_corrective_bead_id": "B-4b0b550d-corrective"
   },
   "labels": []
 }
