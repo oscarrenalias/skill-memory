@@ -1,0 +1,78 @@
+{
+  "bead_id": "B-d7c0d824-review-corrective",
+  "title": "Corrective fix for B-d7c0d824-review: Review Test suite: core CRUD and infrastructure tests",
+  "agent_type": "developer",
+  "description": "Blocked reason: docs/memory/conventions.md:39 documents `python3 -m unittest discover -s tests/` as the run command, but system Python lacks numpy/sqlite-vec and will produce ImportError rather than test results. The correct invocation is `.venv/bin/pytest` (or `.venv/bin/python -m pytest tests/`). This misleads operators into thinking tests are broken when the environment is simply wrong.\n\nRemaining work: Fix conventions.md run command to reference the venv Python (`.venv/bin/pytest` or equivalent) and add a note that system Python is insufficient due to missing numpy/sqlite-vec dependencies.",
+  "status": "ready",
+  "bead_type": "task",
+  "parent_id": "B-d7c0d824-review",
+  "dependencies": [],
+  "acceptance_criteria": [
+    "Implement the minimum fix required to unblock B-d7c0d824-review.",
+    "Update tests/docs as needed for the corrective change.",
+    "Leave a handoff summary that states how the parent bead can be retried."
+  ],
+  "linked_docs": [
+    "specs/drafts/agent-memory-file-ingest-and-skill-packaging.md",
+    ".claude/skills/skill-spec-management/tests/test_spec.py"
+  ],
+  "feature_root_id": "B-54edeccf",
+  "execution_branch_name": "feature/b-54edeccf",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
+  "expected_files": [
+    "tests/__init__.py",
+    "tests/test_memory.py",
+    "docs/memory/conventions.md"
+  ],
+  "expected_globs": [],
+  "touched_files": [
+    "docs/memory/conventions.md",
+    "tests/__init__.py",
+    "tests/test_memory.py"
+  ],
+  "changed_files": [
+    "docs/memory/conventions.md",
+    "tests/__init__.py",
+    "tests/test_memory.py"
+  ],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "None \u2014 only docs/memory/conventions.md needs a one-line fix; no overlap with other in-flight beads.",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-07T20:23:43.827582+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    }
+  ],
+  "metadata": {
+    "auto_corrective_for": "B-d7c0d824-review"
+  },
+  "labels": []
+}
