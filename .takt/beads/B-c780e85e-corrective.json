@@ -51,7 +51,7 @@
     "test_coverage_notes": "",
     "known_limitations": ""
   },
-  "block_reason": "",
+  "block_reason": "Deferred due to file-scope conflict with active bead B-2632ba9d",
   "conflict_risks": "No conflicts possible until implementation exists. When a developer creates .claude/skills/agent-memory/, no existing files will conflict.",
   "branch_name": "",
   "worktree_path": "",
@@ -63,6 +63,13 @@
       "event": "created",
       "agent_type": "scheduler",
       "summary": "Bead created",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T18:49:42.109347+00:00",
+      "event": "deferred",
+      "agent_type": "developer",
+      "summary": "Deferred due to file-scope conflict with active bead B-2632ba9d",
       "details": {}
     }
   ],
