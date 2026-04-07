@@ -1,0 +1,75 @@
+{
+  "bead_id": "B-d7c0d824",
+  "title": "Test suite: core CRUD and infrastructure tests",
+  "agent_type": "developer",
+  "description": "Create .claude/skills/agent-memory/tests/__init__.py (empty) and the skeleton of .claude/skills/agent-memory/tests/test_memory.py. Follow the _TempDirTest base-class pattern from skill-spec-management/tests/test_spec.py: each test chdir's into a fresh tempfile.mkdtemp(). Override DB path via AGENT_MEMORY_DB env var pointing to a temp file. Mock _embed() to return a deterministic random unit vector of shape (N, 384) for all tests by default, with an integration test class guarded by AGENT_MEMORY_INTEGRATION_TESTS=1. Implement test classes: TestInit (idempotent init, tables exist), TestAdd (returns ID, row in both tables, auto-init), TestSearch (most similar text returned, --limit, --json output), TestDelete (removes from both tables, unknown ID exits 1), TestList (newest-first, --source filter, --limit 0 returns all), TestStats (populated DB, missing DB exits 0).",
+  "status": "ready",
+  "bead_type": "task",
+  "parent_id": "B-54edeccf",
+  "dependencies": [],
+  "acceptance_criteria": [
+    "tests/__init__.py exists and is empty",
+    "test_memory.py imports succeed without errors",
+    "_TempDirTest base class used; each test method chdir's into fresh temp dir",
+    "AGENT_MEMORY_DB env var used to redirect DB path in all tests",
+    "_embed is mocked to return deterministic (N, 384) unit vector",
+    "TestInit: init is idempotent and tables exist after init",
+    "TestAdd: add returns an ID and row is present in both tables",
+    "TestSearch: returns most similar text, respects --limit, --json output is valid JSON",
+    "TestDelete: removes from both tables; unknown ID exits 1",
+    "TestList: newest-first order, --source filter works, --limit 0 returns all",
+    "TestStats: works on populated DB; exits 0 on missing DB"
+  ],
+  "linked_docs": [
+    "specs/drafts/agent-memory-file-ingest-and-skill-packaging.md",
+    ".claude/skills/skill-spec-management/tests/test_spec.py"
+  ],
+  "feature_root_id": "B-54edeccf",
+  "execution_branch_name": "feature/b-54edeccf",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
+  "expected_files": [
+    ".claude/skills/agent-memory/tests/__init__.py",
+    ".claude/skills/agent-memory/tests/test_memory.py"
+  ],
+  "expected_globs": [],
+  "touched_files": [],
+  "changed_files": [],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-07T18:39:56.079592+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    }
+  ],
+  "metadata": {},
+  "labels": []
+}
