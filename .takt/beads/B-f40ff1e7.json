@@ -1,0 +1,68 @@
+{
+  "bead_id": "B-f40ff1e7",
+  "title": "Implement add command",
+  "agent_type": "developer",
+  "description": "Implement the add subcommand: parse <text>, optional --source, optional --meta KEY=VALUE repeatable args, auto-init DB if not present, embed text via _embed, generate UUID v4, wrap both inserts (memories + memories_vec using lastrowid) in a single transaction, print 'Added <uuid>'.",
+  "status": "ready",
+  "bead_type": "task",
+  "parent_id": "B-266c0a28",
+  "dependencies": [],
+  "acceptance_criteria": [
+    "./memory.py add 'hello world' prints 'Added <uuid>' where uuid is a valid UUID v4",
+    "Two add calls with different text produce two distinct UUIDs",
+    "Both memories and memories_vec tables contain a matching row after add",
+    "Running add without prior init auto-initialises the DB",
+    "--source and --meta flags are stored in the memories row",
+    "A simulated failure after the memories insert (e.g. bad vec insert) leaves the DB unchanged (transaction rolled back)"
+  ],
+  "linked_docs": [
+    "specs/drafts/agent-memory-core-infrastructure.md"
+  ],
+  "feature_root_id": "B-266c0a28",
+  "execution_branch_name": "feature/b-266c0a28",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
+  "expected_files": [
+    ".claude/skills/agent-memory/memory.py"
+  ],
+  "expected_globs": [],
+  "touched_files": [],
+  "changed_files": [],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-07T18:32:13.218877+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    }
+  ],
+  "metadata": {},
+  "labels": []
+}
