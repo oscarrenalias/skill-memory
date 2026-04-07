@@ -145,6 +145,15 @@
       "agent_type": "review",
       "summary": "Worker started",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:54:51.497416+00:00",
+      "event": "guardrails_applied",
+      "agent_type": "review",
+      "summary": "Applied guardrails from .takt/agent-runs/B-c780e85e/repo/templates/agents/review.md",
+      "details": {
+        "template_path": ".takt/agent-runs/B-c780e85e/repo/templates/agents/review.md"
+      }
     }
   ],
   "metadata": {
@@ -165,7 +174,7 @@
       "agent_type": "review",
       "template_path": ".takt/agent-runs/B-c780e85e/repo/templates/agents/review.md",
       "template_text": "# Review Guardrails\n\nPrimary responsibility: Inspect code, tests, docs, and acceptance criteria for correctness, completeness, and risk.\n\nAllowed actions:\n- Review only the changed files listed in the bead's touched_files and changed_files fields. Do not read unrelated files.\n- Validate acceptance criteria against the implementation and handoff state.\n- Block with a clear recommendation when the bead actually requires implementation work.\n\nEfficiency constraints:\n- Do not run the test suite. Testing is the tester agent's responsibility.\n- Focus on correctness, completeness, and risk \u2014 not style or formatting.\n- Keep the review concise. If there are no findings, say so and approve promptly.\n\nDisallowed actions:\n- Implement feature work, tests, or docs instead of reporting findings.\n- Rewrite architecture or silently fix issues discovered during review.\n- Mark incomplete work as accepted without evidence.\n\nExpected outputs:\n- Return JSON with `outcome` set to `completed` (reviews always complete; use `verdict` for pass/fail) and `summary` as a one-line description of the review result.\n- Return JSON with structured verdict fields for every run: `verdict`, `findings_count`, and `requires_followup`.\n- Treat `verdict` as the review signoff decision: `approved` means the bead can complete, while `needs_changes` means the bead must block for follow-up work.\n- Use `verdict=approved`, `findings_count=0`, and `requires_followup=false` when no unresolved findings remain.\n- Use `verdict=needs_changes`, set `findings_count` to the unresolved finding count, set `requires_followup=true` unless there is a stronger explicit reason not to, and always include `block_reason` when any required fix remains.\n- Keep `completed`, `remaining`, and `risks` as free-form narrative context only. They inform operators, but they do not override the structured verdict or control scheduler state.\n- Review findings ordered by severity, or an explicit statement that no findings were discovered.\n- Clear blocked handoff details when the task belongs to another agent type.",
-      "captured_at": "2026-04-07T18:40:20.506902+00:00"
+      "captured_at": "2026-04-07T19:54:51.497402+00:00"
     },
     "worker_prompt_context": {
       "bead_id": "B-c780e85e",
@@ -194,23 +203,27 @@
         "*.py"
       ],
       "touched_files": [],
-      "conflict_risks": "",
+      "conflict_risks": "No conflicts possible until implementation exists. When a developer creates .claude/skills/agent-memory/, no existing files will conflict.",
       "handoff_summary": {
-        "completed": "",
-        "remaining": "",
-        "risks": "",
-        "verdict": "",
-        "findings_count": 0,
-        "requires_followup": false,
+        "completed": "Read spec files and confirmed both spec-a536cb5e (core infrastructure) and spec-9f1b7155 (query/CRUD) are in planned status. Confirmed the .claude/skills/agent-memory/ directory does not exist in the worktree.",
+        "remaining": "Developer must implement spec-a536cb5e (core infrastructure: DB schema, embedding pipeline, init and add commands) and then spec-9f1b7155 (search, delete, list, stats commands) before this review can proceed.",
+        "risks": "No implementation exists. If the review was scheduled before the developer bead completed, the orchestrator should check bead dependency ordering. spec-a536cb5e must complete before spec-9f1b7155 can be implemented or reviewed.",
+        "verdict": "needs_changes",
+        "findings_count": 1,
+        "requires_followup": true,
         "changed_files": [],
         "updated_docs": [],
-        "next_action": "",
-        "next_agent": "",
-        "block_reason": "",
-        "expected_files": [],
-        "expected_globs": [],
+        "next_action": "A developer agent must implement spec-a536cb5e (core infrastructure) first, then spec-9f1b7155 (query/CRUD commands). Once .claude/skills/agent-memory/memory.py exists with all five subcommands (init, add, search, delete, list, stats), this review bead should be re-run.",
+        "next_agent": "developer",
+        "block_reason": "Expected implementation file .claude/skills/agent-memory/memory.py is absent. The .claude/skills/agent-memory/ directory does not exist in the worktree. Both upstream specs (spec-a536cb5e core infrastructure and spec-9f1b7155 query/CRUD) are in planned status with no code committed. This is a developer task, not a review task at this stage.",
+        "expected_files": [
+          "memory.py"
+        ],
+        "expected_globs": [
+          "*.py"
+        ],
         "touched_files": [],
-        "conflict_risks": "",
+        "conflict_risks": "No conflicts possible until implementation exists. When a developer creates .claude/skills/agent-memory/, no existing files will conflict.",
         "design_decisions": "",
         "test_coverage_notes": "",
         "known_limitations": ""
