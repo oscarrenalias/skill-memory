@@ -1,0 +1,72 @@
+{
+  "bead_id": "B-2760e5db",
+  "title": "Download and commit tokenizer assets",
+  "agent_type": "developer",
+  "description": "Download the four BAAI/bge-small-en-v1.5 tokenizer files from HuggingFace and place them in .claude/skills/agent-memory/assets/. Files: tokenizer.json (~711 KB), tokenizer_config.json (~366 B), vocab.txt (~232 KB), special_tokens_map.json (~125 B). These are committed to git.",
+  "status": "ready",
+  "bead_type": "task",
+  "parent_id": "B-266c0a28",
+  "dependencies": [],
+  "acceptance_criteria": [
+    ".claude/skills/agent-memory/assets/tokenizer.json exists and is ~711 KB",
+    ".claude/skills/agent-memory/assets/tokenizer_config.json exists and is ~366 B",
+    ".claude/skills/agent-memory/assets/vocab.txt exists and is ~232 KB",
+    ".claude/skills/agent-memory/assets/special_tokens_map.json exists and is ~125 B",
+    "All four files parse as valid JSON (or plain text for vocab.txt)"
+  ],
+  "linked_docs": [
+    "specs/drafts/agent-memory-core-infrastructure.md"
+  ],
+  "feature_root_id": "B-266c0a28",
+  "execution_branch_name": "feature/b-266c0a28",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
+  "expected_files": [
+    ".claude/skills/agent-memory/assets/tokenizer.json",
+    ".claude/skills/agent-memory/assets/tokenizer_config.json",
+    ".claude/skills/agent-memory/assets/vocab.txt",
+    ".claude/skills/agent-memory/assets/special_tokens_map.json"
+  ],
+  "expected_globs": [
+    ".claude/skills/agent-memory/assets/*"
+  ],
+  "touched_files": [],
+  "changed_files": [],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-07T18:32:11.133957+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    }
+  ],
+  "metadata": {},
+  "labels": []
+}
