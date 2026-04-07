@@ -47,7 +47,7 @@
     "test_coverage_notes": "",
     "known_limitations": ""
   },
-  "block_reason": "Deferred due to file-scope conflict with active bead B-9a409587-test",
+  "block_reason": "Deferred due to file-scope conflict with active bead B-9a409587-docs",
   "conflict_risks": "None \u2014 _embed and its two singleton helpers occupy a new section between _ensure_model and _resolve_db. No overlap with sibling beads working on cmd_add or cmd_search.",
   "branch_name": "",
   "worktree_path": "",
@@ -94,6 +94,13 @@
       "event": "deferred",
       "agent_type": "documentation",
       "summary": "Deferred due to file-scope conflict with active bead B-9a409587-test",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T20:50:58.794473+00:00",
+      "event": "deferred",
+      "agent_type": "documentation",
+      "summary": "Deferred due to file-scope conflict with active bead B-9a409587-docs",
       "details": {}
     }
   ],
