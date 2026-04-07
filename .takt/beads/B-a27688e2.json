@@ -1,0 +1,69 @@
+{
+  "bead_id": "B-a27688e2",
+  "title": "Test suite: ingest tests",
+  "agent_type": "developer",
+  "description": "Add ingest test classes to .claude/skills/agent-memory/tests/test_memory.py. Uses the same _TempDirTest base and mocked _embed from the core test bead. Implement: TestIngestTxt (paragraph chunking, short chunks skipped), TestIngestMd (heading boundaries respected, heading text at start of chunk), TestIngestJson (string array, object array with content key, invalid input exits 1), TestIngestCsv (--column flag selects text column, other columns become metadata).",
+  "status": "ready",
+  "bead_type": "task",
+  "parent_id": "B-54edeccf",
+  "dependencies": [],
+  "acceptance_criteria": [
+    "TestIngestTxt: 3-paragraph .txt produces 3 rows; chunk shorter than 10 chars is skipped and reported",
+    "TestIngestMd: chunk following ## heading starts with the heading text",
+    "TestIngestJson string array: adds one row per element",
+    "TestIngestJson object array: adds one row per object using 'content' key",
+    "TestIngestJson invalid input: exits 1 with descriptive error",
+    "TestIngestCsv: adds one row per data row; non-text columns appear in metadata JSON",
+    "All new test classes pass with python3 -m unittest discover -s tests/"
+  ],
+  "linked_docs": [
+    "specs/drafts/agent-memory-file-ingest-and-skill-packaging.md"
+  ],
+  "feature_root_id": "B-54edeccf",
+  "execution_branch_name": "feature/b-54edeccf",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
+  "expected_files": [
+    ".claude/skills/agent-memory/tests/test_memory.py"
+  ],
+  "expected_globs": [],
+  "touched_files": [],
+  "changed_files": [],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-07T18:39:56.445452+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    }
+  ],
+  "metadata": {},
+  "labels": []
+}
