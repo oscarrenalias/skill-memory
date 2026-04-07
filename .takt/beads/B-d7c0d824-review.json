@@ -28,11 +28,15 @@
   "touched_files": [
     "docs/memory/conventions.md",
     "tests/__init__.py",
+    "tests/__pycache__/__init__.cpython-314.pyc",
+    "tests/__pycache__/test_memory.cpython-314.pyc",
     "tests/test_memory.py"
   ],
   "changed_files": [
     "docs/memory/conventions.md",
     "tests/__init__.py",
+    "tests/__pycache__/__init__.cpython-314.pyc",
+    "tests/__pycache__/test_memory.cpython-314.pyc",
     "tests/test_memory.py"
   ],
   "updated_docs": [
