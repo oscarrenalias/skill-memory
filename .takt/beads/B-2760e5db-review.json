@@ -35,7 +35,9 @@
     "assets/tokenizer.json",
     "assets/tokenizer_config.json",
     "assets/vocab.txt",
-    "memory.py"
+    "memory.py",
+    "tests/__pycache__/test_tokenizer_assets.cpython-314-pytest-9.0.2.pyc",
+    "tests/test_tokenizer_assets.py"
   ],
   "changed_files": [
     "__pycache__/memory.cpython-314.pyc",
@@ -43,7 +45,9 @@
     "assets/tokenizer.json",
     "assets/tokenizer_config.json",
     "assets/vocab.txt",
-    "memory.py"
+    "memory.py",
+    "tests/__pycache__/test_tokenizer_assets.cpython-314-pytest-9.0.2.pyc",
+    "tests/test_tokenizer_assets.py"
   ],
   "updated_docs": [],
   "handoff_summary": {
