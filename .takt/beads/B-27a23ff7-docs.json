@@ -50,7 +50,7 @@
     "test_coverage_notes": "",
     "known_limitations": ""
   },
-  "block_reason": "Deferred due to file-scope conflict with active bead B-2760e5db-docs",
+  "block_reason": "Deferred due to file-scope conflict with active bead B-2632ba9d-test",
   "conflict_risks": "None \u2014 only memory.py is modified; no sibling beads touch this file.",
   "branch_name": "",
   "worktree_path": "",
@@ -132,6 +132,13 @@
       "event": "deferred",
       "agent_type": "documentation",
       "summary": "Deferred due to file-scope conflict with active bead B-2760e5db-docs",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T20:13:35.754210+00:00",
+      "event": "deferred",
+      "agent_type": "documentation",
+      "summary": "Deferred due to file-scope conflict with active bead B-2632ba9d-test",
       "details": {}
     }
   ],
