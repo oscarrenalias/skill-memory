@@ -124,6 +124,13 @@
       "agent_type": "review",
       "summary": "1 finding: conventions.md documents `python3 -m unittest discover` but the correct invocation requires the venv Python; all test logic is correct.",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T20:23:44.271799+00:00",
+      "event": "corrective_planned",
+      "agent_type": "review",
+      "summary": "Created corrective bead B-d7c0d824-review-corrective for blocked issue",
+      "details": {}
     }
   ],
   "metadata": {
@@ -245,7 +252,8 @@
         "source": "provider",
         "attempt": 1
       }
-    ]
+    ],
+    "auto_corrective_bead_id": "B-d7c0d824-review-corrective"
   },
   "labels": []
 }
