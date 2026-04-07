@@ -90,6 +90,15 @@
       "agent_type": "developer",
       "summary": "Worker started",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:54:51.821364+00:00",
+      "event": "guardrails_applied",
+      "agent_type": "developer",
+      "summary": "Applied guardrails from .takt/agent-runs/B-812641b9/repo/templates/agents/developer.md",
+      "details": {
+        "template_path": ".takt/agent-runs/B-812641b9/repo/templates/agents/developer.md"
+      }
     }
   ],
   "metadata": {
@@ -106,7 +115,63 @@
     ],
     "skill_bundle_hash": "3d67820a7fb8135bc362b2b95d14300da249795bcc32c95f5dd45f36e15acfa1",
     "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-812641b9/home",
-    "runner_backend": "claude"
+    "runner_backend": "claude",
+    "guardrails": {
+      "agent_type": "developer",
+      "template_path": ".takt/agent-runs/B-812641b9/repo/templates/agents/developer.md",
+      "template_text": "# Developer Guardrails\n\nPrimary responsibility: Implement only the assigned bead inside the existing architecture and file scope.\n\nAllowed actions:\n- Modify code, configuration, or local docs required to complete the assigned bead.\n- Create sub-beads for discovered follow-up work that should be handled separately.\n- Verify your `Python` changes compile and import correctly with a quick syntax check: `python -m py_compile`.\n\nDisallowed actions:\n- Run any test suite \u2014 not even a targeted `pytest` run or any subset. Test execution is exclusively the tester agent's responsibility. Running tests wastes the agent budget and delays the pipeline.\n- Redesign unrelated architecture or broaden scope beyond the assigned bead.\n- Perform final review signoff in place of a review agent.\n- Silently absorb unrelated test, documentation, or planning work that should be handed off.\n\nExpected outputs:\n- Completed or blocked JSON with concise implementation summary.\n- Accurate touched files, changed files, risks, and follow-up handoff fields.",
+      "captured_at": "2026-04-07T19:54:51.821352+00:00"
+    },
+    "worker_prompt_context": {
+      "bead_id": "B-812641b9",
+      "feature_root_id": "B-54edeccf",
+      "title": "Ingest JSON and CSV format support",
+      "agent_type": "developer",
+      "description": "Extend the ingest dispatcher in memory.py with handlers for .json and .csv. JSON: expect a JSON array where each element is either a plain string (used as content) or an object with a required 'content' key and optional 'metadata' object and 'source' string; exit 1 with a descriptive error for invalid input. CSV: require --column NAME flag specifying which column holds the text; all other columns are merged into the chunk's metadata JSON; first row is the header. Add an explicit 'unsupported format' exit-1 path for unknown extensions.",
+      "status": "in_progress",
+      "acceptance_criteria": [
+        "JSON string array [{\"content\":\"a\"},{\"content\":\"b\"}] adds exactly 2 rows",
+        "JSON array of plain strings [\"a\",\"b\"] adds exactly 2 rows",
+        "JSON array with objects lacking 'content' key exits 1 with descriptive error",
+        "CSV with --column text adds one row per data row; other columns appear in metadata JSON",
+        "CSV without --column flag exits 1 with a clear message",
+        "memory.py ingest file.xyz exits 1 with 'unsupported format' message"
+      ],
+      "dependencies": [
+        "B-d34d190d"
+      ],
+      "linked_docs": [
+        "specs/drafts/agent-memory-file-ingest-and-skill-packaging.md"
+      ],
+      "execution_branch_name": "feature/b-54edeccf",
+      "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
+      "expected_files": [
+        "memory.py"
+      ],
+      "expected_globs": [],
+      "touched_files": [],
+      "conflict_risks": "",
+      "handoff_summary": {
+        "completed": "",
+        "remaining": "",
+        "risks": "",
+        "verdict": "",
+        "findings_count": 0,
+        "requires_followup": false,
+        "changed_files": [],
+        "updated_docs": [],
+        "next_action": "",
+        "next_agent": "",
+        "block_reason": "",
+        "expected_files": [],
+        "expected_globs": [],
+        "touched_files": [],
+        "conflict_risks": "",
+        "design_decisions": "",
+        "test_coverage_notes": "",
+        "known_limitations": ""
+      }
+    }
   },
   "labels": []
 }
