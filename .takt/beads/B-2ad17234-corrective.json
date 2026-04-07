@@ -3,7 +3,7 @@
   "title": "Corrective fix for B-2ad17234: Implement model bootstrap (_ensure_model)",
   "agent_type": "developer",
   "description": "Blocked reason: All write operations to the worktree file were denied by the Claude Code permission system (\"Claude requested permissions to write to \u2026 but you haven't granted it yet\"). This applies to Edit, Write, and Bash tools equally. The implementation is complete and tested locally; only the file write is blocked.\n\nRemaining work: Write the following changes to `.claude/skills/agent-memory/memory.py`: (1) add `import hashlib` and `import urllib.request` to stdlib imports; (2) add three module-level constants `_MODEL_URL`, `_MODEL_SHA256`, `_MODEL_PATH`; (3) add `_sha256_of()` helper; (4) add `_ensure_model()` function implementing download + verify + cleanup on failure. File write permissions must be granted to the worktree path first.",
-  "status": "in_progress",
+  "status": "done",
   "bead_type": "task",
   "parent_id": "B-2ad17234",
   "dependencies": [],
@@ -23,40 +23,47 @@
   ],
   "expected_globs": [],
   "touched_files": [
+    "__pycache__/memory.cpython-314.pyc",
     "memory.py"
   ],
   "changed_files": [
+    "__pycache__/memory.cpython-314.pyc",
     "memory.py"
   ],
   "updated_docs": [],
   "handoff_summary": {
-    "completed": "",
-    "remaining": "",
-    "risks": "",
-    "verdict": "",
+    "completed": "Added `import hashlib` and `import urllib.request` to pre-bootstrap stdlib imports. Added `_MODEL_URL`, `_MODEL_SHA256` (empty pending verification), and `_MODEL_PATH` constants. Added `_sha256_of(path)` streaming SHA256 helper. Added `_ensure_model()` that downloads from HuggingFace, verifies SHA256 when non-empty, prints progress to stderr, cleans up partial download on failure, and exits 1 with a descriptive error.",
+    "remaining": "`_MODEL_SHA256` is currently `\"\"` (verification disabled). Must be filled in after computing `sha256sum` of the actual model file per spec \u00a7Pending Decisions #1. The parent bead B-2ad17234 can now implement `_embed()` and call `_ensure_model()` from `cmd_add`.",
+    "risks": "SHA256 verification is skipped until `_MODEL_SHA256` is populated. This is intentional and documented inline; the code path for verification is fully implemented and will activate once the constant is set.",
+    "verdict": "approved",
     "findings_count": 0,
-    "requires_followup": false,
-    "changed_files": [],
+    "requires_followup": true,
+    "changed_files": [
+      "__pycache__/memory.cpython-314.pyc",
+      "memory.py"
+    ],
     "updated_docs": [],
-    "next_action": "",
-    "next_agent": "",
+    "next_action": "Compute SHA256 of BAAI/bge-small-en-v1.5 model.onnx and hardcode it as `_MODEL_SHA256` in memory.py, then implement `_embed()` and wire `_ensure_model()` into `cmd_add`.",
+    "next_agent": "developer",
     "block_reason": "",
-    "expected_files": [],
+    "expected_files": [
+      "memory.py"
+    ],
     "expected_globs": [],
-    "touched_files": [],
-    "conflict_risks": "",
-    "design_decisions": "",
-    "test_coverage_notes": "",
-    "known_limitations": ""
+    "touched_files": [
+      "__pycache__/memory.cpython-314.pyc",
+      "memory.py"
+    ],
+    "conflict_risks": "None. No sibling beads claim memory.py at this time.",
+    "design_decisions": "`_MODEL_SHA256 = \"\"` is the deliberate empty-string sentinel: when empty, SHA256 verification is skipped at download time. This allows the file to be functional immediately while the hash is confirmed. The `except SystemExit: raise` guard ensures the mismatch `sys.exit(1)` is not swallowed by the broad except clause.",
+    "test_coverage_notes": "Existing tests in tests/test_memory_cli.py do not cover _ensure_model; tester bead should add unit tests for (a) early-return when model already exists, (b) cleanup on download failure, (c) SHA256 mismatch path once the hash is known.",
+    "known_limitations": "`_MODEL_SHA256` is empty, so SHA256 verification is currently inactive. Must be populated before this can be considered production-ready. The spec's Pending Decision #1 is still open."
   },
-  "block_reason": "Deferred due to file-scope conflict with active bead B-27a23ff7-docs",
-  "conflict_risks": "None beyond the file-write block. No sibling beads currently claim this file.",
+  "block_reason": "",
+  "conflict_risks": "None. No sibling beads claim memory.py at this time.",
   "branch_name": "feature/b-266c0a28",
   "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
-  "lease": {
-    "owner": "developer:B-2ad17234-corrective",
-    "expires_at": "2026-04-07T20:59:41.920017+00:00"
-  },
+  "lease": null,
   "retries": 0,
   "execution_history": [
     {
@@ -203,6 +210,13 @@
       "details": {
         "template_path": ".takt/agent-runs/B-2ad17234-corrective/repo/templates/agents/developer.md"
       }
+    },
+    {
+      "timestamp": "2026-04-07T20:31:30.078355+00:00",
+      "event": "completed",
+      "agent_type": "developer",
+      "summary": "Added model bootstrap infrastructure to memory.py: `import hashlib`, `import urllib.request`, three module-level constants (`_MODEL_URL`, `_MODEL_SHA256`, `_MODEL_PATH`), `_sha256_of()` streaming hash helper, and `_ensure_model()` which downloads, verifies (when `_MODEL_SHA256` is non-empty), and cleans up on failure. File passes `py_compile` syntax check.",
+      "details": {}
     }
   ],
   "metadata": {
@@ -273,7 +287,53 @@
         "test_coverage_notes": "",
         "known_limitations": ""
       }
-    }
+    },
+    "last_agent_result": {
+      "outcome": "completed",
+      "summary": "Added model bootstrap infrastructure to memory.py: `import hashlib`, `import urllib.request`, three module-level constants (`_MODEL_URL`, `_MODEL_SHA256`, `_MODEL_PATH`), `_sha256_of()` streaming hash helper, and `_ensure_model()` which downloads, verifies (when `_MODEL_SHA256` is non-empty), and cleans up on failure. File passes `py_compile` syntax check.",
+      "verdict": "approved",
+      "findings_count": 0,
+      "requires_followup": true,
+      "next_agent": "developer",
+      "block_reason": ""
+    },
+    "telemetry": {
+      "cost_usd": 0.27439065,
+      "duration_ms": 104789,
+      "duration_api_ms": 97034,
+      "num_turns": 17,
+      "input_tokens": 14,
+      "output_tokens": 5686,
+      "cache_creation_tokens": 24541,
+      "cache_read_tokens": 323433,
+      "stop_reason": "end_turn",
+      "session_id": "3d4e88a2-650c-48b9-a56d-743cc2ee6e2b",
+      "permission_denials": [],
+      "prompt_chars": 6595,
+      "prompt_lines": 142,
+      "source": "provider",
+      "attempt": 1
+    },
+    "telemetry_history": [
+      {
+        "cost_usd": 0.27439065,
+        "duration_ms": 104789,
+        "duration_api_ms": 97034,
+        "num_turns": 17,
+        "input_tokens": 14,
+        "output_tokens": 5686,
+        "cache_creation_tokens": 24541,
+        "cache_read_tokens": 323433,
+        "stop_reason": "end_turn",
+        "session_id": "3d4e88a2-650c-48b9-a56d-743cc2ee6e2b",
+        "permission_denials": [],
+        "prompt_chars": 6595,
+        "prompt_lines": 142,
+        "source": "provider",
+        "attempt": 1
+      }
+    ],
+    "last_commit": "b4d3e93145f9a83c770c0b0421542059eb946a3b"
   },
   "labels": []
 }
