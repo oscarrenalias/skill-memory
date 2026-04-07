@@ -34,10 +34,17 @@ developer bead `done` — use `takt merge` after work is complete.
 
 ## Running the Test Suite
 
-Run the full test suite from the project root:
+Run the full test suite from the project root using the virtual environment's Python.
+System Python is insufficient — `numpy` and `sqlite-vec` are only available inside `.venv`.
 
 ```bash
-python3 -m unittest discover -s tests/
+.venv/bin/pytest tests/
+```
+
+Alternatively:
+
+```bash
+.venv/bin/python -m pytest tests/
 ```
 
 All tests mock `_embed()` with a deterministic unit-vector function so no model download
@@ -45,7 +52,7 @@ is required. Integration tests that exercise the real ONNX embedding model are g
 an environment variable and skipped by default:
 
 ```bash
-AGENT_MEMORY_INTEGRATION_TESTS=1 python3 -m unittest discover -s tests/
+AGENT_MEMORY_INTEGRATION_TESTS=1 .venv/bin/pytest tests/
 ```
 
 Test classes and their coverage:
