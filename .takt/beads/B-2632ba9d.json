@@ -1,0 +1,68 @@
+{
+  "bead_id": "B-2632ba9d",
+  "title": "Implement CLI skeleton and venv bootstrap",
+  "agent_type": "developer",
+  "description": "Create memory.py with the shebang line, the _bootstrap() function that creates .venv/ and installs onnxruntime, sqlite-vec, tokenizers, and numpy, and a minimal argparse skeleton that parses the init and add subcommands (stubs only \u2014 no logic yet). Mark the file executable.",
+  "status": "ready",
+  "bead_type": "task",
+  "parent_id": "B-266c0a28",
+  "dependencies": [],
+  "acceptance_criteria": [
+    "memory.py has shebang #!/usr/bin/env python3 on line 1",
+    "memory.py is executable (chmod +x applied)",
+    "_bootstrap() creates .venv/ and installs the four deps on first run",
+    "_bootstrap() is a no-op when already running inside the managed venv",
+    "Running ./memory.py --help does not error and lists init and add subcommands",
+    "Running ./memory.py with an unknown subcommand exits non-zero"
+  ],
+  "linked_docs": [
+    "specs/drafts/agent-memory-core-infrastructure.md"
+  ],
+  "feature_root_id": "B-266c0a28",
+  "execution_branch_name": "feature/b-266c0a28",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
+  "expected_files": [
+    ".claude/skills/agent-memory/memory.py"
+  ],
+  "expected_globs": [],
+  "touched_files": [],
+  "changed_files": [],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-07T18:32:11.425921+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    }
+  ],
+  "metadata": {},
+  "labels": []
+}
