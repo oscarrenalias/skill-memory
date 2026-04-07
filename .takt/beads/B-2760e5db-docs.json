@@ -1,0 +1,84 @@
+{
+  "bead_id": "B-2760e5db-docs",
+  "title": "Document Download and commit tokenizer assets",
+  "agent_type": "documentation",
+  "description": "Update docs for B-2760e5db",
+  "status": "ready",
+  "bead_type": "task",
+  "parent_id": "B-2760e5db",
+  "dependencies": [
+    "B-2760e5db"
+  ],
+  "acceptance_criteria": [],
+  "linked_docs": [
+    "specs/drafts/agent-memory-core-infrastructure.md"
+  ],
+  "feature_root_id": "B-266c0a28",
+  "execution_branch_name": "feature/b-266c0a28",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
+  "expected_files": [
+    ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
+    ".claude/skills/agent-memory/assets/special_tokens_map.json",
+    ".claude/skills/agent-memory/assets/tokenizer.json",
+    ".claude/skills/agent-memory/assets/tokenizer_config.json",
+    ".claude/skills/agent-memory/assets/vocab.txt",
+    ".claude/skills/agent-memory/memory.py"
+  ],
+  "expected_globs": [
+    ".claude/skills/agent-memory/assets/*"
+  ],
+  "touched_files": [
+    ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
+    ".claude/skills/agent-memory/assets/special_tokens_map.json",
+    ".claude/skills/agent-memory/assets/tokenizer.json",
+    ".claude/skills/agent-memory/assets/tokenizer_config.json",
+    ".claude/skills/agent-memory/assets/vocab.txt",
+    ".claude/skills/agent-memory/memory.py"
+  ],
+  "changed_files": [
+    ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
+    ".claude/skills/agent-memory/assets/special_tokens_map.json",
+    ".claude/skills/agent-memory/assets/tokenizer.json",
+    ".claude/skills/agent-memory/assets/tokenizer_config.json",
+    ".claude/skills/agent-memory/assets/vocab.txt",
+    ".claude/skills/agent-memory/memory.py"
+  ],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "None \u2014 asset files only, no shared code modified.",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-07T18:50:49.724499+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    }
+  ],
+  "metadata": {},
+  "labels": []
+}
