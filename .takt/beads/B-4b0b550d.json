@@ -1,0 +1,69 @@
+{
+  "bead_id": "B-4b0b550d",
+  "title": "Test query and CRUD commands",
+  "agent_type": "tester",
+  "description": "Write and run integration tests covering all four new subcommands: search, delete, list, and stats. Tests should use a temporary DB to avoid polluting state. Cover happy paths, edge cases (nonexistent IDs, empty DB for stats, --limit 0 for list), and JSON output shapes.",
+  "status": "ready",
+  "bead_type": "task",
+  "parent_id": "B-cb0b48a1",
+  "dependencies": [],
+  "acceptance_criteria": [
+    "All acceptance criteria from the spec pass against a fresh temporary DB",
+    "search returns correct results and respects --limit, --threshold, --source, and --json flags",
+    "delete removes from both tables in a transaction; nonexistent ID exits 1",
+    "list returns newest-first and filters by source correctly",
+    "stats handles both populated and non-existent DBs correctly",
+    "No test leaves persistent state in the default DB path"
+  ],
+  "linked_docs": [
+    "specs/drafts/agent-memory-query-and-crud-operations.md"
+  ],
+  "feature_root_id": "B-cb0b48a1",
+  "execution_branch_name": "feature/b-cb0b48a1",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1",
+  "expected_files": [],
+  "expected_globs": [
+    ".claude/skills/agent-memory/test_*.py",
+    ".claude/skills/agent-memory/*_test.py"
+  ],
+  "touched_files": [],
+  "changed_files": [],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-07T18:33:20.123790+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    }
+  ],
+  "metadata": {},
+  "labels": []
+}
