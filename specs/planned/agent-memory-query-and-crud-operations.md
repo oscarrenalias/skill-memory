@@ -39,10 +39,8 @@ memory.py search <query> [--limit N] [--threshold F] [--source TAG] [--json] [--
 - Embed `query` via `_embed([query])` (reuse pipeline from Spec 1)
 - Query `memories_vec` for the `--limit` nearest neighbours (default: 5)
 - Join with `memories` on rowid to retrieve content, source, metadata, created_at
-- Apply `--threshold` as a maximum distance filter (default: no threshold; lower distance = more similar)
-- Apply `--source` to filter by the `source` column before or after the ANN search
-
-> **⚠ PENDING DECISION — see §Pending Decisions #1:** sqlite-vec distance metric (L2 vs cosine) and the expected value range for the threshold flag must be confirmed so the `--threshold` default and help text are meaningful.
+- Apply `--threshold` as a maximum L2 distance filter (default: no threshold; range 0–2 for L2-normalised vectors; lower = more similar)
+- Apply `--source` as a Python post-filter on ANN results (pre-filtering is not supported by sqlite-vec 0.1.x)
 
 **Default output** (one result per line):
 ```
@@ -70,9 +68,11 @@ memory.py delete <id> [--db PATH]
 ```
 
 - Resolve `id` to a rowid via `SELECT rowid FROM memories WHERE id = ?`
-- Delete from `memories_vec` by rowid, then from `memories` by id
-- Both deletes in a single transaction
-- Print: `Deleted <id>` on success; exit 1 with error if ID not found
+- Delete from `memories_vec` by rowid, then from `memories` by id (in a single transaction)
+- Print: `Deleted <id>` on success
+- Exit 1 with error message on stderr if ID not found or DB does not exist
+
+**Status: implemented.** Both `memories_vec` and `memories` rows are removed atomically. The rowid lookup ensures the vector index stays consistent with the metadata table.
 
 ### 3. `list` command
 
@@ -123,8 +123,8 @@ No new files are introduced by this spec.
 - `memory.py stats` prints DB path, row count, and file size without errors when at least one memory exists.
 - `memory.py stats` on a non-existent DB prints a descriptive message and exits 0.
 
-## Pending Decisions
+## Resolved Decisions
 
-1. **sqlite-vec distance metric**: `vec0` returns a `distance` column whose semantics (L2, cosine, inner product) depend on how the virtual table was created and the sqlite-vec version. The spec currently uses the default (likely L2). The implementing agent must confirm which metric is in use for the version of sqlite-vec declared in `pyproject.toml`, document it in a comment in `memory.py`, and set the `--threshold` help text accordingly. If cosine distance is available and preferred (range 0–2 for normalised vectors, lower = more similar), the spec should be updated before implementation.
+1. **sqlite-vec distance metric** — **Resolved (L2 / Euclidean).** `vec0` tables with `float[N]` columns use L2 distance in sqlite-vec ≥0.1.6. Vectors are L2-normalised by `_embed`, so distance values fall in [0, 2] (0 = identical, 2 = maximally opposite). Use `--threshold ≤0.5` for high similarity, `≤1.0` for moderate. This is documented in the `_embed` and `_init_db` docstrings in `memory.py`.
 
-2. **Source filter placement**: For the `search` command, filtering by `--source` can happen either (a) as a post-filter on ANN results (fast, may miss relevant items if limit is small) or (b) as a pre-filter using a row id allow-list before the ANN query. sqlite-vec's support for pre-filtering constraints should be checked for the declared version. *Implementing agent should use post-filter unless pre-filter is straightforward and well-supported.*
+2. **Source filter placement** — **Resolved (post-filter).** sqlite-vec 0.1.x `vec0` tables do not support additional column predicates in the `WHERE` clause alongside the `MATCH` constraint. Source filtering is applied as a Python post-filter after the ANN results are retrieved (see `cmd_search`). This is documented in the `_init_db` docstring in `memory.py`.
