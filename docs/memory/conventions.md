@@ -31,3 +31,34 @@ worktree at `.takt/worktrees/{feature-root-id}`.
 Beads move through: `open` → `ready` → `in_progress` → `done` | `blocked` | `handed_off`.
 Only the scheduler transitions beads out of `in_progress`. Do not manually mark a
 developer bead `done` — use `takt merge` after work is complete.
+
+## Running the Test Suite
+
+Run the full test suite from the project root:
+
+```bash
+python3 -m unittest discover -s tests/
+```
+
+All tests mock `_embed()` with a deterministic unit-vector function so no model download
+is required. Integration tests that exercise the real ONNX embedding model are guarded by
+an environment variable and skipped by default:
+
+```bash
+AGENT_MEMORY_INTEGRATION_TESTS=1 python3 -m unittest discover -s tests/
+```
+
+Test classes and their coverage:
+
+| Class | Coverage |
+|---|---|
+| `TestInit` | idempotent init; both tables exist after init |
+| `TestAdd` | returns UUID; row in both `memories` and `memories_vec`; auto-init |
+| `TestSearch` | most-similar text ranked first; `--limit`; `--json` output |
+| `TestDelete` | removes from both tables; unknown ID exits 1 |
+| `TestList` | newest-first order; `--source` filter; `--limit 0` returns all |
+| `TestStats` | populated DB output; missing DB exits 0 |
+| `TestIngestTxt` | paragraph chunking; short chunks skipped |
+| `TestIngestMd` | `## ` heading boundaries; heading text in chunk |
+| `TestIngestJson` | string array; object array with `content` key; invalid input exits 1 |
+| `TestIngestCsv` | `--column` flag selects text column; other columns become metadata |
