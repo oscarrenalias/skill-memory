@@ -6,7 +6,10 @@
   "status": "ready",
   "bead_type": "task",
   "parent_id": "B-266c0a28",
-  "dependencies": [],
+  "dependencies": [
+    "B-2760e5db",
+    "B-2ad17234"
+  ],
   "acceptance_criteria": [
     "_embed(['hello']) returns ndarray of shape (1, 384)",
     "L2 norm of each returned vector is \u2248 1.0 (within 1e-5)",
