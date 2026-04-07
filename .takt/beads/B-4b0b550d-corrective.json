@@ -86,6 +86,15 @@
       "agent_type": "developer",
       "summary": "Worker started",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T18:51:13.963983+00:00",
+      "event": "guardrails_applied",
+      "agent_type": "developer",
+      "summary": "Applied guardrails from .takt/agent-runs/B-4b0b550d-corrective/repo/templates/agents/developer.md",
+      "details": {
+        "template_path": ".takt/agent-runs/B-4b0b550d-corrective/repo/templates/agents/developer.md"
+      }
     }
   ],
   "metadata": {
@@ -103,7 +112,59 @@
     ],
     "skill_bundle_hash": "3d67820a7fb8135bc362b2b95d14300da249795bcc32c95f5dd45f36e15acfa1",
     "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-4b0b550d-corrective/home",
-    "runner_backend": "claude"
+    "runner_backend": "claude",
+    "guardrails": {
+      "agent_type": "developer",
+      "template_path": ".takt/agent-runs/B-4b0b550d-corrective/repo/templates/agents/developer.md",
+      "template_text": "# Developer Guardrails\n\nPrimary responsibility: Implement only the assigned bead inside the existing architecture and file scope.\n\nAllowed actions:\n- Modify code, configuration, or local docs required to complete the assigned bead.\n- Create sub-beads for discovered follow-up work that should be handled separately.\n- Verify your `Python` changes compile and import correctly with a quick syntax check: `python -m py_compile`.\n\nDisallowed actions:\n- Run any test suite \u2014 not even a targeted `pytest` run or any subset. Test execution is exclusively the tester agent's responsibility. Running tests wastes the agent budget and delays the pipeline.\n- Redesign unrelated architecture or broaden scope beyond the assigned bead.\n- Perform final review signoff in place of a review agent.\n- Silently absorb unrelated test, documentation, or planning work that should be handed off.\n\nExpected outputs:\n- Completed or blocked JSON with concise implementation summary.\n- Accurate touched files, changed files, risks, and follow-up handoff fields.",
+      "captured_at": "2026-04-07T18:51:13.963972+00:00"
+    },
+    "worker_prompt_context": {
+      "bead_id": "B-4b0b550d-corrective",
+      "feature_root_id": "B-cb0b48a1",
+      "title": "Corrective fix for B-4b0b550d: Test query and CRUD commands",
+      "agent_type": "developer",
+      "description": "Blocked reason: Expected implementation file .claude/skills/agent-memory/memory.py is absent. The .claude/skills/agent-memory/ directory does not exist in the worktree HEAD. All developer implementation beads for search, delete, list, and stats commands are in ready/in_progress state with no code committed to the feature branch. This is the same blocking condition that halted review bead B-c780e85e. Testing cannot proceed without the implementation.\n\nRemaining work: Tests cannot be written or run until memory.py is implemented and committed to the feature branch.",
+      "status": "in_progress",
+      "acceptance_criteria": [
+        "Implement the minimum fix required to unblock B-4b0b550d.",
+        "Update tests/docs as needed for the corrective change.",
+        "Leave a handoff summary that states how the parent bead can be retried."
+      ],
+      "dependencies": [],
+      "linked_docs": [
+        "specs/drafts/agent-memory-query-and-crud-operations.md"
+      ],
+      "execution_branch_name": "feature/b-cb0b48a1",
+      "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1",
+      "expected_files": [],
+      "expected_globs": [
+        ".claude/skills/agent-memory/test_*.py",
+        ".claude/skills/agent-memory/*_test.py"
+      ],
+      "touched_files": [],
+      "conflict_risks": "None from this bead; no files were changed.",
+      "handoff_summary": {
+        "completed": "",
+        "remaining": "",
+        "risks": "",
+        "verdict": "",
+        "findings_count": 0,
+        "requires_followup": false,
+        "changed_files": [],
+        "updated_docs": [],
+        "next_action": "",
+        "next_agent": "",
+        "block_reason": "",
+        "expected_files": [],
+        "expected_globs": [],
+        "touched_files": [],
+        "conflict_risks": "",
+        "design_decisions": "",
+        "test_coverage_notes": "",
+        "known_limitations": ""
+      }
+    }
   },
   "labels": []
 }
