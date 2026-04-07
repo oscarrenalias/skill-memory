@@ -6,7 +6,9 @@
   "status": "ready",
   "bead_type": "task",
   "parent_id": "B-54edeccf",
-  "dependencies": [],
+  "dependencies": [
+    "B-1b570ca0"
+  ],
   "acceptance_criteria": [
     "Ingest argument parsing matches the spec CLI signature exactly",
     "All four format handlers (txt, md, json, csv) are present and handle error cases",
