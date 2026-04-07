@@ -6,7 +6,9 @@
   "status": "ready",
   "bead_type": "task",
   "parent_id": "B-266c0a28",
-  "dependencies": [],
+  "dependencies": [
+    "B-841d81bc"
+  ],
   "acceptance_criteria": [
     ".claude/skills/agent-memory/assets/tokenizer.json exists and is ~711 KB",
     ".claude/skills/agent-memory/assets/tokenizer_config.json exists and is ~366 B",
