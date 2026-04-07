@@ -6,7 +6,9 @@
   "status": "ready",
   "bead_type": "task",
   "parent_id": "B-54edeccf",
-  "dependencies": [],
+  "dependencies": [
+    "B-d7c0d824"
+  ],
   "acceptance_criteria": [
     "TestIngestTxt: 3-paragraph .txt produces 3 rows; chunk shorter than 10 chars is skipped and reported",
     "TestIngestMd: chunk following ## heading starts with the heading text",
