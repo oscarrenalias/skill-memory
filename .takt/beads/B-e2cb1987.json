@@ -111,6 +111,13 @@
       "agent_type": "developer",
       "summary": "Worker execution failed: claude -p produced no structured output. is_error=False, stop_reason=end_turn, result='End-to-end confirmed: bootstrap ran, then `stats` on a non-existent DB printed `\"No memory DB found at ...\"` and exited 0. Implementation is complete.'",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T18:49:39.975832+00:00",
+      "event": "corrective_planned",
+      "agent_type": "developer",
+      "summary": "Created corrective bead B-e2cb1987-corrective for blocked issue",
+      "details": {}
     }
   ],
   "metadata": {
@@ -188,7 +195,8 @@
       "requires_followup": false,
       "next_agent": "",
       "block_reason": "claude -p produced no structured output. is_error=False, stop_reason=end_turn, result='End-to-end confirmed: bootstrap ran, then `stats` on a non-existent DB printed `\"No memory DB found at ...\"` and exited 0. Implementation is complete.'"
-    }
+    },
+    "auto_corrective_bead_id": "B-e2cb1987-corrective"
   },
   "labels": []
 }
