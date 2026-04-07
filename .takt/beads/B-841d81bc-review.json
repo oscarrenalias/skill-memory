@@ -27,11 +27,19 @@
   ],
   "touched_files": [
     ".claude/skills/agent-memory/.gitignore",
-    ".claude/skills/agent-memory/assets/.gitkeep"
+    ".claude/skills/agent-memory/assets/.gitkeep",
+    ".claude/skills/agent-memory/assets/special_tokens_map.json",
+    ".claude/skills/agent-memory/assets/tokenizer.json",
+    ".claude/skills/agent-memory/assets/tokenizer_config.json",
+    ".claude/skills/agent-memory/assets/vocab.txt"
   ],
   "changed_files": [
     ".claude/skills/agent-memory/.gitignore",
-    ".claude/skills/agent-memory/assets/.gitkeep"
+    ".claude/skills/agent-memory/assets/.gitkeep",
+    ".claude/skills/agent-memory/assets/special_tokens_map.json",
+    ".claude/skills/agent-memory/assets/tokenizer.json",
+    ".claude/skills/agent-memory/assets/tokenizer_config.json",
+    ".claude/skills/agent-memory/assets/vocab.txt"
   ],
   "updated_docs": [],
   "handoff_summary": {
