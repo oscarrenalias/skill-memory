@@ -3,7 +3,7 @@
   "title": "Document Test suite: core CRUD and infrastructure tests",
   "agent_type": "documentation",
   "description": "Update docs for B-d7c0d824",
-  "status": "in_progress",
+  "status": "done",
   "bead_type": "task",
   "parent_id": "B-d7c0d824",
   "dependencies": [
@@ -19,52 +19,52 @@
   "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
   "expected_files": [
     "tests/__init__.py",
-    "tests/__pycache__/__init__.cpython-314.pyc",
-    "tests/__pycache__/test_memory.cpython-314.pyc",
     "tests/test_memory.py"
   ],
   "expected_globs": [],
   "touched_files": [
-    "tests/__init__.py",
-    "tests/__pycache__/__init__.cpython-314.pyc",
-    "tests/__pycache__/test_memory.cpython-314.pyc",
-    "tests/test_memory.py"
+    "docs/memory/conventions.md"
   ],
   "changed_files": [
-    "tests/__init__.py",
-    "tests/__pycache__/__init__.cpython-314.pyc",
-    "tests/__pycache__/test_memory.cpython-314.pyc",
-    "tests/test_memory.py"
+    "docs/memory/conventions.md"
   ],
-  "updated_docs": [],
+  "updated_docs": [
+    "docs/memory/conventions.md"
+  ],
   "handoff_summary": {
-    "completed": "",
+    "completed": "Added testing documentation to docs/memory/conventions.md: how to run the suite, the _embed mock strategy, AGENT_MEMORY_INTEGRATION_TESTS=1 flag, and a coverage table for all 10 test classes.",
     "remaining": "",
-    "risks": "",
-    "verdict": "",
+    "risks": "None \u2014 docs/memory/conventions.md is not in scope of any other active bead.",
+    "verdict": "approved",
     "findings_count": 0,
     "requires_followup": false,
-    "changed_files": [],
-    "updated_docs": [],
+    "changed_files": [
+      "docs/memory/conventions.md"
+    ],
+    "updated_docs": [
+      "docs/memory/conventions.md"
+    ],
     "next_action": "",
     "next_agent": "",
     "block_reason": "",
-    "expected_files": [],
+    "expected_files": [
+      "tests/__init__.py",
+      "tests/test_memory.py"
+    ],
     "expected_globs": [],
-    "touched_files": [],
-    "conflict_risks": "",
-    "design_decisions": "",
-    "test_coverage_notes": "",
+    "touched_files": [
+      "docs/memory/conventions.md"
+    ],
+    "conflict_risks": "None \u2014 docs/memory/conventions.md has no overlap with other active beads.",
+    "design_decisions": "test_memory.py already has a comprehensive module docstring (lines 1\u201313); documentation in conventions.md is proportional and non-redundant.",
+    "test_coverage_notes": "No tests run (documentation bead); test file self-documents via module docstring.",
     "known_limitations": ""
   },
-  "block_reason": "Deferred due to file-scope conflict with active bead B-d7c0d824-test",
-  "conflict_risks": "None \u2014 tests/test_memory.py is a new file; no overlap with tests/test_ingest_chunking.py.",
+  "block_reason": "",
+  "conflict_risks": "None \u2014 docs/memory/conventions.md has no overlap with other active beads.",
   "branch_name": "feature/b-54edeccf",
   "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
-  "lease": {
-    "owner": "documentation:B-d7c0d824-docs",
-    "expires_at": "2026-04-07T20:51:02.831651+00:00"
-  },
+  "lease": null,
   "retries": 0,
   "execution_history": [
     {
@@ -133,6 +133,13 @@
       "details": {
         "template_path": ".takt/agent-runs/B-d7c0d824-docs/repo/templates/agents/documentation.md"
       }
+    },
+    {
+      "timestamp": "2026-04-07T20:22:15.242577+00:00",
+      "event": "completed",
+      "agent_type": "documentation",
+      "summary": "Added \"Running Tests\" section to docs/memory/conventions.md documenting test suite run command, mocking strategy, integration test env var, and per-class coverage table.",
+      "details": {}
     }
   ],
   "metadata": {
@@ -206,7 +213,53 @@
         "test_coverage_notes": "",
         "known_limitations": ""
       }
-    }
+    },
+    "last_agent_result": {
+      "outcome": "completed",
+      "summary": "Added \"Running Tests\" section to docs/memory/conventions.md documenting test suite run command, mocking strategy, integration test env var, and per-class coverage table.",
+      "verdict": "approved",
+      "findings_count": 0,
+      "requires_followup": false,
+      "next_agent": "",
+      "block_reason": ""
+    },
+    "telemetry": {
+      "cost_usd": 0.2511711,
+      "duration_ms": 68313,
+      "duration_api_ms": 63960,
+      "num_turns": 12,
+      "input_tokens": 10,
+      "output_tokens": 3537,
+      "cache_creation_tokens": 34304,
+      "cache_read_tokens": 231487,
+      "stop_reason": "end_turn",
+      "session_id": "9ca364e1-f017-4aa3-8579-823e1e38ed6b",
+      "permission_denials": [],
+      "prompt_chars": 6789,
+      "prompt_lines": 157,
+      "source": "provider",
+      "attempt": 1
+    },
+    "telemetry_history": [
+      {
+        "cost_usd": 0.2511711,
+        "duration_ms": 68313,
+        "duration_api_ms": 63960,
+        "num_turns": 12,
+        "input_tokens": 10,
+        "output_tokens": 3537,
+        "cache_creation_tokens": 34304,
+        "cache_read_tokens": 231487,
+        "stop_reason": "end_turn",
+        "session_id": "9ca364e1-f017-4aa3-8579-823e1e38ed6b",
+        "permission_denials": [],
+        "prompt_chars": 6789,
+        "prompt_lines": 157,
+        "source": "provider",
+        "attempt": 1
+      }
+    ],
+    "last_commit": "43b6fa55f2efa58ade23491b14843a96c5a1278f"
   },
   "labels": []
 }
