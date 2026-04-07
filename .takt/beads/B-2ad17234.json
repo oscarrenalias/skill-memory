@@ -3,7 +3,7 @@
   "title": "Implement model bootstrap (_ensure_model)",
   "agent_type": "developer",
   "description": "Implement _ensure_model(): compute the SHA256 of the actual downloaded model.onnx at implementation time (use the curl + sha256sum command from the spec), hardcode it as _MODEL_SHA256, then write the download logic to ~/.cache/agent-memory/bge-small-en-v1.5/model.onnx with progress message, post-download SHA256 verification, and cleanup + exit(1) on failure.",
-  "status": "ready",
+  "status": "in_progress",
   "bead_type": "task",
   "parent_id": "B-266c0a28",
   "dependencies": [
@@ -55,7 +55,10 @@
   "conflict_risks": "None beyond the file-write block. No sibling beads currently claim this file.",
   "branch_name": "feature/b-266c0a28",
   "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
-  "lease": null,
+  "lease": {
+    "owner": "developer:B-2ad17234",
+    "expires_at": "2026-04-07T21:01:36.985572+00:00"
+  },
   "retries": 0,
   "execution_history": [
     {
@@ -138,6 +141,30 @@
       "event": "retried",
       "agent_type": "developer",
       "summary": "Requeued blocked bead after corrective bead B-2ad17234-corrective completed",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T20:31:37.510083+00:00",
+      "event": "skills_loaded",
+      "agent_type": "developer",
+      "summary": "Loaded 7 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/developer-implementation",
+          "capability/code-edit",
+          "task/corrective-implementation",
+          "task/refactor-safe",
+          "task/migration",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-07T20:31:37.510107+00:00",
+      "event": "started",
+      "agent_type": "developer",
+      "summary": "Worker started",
       "details": {}
     }
   ],
