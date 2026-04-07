@@ -310,23 +310,8 @@ def cmd_add(args):
     print(f"Added {mem_id}")
 
 
-def cmd_ingest(args):
-    """Ingest a file by chunking it and inserting each chunk into the memory DB."""
-    file_path = Path(args.file)
-    if not file_path.exists():
-        print(f"File not found: {file_path}", file=sys.stderr)
-        sys.exit(1)
-
-    ext = file_path.suffix.lower()
-    if ext not in (".txt", ".md"):
-        print(f"Unsupported file format: {ext!r}. Supported: .txt, .md", file=sys.stderr)
-        sys.exit(1)
-
-    source = args.source if args.source else file_path.name
-    chunk_size = args.chunk_size
-    overlap = args.overlap
-    db_path = _resolve_db(args.db)
-
+def _ingest_text_chunks(file_path, ext, chunk_size, overlap, source, db_path):
+    """Shared logic for .txt and .md ingestion."""
     text = file_path.read_text(encoding="utf-8")
 
     if ext == ".txt":
@@ -334,7 +319,6 @@ def cmd_ingest(args):
     else:  # .md
         raw_chunks = _chunk_md(text, chunk_size, overlap)
 
-    # Filter chunks shorter than 10 characters
     MIN_CHUNK_LEN = 10
     chunks = []
     skipped = 0
@@ -356,6 +340,135 @@ def cmd_ingest(args):
         con.close()
 
     print(f"Ingesting {file_path.name}\u2026 {added} chunks added ({skipped} skipped).", file=sys.stderr)
+
+
+def _ingest_json(file_path, source, db_path):
+    """Ingest a JSON file. Expects a top-level array of strings or objects."""
+    try:
+        data = json.loads(file_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        print(f"Invalid JSON in {file_path.name}: {exc}", file=sys.stderr)
+        sys.exit(1)
+
+    if not isinstance(data, list):
+        print(
+            f"Invalid JSON format in {file_path.name}: expected a top-level array, got {type(data).__name__}",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+    records = []
+    for idx, item in enumerate(data):
+        if isinstance(item, str):
+            records.append({"content": item, "source": source, "metadata": {}})
+        elif isinstance(item, dict):
+            if "content" not in item:
+                print(
+                    f"Invalid JSON format in {file_path.name}: element at index {idx} is missing required 'content' key",
+                    file=sys.stderr,
+                )
+                sys.exit(1)
+            content = item["content"]
+            if not isinstance(content, str):
+                print(
+                    f"Invalid JSON format in {file_path.name}: element at index {idx} 'content' must be a string",
+                    file=sys.stderr,
+                )
+                sys.exit(1)
+            meta = item.get("metadata", {})
+            if not isinstance(meta, dict):
+                print(
+                    f"Invalid JSON format in {file_path.name}: element at index {idx} 'metadata' must be an object",
+                    file=sys.stderr,
+                )
+                sys.exit(1)
+            row_source = item.get("source", source)
+            records.append({"content": content, "source": row_source, "metadata": meta})
+        else:
+            print(
+                f"Invalid JSON format in {file_path.name}: element at index {idx} must be a string or object, got {type(item).__name__}",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+
+    _auto_init(db_path)
+    con = _open_db(db_path)
+    added = 0
+    try:
+        with con:
+            for rec in records:
+                _insert_chunk(con, rec["content"], rec["source"], rec["metadata"])
+                added += 1
+    finally:
+        con.close()
+
+    print(f"Ingesting {file_path.name}\u2026 {added} rows added.", file=sys.stderr)
+
+
+def _ingest_csv(file_path, column, source, db_path):
+    """Ingest a CSV file. --column specifies the text column; others become metadata."""
+    import csv
+
+    with file_path.open(newline="", encoding="utf-8") as fh:
+        reader = csv.DictReader(fh)
+        if reader.fieldnames is None:
+            print(f"CSV file {file_path.name} appears to be empty", file=sys.stderr)
+            sys.exit(1)
+        fieldnames = list(reader.fieldnames)
+        if column not in fieldnames:
+            print(
+                f"Column {column!r} not found in {file_path.name}. Available columns: {fieldnames}",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+        meta_columns = [f for f in fieldnames if f != column]
+        rows = list(reader)
+
+    _auto_init(db_path)
+    con = _open_db(db_path)
+    added = 0
+    try:
+        with con:
+            for row in rows:
+                content = row[column]
+                metadata = {col: row[col] for col in meta_columns}
+                _insert_chunk(con, content, source, metadata)
+                added += 1
+    finally:
+        con.close()
+
+    print(f"Ingesting {file_path.name}\u2026 {added} rows added.", file=sys.stderr)
+
+
+def cmd_ingest(args):
+    """Ingest a file by chunking it and inserting each chunk into the memory DB."""
+    file_path = Path(args.file)
+    if not file_path.exists():
+        print(f"File not found: {file_path}", file=sys.stderr)
+        sys.exit(1)
+
+    ext = file_path.suffix.lower()
+    source = args.source if args.source else file_path.name
+    db_path = _resolve_db(args.db)
+
+    if ext in (".txt", ".md"):
+        _ingest_text_chunks(file_path, ext, args.chunk_size, args.overlap, source, db_path)
+    elif ext == ".json":
+        _ingest_json(file_path, source, db_path)
+    elif ext == ".csv":
+        if not args.column:
+            print(
+                f"--column NAME is required when ingesting a CSV file (specifies which column holds the text)",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+        _ingest_csv(file_path, args.column, source, db_path)
+    else:
+        print(
+            f"Unsupported format: {ext!r}. Supported formats: .txt, .md, .json, .csv",
+            file=sys.stderr,
+        )
+        sys.exit(1)
 
 
 def cmd_search(args):
@@ -528,6 +641,10 @@ def main():
     ingest_parser.add_argument(
         "--overlap", type=int, default=100, metavar="N",
         help="Character overlap between adjacent chunks (default: 100)"
+    )
+    ingest_parser.add_argument(
+        "--column", metavar="NAME",
+        help="CSV only: column name containing the text to ingest"
     )
     ingest_parser.add_argument("--db", metavar="PATH", help="Override DB path")
     ingest_parser.set_defaults(func=cmd_ingest)
