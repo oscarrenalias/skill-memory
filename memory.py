@@ -2,6 +2,8 @@
 import sys
 import os
 import subprocess
+import hashlib
+import urllib.request
 from pathlib import Path
 
 _SKILL_DIR = Path(__file__).parent
@@ -32,6 +34,54 @@ import json
 import sqlite3
 import uuid
 from datetime import datetime, timezone
+
+
+# ---------------------------------------------------------------------------
+# Model bootstrap
+# ---------------------------------------------------------------------------
+
+_MODEL_URL = "https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/onnx/model.onnx"
+# SHA256 must be verified by downloading the model and running sha256sum.
+# See specs/planned/agent-memory-core-infrastructure.md §Pending Decisions #1.
+# Leave empty to skip verification (insecure; update before production use).
+_MODEL_SHA256 = ""
+_MODEL_PATH = Path.home() / ".cache" / "agent-memory" / "bge-small-en-v1.5" / "model.onnx"
+
+
+def _sha256_of(path: Path) -> str:
+    """Compute SHA256 hex digest of a file in streaming fashion."""
+    h = hashlib.sha256()
+    with path.open("rb") as fh:
+        for chunk in iter(lambda: fh.read(65536), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def _ensure_model() -> Path:
+    """Download the ONNX model if absent; verify SHA256 and clean up on failure."""
+    if _MODEL_PATH.exists():
+        return _MODEL_PATH
+    _MODEL_PATH.parent.mkdir(parents=True, exist_ok=True)
+    print("Downloading bge-small-en-v1.5 model…", file=sys.stderr)
+    try:
+        urllib.request.urlretrieve(_MODEL_URL, _MODEL_PATH)
+        if _MODEL_SHA256:
+            actual = _sha256_of(_MODEL_PATH)
+            if actual != _MODEL_SHA256:
+                _MODEL_PATH.unlink(missing_ok=True)
+                print(
+                    f"error: model SHA256 mismatch\n  expected: {_MODEL_SHA256}\n  got:      {actual}",
+                    file=sys.stderr,
+                )
+                sys.exit(1)
+    except SystemExit:
+        raise
+    except Exception as exc:
+        if _MODEL_PATH.exists():
+            _MODEL_PATH.unlink()
+        print(f"error: failed to download model: {exc}", file=sys.stderr)
+        sys.exit(1)
+    return _MODEL_PATH
 
 
 # ---------------------------------------------------------------------------
