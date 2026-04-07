@@ -4,3 +4,6 @@
 .takt/telemetry/
 .takt/logs/
 .takt/agent-runs/
+
+# agent-memory
+.venv/
