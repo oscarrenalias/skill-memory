@@ -3,7 +3,7 @@
   "title": "Review Test suite: core CRUD and infrastructure tests",
   "agent_type": "review",
   "description": "Review implementation for B-d7c0d824",
-  "status": "in_progress",
+  "status": "done",
   "bead_type": "task",
   "parent_id": "B-d7c0d824",
   "dependencies": [
@@ -28,27 +28,23 @@
   "touched_files": [
     "docs/memory/conventions.md",
     "tests/__init__.py",
-    "tests/__pycache__/__init__.cpython-314.pyc",
-    "tests/__pycache__/test_memory.cpython-314.pyc",
     "tests/test_memory.py"
   ],
   "changed_files": [
     "docs/memory/conventions.md",
     "tests/__init__.py",
-    "tests/__pycache__/__init__.cpython-314.pyc",
-    "tests/__pycache__/test_memory.cpython-314.pyc",
     "tests/test_memory.py"
   ],
   "updated_docs": [
     "docs/memory/conventions.md"
   ],
   "handoff_summary": {
-    "completed": "Reviewed test_memory.py (774 lines), tests/__init__.py, and docs/memory/conventions.md. Test logic is correct and complete: deterministic mock embedding, per-test tmpdir isolation, correct sqlite_vec COUNT(*) workaround, ingest coverage across txt/md/json/csv formats, integration tests properly gated.",
-    "remaining": "Fix conventions.md run command to reference the venv Python (`.venv/bin/pytest` or equivalent) and add a note that system Python is insufficient due to missing numpy/sqlite-vec dependencies.",
-    "risks": "Operators following conventions.md will use system Python and encounter ImportError rather than meaningful test results, masking the true test status.",
-    "verdict": "needs_changes",
-    "findings_count": 1,
-    "requires_followup": true,
+    "completed": "Reviewed conventions.md (corrective fix confirmed), tests/__init__.py (empty package marker), and test_memory.py (774 lines). The prior finding about `python3 -m unittest discover` has been resolved: conventions.md now documents `.venv/bin/pytest tests/` with an explicit note that system Python lacks numpy/sqlite-vec. Test logic is correct: deterministic hash-seeded _mock_embed, per-test tmpdir isolation via AGENT_MEMORY_DB env var, COUNT(*) workaround for sqlite_vec virtual table, full ingest coverage across txt/md/json/csv, and integration tests properly gated behind AGENT_MEMORY_INTEGRATION_TESTS=1.",
+    "remaining": "None.",
+    "risks": "None \u2014 all findings resolved.",
+    "verdict": "approved",
+    "findings_count": 0,
+    "requires_followup": false,
     "changed_files": [
       "docs/memory/conventions.md",
       "tests/__init__.py",
@@ -57,9 +53,9 @@
     "updated_docs": [
       "docs/memory/conventions.md"
     ],
-    "next_action": "Create a corrective bead to update docs/memory/conventions.md: replace `python3 -m unittest discover -s tests/` with `.venv/bin/pytest tests/` and add a note that the venv is required because system Python lacks numpy and sqlite-vec.",
-    "next_agent": "developer",
-    "block_reason": "docs/memory/conventions.md:39 documents `python3 -m unittest discover -s tests/` as the run command, but system Python lacks numpy/sqlite-vec and will produce ImportError rather than test results. The correct invocation is `.venv/bin/pytest` (or `.venv/bin/python -m pytest tests/`). This misleads operators into thinking tests are broken when the environment is simply wrong.",
+    "next_action": "Bead can be marked done and merged.",
+    "next_agent": "",
+    "block_reason": "",
     "expected_files": [
       "tests/__init__.py",
       "tests/test_memory.py",
@@ -71,19 +67,16 @@
       "tests/__init__.py",
       "tests/test_memory.py"
     ],
-    "conflict_risks": "None \u2014 only docs/memory/conventions.md needs a one-line fix; no overlap with other in-flight beads.",
-    "design_decisions": "All design decisions from the developer handoff are correctly reflected in the implementation: hash-seeded _mock_embed for deterministic search ranking, direct sqlite3 insert with explicit created_at for TestList ordering, COUNT(*) for memories_vec deletion check.",
-    "test_coverage_notes": "Test classes cover: TestInit (idempotent init, both tables), TestAdd (UUID output, both tables, auto-init), TestSearch (ranking, limit, JSON output), TestDelete (both tables, unknown ID exits 1), TestList (newest-first, source filter, limit 0), TestStats (populated DB, missing DB exits 0), TestIngestTxt, TestIngestMd, TestIngestJson, TestIngestCsv, TestSearchIntegration (env-gated).",
-    "known_limitations": "Integration tests require AGENT_MEMORY_INTEGRATION_TESTS=1 and the real ONNX model \u2014 intentionally skipped by default and documented."
+    "conflict_risks": "None \u2014 only docs/memory/conventions.md was modified; no overlap with other in-flight beads.",
+    "design_decisions": "All design decisions from the developer handoff are correctly reflected: hash-seeded _mock_embed for deterministic search ranking, direct sqlite3 insert with explicit created_at for TestList ordering, COUNT(*) for memories_vec deletion check.",
+    "test_coverage_notes": "TestInit (idempotent init, both tables), TestAdd (UUID output, both tables, auto-init), TestSearch (ranking, limit, JSON output), TestDelete (both tables, unknown ID exits 1), TestList (newest-first, source filter, limit 0), TestStats (populated DB, missing DB exits 0), TestIngestTxt, TestIngestMd, TestIngestJson, TestIngestCsv, TestSearchIntegration (env-gated).",
+    "known_limitations": "Integration tests require AGENT_MEMORY_INTEGRATION_TESTS=1 and the real ONNX model \u2014 intentionally skipped by default and documented in conventions.md."
   },
   "block_reason": "",
-  "conflict_risks": "None \u2014 only docs/memory/conventions.md needs a one-line fix; no overlap with other in-flight beads.",
+  "conflict_risks": "None \u2014 only docs/memory/conventions.md was modified; no overlap with other in-flight beads.",
   "branch_name": "feature/b-54edeccf",
   "worktree_path": "",
-  "lease": {
-    "owner": "review:B-d7c0d824-review",
-    "expires_at": "2026-04-07T20:58:46.533004+00:00"
-  },
+  "lease": null,
   "retries": 0,
   "execution_history": [
     {
@@ -177,6 +170,13 @@
       "details": {
         "template_path": ".takt/agent-runs/B-d7c0d824-review/repo/templates/agents/review.md"
       }
+    },
+    {
+      "timestamp": "2026-04-07T20:29:24.655259+00:00",
+      "event": "completed",
+      "agent_type": "review",
+      "summary": "All findings resolved \u2014 corrective bead fixed conventions.md run command; implementation and docs approved.",
+      "details": {}
     }
   ],
   "metadata": {
@@ -268,30 +268,30 @@
       }
     },
     "last_agent_result": {
-      "outcome": "blocked",
-      "summary": "1 finding: conventions.md documents `python3 -m unittest discover` but the correct invocation requires the venv Python; all test logic is correct.",
-      "verdict": "needs_changes",
-      "findings_count": 1,
-      "requires_followup": true,
-      "next_agent": "developer",
-      "block_reason": "docs/memory/conventions.md:39 documents `python3 -m unittest discover -s tests/` as the run command, but system Python lacks numpy/sqlite-vec and will produce ImportError rather than test results. The correct invocation is `.venv/bin/pytest` (or `.venv/bin/python -m pytest tests/`). This misleads operators into thinking tests are broken when the environment is simply wrong."
+      "outcome": "completed",
+      "summary": "All findings resolved \u2014 corrective bead fixed conventions.md run command; implementation and docs approved.",
+      "verdict": "approved",
+      "findings_count": 0,
+      "requires_followup": false,
+      "next_agent": "",
+      "block_reason": ""
     },
     "telemetry": {
-      "cost_usd": 0.1754028,
-      "duration_ms": 76145,
-      "duration_api_ms": 71963,
-      "num_turns": 7,
-      "input_tokens": 7,
-      "output_tokens": 3735,
-      "cache_creation_tokens": 21826,
-      "cache_read_tokens": 125031,
+      "cost_usd": 0.12552629999999998,
+      "duration_ms": 35011,
+      "duration_api_ms": 30760,
+      "num_turns": 5,
+      "input_tokens": 6,
+      "output_tokens": 1430,
+      "cache_creation_tokens": 20258,
+      "cache_read_tokens": 93636,
       "stop_reason": "end_turn",
-      "session_id": "4ac5b5b9-b735-4699-826e-fc319a198d36",
+      "session_id": "96e9a900-ff09-409e-b258-0513702cd775",
       "permission_denials": [],
-      "prompt_chars": 7770,
-      "prompt_lines": 164,
+      "prompt_chars": 10518,
+      "prompt_lines": 184,
       "source": "provider",
-      "attempt": 1
+      "attempt": 2
     },
     "telemetry_history": [
       {
@@ -310,6 +310,23 @@
         "prompt_lines": 164,
         "source": "provider",
         "attempt": 1
+      },
+      {
+        "cost_usd": 0.12552629999999998,
+        "duration_ms": 35011,
+        "duration_api_ms": 30760,
+        "num_turns": 5,
+        "input_tokens": 6,
+        "output_tokens": 1430,
+        "cache_creation_tokens": 20258,
+        "cache_read_tokens": 93636,
+        "stop_reason": "end_turn",
+        "session_id": "96e9a900-ff09-409e-b258-0513702cd775",
+        "permission_denials": [],
+        "prompt_chars": 10518,
+        "prompt_lines": 184,
+        "source": "provider",
+        "attempt": 2
       }
     ],
     "auto_corrective_bead_id": "B-d7c0d824-review-corrective",
