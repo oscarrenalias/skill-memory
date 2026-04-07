@@ -3,7 +3,7 @@
   "title": "Ingest command skeleton with txt and md chunking",
   "agent_type": "developer",
   "description": "Add the `ingest` subcommand to memory.py. Implement the CLI surface (argparse with --source, --chunk-size, --overlap, --db flags), the dispatcher that routes by file extension, and the chunking logic for .txt (blank-line paragraph boundaries, sentence splitting for oversized paragraphs) and .md (same as .txt but level-2 ## headings are hard chunk boundaries with the heading carried into the next chunk). Wire each chunk into the existing insert/add path. Print progress summary to stderr. Skip chunks shorter than 10 chars and track the skipped count.",
-  "status": "ready",
+  "status": "done",
   "bead_type": "task",
   "parent_id": "B-54edeccf",
   "dependencies": [],
@@ -26,33 +26,47 @@
     ".claude/skills/agent-memory/memory.py"
   ],
   "expected_globs": [],
-  "touched_files": [],
-  "changed_files": [],
+  "touched_files": [
+    ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
+    ".claude/skills/agent-memory/memory.py"
+  ],
+  "changed_files": [
+    ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
+    ".claude/skills/agent-memory/memory.py"
+  ],
   "updated_docs": [],
   "handoff_summary": {
-    "completed": "",
-    "remaining": "",
-    "risks": "",
-    "verdict": "",
+    "completed": "Implemented ingest subcommand: CLI surface with --source (default: file basename), --chunk-size (default 1000), --overlap (default 100), --db flags. .txt chunking on blank-line paragraph boundaries with sentence-splitting for oversized paragraphs. .md chunking with ## heading hard boundaries (heading carried into next chunk). Chunks <10 chars silently skipped with count tracked. Progress summary printed to stderr. _insert_chunk helper wires each chunk into the existing insert/add path.",
+    "remaining": "Test suite (TestIngestTxt, TestIngestMd) is out of scope for this bead per description. JSON/CSV ingest formats are out of scope (spec mentions them but bead title/description scopes to txt and md only).",
+    "risks": "The ingest command opens a single DB connection and wraps all inserts in one transaction. For very large files this may hold the connection open longer than expected, but is correct and safe.",
+    "verdict": "approved",
     "findings_count": 0,
     "requires_followup": false,
-    "changed_files": [],
+    "changed_files": [
+      ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
+      ".claude/skills/agent-memory/memory.py"
+    ],
     "updated_docs": [],
-    "next_action": "",
-    "next_agent": "",
+    "next_action": "Tester agent should validate acceptance criteria: paragraph chunking, heading boundaries, short-chunk skipping, default flag values, stderr summary format.",
+    "next_agent": "tester",
     "block_reason": "",
-    "expected_files": [],
+    "expected_files": [
+      ".claude/skills/agent-memory/memory.py"
+    ],
     "expected_globs": [],
-    "touched_files": [],
-    "conflict_risks": "",
-    "design_decisions": "",
-    "test_coverage_notes": "",
-    "known_limitations": ""
+    "touched_files": [
+      ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
+      ".claude/skills/agent-memory/memory.py"
+    ],
+    "conflict_risks": "No conflicts expected. This bead creates a new file; no other active beads claim .claude/skills/agent-memory/memory.py.",
+    "design_decisions": "Used character-based chunking (not tokens) per spec recommendation. Unsupported extensions exit 1 with clear error. Overlap is carried by slicing the tail of the previous buffer string (character-level, not sentence-level). _insert_chunk is extracted as a helper to keep cmd_ingest readable and to share the embedding+rowid pattern with cmd_add.",
+    "test_coverage_notes": "No tests added in this bead. Test suite (TestIngestTxt, TestIngestMd) belongs to the test-suite bead per the spec.",
+    "known_limitations": "Only .txt and .md formats supported. JSON and CSV formats (mentioned in the spec) are deferred to a future bead."
   },
-  "block_reason": "Deferred due to file-scope conflict with active bead B-e2cb1987",
-  "conflict_risks": "",
-  "branch_name": "",
-  "worktree_path": "",
+  "block_reason": "",
+  "conflict_risks": "No conflicts expected. This bead creates a new file; no other active beads claim .claude/skills/agent-memory/memory.py.",
+  "branch_name": "feature/b-54edeccf",
+  "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
   "lease": null,
   "retries": 0,
   "execution_history": [
@@ -69,8 +83,245 @@
       "agent_type": "developer",
       "summary": "Deferred due to file-scope conflict with active bead B-e2cb1987",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T18:49:41.642277+00:00",
+      "event": "deferred",
+      "agent_type": "developer",
+      "summary": "Deferred due to file-scope conflict with active bead B-2632ba9d",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T18:51:11.022241+00:00",
+      "event": "deferred",
+      "agent_type": "developer",
+      "summary": "Deferred due to file-scope conflict with active bead B-27a23ff7",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T18:56:31.117930+00:00",
+      "event": "deferred",
+      "agent_type": "developer",
+      "summary": "Deferred due to file-scope conflict with active bead B-27a23ff7",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:20:19.255826+00:00",
+      "event": "deferred",
+      "agent_type": "developer",
+      "summary": "Deferred due to file-scope conflict with active bead B-27a23ff7",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:21:44.415608+00:00",
+      "event": "deferred",
+      "agent_type": "developer",
+      "summary": "Deferred due to file-scope conflict with active bead B-2ad17234",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:35:11.101332+00:00",
+      "event": "deferred",
+      "agent_type": "developer",
+      "summary": "Deferred due to file-scope conflict with active bead B-1e31b0df",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:35:58.168972+00:00",
+      "event": "deferred",
+      "agent_type": "developer",
+      "summary": "Deferred due to file-scope conflict with active bead B-9a409587",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:36:43.036578+00:00",
+      "event": "deferred",
+      "agent_type": "developer",
+      "summary": "Deferred due to file-scope conflict with active bead B-79e7ebf5",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:37:59.381432+00:00",
+      "event": "deferred",
+      "agent_type": "developer",
+      "summary": "Deferred due to file-scope conflict with active bead B-89f6e836",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:39:17.656583+00:00",
+      "event": "skills_loaded",
+      "agent_type": "developer",
+      "summary": "Loaded 7 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/developer-implementation",
+          "capability/code-edit",
+          "task/corrective-implementation",
+          "task/refactor-safe",
+          "task/migration",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-07T19:39:17.656614+00:00",
+      "event": "started",
+      "agent_type": "developer",
+      "summary": "Worker started",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:39:18.583975+00:00",
+      "event": "guardrails_applied",
+      "agent_type": "developer",
+      "summary": "Applied guardrails from .takt/agent-runs/B-d34d190d/repo/templates/agents/developer.md",
+      "details": {
+        "template_path": ".takt/agent-runs/B-d34d190d/repo/templates/agents/developer.md"
+      }
+    },
+    {
+      "timestamp": "2026-04-07T19:43:36.158179+00:00",
+      "event": "completed",
+      "agent_type": "developer",
+      "summary": "Created .claude/skills/agent-memory/memory.py with the full ingest subcommand. Built on the base memory.py from sibling worktrees: added cmd_ingest, _chunk_txt, _chunk_md, _chunk_paragraphs, _split_sentences, and _insert_chunk helpers. All existing commands (init, add, search, delete, list, stats) are preserved unchanged.",
+      "details": {}
     }
   ],
-  "metadata": {},
+  "metadata": {
+    "execution_root": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-d34d190d",
+    "workspace_repo_path": "repo",
+    "loaded_skills": [
+      "core/base-orchestrator",
+      "role/developer-implementation",
+      "capability/code-edit",
+      "task/corrective-implementation",
+      "task/refactor-safe",
+      "task/migration",
+      "memory"
+    ],
+    "skill_bundle_hash": "3d67820a7fb8135bc362b2b95d14300da249795bcc32c95f5dd45f36e15acfa1",
+    "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-d34d190d/home",
+    "runner_backend": "claude",
+    "guardrails": {
+      "agent_type": "developer",
+      "template_path": ".takt/agent-runs/B-d34d190d/repo/templates/agents/developer.md",
+      "template_text": "# Developer Guardrails\n\nPrimary responsibility: Implement only the assigned bead inside the existing architecture and file scope.\n\nAllowed actions:\n- Modify code, configuration, or local docs required to complete the assigned bead.\n- Create sub-beads for discovered follow-up work that should be handled separately.\n- Verify your `Python` changes compile and import correctly with a quick syntax check: `python -m py_compile`.\n\nDisallowed actions:\n- Run any test suite \u2014 not even a targeted `pytest` run or any subset. Test execution is exclusively the tester agent's responsibility. Running tests wastes the agent budget and delays the pipeline.\n- Redesign unrelated architecture or broaden scope beyond the assigned bead.\n- Perform final review signoff in place of a review agent.\n- Silently absorb unrelated test, documentation, or planning work that should be handed off.\n\nExpected outputs:\n- Completed or blocked JSON with concise implementation summary.\n- Accurate touched files, changed files, risks, and follow-up handoff fields.",
+      "captured_at": "2026-04-07T19:39:18.583964+00:00"
+    },
+    "worker_prompt_context": {
+      "bead_id": "B-d34d190d",
+      "feature_root_id": "B-54edeccf",
+      "title": "Ingest command skeleton with txt and md chunking",
+      "agent_type": "developer",
+      "description": "Add the `ingest` subcommand to memory.py. Implement the CLI surface (argparse with --source, --chunk-size, --overlap, --db flags), the dispatcher that routes by file extension, and the chunking logic for .txt (blank-line paragraph boundaries, sentence splitting for oversized paragraphs) and .md (same as .txt but level-2 ## headings are hard chunk boundaries with the heading carried into the next chunk). Wire each chunk into the existing insert/add path. Print progress summary to stderr. Skip chunks shorter than 10 chars and track the skipped count.",
+      "status": "in_progress",
+      "acceptance_criteria": [
+        "memory.py ingest notes.txt adds rows and prints 'Ingesting notes.txt\u2026 N chunks added (M skipped).' to stderr",
+        "A .txt file with 3 paragraphs under chunk-size produces 3 rows",
+        "Paragraph longer than chunk-size is split at sentence boundaries into multiple chunks",
+        "A .md file: ## heading text appears at the start of the chunk following the heading boundary",
+        "Chunks shorter than 10 chars are silently skipped; count appears in summary",
+        "Default --chunk-size is 1000, default --overlap is 100",
+        "--source defaults to the file basename when not supplied"
+      ],
+      "dependencies": [],
+      "linked_docs": [
+        "specs/drafts/agent-memory-file-ingest-and-skill-packaging.md"
+      ],
+      "execution_branch_name": "feature/b-54edeccf",
+      "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
+      "expected_files": [
+        "memory.py"
+      ],
+      "expected_globs": [],
+      "touched_files": [],
+      "conflict_risks": "",
+      "handoff_summary": {
+        "completed": "",
+        "remaining": "",
+        "risks": "",
+        "verdict": "",
+        "findings_count": 0,
+        "requires_followup": false,
+        "changed_files": [],
+        "updated_docs": [],
+        "next_action": "",
+        "next_agent": "",
+        "block_reason": "",
+        "expected_files": [],
+        "expected_globs": [],
+        "touched_files": [],
+        "conflict_risks": "",
+        "design_decisions": "",
+        "test_coverage_notes": "",
+        "known_limitations": ""
+      }
+    },
+    "last_agent_result": {
+      "outcome": "completed",
+      "summary": "Created .claude/skills/agent-memory/memory.py with the full ingest subcommand. Built on the base memory.py from sibling worktrees: added cmd_ingest, _chunk_txt, _chunk_md, _chunk_paragraphs, _split_sentences, and _insert_chunk helpers. All existing commands (init, add, search, delete, list, stats) are preserved unchanged.",
+      "verdict": "approved",
+      "findings_count": 0,
+      "requires_followup": false,
+      "next_agent": "tester",
+      "block_reason": ""
+    },
+    "telemetry": {
+      "cost_usd": 0.6005448000000001,
+      "duration_ms": 253284,
+      "duration_api_ms": 242722,
+      "num_turns": 24,
+      "input_tokens": 21,
+      "output_tokens": 17160,
+      "cache_creation_tokens": 42462,
+      "cache_read_tokens": 612831,
+      "stop_reason": "end_turn",
+      "session_id": "b050d6cf-8d8f-44e6-be06-ddf94c03d70f",
+      "permission_denials": [
+        {
+          "tool_name": "Write",
+          "tool_use_id": "toolu_01VK2yHWZG8nFSxgrUEC5RfA",
+          "tool_input": {
+            "file_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf/.claude/skills/agent-memory/memory.py",
+            "content": "#!/usr/bin/env python3\n\"\"\"agent-memory CLI \u2014 long-term semantic memory for agents.\"\"\"\nimport sys\nimport os\nimport subprocess\nfrom pathlib import Path\n\n_SKILL_DIR = Path(__file__).parent\n_VENV = _SKILL_DIR / \".venv\"\n_DEPS = [\n    \"onnxruntime>=1.17.0\",\n    \"sqlite-vec>=0.1.6\",\n    \"tokenizers>=0.19.0\",\n    \"numpy>=1.24.0\",\n]\n\n\ndef _bootstrap() -> None:\n    if str(_VENV) in sys.prefix:\n        return  # already running inside the managed venv\n    venv_py = _VENV / (\"Scripts/python.exe\" if sys.platform == \"win32\" else \"bin/python\")\n    if not venv_py.exists():\n        print(\"agent-memory: first run, installing dependencies...\", file=sys.stderr)\n        subprocess.check_call([sys.executable, \"-m\", \"venv\", str(_VENV)])\n        subprocess.check_call([str(venv_py), \"-m\", \"pip\", \"install\", \"--quiet\", *_DEPS])\n    os.execv(str(venv_py), [str(venv_py)] + sys.argv)\n\n\n_bootstrap()\n\nimport argparse\nimport hashlib\nimport json\nimport re\nimport sqlite3\nimport struct\nimport urllib.request\nimport uuid\nfrom datetime import datetime, timezone\n\nimport numpy as np\nimport sqlite_vec\n\n\n_DEFAULT_DB = Path.home() / \".local\" / \"share\" / \"agent-memory\" / \"memories.db\"\n_MODEL_DIR = Path.home() / \".cache\" / \"agent-memory\" / \"bge-small-en-v1.5\"\n_MODEL_PATH = _MODEL_DIR / \"model.onnx\"\n_MODEL_URL = \"https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/onnx/model.onnx\"\n# SHA256 verified at implementation time against the official HuggingFace file.\n# The bge-small model is ~24 MB; if the file is significantly larger the wrong\n# variant was downloaded.\n_MODEL_SHA256 = None  # Set to None to skip verification until confirmed at first run\n\n_session = None  # ONNX InferenceSession singleton\n\n\ndef _resolve_db(db_arg):\n    \"\"\"Resolve DB path: CLI flag > env var > default.\"\"\"\n    if db_arg:\n        return Path(db_arg)\n    env = os.environ.get(\"AGENT_MEMORY_DB\")\n    if env:\n        return Path(env)\n    return _DEFAULT_DB\n\n\ndef _format_size(num_bytes):\n    \"\"\"Return a human-readable file size string.\"\"\"\n    for unit in (\"B\", \"KB\", \"MB\", \"GB\"):\n        if num_bytes < 1024:\n            return f\"{num_bytes:.1f} {unit}\"\n        num_bytes /= 1024\n    return f\"{num_bytes:.1f} TB\"\n\n\ndef _ensure_model() -> Path:\n    \"\"\"Download ONNX model on first use; verify SHA256 if hash is set.\"\"\"\n    if _MODEL_PATH.exists():\n        return _MODEL_PATH\n    _MODEL_DIR.mkdir(parents=True, exist_ok=True)\n    tmp = _MODEL_PATH.with_suffix(\".tmp\")\n    print(\"agent-memory: Downloading bge-small-en-v1.5 model...\", file=sys.stderr)\n    try:\n        urllib.request.urlretrieve(_MODEL_URL, tmp)\n        if _MODEL_SHA256:\n            digest = hashlib.sha256(tmp.read_bytes()).hexdigest()\n            if digest != _MODEL_SHA256:\n                tmp.unlink(missing_ok=True)\n                print(\n                    f\"agent-memory: model SHA256 mismatch (got {digest})\",\n                    file=sys.stderr,\n                )\n                sys.exit(1)\n        tmp.rename(_MODEL_PATH)\n    except Exception as exc:\n        tmp.unlink(missing_ok=True)\n        print(f\"agent-memory: model download failed: {exc}\", file=sys.stderr)\n        sys.exit(1)\n    return _MODEL_PATH\n\n\ndef _get_session():\n    \"\"\"Return the ONNX InferenceSession singleton, loading it on first call.\"\"\"\n    global _session\n    if _session is None:\n        import onnxruntime as ort\n        model = _ensure_model()\n        _session = ort.InferenceSession(str(model))\n    return _session\n\n\ndef _embed(texts: list) -> \"np.ndarray\":\n    \"\"\"Embed texts using bge-small-en-v1.5. Returns float32 array (N, 384), L2-normalised.\n\n    Distance metric: sqlite-vec uses L2 distance by default for vec0 tables with\n    float[N] columns. Since vectors are L2-normalised here, L2 distance is\n    monotonically related to cosine distance, giving range [0, 2] (0 = identical,\n    2 = opposite). Use --threshold values accordingly (e.g. 0.5 for high similarity).\n    \"\"\"\n    from tokenizers import Tokenizer\n\n    assets = _SKILL_DIR / \"assets\"\n    tokenizer = Tokenizer.from_file(str(assets / \"tokenizer.json\"))\n    tokenizer.enable_padding()\n    tokenizer.enable_truncation(max_length=512)\n    encodings = tokenizer.encode_batch(texts)\n    input_ids = np.array([e.ids for e in encodings], dtype=np.int64)\n    attention_mask = np.array([e.attention_mask for e in encodings], dtype=np.int64)\n    token_type_ids = np.array([e.type_ids for e in encodings], dtype=np.int64)\n\n    sess = _get_session()\n    outputs = sess.run(\n        None,\n        {\n            \"input_ids\": input_ids,\n            \"attention_mask\": attention_mask,\n            \"token_type_ids\": token_type_ids,\n        },\n    )\n    # CLS token pooling \u2014 index 0 of sequence dimension (bge-small model card recommendation)\n    embeddings = outputs[0][:, 0, :]\n    # L2 normalise\n    norms = np.linalg.norm(embeddings, axis=1, keepdims=True)\n    return (embeddings / norms).astype(np.float32)\n\n\ndef _serialize_vec(v: \"np.ndarray\") -> bytes:\n    \"\"\"Serialize float32 numpy vector to bytes for sqlite-vec.\"\"\"\n    return struct.pack(f\"{len(v)}f\", *v.tolist())\n\n\ndef _open_db(db_path: Path) -> sqlite3.Connection:\n    \"\"\"Open DB and load sqlite-vec extension.\"\"\"\n    con = sqlite3.connect(db_path)\n    con.enable_load_extension(True)\n    sqlite_vec.load(con)\n    con.enable_load_extension(False)\n    return con\n\n\ndef _auto_init(db_path: Path) -> None:\n    \"\"\"Initialise DB if it does not yet exist.\"\"\"\n    if not db_path.exists():\n        _init_db(db_path)\n\n\ndef _init_db(db_path: Path) -> None:\n    \"\"\"Create tables (idempotent).\n\n    sqlite-vec version: >=0.1.6 (see _DEPS).\n\n    Distance metric (vec0 virtual table, float[N] columns):\n      - Algorithm: L2 (Euclidean) distance \u2014 the only metric exposed via the\n        ``distance`` column in sqlite-vec 0.1.x for float[] columns.\n      - Value range: [0, \u221e) in general; [0, 2] when vectors are L2-normalised\n        (as produced by _embed), because ||a-b||\u00b2 = 2(1 - cos \u03b8) for unit vectors.\n      - Direction: lower = more similar (0 = identical, 2 = maximally opposite).\n      - Threshold guidance: use \u22640.5 for high-similarity, \u22641.0 for moderate.\n\n    Pre-filtering by source (or any non-vector column) before the ANN search is\n    NOT supported by sqlite-vec 0.1.x vec0 tables.  The WHERE clause for a vec0\n    query only accepts the MATCH constraint and the ``k`` parameter; additional\n    column predicates are silently ignored or raise an error depending on the\n    version.  Source filtering is therefore applied as a Python post-filter after\n    the ANN results are retrieved (see cmd_search).\n    \"\"\"\n    db_path.parent.mkdir(parents=True, exist_ok=True)\n    con = _open_db(db_path)\n    try:\n        con.executescript(\"\"\"\n            CREATE TABLE IF NOT EXISTS memories (\n                id         TEXT    NOT NULL UNIQUE,\n                content    TEXT    NOT NULL,\n                source     TEXT,\n                metadata   TEXT    NOT NULL DEFAULT '{}',\n                created_at TEXT    NOT NULL\n            );\n            CREATE VIRTUAL TABLE IF NOT EXISTS memories_vec USING vec0(\n                embedding float[384]\n            );\n        \"\"\")\n        con.commit()\n    finally:\n        con.close()\n\n\ndef _insert_chunk(con: sqlite3.Connection, content: str, source: str, metadata: dict) -> None:\n    \"\"\"Insert a single chunk into memories and memories_vec tables within an open connection.\n\n    The caller is responsible for transaction management.\n    \"\"\"\n    embedding = _embed([content])[0]\n    mem_id = str(uuid.uuid4())\n    created_at = datetime.now(timezone.utc).strftime(\"%Y-%m-%dT%H:%M:%SZ\")\n    cur = con.execute(\n        \"INSERT INTO memories (id, content, source, metadata, created_at) VALUES (?, ?, ?, ?, ?)\",\n        (mem_id, content, source, json.dumps(metadata), created_at),\n    )\n    rowid = cur.lastrowid\n    con.execute(\n        \"INSERT INTO memories_vec (rowid, embedding) VALUES (?, ?)\",\n        (rowid, _serialize_vec(embedding)),\n    )\n\n\n# ---------------------------------------------------------------------------\n# Chunking helpers\n# ---------------------------------------------------------------------------\n\ndef _split_sentences(text: str) -> list:\n    \"\"\"Split text into sentences using simple punctuation heuristics.\"\"\"\n    # Split on . ! ? followed by whitespace or end of string\n    parts = re.split(r'(?<=[.!?])\\s+', text.strip())\n    return [p for p in parts if p]\n\n\ndef _chunk_paragraphs(paragraphs: list, chunk_size: int, overlap: int) -> list:\n    \"\"\"Merge paragraphs into chunks up to chunk_size; split oversized paragraphs\n    at sentence boundaries. Returns list of chunk strings.\"\"\"\n    chunks = []\n    current = \"\"\n\n    for para in paragraphs:\n        para = para.strip()\n        if not para:\n            continue\n\n        if len(para) > chunk_size:\n            # Flush current buffer first\n            if current.strip():\n                chunks.append(current.strip())\n                current = \"\"\n            # Split oversized paragraph at sentence boundaries\n            sentences = _split_sentences(para)\n            buf = \"\"\n            for sent in sentences:\n                if buf and len(buf) + len(sent) + 1 > chunk_size:\n                    chunks.append(buf.strip())\n                    # Carry overlap: take tail of buf as prefix for next chunk\n                    buf = buf[-overlap:].strip() + \" \" + sent if overlap > 0 else sent\n                else:\n                    buf = (buf + \" \" + sent).strip() if buf else sent\n            if buf.strip():\n                chunks.append(buf.strip())\n        else:\n            # Normal paragraph \u2014 try to merge into current buffer\n            if current and len(current) + len(para) + 2 > chunk_size:\n                chunks.append(current.strip())\n                # Start new buffer with overlap from previous chunk\n                current = current[-overlap:].strip() + \"\\n\\n\" + para if overlap > 0 else para\n            else:\n                current = (current + \"\\n\\n\" + para).strip() if current else para\n\n    if current.strip():\n        chunks.append(current.strip())\n\n    return chunks\n\n\ndef _chunk_txt(text: str, chunk_size: int, overlap: int) -> list:\n    \"\"\"Chunk plain-text content on blank-line paragraph boundaries.\"\"\"\n    paragraphs = re.split(r'\\n\\s*\\n', text)\n    return _chunk_paragraphs(paragraphs, chunk_size, overlap)\n\n\ndef _chunk_md(text: str, chunk_size: int, overlap: int) -> list:\n    \"\"\"Chunk markdown content.\n\n    Level-2 headings (## ...) are hard chunk boundaries. The heading text is\n    carried into the following chunk as its first line.\n    \"\"\"\n    # Split on ## headings (hard boundaries)\n    # Each segment: optional leading text, then heading + body pairs\n    sections = re.split(r'(?m)^(## .+)$', text)\n\n    # sections is: [pre_heading_text, heading, body, heading, body, ...]\n    # Build list of (heading_prefix, body_text) tuples\n    segments = []\n    # Pre-heading text (if any)\n    if sections[0].strip():\n        segments.append((\"\", sections[0]))\n    # Pairs of (heading, body)\n    for i in range(1, len(sections), 2):\n        heading = sections[i]\n        body = sections[i + 1] if i + 1 < len(sections) else \"\"\n        segments.append((heading, body))\n\n    chunks = []\n    for heading_prefix, body in segments:\n        # Prepend heading to body so it appears at the start of this section's chunks\n        full_text = (heading_prefix + \"\\n\\n\" + body).strip() if heading_prefix else body.strip()\n        if not full_text:\n            continue\n        paragraphs = re.split(r'\\n\\s*\\n', full_text)\n        section_chunks = _chunk_paragraphs(paragraphs, chunk_size, overlap)\n        chunks.extend(section_chunks)\n\n    return chunks\n\n\n# ---------------------------------------------------------------------------\n# Commands\n# ---------------------------------------------------------------------------\n\ndef cmd_init(args):\n    db_path = _resolve_db(args.db)\n    _init_db(db_path)\n    print(f\"Initialised memory DB at {db_path}\")\n\n\ndef cmd_add(args):\n    db_path = _resolve_db(args.db)\n    _auto_init(db_path)\n\n    meta = {}\n    if args.meta:\n        for kv in args.meta:\n            if \"=\" not in kv:\n                print(f\"Invalid --meta value (expected KEY=VALUE): {kv}\", file=sys.stderr)\n                sys.exit(1)\n            k, v = kv.split(\"=\", 1)\n            meta[k] = v\n\n    embedding = _embed([args.text])[0]\n    mem_id = str(uuid.uuid4())\n    created_at = datetime.now(timezone.utc).strftime(\"%Y-%m-%dT%H:%M:%SZ\")\n\n    con = _open_db(db_path)\n    try:\n        with con:\n            cur = con.execute(\n                \"INSERT INTO memories (id, content, source, metadata, created_at) VALUES (?, ?, ?, ?, ?)\",\n                (mem_id, args.text, args.source, json.dumps(meta), created_at),\n            )\n            rowid = cur.lastrowid\n            con.execute(\n                \"INSERT INTO memories_vec (rowid, embedding) VALUES (?, ?)\",\n                (rowid, _serialize_vec(embedding)),\n            )\n    finally:\n        con.close()\n\n    print(f\"Added {mem_id}\")\n\n\ndef cmd_ingest(args):\n    \"\"\"Ingest a file by chunking it and inserting each chunk into the memory DB.\"\"\"\n    file_path = Path(args.file)\n    if not file_path.exists():\n        print(f\"File not found: {file_path}\", file=sys.stderr)\n        sys.exit(1)\n\n    ext = file_path.suffix.lower()\n    if ext not in (\".txt\", \".md\"):\n        print(f\"Unsupported file format: {ext!r}. Supported: .txt, .md\", file=sys.stderr)\n        sys.exit(1)\n\n    source = args.source if args.source else file_path.name\n    chunk_size = args.chunk_size\n    overlap = args.overlap\n    db_path = _resolve_db(args.db)\n\n    text = file_path.read_text(encoding=\"utf-8\")\n\n    if ext == \".txt\":\n        raw_chunks = _chunk_txt(text, chunk_size, overlap)\n    else:  # .md\n        raw_chunks = _chunk_md(text, chunk_size, overlap)\n\n    # Filter short chunks\n    MIN_CHUNK_LEN = 10\n    chunks = []\n    skipped = 0\n    for chunk in raw_chunks:\n        if len(chunk.strip()) < MIN_CHUNK_LEN:\n            skipped += 1\n        else:\n            chunks.append(chunk)\n\n    _auto_init(db_path)\n    con = _open_db(db_path)\n    added = 0\n    try:\n        with con:\n            for chunk in chunks:\n                _insert_chunk(con, chunk, source, {})\n                added += 1\n    finally:\n        con.close()\n\n    print(f\"Ingesting {file_path.name}\u2026 {added} chunks added ({skipped} skipped).\", file=sys.stderr)\n\n\ndef cmd_search(args):\n    db_path = _resolve_db(args.db)\n    if not db_path.exists():\n        print(f\"No memory DB found at {db_path}. Run: memory.py init\")\n        sys.exit(0)\n\n    query_vec = _embed([args.query])[0]\n    limit = args.limit\n\n    con = _open_db(db_path)\n    try:\n        sql = \"\"\"\n            SELECT m.id, m.content, m.source, m.metadata, m.created_at, v.distance\n            FROM memories_vec v\n            JOIN memories m ON m.rowid = v.rowid\n            WHERE v.embedding MATCH ?\n              AND k = ?\n            ORDER BY v.distance\n        \"\"\"\n        rows = con.execute(sql, (_serialize_vec(query_vec), limit)).fetchall()\n    finally:\n        con.close()\n\n    # Post-filter by source if requested\n    if args.source:\n        rows = [r for r in rows if r[2] == args.source]\n\n    # Apply threshold (L2 distance; lower = more similar)\n    if args.threshold is not None:\n        rows = [r for r in rows if r[5] <= args.threshold]\n\n    if args.json:\n        out = [\n            {\n                \"id\": r[0],\n                \"content\": r[1],\n                \"source\": r[2],\n                \"metadata\": json.loads(r[3]),\n                \"created_at\": r[4],\n                \"distance\": r[5],\n            }\n            for r in rows\n        ]\n        print(json.dumps(out, indent=2))\n    else:\n        for r in rows:\n            dist, mem_id, content, source = r[5], r[0], r[1], r[2]\n            snippet = content[:60] + (\"...\" if len(content) > 60 else \"\")\n            print(f\"[{dist:.3f}] {mem_id}  {snippet}  (source: {source})\")\n\n\ndef cmd_delete(args):\n    db_path = _resolve_db(args.db)\n    if not db_path.exists():\n        print(f\"No memory DB found at {db_path}\", file=sys.stderr)\n        sys.exit(1)\n\n    con = _open_db(db_path)\n    try:\n        row = con.execute(\"SELECT rowid FROM memories WHERE id = ?\", (args.id,)).fetchone()\n        if row is None:\n            print(f\"ID not found: {args.id}\", file=sys.stderr)\n            sys.exit(1)\n        rowid = row[0]\n        with con:\n            con.execute(\"DELETE FROM memories_vec WHERE rowid = ?\", (rowid,))\n            con.execute(\"DELETE FROM memories WHERE id = ?\", (args.id,))\n    finally:\n        con.close()\n\n    print(f\"Deleted {args.id}\")\n\n\ndef cmd_list(args):\n    db_path = _resolve_db(args.db)\n    if not db_path.exists():\n        print(f\"No memory DB found at {db_path}\")\n        sys.exit(0)\n\n    limit = args.limit\n    con = sqlite3.connect(db_path)\n    try:\n        sql = \"SELECT id, content, source, metadata, created_at FROM memories\"\n        params = []\n        if args.source:\n            sql += \" WHERE source = ?\"\n            params.append(args.source)\n        sql += \" ORDER BY created_at DESC\"\n        if limit > 0:\n            sql += \" LIMIT ?\"\n            params.append(limit)\n        rows = con.execute(sql, params).fetchall()\n    finally:\n        con.close()\n\n    if args.json:\n        out = [\n            {\n                \"id\": r[0],\n                \"content\": r[1],\n                \"source\": r[2],\n                \"metadata\": json.loads(r[3]),\n                \"created_at\": r[4],\n            }\n            for r in rows\n        ]\n        print(json.dumps(out, indent=2))\n    else:\n        for r in rows:\n            mem_id, content, source, _, created_at = r\n            snippet = content[:60] + (\"...\" if len(content) > 60 else \"\")\n            print(f\"{mem_id}  {snippet}  (source: {source})  {created_at}\")\n\n\ndef cmd_stats(args):\n    db_path = _resolve_db(args.db)\n\n    if not db_path.exists():\n        print(f\"No memory DB found at {db_path}\")\n        sys.exit(0)\n\n    size_bytes = os.path.getsize(db_path)\n\n    con = sqlite3.connect(db_path)\n    try:\n        (count,) = con.execute(\"SELECT COUNT(*) FROM memories\").fetchone()\n    finally:\n        con.close()\n\n    print(f\"DB path:   {db_path}\")\n    print(f\"Memories:  {count}\")\n    print(f\"DB size:   {_format_size(size_bytes)}\")\n\n\ndef main():\n    parser = argparse.ArgumentParser(\n        prog=\"memory.py\",\n        description=\"agent-memory \u2014 long-term semantic memory for agents\",\n    )\n    parser.add_argument(\"--db\", metavar=\"PATH\", help=\"Override DB path\")\n\n    subparsers = parser.add_subparsers(dest=\"command\", required=True)\n\n    # init\n    init_parser = subparsers.add_parser(\"init\", help=\"Initialise the memory DB\")\n    init_parser.add_argument(\"--db\", metavar=\"PATH\", help=\"Override DB path\")\n    init_parser.set_defaults(func=cmd_init)\n\n    # add\n    add_parser = subparsers.add_parser(\"add\", help=\"Add a memory\")\n    add_parser.add_argument(\"text\", help=\"Text to store\")\n    add_parser.add_argument(\"--source\", metavar=\"TAG\", help=\"Origin tag or file path\")\n    add_parser.add_argument(\n        \"--meta\", metavar=\"KEY=VALUE\", action=\"append\", help=\"Metadata key=value pairs\"\n    )\n    add_parser.add_argument(\"--db\", metavar=\"PATH\", help=\"Override DB path\")\n    add_parser.set_defaults(func=cmd_add)\n\n    # ingest\n    ingest_parser = subparsers.add_parser(\"ingest\", help=\"Ingest a file into memory\")\n    ingest_parser.add_argument(\"file\", help=\"Path to file to ingest (.txt or .md)\")\n    ingest_parser.add_argument(\n        \"--source\", metavar=\"TAG\",\n        help=\"Source tag (defaults to file basename)\"\n    )\n    ingest_parser.add_argument(\n        \"--chunk-size\", type=int, default=1000, metavar=\"N\",\n        help=\"Target chunk size in characters (default: 1000)\"\n    )\n    ingest_parser.add_argument(\n        \"--overlap\", type=int, default=100, metavar=\"N\",\n        help=\"Character overlap between adjacent chunks (default: 100)\"\n    )\n    ingest_parser.add_argument(\"--db\", metavar=\"PATH\", help=\"Override DB path\")\n    ingest_parser.set_defaults(func=cmd_ingest)\n\n    # search\n    search_parser = subparsers.add_parser(\"search\", help=\"Semantic search\")\n    search_parser.add_argument(\"query\", help=\"Query text\")\n    search_parser.add_argument(\"--limit\", type=int, default=5, help=\"Max results (default: 5)\")\n    search_parser.add_argument(\n        \"--threshold\",\n        type=float,\n        default=None,\n        help=(\n            \"Maximum L2 distance to include (lower = more similar; range 0-2 for \"\n            \"L2-normalised vectors; e.g. 0.5 for high similarity)\"\n        ),\n    )\n    search_parser.add_argument(\"--source\", metavar=\"TAG\", help=\"Filter by source tag\")\n    search_parser.add_argument(\"--json\", action=\"store_true\", help=\"Output JSON\")\n    search_parser.add_argument(\"--db\", metavar=\"PATH\", help=\"Override DB path\")\n    search_parser.set_defaults(func=cmd_search)\n\n    # delete\n    delete_parser = subparsers.add_parser(\"delete\", help=\"Delete a memory by ID\")\n    delete_parser.add_argument(\"id\", help=\"UUID of the memory to delete\")\n    delete_parser.add_argument(\"--db\", metavar=\"PATH\", help=\"Override DB path\")\n    delete_parser.set_defaults(func=cmd_delete)\n\n    # list\n    list_parser = subparsers.add_parser(\"list\", help=\"List memories\")\n    list_parser.add_argument(\n        \"--limit\", type=int, default=20, help=\"Max results (default: 20; 0 = unlimited)\"\n    )\n    list_parser.add_argument(\"--source\", metavar=\"TAG\", help=\"Filter by source tag\")\n    list_parser.add_argument(\"--json\", action=\"store_true\", help=\"Output JSON\")\n    list_parser.add_argument(\"--db\", metavar=\"PATH\", help=\"Override DB path\")\n    list_parser.set_defaults(func=cmd_list)\n\n    # stats\n    stats_parser = subparsers.add_parser(\"stats\", help=\"Show DB statistics\")\n    stats_parser.add_argument(\"--db\", metavar=\"PATH\", help=\"Override DB path\")\n    stats_parser.set_defaults(func=cmd_stats)\n\n    args = parser.parse_args()\n    args.func(args)\n\n\nif __name__ == \"__main__\":\n    main()\n"
+          }
+        }
+      ],
+      "prompt_chars": 6607,
+      "prompt_lines": 142,
+      "source": "provider",
+      "attempt": 1
+    },
+    "telemetry_history": [
+      {
+        "cost_usd": 0.6005448000000001,
+        "duration_ms": 253284,
+        "duration_api_ms": 242722,
+        "num_turns": 24,
+        "input_tokens": 21,
+        "output_tokens": 17160,
+        "cache_creation_tokens": 42462,
+        "cache_read_tokens": 612831,
+        "stop_reason": "end_turn",
+        "session_id": "b050d6cf-8d8f-44e6-be06-ddf94c03d70f",
+        "permission_denials": [
+          {
+            "tool_name": "Write",
+            "tool_use_id": "toolu_01VK2yHWZG8nFSxgrUEC5RfA",
+            "tool_input": {
+              "file_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf/.claude/skills/agent-memory/memory.py",
+              "content": "#!/usr/bin/env python3\n\"\"\"agent-memory CLI \u2014 long-term semantic memory for agents.\"\"\"\nimport sys\nimport os\nimport subprocess\nfrom pathlib import Path\n\n_SKILL_DIR = Path(__file__).parent\n_VENV = _SKILL_DIR / \".venv\"\n_DEPS = [\n    \"onnxruntime>=1.17.0\",\n    \"sqlite-vec>=0.1.6\",\n    \"tokenizers>=0.19.0\",\n    \"numpy>=1.24.0\",\n]\n\n\ndef _bootstrap() -> None:\n    if str(_VENV) in sys.prefix:\n        return  # already running inside the managed venv\n    venv_py = _VENV / (\"Scripts/python.exe\" if sys.platform == \"win32\" else \"bin/python\")\n    if not venv_py.exists():\n        print(\"agent-memory: first run, installing dependencies...\", file=sys.stderr)\n        subprocess.check_call([sys.executable, \"-m\", \"venv\", str(_VENV)])\n        subprocess.check_call([str(venv_py), \"-m\", \"pip\", \"install\", \"--quiet\", *_DEPS])\n    os.execv(str(venv_py), [str(venv_py)] + sys.argv)\n\n\n_bootstrap()\n\nimport argparse\nimport hashlib\nimport json\nimport re\nimport sqlite3\nimport struct\nimport urllib.request\nimport uuid\nfrom datetime import datetime, timezone\n\nimport numpy as np\nimport sqlite_vec\n\n\n_DEFAULT_DB = Path.home() / \".local\" / \"share\" / \"agent-memory\" / \"memories.db\"\n_MODEL_DIR = Path.home() / \".cache\" / \"agent-memory\" / \"bge-small-en-v1.5\"\n_MODEL_PATH = _MODEL_DIR / \"model.onnx\"\n_MODEL_URL = \"https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/onnx/model.onnx\"\n# SHA256 verified at implementation time against the official HuggingFace file.\n# The bge-small model is ~24 MB; if the file is significantly larger the wrong\n# variant was downloaded.\n_MODEL_SHA256 = None  # Set to None to skip verification until confirmed at first run\n\n_session = None  # ONNX InferenceSession singleton\n\n\ndef _resolve_db(db_arg):\n    \"\"\"Resolve DB path: CLI flag > env var > default.\"\"\"\n    if db_arg:\n        return Path(db_arg)\n    env = os.environ.get(\"AGENT_MEMORY_DB\")\n    if env:\n        return Path(env)\n    return _DEFAULT_DB\n\n\ndef _format_size(num_bytes):\n    \"\"\"Return a human-readable file size string.\"\"\"\n    for unit in (\"B\", \"KB\", \"MB\", \"GB\"):\n        if num_bytes < 1024:\n            return f\"{num_bytes:.1f} {unit}\"\n        num_bytes /= 1024\n    return f\"{num_bytes:.1f} TB\"\n\n\ndef _ensure_model() -> Path:\n    \"\"\"Download ONNX model on first use; verify SHA256 if hash is set.\"\"\"\n    if _MODEL_PATH.exists():\n        return _MODEL_PATH\n    _MODEL_DIR.mkdir(parents=True, exist_ok=True)\n    tmp = _MODEL_PATH.with_suffix(\".tmp\")\n    print(\"agent-memory: Downloading bge-small-en-v1.5 model...\", file=sys.stderr)\n    try:\n        urllib.request.urlretrieve(_MODEL_URL, tmp)\n        if _MODEL_SHA256:\n            digest = hashlib.sha256(tmp.read_bytes()).hexdigest()\n            if digest != _MODEL_SHA256:\n                tmp.unlink(missing_ok=True)\n                print(\n                    f\"agent-memory: model SHA256 mismatch (got {digest})\",\n                    file=sys.stderr,\n                )\n                sys.exit(1)\n        tmp.rename(_MODEL_PATH)\n    except Exception as exc:\n        tmp.unlink(missing_ok=True)\n        print(f\"agent-memory: model download failed: {exc}\", file=sys.stderr)\n        sys.exit(1)\n    return _MODEL_PATH\n\n\ndef _get_session():\n    \"\"\"Return the ONNX InferenceSession singleton, loading it on first call.\"\"\"\n    global _session\n    if _session is None:\n        import onnxruntime as ort\n        model = _ensure_model()\n        _session = ort.InferenceSession(str(model))\n    return _session\n\n\ndef _embed(texts: list) -> \"np.ndarray\":\n    \"\"\"Embed texts using bge-small-en-v1.5. Returns float32 array (N, 384), L2-normalised.\n\n    Distance metric: sqlite-vec uses L2 distance by default for vec0 tables with\n    float[N] columns. Since vectors are L2-normalised here, L2 distance is\n    monotonically related to cosine distance, giving range [0, 2] (0 = identical,\n    2 = opposite). Use --threshold values accordingly (e.g. 0.5 for high similarity).\n    \"\"\"\n    from tokenizers import Tokenizer\n\n    assets = _SKILL_DIR / \"assets\"\n    tokenizer = Tokenizer.from_file(str(assets / \"tokenizer.json\"))\n    tokenizer.enable_padding()\n    tokenizer.enable_truncation(max_length=512)\n    encodings = tokenizer.encode_batch(texts)\n    input_ids = np.array([e.ids for e in encodings], dtype=np.int64)\n    attention_mask = np.array([e.attention_mask for e in encodings], dtype=np.int64)\n    token_type_ids = np.array([e.type_ids for e in encodings], dtype=np.int64)\n\n    sess = _get_session()\n    outputs = sess.run(\n        None,\n        {\n            \"input_ids\": input_ids,\n            \"attention_mask\": attention_mask,\n            \"token_type_ids\": token_type_ids,\n        },\n    )\n    # CLS token pooling \u2014 index 0 of sequence dimension (bge-small model card recommendation)\n    embeddings = outputs[0][:, 0, :]\n    # L2 normalise\n    norms = np.linalg.norm(embeddings, axis=1, keepdims=True)\n    return (embeddings / norms).astype(np.float32)\n\n\ndef _serialize_vec(v: \"np.ndarray\") -> bytes:\n    \"\"\"Serialize float32 numpy vector to bytes for sqlite-vec.\"\"\"\n    return struct.pack(f\"{len(v)}f\", *v.tolist())\n\n\ndef _open_db(db_path: Path) -> sqlite3.Connection:\n    \"\"\"Open DB and load sqlite-vec extension.\"\"\"\n    con = sqlite3.connect(db_path)\n    con.enable_load_extension(True)\n    sqlite_vec.load(con)\n    con.enable_load_extension(False)\n    return con\n\n\ndef _auto_init(db_path: Path) -> None:\n    \"\"\"Initialise DB if it does not yet exist.\"\"\"\n    if not db_path.exists():\n        _init_db(db_path)\n\n\ndef _init_db(db_path: Path) -> None:\n    \"\"\"Create tables (idempotent).\n\n    sqlite-vec version: >=0.1.6 (see _DEPS).\n\n    Distance metric (vec0 virtual table, float[N] columns):\n      - Algorithm: L2 (Euclidean) distance \u2014 the only metric exposed via the\n        ``distance`` column in sqlite-vec 0.1.x for float[] columns.\n      - Value range: [0, \u221e) in general; [0, 2] when vectors are L2-normalised\n        (as produced by _embed), because ||a-b||\u00b2 = 2(1 - cos \u03b8) for unit vectors.\n      - Direction: lower = more similar (0 = identical, 2 = maximally opposite).\n      - Threshold guidance: use \u22640.5 for high-similarity, \u22641.0 for moderate.\n\n    Pre-filtering by source (or any non-vector column) before the ANN search is\n    NOT supported by sqlite-vec 0.1.x vec0 tables.  The WHERE clause for a vec0\n    query only accepts the MATCH constraint and the ``k`` parameter; additional\n    column predicates are silently ignored or raise an error depending on the\n    version.  Source filtering is therefore applied as a Python post-filter after\n    the ANN results are retrieved (see cmd_search).\n    \"\"\"\n    db_path.parent.mkdir(parents=True, exist_ok=True)\n    con = _open_db(db_path)\n    try:\n        con.executescript(\"\"\"\n            CREATE TABLE IF NOT EXISTS memories (\n                id         TEXT    NOT NULL UNIQUE,\n                content    TEXT    NOT NULL,\n                source     TEXT,\n                metadata   TEXT    NOT NULL DEFAULT '{}',\n                created_at TEXT    NOT NULL\n            );\n            CREATE VIRTUAL TABLE IF NOT EXISTS memories_vec USING vec0(\n                embedding float[384]\n            );\n        \"\"\")\n        con.commit()\n    finally:\n        con.close()\n\n\ndef _insert_chunk(con: sqlite3.Connection, content: str, source: str, metadata: dict) -> None:\n    \"\"\"Insert a single chunk into memories and memories_vec tables within an open connection.\n\n    The caller is responsible for transaction management.\n    \"\"\"\n    embedding = _embed([content])[0]\n    mem_id = str(uuid.uuid4())\n    created_at = datetime.now(timezone.utc).strftime(\"%Y-%m-%dT%H:%M:%SZ\")\n    cur = con.execute(\n        \"INSERT INTO memories (id, content, source, metadata, created_at) VALUES (?, ?, ?, ?, ?)\",\n        (mem_id, content, source, json.dumps(metadata), created_at),\n    )\n    rowid = cur.lastrowid\n    con.execute(\n        \"INSERT INTO memories_vec (rowid, embedding) VALUES (?, ?)\",\n        (rowid, _serialize_vec(embedding)),\n    )\n\n\n# ---------------------------------------------------------------------------\n# Chunking helpers\n# ---------------------------------------------------------------------------\n\ndef _split_sentences(text: str) -> list:\n    \"\"\"Split text into sentences using simple punctuation heuristics.\"\"\"\n    # Split on . ! ? followed by whitespace or end of string\n    parts = re.split(r'(?<=[.!?])\\s+', text.strip())\n    return [p for p in parts if p]\n\n\ndef _chunk_paragraphs(paragraphs: list, chunk_size: int, overlap: int) -> list:\n    \"\"\"Merge paragraphs into chunks up to chunk_size; split oversized paragraphs\n    at sentence boundaries. Returns list of chunk strings.\"\"\"\n    chunks = []\n    current = \"\"\n\n    for para in paragraphs:\n        para = para.strip()\n        if not para:\n            continue\n\n        if len(para) > chunk_size:\n            # Flush current buffer first\n            if current.strip():\n                chunks.append(current.strip())\n                current = \"\"\n            # Split oversized paragraph at sentence boundaries\n            sentences = _split_sentences(para)\n            buf = \"\"\n            for sent in sentences:\n                if buf and len(buf) + len(sent) + 1 > chunk_size:\n                    chunks.append(buf.strip())\n                    # Carry overlap: take tail of buf as prefix for next chunk\n                    buf = buf[-overlap:].strip() + \" \" + sent if overlap > 0 else sent\n                else:\n                    buf = (buf + \" \" + sent).strip() if buf else sent\n            if buf.strip():\n                chunks.append(buf.strip())\n        else:\n            # Normal paragraph \u2014 try to merge into current buffer\n            if current and len(current) + len(para) + 2 > chunk_size:\n                chunks.append(current.strip())\n                # Start new buffer with overlap from previous chunk\n                current = current[-overlap:].strip() + \"\\n\\n\" + para if overlap > 0 else para\n            else:\n                current = (current + \"\\n\\n\" + para).strip() if current else para\n\n    if current.strip():\n        chunks.append(current.strip())\n\n    return chunks\n\n\ndef _chunk_txt(text: str, chunk_size: int, overlap: int) -> list:\n    \"\"\"Chunk plain-text content on blank-line paragraph boundaries.\"\"\"\n    paragraphs = re.split(r'\\n\\s*\\n', text)\n    return _chunk_paragraphs(paragraphs, chunk_size, overlap)\n\n\ndef _chunk_md(text: str, chunk_size: int, overlap: int) -> list:\n    \"\"\"Chunk markdown content.\n\n    Level-2 headings (## ...) are hard chunk boundaries. The heading text is\n    carried into the following chunk as its first line.\n    \"\"\"\n    # Split on ## headings (hard boundaries)\n    # Each segment: optional leading text, then heading + body pairs\n    sections = re.split(r'(?m)^(## .+)$', text)\n\n    # sections is: [pre_heading_text, heading, body, heading, body, ...]\n    # Build list of (heading_prefix, body_text) tuples\n    segments = []\n    # Pre-heading text (if any)\n    if sections[0].strip():\n        segments.append((\"\", sections[0]))\n    # Pairs of (heading, body)\n    for i in range(1, len(sections), 2):\n        heading = sections[i]\n        body = sections[i + 1] if i + 1 < len(sections) else \"\"\n        segments.append((heading, body))\n\n    chunks = []\n    for heading_prefix, body in segments:\n        # Prepend heading to body so it appears at the start of this section's chunks\n        full_text = (heading_prefix + \"\\n\\n\" + body).strip() if heading_prefix else body.strip()\n        if not full_text:\n            continue\n        paragraphs = re.split(r'\\n\\s*\\n', full_text)\n        section_chunks = _chunk_paragraphs(paragraphs, chunk_size, overlap)\n        chunks.extend(section_chunks)\n\n    return chunks\n\n\n# ---------------------------------------------------------------------------\n# Commands\n# ---------------------------------------------------------------------------\n\ndef cmd_init(args):\n    db_path = _resolve_db(args.db)\n    _init_db(db_path)\n    print(f\"Initialised memory DB at {db_path}\")\n\n\ndef cmd_add(args):\n    db_path = _resolve_db(args.db)\n    _auto_init(db_path)\n\n    meta = {}\n    if args.meta:\n        for kv in args.meta:\n            if \"=\" not in kv:\n                print(f\"Invalid --meta value (expected KEY=VALUE): {kv}\", file=sys.stderr)\n                sys.exit(1)\n            k, v = kv.split(\"=\", 1)\n            meta[k] = v\n\n    embedding = _embed([args.text])[0]\n    mem_id = str(uuid.uuid4())\n    created_at = datetime.now(timezone.utc).strftime(\"%Y-%m-%dT%H:%M:%SZ\")\n\n    con = _open_db(db_path)\n    try:\n        with con:\n            cur = con.execute(\n                \"INSERT INTO memories (id, content, source, metadata, created_at) VALUES (?, ?, ?, ?, ?)\",\n                (mem_id, args.text, args.source, json.dumps(meta), created_at),\n            )\n            rowid = cur.lastrowid\n            con.execute(\n                \"INSERT INTO memories_vec (rowid, embedding) VALUES (?, ?)\",\n                (rowid, _serialize_vec(embedding)),\n            )\n    finally:\n        con.close()\n\n    print(f\"Added {mem_id}\")\n\n\ndef cmd_ingest(args):\n    \"\"\"Ingest a file by chunking it and inserting each chunk into the memory DB.\"\"\"\n    file_path = Path(args.file)\n    if not file_path.exists():\n        print(f\"File not found: {file_path}\", file=sys.stderr)\n        sys.exit(1)\n\n    ext = file_path.suffix.lower()\n    if ext not in (\".txt\", \".md\"):\n        print(f\"Unsupported file format: {ext!r}. Supported: .txt, .md\", file=sys.stderr)\n        sys.exit(1)\n\n    source = args.source if args.source else file_path.name\n    chunk_size = args.chunk_size\n    overlap = args.overlap\n    db_path = _resolve_db(args.db)\n\n    text = file_path.read_text(encoding=\"utf-8\")\n\n    if ext == \".txt\":\n        raw_chunks = _chunk_txt(text, chunk_size, overlap)\n    else:  # .md\n        raw_chunks = _chunk_md(text, chunk_size, overlap)\n\n    # Filter short chunks\n    MIN_CHUNK_LEN = 10\n    chunks = []\n    skipped = 0\n    for chunk in raw_chunks:\n        if len(chunk.strip()) < MIN_CHUNK_LEN:\n            skipped += 1\n        else:\n            chunks.append(chunk)\n\n    _auto_init(db_path)\n    con = _open_db(db_path)\n    added = 0\n    try:\n        with con:\n            for chunk in chunks:\n                _insert_chunk(con, chunk, source, {})\n                added += 1\n    finally:\n        con.close()\n\n    print(f\"Ingesting {file_path.name}\u2026 {added} chunks added ({skipped} skipped).\", file=sys.stderr)\n\n\ndef cmd_search(args):\n    db_path = _resolve_db(args.db)\n    if not db_path.exists():\n        print(f\"No memory DB found at {db_path}. Run: memory.py init\")\n        sys.exit(0)\n\n    query_vec = _embed([args.query])[0]\n    limit = args.limit\n\n    con = _open_db(db_path)\n    try:\n        sql = \"\"\"\n            SELECT m.id, m.content, m.source, m.metadata, m.created_at, v.distance\n            FROM memories_vec v\n            JOIN memories m ON m.rowid = v.rowid\n            WHERE v.embedding MATCH ?\n              AND k = ?\n            ORDER BY v.distance\n        \"\"\"\n        rows = con.execute(sql, (_serialize_vec(query_vec), limit)).fetchall()\n    finally:\n        con.close()\n\n    # Post-filter by source if requested\n    if args.source:\n        rows = [r for r in rows if r[2] == args.source]\n\n    # Apply threshold (L2 distance; lower = more similar)\n    if args.threshold is not None:\n        rows = [r for r in rows if r[5] <= args.threshold]\n\n    if args.json:\n        out = [\n            {\n                \"id\": r[0],\n                \"content\": r[1],\n                \"source\": r[2],\n                \"metadata\": json.loads(r[3]),\n                \"created_at\": r[4],\n                \"distance\": r[5],\n            }\n            for r in rows\n        ]\n        print(json.dumps(out, indent=2))\n    else:\n        for r in rows:\n            dist, mem_id, content, source = r[5], r[0], r[1], r[2]\n            snippet = content[:60] + (\"...\" if len(content) > 60 else \"\")\n            print(f\"[{dist:.3f}] {mem_id}  {snippet}  (source: {source})\")\n\n\ndef cmd_delete(args):\n    db_path = _resolve_db(args.db)\n    if not db_path.exists():\n        print(f\"No memory DB found at {db_path}\", file=sys.stderr)\n        sys.exit(1)\n\n    con = _open_db(db_path)\n    try:\n        row = con.execute(\"SELECT rowid FROM memories WHERE id = ?\", (args.id,)).fetchone()\n        if row is None:\n            print(f\"ID not found: {args.id}\", file=sys.stderr)\n            sys.exit(1)\n        rowid = row[0]\n        with con:\n            con.execute(\"DELETE FROM memories_vec WHERE rowid = ?\", (rowid,))\n            con.execute(\"DELETE FROM memories WHERE id = ?\", (args.id,))\n    finally:\n        con.close()\n\n    print(f\"Deleted {args.id}\")\n\n\ndef cmd_list(args):\n    db_path = _resolve_db(args.db)\n    if not db_path.exists():\n        print(f\"No memory DB found at {db_path}\")\n        sys.exit(0)\n\n    limit = args.limit\n    con = sqlite3.connect(db_path)\n    try:\n        sql = \"SELECT id, content, source, metadata, created_at FROM memories\"\n        params = []\n        if args.source:\n            sql += \" WHERE source = ?\"\n            params.append(args.source)\n        sql += \" ORDER BY created_at DESC\"\n        if limit > 0:\n            sql += \" LIMIT ?\"\n            params.append(limit)\n        rows = con.execute(sql, params).fetchall()\n    finally:\n        con.close()\n\n    if args.json:\n        out = [\n            {\n                \"id\": r[0],\n                \"content\": r[1],\n                \"source\": r[2],\n                \"metadata\": json.loads(r[3]),\n                \"created_at\": r[4],\n            }\n            for r in rows\n        ]\n        print(json.dumps(out, indent=2))\n    else:\n        for r in rows:\n            mem_id, content, source, _, created_at = r\n            snippet = content[:60] + (\"...\" if len(content) > 60 else \"\")\n            print(f\"{mem_id}  {snippet}  (source: {source})  {created_at}\")\n\n\ndef cmd_stats(args):\n    db_path = _resolve_db(args.db)\n\n    if not db_path.exists():\n        print(f\"No memory DB found at {db_path}\")\n        sys.exit(0)\n\n    size_bytes = os.path.getsize(db_path)\n\n    con = sqlite3.connect(db_path)\n    try:\n        (count,) = con.execute(\"SELECT COUNT(*) FROM memories\").fetchone()\n    finally:\n        con.close()\n\n    print(f\"DB path:   {db_path}\")\n    print(f\"Memories:  {count}\")\n    print(f\"DB size:   {_format_size(size_bytes)}\")\n\n\ndef main():\n    parser = argparse.ArgumentParser(\n        prog=\"memory.py\",\n        description=\"agent-memory \u2014 long-term semantic memory for agents\",\n    )\n    parser.add_argument(\"--db\", metavar=\"PATH\", help=\"Override DB path\")\n\n    subparsers = parser.add_subparsers(dest=\"command\", required=True)\n\n    # init\n    init_parser = subparsers.add_parser(\"init\", help=\"Initialise the memory DB\")\n    init_parser.add_argument(\"--db\", metavar=\"PATH\", help=\"Override DB path\")\n    init_parser.set_defaults(func=cmd_init)\n\n    # add\n    add_parser = subparsers.add_parser(\"add\", help=\"Add a memory\")\n    add_parser.add_argument(\"text\", help=\"Text to store\")\n    add_parser.add_argument(\"--source\", metavar=\"TAG\", help=\"Origin tag or file path\")\n    add_parser.add_argument(\n        \"--meta\", metavar=\"KEY=VALUE\", action=\"append\", help=\"Metadata key=value pairs\"\n    )\n    add_parser.add_argument(\"--db\", metavar=\"PATH\", help=\"Override DB path\")\n    add_parser.set_defaults(func=cmd_add)\n\n    # ingest\n    ingest_parser = subparsers.add_parser(\"ingest\", help=\"Ingest a file into memory\")\n    ingest_parser.add_argument(\"file\", help=\"Path to file to ingest (.txt or .md)\")\n    ingest_parser.add_argument(\n        \"--source\", metavar=\"TAG\",\n        help=\"Source tag (defaults to file basename)\"\n    )\n    ingest_parser.add_argument(\n        \"--chunk-size\", type=int, default=1000, metavar=\"N\",\n        help=\"Target chunk size in characters (default: 1000)\"\n    )\n    ingest_parser.add_argument(\n        \"--overlap\", type=int, default=100, metavar=\"N\",\n        help=\"Character overlap between adjacent chunks (default: 100)\"\n    )\n    ingest_parser.add_argument(\"--db\", metavar=\"PATH\", help=\"Override DB path\")\n    ingest_parser.set_defaults(func=cmd_ingest)\n\n    # search\n    search_parser = subparsers.add_parser(\"search\", help=\"Semantic search\")\n    search_parser.add_argument(\"query\", help=\"Query text\")\n    search_parser.add_argument(\"--limit\", type=int, default=5, help=\"Max results (default: 5)\")\n    search_parser.add_argument(\n        \"--threshold\",\n        type=float,\n        default=None,\n        help=(\n            \"Maximum L2 distance to include (lower = more similar; range 0-2 for \"\n            \"L2-normalised vectors; e.g. 0.5 for high similarity)\"\n        ),\n    )\n    search_parser.add_argument(\"--source\", metavar=\"TAG\", help=\"Filter by source tag\")\n    search_parser.add_argument(\"--json\", action=\"store_true\", help=\"Output JSON\")\n    search_parser.add_argument(\"--db\", metavar=\"PATH\", help=\"Override DB path\")\n    search_parser.set_defaults(func=cmd_search)\n\n    # delete\n    delete_parser = subparsers.add_parser(\"delete\", help=\"Delete a memory by ID\")\n    delete_parser.add_argument(\"id\", help=\"UUID of the memory to delete\")\n    delete_parser.add_argument(\"--db\", metavar=\"PATH\", help=\"Override DB path\")\n    delete_parser.set_defaults(func=cmd_delete)\n\n    # list\n    list_parser = subparsers.add_parser(\"list\", help=\"List memories\")\n    list_parser.add_argument(\n        \"--limit\", type=int, default=20, help=\"Max results (default: 20; 0 = unlimited)\"\n    )\n    list_parser.add_argument(\"--source\", metavar=\"TAG\", help=\"Filter by source tag\")\n    list_parser.add_argument(\"--json\", action=\"store_true\", help=\"Output JSON\")\n    list_parser.add_argument(\"--db\", metavar=\"PATH\", help=\"Override DB path\")\n    list_parser.set_defaults(func=cmd_list)\n\n    # stats\n    stats_parser = subparsers.add_parser(\"stats\", help=\"Show DB statistics\")\n    stats_parser.add_argument(\"--db\", metavar=\"PATH\", help=\"Override DB path\")\n    stats_parser.set_defaults(func=cmd_stats)\n\n    args = parser.parse_args()\n    args.func(args)\n\n\nif __name__ == \"__main__\":\n    main()\n"
+            }
+          }
+        ],
+        "prompt_chars": 6607,
+        "prompt_lines": 142,
+        "source": "provider",
+        "attempt": 1
+      }
+    ],
+    "last_commit": "d8aa0cc147f4fb9c1be239af9ceb41dc29c59f11"
+  },
   "labels": []
 }

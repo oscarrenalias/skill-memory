@@ -31,8 +31,8 @@
   "execution_branch_name": "feature/b-54edeccf",
   "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
   "expected_files": [
-    ".claude/skills/agent-memory/tests/__init__.py",
-    ".claude/skills/agent-memory/tests/test_memory.py"
+    "tests/__init__.py",
+    "tests/test_memory.py"
   ],
   "expected_globs": [],
   "touched_files": [],

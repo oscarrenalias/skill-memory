@@ -1,0 +1,147 @@
+{
+  "bead_id": "B-2760e5db-test",
+  "title": "Test Download and commit tokenizer assets",
+  "agent_type": "tester",
+  "description": "Validate implementation for B-2760e5db",
+  "status": "ready",
+  "bead_type": "task",
+  "parent_id": "B-2760e5db",
+  "dependencies": [
+    "B-2760e5db"
+  ],
+  "acceptance_criteria": [],
+  "linked_docs": [
+    "specs/drafts/agent-memory-core-infrastructure.md"
+  ],
+  "feature_root_id": "B-266c0a28",
+  "execution_branch_name": "feature/b-266c0a28",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
+  "expected_files": [
+    "__pycache__/memory.cpython-314.pyc",
+    "assets/special_tokens_map.json",
+    "assets/tokenizer.json",
+    "assets/tokenizer_config.json",
+    "assets/vocab.txt",
+    "memory.py"
+  ],
+  "expected_globs": [
+    "assets/*"
+  ],
+  "touched_files": [
+    "__pycache__/memory.cpython-314.pyc",
+    "assets/special_tokens_map.json",
+    "assets/tokenizer.json",
+    "assets/tokenizer_config.json",
+    "assets/vocab.txt",
+    "memory.py"
+  ],
+  "changed_files": [
+    "__pycache__/memory.cpython-314.pyc",
+    "assets/special_tokens_map.json",
+    "assets/tokenizer.json",
+    "assets/tokenizer_config.json",
+    "assets/vocab.txt",
+    "memory.py"
+  ],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "Deferred due to file-scope conflict with active bead B-d34d190d",
+  "conflict_risks": "None \u2014 asset files only, no shared code modified.",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-07T18:50:49.439603+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T18:51:11.580828+00:00",
+      "event": "deferred",
+      "agent_type": "tester",
+      "summary": "Deferred due to file-scope conflict with active bead B-27a23ff7",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T18:56:31.758403+00:00",
+      "event": "deferred",
+      "agent_type": "tester",
+      "summary": "Deferred due to file-scope conflict with active bead B-27a23ff7",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:20:19.948535+00:00",
+      "event": "deferred",
+      "agent_type": "tester",
+      "summary": "Deferred due to file-scope conflict with active bead B-27a23ff7",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:21:45.671557+00:00",
+      "event": "deferred",
+      "agent_type": "tester",
+      "summary": "Deferred due to file-scope conflict with active bead B-2ad17234",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:35:11.916565+00:00",
+      "event": "deferred",
+      "agent_type": "tester",
+      "summary": "Deferred due to file-scope conflict with active bead B-1e31b0df",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:35:59.298560+00:00",
+      "event": "deferred",
+      "agent_type": "tester",
+      "summary": "Deferred due to file-scope conflict with active bead B-9a409587",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:36:43.960509+00:00",
+      "event": "deferred",
+      "agent_type": "tester",
+      "summary": "Deferred due to file-scope conflict with active bead B-79e7ebf5",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:38:00.254461+00:00",
+      "event": "deferred",
+      "agent_type": "tester",
+      "summary": "Deferred due to file-scope conflict with active bead B-89f6e836",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:39:08.068453+00:00",
+      "event": "deferred",
+      "agent_type": "tester",
+      "summary": "Deferred due to file-scope conflict with active bead B-d34d190d",
+      "details": {}
+    }
+  ],
+  "metadata": {},
+  "labels": []
+}

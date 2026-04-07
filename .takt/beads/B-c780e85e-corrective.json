@@ -1,0 +1,143 @@
+{
+  "bead_id": "B-c780e85e-corrective",
+  "title": "Corrective fix for B-c780e85e: Review query and CRUD implementation",
+  "agent_type": "developer",
+  "description": "Blocked reason: Expected implementation file .claude/skills/agent-memory/memory.py is absent. The .claude/skills/agent-memory/ directory does not exist in the worktree. Both upstream specs (spec-a536cb5e core infrastructure and spec-9f1b7155 query/CRUD) are in planned status with no code committed. This is a developer task, not a review task at this stage.\n\nRemaining work: Developer must implement spec-a536cb5e (core infrastructure: DB schema, embedding pipeline, init and add commands) and then spec-9f1b7155 (search, delete, list, stats commands) before this review can proceed.",
+  "status": "ready",
+  "bead_type": "task",
+  "parent_id": "B-c780e85e",
+  "dependencies": [],
+  "acceptance_criteria": [
+    "Implement the minimum fix required to unblock B-c780e85e.",
+    "Update tests/docs as needed for the corrective change.",
+    "Leave a handoff summary that states how the parent bead can be retried."
+  ],
+  "linked_docs": [
+    "specs/drafts/agent-memory-query-and-crud-operations.md"
+  ],
+  "feature_root_id": "B-cb0b48a1",
+  "execution_branch_name": "feature/b-cb0b48a1",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1",
+  "expected_files": [
+    "memory.py"
+  ],
+  "expected_globs": [
+    "*.py"
+  ],
+  "touched_files": [
+    "memory.py"
+  ],
+  "changed_files": [
+    "memory.py"
+  ],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "Deferred due to file-scope conflict with active bead B-d34d190d",
+  "conflict_risks": "No conflicts possible until implementation exists. When a developer creates .claude/skills/agent-memory/, no existing files will conflict.",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-07T18:41:22.304735+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T18:49:42.109347+00:00",
+      "event": "deferred",
+      "agent_type": "developer",
+      "summary": "Deferred due to file-scope conflict with active bead B-2632ba9d",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T18:51:11.335202+00:00",
+      "event": "deferred",
+      "agent_type": "developer",
+      "summary": "Deferred due to file-scope conflict with active bead B-27a23ff7",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T18:56:31.408315+00:00",
+      "event": "deferred",
+      "agent_type": "developer",
+      "summary": "Deferred due to file-scope conflict with active bead B-27a23ff7",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:20:19.589561+00:00",
+      "event": "deferred",
+      "agent_type": "developer",
+      "summary": "Deferred due to file-scope conflict with active bead B-27a23ff7",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:21:45.154882+00:00",
+      "event": "deferred",
+      "agent_type": "developer",
+      "summary": "Deferred due to file-scope conflict with active bead B-2ad17234",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:35:11.457194+00:00",
+      "event": "deferred",
+      "agent_type": "developer",
+      "summary": "Deferred due to file-scope conflict with active bead B-1e31b0df",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:35:58.759917+00:00",
+      "event": "deferred",
+      "agent_type": "developer",
+      "summary": "Deferred due to file-scope conflict with active bead B-9a409587",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:36:43.571417+00:00",
+      "event": "deferred",
+      "agent_type": "developer",
+      "summary": "Deferred due to file-scope conflict with active bead B-79e7ebf5",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:37:59.800546+00:00",
+      "event": "deferred",
+      "agent_type": "developer",
+      "summary": "Deferred due to file-scope conflict with active bead B-89f6e836",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:39:07.620805+00:00",
+      "event": "deferred",
+      "agent_type": "developer",
+      "summary": "Deferred due to file-scope conflict with active bead B-d34d190d",
+      "details": {}
+    }
+  ],
+  "metadata": {
+    "auto_corrective_for": "B-c780e85e"
+  },
+  "labels": []
+}
