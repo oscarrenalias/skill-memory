@@ -3,7 +3,7 @@
   "title": "Ingest JSON and CSV format support",
   "agent_type": "developer",
   "description": "Extend the ingest dispatcher in memory.py with handlers for .json and .csv. JSON: expect a JSON array where each element is either a plain string (used as content) or an object with a required 'content' key and optional 'metadata' object and 'source' string; exit 1 with a descriptive error for invalid input. CSV: require --column NAME flag specifying which column holds the text; all other columns are merged into the chunk's metadata JSON; first row is the header. Add an explicit 'unsupported format' exit-1 path for unknown extensions.",
-  "status": "ready",
+  "status": "in_progress",
   "bead_type": "task",
   "parent_id": "B-54edeccf",
   "dependencies": [
@@ -52,9 +52,12 @@
   },
   "block_reason": "",
   "conflict_risks": "",
-  "branch_name": "",
-  "worktree_path": "",
-  "lease": null,
+  "branch_name": "feature/b-54edeccf",
+  "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
+  "lease": {
+    "owner": "developer:B-812641b9",
+    "expires_at": "2026-04-07T20:24:48.525840+00:00"
+  },
   "retries": 0,
   "execution_history": [
     {
@@ -63,8 +66,47 @@
       "agent_type": "scheduler",
       "summary": "Bead created",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:54:49.951788+00:00",
+      "event": "skills_loaded",
+      "agent_type": "developer",
+      "summary": "Loaded 7 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/developer-implementation",
+          "capability/code-edit",
+          "task/corrective-implementation",
+          "task/refactor-safe",
+          "task/migration",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-07T19:54:49.951824+00:00",
+      "event": "started",
+      "agent_type": "developer",
+      "summary": "Worker started",
+      "details": {}
     }
   ],
-  "metadata": {},
+  "metadata": {
+    "execution_root": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-812641b9",
+    "workspace_repo_path": "repo",
+    "loaded_skills": [
+      "core/base-orchestrator",
+      "role/developer-implementation",
+      "capability/code-edit",
+      "task/corrective-implementation",
+      "task/refactor-safe",
+      "task/migration",
+      "memory"
+    ],
+    "skill_bundle_hash": "3d67820a7fb8135bc362b2b95d14300da249795bcc32c95f5dd45f36e15acfa1",
+    "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-812641b9/home",
+    "runner_backend": "claude"
+  },
   "labels": []
 }
