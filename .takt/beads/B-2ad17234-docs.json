@@ -50,7 +50,7 @@
     "test_coverage_notes": "",
     "known_limitations": ""
   },
-  "block_reason": "Deferred due to file-scope conflict with active bead B-22336fc3",
+  "block_reason": "Deferred due to file-scope conflict with active bead B-f40ff1e7",
   "conflict_risks": "None. No sibling beads claim memory.py.",
   "branch_name": "",
   "worktree_path": "",
@@ -69,6 +69,13 @@
       "event": "deferred",
       "agent_type": "documentation",
       "summary": "Deferred due to file-scope conflict with active bead B-22336fc3",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T20:39:19.214134+00:00",
+      "event": "deferred",
+      "agent_type": "documentation",
+      "summary": "Deferred due to file-scope conflict with active bead B-f40ff1e7",
       "details": {}
     }
   ],
