@@ -47,7 +47,7 @@
     "test_coverage_notes": "",
     "known_limitations": ""
   },
-  "block_reason": "Deferred due to file-scope conflict with active bead B-89f6e836",
+  "block_reason": "Deferred due to file-scope conflict with active bead B-d34d190d",
   "conflict_risks": "No conflicts expected. memory.py is a new file with no overlap with sibling beads.",
   "branch_name": "",
   "worktree_path": "",
@@ -115,6 +115,13 @@
       "event": "deferred",
       "agent_type": "documentation",
       "summary": "Deferred due to file-scope conflict with active bead B-89f6e836",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:39:09.737793+00:00",
+      "event": "deferred",
+      "agent_type": "documentation",
+      "summary": "Deferred due to file-scope conflict with active bead B-d34d190d",
       "details": {}
     }
   ],
