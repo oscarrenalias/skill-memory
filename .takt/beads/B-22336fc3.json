@@ -1,0 +1,67 @@
+{
+  "bead_id": "B-22336fc3",
+  "title": "Implement embedding pipeline (_embed)",
+  "agent_type": "developer",
+  "description": "Implement _embed(texts: list[str]) -> np.ndarray: load tokenizer from assets/tokenizer.json, tokenize with max_length=512/padding/truncation, run the ONNX InferenceSession singleton (input nodes: input_ids, attention_mask, token_type_ids; output: last_hidden_state), apply CLS token pooling (output[:, 0, :]), and L2-normalise each vector. Session must be a module-level singleton.",
+  "status": "ready",
+  "bead_type": "task",
+  "parent_id": "B-266c0a28",
+  "dependencies": [],
+  "acceptance_criteria": [
+    "_embed(['hello']) returns ndarray of shape (1, 384)",
+    "L2 norm of each returned vector is \u2248 1.0 (within 1e-5)",
+    "Batch input _embed(['a', 'b']) returns shape (2, 384)",
+    "ONNX session is created once per process, not per call",
+    "_ensure_model() is called before loading the session"
+  ],
+  "linked_docs": [
+    "specs/drafts/agent-memory-core-infrastructure.md"
+  ],
+  "feature_root_id": "B-266c0a28",
+  "execution_branch_name": "feature/b-266c0a28",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
+  "expected_files": [
+    ".claude/skills/agent-memory/memory.py"
+  ],
+  "expected_globs": [],
+  "touched_files": [],
+  "changed_files": [],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-07T18:32:12.887800+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    }
+  ],
+  "metadata": {},
+  "labels": []
+}
