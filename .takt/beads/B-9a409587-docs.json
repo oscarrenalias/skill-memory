@@ -49,7 +49,7 @@
     "test_coverage_notes": "",
     "known_limitations": ""
   },
-  "block_reason": "Deferred due to file-scope conflict with active bead B-27a23ff7-test",
+  "block_reason": "Deferred due to file-scope conflict with active bead B-27a23ff7-docs",
   "conflict_risks": "None \u2014 memory.py is fully implemented and no other bead should need to touch the delete command.",
   "branch_name": "",
   "worktree_path": "",
@@ -145,6 +145,13 @@
       "event": "deferred",
       "agent_type": "documentation",
       "summary": "Deferred due to file-scope conflict with active bead B-27a23ff7-test",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T20:28:42.420124+00:00",
+      "event": "deferred",
+      "agent_type": "documentation",
+      "summary": "Deferred due to file-scope conflict with active bead B-27a23ff7-docs",
       "details": {}
     }
   ],
