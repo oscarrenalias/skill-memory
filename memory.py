@@ -164,7 +164,25 @@ def _auto_init(db_path: Path) -> None:
 
 
 def _init_db(db_path: Path) -> None:
-    """Create tables (idempotent)."""
+    """Create tables (idempotent).
+
+    sqlite-vec version: >=0.1.6 (see _DEPS).
+
+    Distance metric (vec0 virtual table, float[N] columns):
+      - Algorithm: L2 (Euclidean) distance — the only metric exposed via the
+        ``distance`` column in sqlite-vec 0.1.x for float[] columns.
+      - Value range: [0, ∞) in general; [0, 2] when vectors are L2-normalised
+        (as produced by _embed), because ||a-b||² = 2(1 - cos θ) for unit vectors.
+      - Direction: lower = more similar (0 = identical, 2 = maximally opposite).
+      - Threshold guidance: use ≤0.5 for high-similarity, ≤1.0 for moderate.
+
+    Pre-filtering by source (or any non-vector column) before the ANN search is
+    NOT supported by sqlite-vec 0.1.x vec0 tables.  The WHERE clause for a vec0
+    query only accepts the MATCH constraint and the ``k`` parameter; additional
+    column predicates are silently ignored or raise an error depending on the
+    version.  Source filtering is therefore applied as a Python post-filter after
+    the ANN results are retrieved (see cmd_search).
+    """
     db_path.parent.mkdir(parents=True, exist_ok=True)
     con = _open_db(db_path)
     try:
