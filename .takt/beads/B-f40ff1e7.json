@@ -6,7 +6,10 @@
   "status": "ready",
   "bead_type": "task",
   "parent_id": "B-266c0a28",
-  "dependencies": [],
+  "dependencies": [
+    "B-27a23ff7",
+    "B-22336fc3"
+  ],
   "acceptance_criteria": [
     "./memory.py add 'hello world' prints 'Added <uuid>' where uuid is a valid UUID v4",
     "Two add calls with different text produce two distinct UUIDs",
