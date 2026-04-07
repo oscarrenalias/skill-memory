@@ -1,0 +1,68 @@
+{
+  "bead_id": "B-6060f4f7",
+  "title": "Create SKILL.md agent-facing documentation",
+  "agent_type": "developer",
+  "description": "Create .claude/skills/agent-memory/SKILL.md with the required YAML frontmatter (name, description, tools, user-invocable: true) and body sections: Getting Started (how to locate memory.py), When to use this skill (bead start/end patterns and post-feature ingest), Commands reference (one paragraph per command with full CLI signature), DB path conventions (default location, --db flag, per-project vs shared), and What NOT to store (mirrors docs/memory/conventions.md guidance on ephemeral state and CLAUDE.md content).",
+  "status": "ready",
+  "bead_type": "task",
+  "parent_id": "B-54edeccf",
+  "dependencies": [],
+  "acceptance_criteria": [
+    "SKILL.md exists at .claude/skills/agent-memory/SKILL.md",
+    "Frontmatter contains name, description, tools, and user-invocable fields",
+    "Body contains a 'When to use this skill' section",
+    "Body contains a 'Commands reference' section covering init, add, search, delete, list, stats, and ingest",
+    "Body contains a 'What NOT to store' section",
+    "DB path conventions section explains --db flag and when to prefer per-project vs shared DB"
+  ],
+  "linked_docs": [
+    "specs/drafts/agent-memory-file-ingest-and-skill-packaging.md"
+  ],
+  "feature_root_id": "B-54edeccf",
+  "execution_branch_name": "feature/b-54edeccf",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
+  "expected_files": [
+    ".claude/skills/agent-memory/SKILL.md"
+  ],
+  "expected_globs": [],
+  "touched_files": [],
+  "changed_files": [],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-07T18:39:55.554385+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    }
+  ],
+  "metadata": {},
+  "labels": []
+}
