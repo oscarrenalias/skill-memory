@@ -42,6 +42,8 @@ memory.py search <query> [--limit N] [--threshold F] [--source TAG] [--json] [--
 - Apply `--threshold` as a maximum L2 distance filter (default: no threshold; range 0–2 for L2-normalised vectors; lower = more similar)
 - Apply `--source` as a Python post-filter on ANN results (pre-filtering is not supported by sqlite-vec 0.1.x)
 
+**Status: implemented.** ANN results are fetched from `memories_vec` and joined with `memories` on rowid. Source filtering and threshold filtering are applied as Python post-filters after the ANN query returns. The `--limit` parameter is passed as the `k` value directly to sqlite-vec. Distance values are L2 distances in [0, 2] for L2-normalised vectors.
+
 **Default output** (one result per line):
 ```
 [0.142] <uuid>  The quick brown fox…  (source: notes)
