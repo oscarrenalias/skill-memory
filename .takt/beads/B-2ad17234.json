@@ -1,0 +1,67 @@
+{
+  "bead_id": "B-2ad17234",
+  "title": "Implement model bootstrap (_ensure_model)",
+  "agent_type": "developer",
+  "description": "Implement _ensure_model(): compute the SHA256 of the actual downloaded model.onnx at implementation time (use the curl + sha256sum command from the spec), hardcode it as _MODEL_SHA256, then write the download logic to ~/.cache/agent-memory/bge-small-en-v1.5/model.onnx with progress message, post-download SHA256 verification, and cleanup + exit(1) on failure.",
+  "status": "ready",
+  "bead_type": "task",
+  "parent_id": "B-266c0a28",
+  "dependencies": [],
+  "acceptance_criteria": [
+    "_MODEL_SHA256 is hardcoded as the verified SHA256 of the actual downloaded model file",
+    "First call prints 'Downloading bge-small-en-v1.5 model\u2026' to stderr",
+    "Subsequent calls are no-ops (model already cached)",
+    "If SHA256 does not match, partial file is deleted and process exits with code 1 and descriptive message",
+    "Model is stored at ~/.cache/agent-memory/bge-small-en-v1.5/model.onnx"
+  ],
+  "linked_docs": [
+    "specs/drafts/agent-memory-core-infrastructure.md"
+  ],
+  "feature_root_id": "B-266c0a28",
+  "execution_branch_name": "feature/b-266c0a28",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
+  "expected_files": [
+    ".claude/skills/agent-memory/memory.py"
+  ],
+  "expected_globs": [],
+  "touched_files": [],
+  "changed_files": [],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-07T18:32:12.435736+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    }
+  ],
+  "metadata": {},
+  "labels": []
+}
