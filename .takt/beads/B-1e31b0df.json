@@ -1,0 +1,68 @@
+{
+  "bead_id": "B-1e31b0df",
+  "title": "Implement list command",
+  "agent_type": "developer",
+  "description": "Add the `list` subcommand to memory.py. Select from memories ordered by created_at DESC. Support --limit (default 20, 0 = unlimited), --source (exact match filter), --json (array of all columns, no distance), and --db flags. Default output: one line per row with uuid, truncated content (60 chars), source, and created_at.",
+  "status": "ready",
+  "bead_type": "task",
+  "parent_id": "B-cb0b48a1",
+  "dependencies": [],
+  "acceptance_criteria": [
+    "memory.py list returns results newest-first",
+    "memory.py list --source mytag returns only rows where source = 'mytag'",
+    "memory.py list --json outputs valid JSON array with all columns",
+    "memory.py list --limit 3 returns at most 3 results"
+  ],
+  "linked_docs": [
+    "specs/drafts/agent-memory-query-and-crud-operations.md"
+  ],
+  "feature_root_id": "B-cb0b48a1",
+  "execution_branch_name": "feature/b-cb0b48a1",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1",
+  "expected_files": [
+    ".claude/skills/agent-memory/memory.py"
+  ],
+  "expected_globs": [
+    ".claude/skills/agent-memory/*.py"
+  ],
+  "touched_files": [],
+  "changed_files": [],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-07T18:33:19.465312+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    }
+  ],
+  "metadata": {},
+  "labels": []
+}
