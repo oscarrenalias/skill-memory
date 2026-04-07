@@ -3,7 +3,7 @@
   "title": "Ingest JSON and CSV format support",
   "agent_type": "developer",
   "description": "Extend the ingest dispatcher in memory.py with handlers for .json and .csv. JSON: expect a JSON array where each element is either a plain string (used as content) or an object with a required 'content' key and optional 'metadata' object and 'source' string; exit 1 with a descriptive error for invalid input. CSV: require --column NAME flag specifying which column holds the text; all other columns are merged into the chunk's metadata JSON; first row is the header. Add an explicit 'unsupported format' exit-1 path for unknown extensions.",
-  "status": "in_progress",
+  "status": "done",
   "bead_type": "task",
   "parent_id": "B-54edeccf",
   "dependencies": [
@@ -27,37 +27,52 @@
     "memory.py"
   ],
   "expected_globs": [],
-  "touched_files": [],
-  "changed_files": [],
+  "touched_files": [
+    "__pycache__/memory.cpython-314.pyc",
+    "memory.py",
+    "tests/__init__.py"
+  ],
+  "changed_files": [
+    "__pycache__/memory.cpython-314.pyc",
+    "memory.py",
+    "tests/__init__.py"
+  ],
   "updated_docs": [],
   "handoff_summary": {
-    "completed": "",
+    "completed": "Added _ingest_json(), _ingest_csv(), and refactored _ingest_text_chunks() helpers. cmd_ingest now dispatches on .txt/.md/.json/.csv and falls through to an explicit unsupported-format sys.exit(1). Added --column argument to the ingest subparser.",
     "remaining": "",
-    "risks": "",
-    "verdict": "",
+    "risks": "csv.DictReader reads the entire file into memory before inserting \u2014 fine for typical memory files but could be slow for very large CSVs. Not a concern for current use case.",
+    "verdict": "approved",
     "findings_count": 0,
     "requires_followup": false,
-    "changed_files": [],
+    "changed_files": [
+      "__pycache__/memory.cpython-314.pyc",
+      "memory.py",
+      "tests/__init__.py"
+    ],
     "updated_docs": [],
-    "next_action": "",
-    "next_agent": "",
+    "next_action": "Hand off to tester agent to validate all six acceptance criteria.",
+    "next_agent": "tester",
     "block_reason": "",
-    "expected_files": [],
+    "expected_files": [
+      "memory.py"
+    ],
     "expected_globs": [],
-    "touched_files": [],
-    "conflict_risks": "",
-    "design_decisions": "",
-    "test_coverage_notes": "",
-    "known_limitations": ""
+    "touched_files": [
+      "__pycache__/memory.cpython-314.pyc",
+      "memory.py",
+      "tests/__init__.py"
+    ],
+    "conflict_risks": "None \u2014 changes are confined to cmd_ingest and three new private helpers in memory.py. No shared state or schema changes.",
+    "design_decisions": "Extracted _ingest_text_chunks() to avoid duplicating the chunk/filter/insert loop. CSV uses stdlib csv.DictReader \u2014 no new dependency. JSON validation is eager (all rows checked before any DB write) so the DB is never partially populated on bad input.",
+    "test_coverage_notes": "All six acceptance criteria map to distinct code paths: JSON string branch, JSON object branch, JSON missing-content branch, CSV happy path, CSV no-column branch, unknown-extension branch.",
+    "known_limitations": "CSV column-not-found error is detected only after the file header is read; empty CSV (no header row) yields a generic \"appears to be empty\" message rather than column-specific feedback."
   },
   "block_reason": "",
-  "conflict_risks": "",
+  "conflict_risks": "None \u2014 changes are confined to cmd_ingest and three new private helpers in memory.py. No shared state or schema changes.",
   "branch_name": "feature/b-54edeccf",
   "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
-  "lease": {
-    "owner": "developer:B-812641b9",
-    "expires_at": "2026-04-07T20:24:48.525840+00:00"
-  },
+  "lease": null,
   "retries": 0,
   "execution_history": [
     {
@@ -99,6 +114,13 @@
       "details": {
         "template_path": ".takt/agent-runs/B-812641b9/repo/templates/agents/developer.md"
       }
+    },
+    {
+      "timestamp": "2026-04-07T19:56:12.726761+00:00",
+      "event": "completed",
+      "agent_type": "developer",
+      "summary": "Extended memory.py ingest dispatcher with .json and .csv handlers, plus explicit unsupported-format exit-1 path. JSON accepts arrays of plain strings or objects with required 'content' key; CSV requires --column NAME and merges all other columns into metadata.",
+      "details": {}
     }
   ],
   "metadata": {
@@ -171,7 +193,53 @@
         "test_coverage_notes": "",
         "known_limitations": ""
       }
-    }
+    },
+    "last_agent_result": {
+      "outcome": "completed",
+      "summary": "Extended memory.py ingest dispatcher with .json and .csv handlers, plus explicit unsupported-format exit-1 path. JSON accepts arrays of plain strings or objects with required 'content' key; CSV requires --column NAME and merges all other columns into metadata.",
+      "verdict": "approved",
+      "findings_count": 0,
+      "requires_followup": false,
+      "next_agent": "tester",
+      "block_reason": ""
+    },
+    "telemetry": {
+      "cost_usd": 0.20621625,
+      "duration_ms": 77862,
+      "duration_api_ms": 68384,
+      "num_turns": 9,
+      "input_tokens": 10,
+      "output_tokens": 4449,
+      "cache_creation_tokens": 20839,
+      "cache_read_tokens": 204350,
+      "stop_reason": "end_turn",
+      "session_id": "729eb5ed-03ed-41fb-9020-49690d5ea18f",
+      "permission_denials": [],
+      "prompt_chars": 6194,
+      "prompt_lines": 136,
+      "source": "provider",
+      "attempt": 1
+    },
+    "telemetry_history": [
+      {
+        "cost_usd": 0.20621625,
+        "duration_ms": 77862,
+        "duration_api_ms": 68384,
+        "num_turns": 9,
+        "input_tokens": 10,
+        "output_tokens": 4449,
+        "cache_creation_tokens": 20839,
+        "cache_read_tokens": 204350,
+        "stop_reason": "end_turn",
+        "session_id": "729eb5ed-03ed-41fb-9020-49690d5ea18f",
+        "permission_denials": [],
+        "prompt_chars": 6194,
+        "prompt_lines": 136,
+        "source": "provider",
+        "attempt": 1
+      }
+    ],
+    "last_commit": "9d985d7f3d0e0a1df4237e5ccba7db6078d35d6c"
   },
   "labels": []
 }
