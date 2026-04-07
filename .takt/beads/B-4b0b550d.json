@@ -3,7 +3,7 @@
   "title": "Test query and CRUD commands",
   "agent_type": "tester",
   "description": "Write and run integration tests covering all four new subcommands: search, delete, list, and stats. Tests should use a temporary DB to avoid polluting state. Cover happy paths, edge cases (nonexistent IDs, empty DB for stats, --limit 0 for list), and JSON output shapes.",
-  "status": "ready",
+  "status": "in_progress",
   "bead_type": "task",
   "parent_id": "B-cb0b48a1",
   "dependencies": [],
@@ -64,7 +64,10 @@
   "conflict_risks": "",
   "branch_name": "feature/b-cb0b48a1",
   "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1",
-  "lease": null,
+  "lease": {
+    "owner": "tester:B-4b0b550d",
+    "expires_at": "2026-04-07T20:09:16.944518+00:00"
+  },
   "retries": 2,
   "execution_history": [
     {
@@ -245,6 +248,29 @@
       "event": "retried",
       "agent_type": "tester",
       "summary": "Bead requeued",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:39:17.420305+00:00",
+      "event": "skills_loaded",
+      "agent_type": "tester",
+      "summary": "Loaded 6 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/tester-validation",
+          "capability/test-execution",
+          "task/defect-bead-creation",
+          "task/regression-triage",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-07T19:39:17.420338+00:00",
+      "event": "started",
+      "agent_type": "tester",
+      "summary": "Worker started",
       "details": {}
     }
   ],
