@@ -3,7 +3,7 @@
   "title": "Review Test suite: core CRUD and infrastructure tests",
   "agent_type": "review",
   "description": "Review implementation for B-d7c0d824",
-  "status": "ready",
+  "status": "in_progress",
   "bead_type": "task",
   "parent_id": "B-d7c0d824",
   "dependencies": [
@@ -80,7 +80,10 @@
   "conflict_risks": "None \u2014 only docs/memory/conventions.md needs a one-line fix; no overlap with other in-flight beads.",
   "branch_name": "feature/b-54edeccf",
   "worktree_path": "",
-  "lease": null,
+  "lease": {
+    "owner": "review:B-d7c0d824-review",
+    "expires_at": "2026-04-07T20:58:46.533004+00:00"
+  },
   "retries": 0,
   "execution_history": [
     {
@@ -141,6 +144,29 @@
       "event": "retried",
       "agent_type": "review",
       "summary": "Requeued blocked bead after corrective bead B-d7c0d824-review-corrective completed",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T20:28:47.347230+00:00",
+      "event": "skills_loaded",
+      "agent_type": "review",
+      "summary": "Loaded 6 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/reviewer-signoff",
+          "capability/code-review",
+          "task/corrective-bead-creation",
+          "task/risk-assessment",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-07T20:28:47.347257+00:00",
+      "event": "started",
+      "agent_type": "review",
+      "summary": "Worker started",
       "details": {}
     }
   ],
