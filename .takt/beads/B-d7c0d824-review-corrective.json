@@ -3,7 +3,7 @@
   "title": "Corrective fix for B-d7c0d824-review: Review Test suite: core CRUD and infrastructure tests",
   "agent_type": "developer",
   "description": "Blocked reason: docs/memory/conventions.md:39 documents `python3 -m unittest discover -s tests/` as the run command, but system Python lacks numpy/sqlite-vec and will produce ImportError rather than test results. The correct invocation is `.venv/bin/pytest` (or `.venv/bin/python -m pytest tests/`). This misleads operators into thinking tests are broken when the environment is simply wrong.\n\nRemaining work: Fix conventions.md run command to reference the venv Python (`.venv/bin/pytest` or equivalent) and add a note that system Python is insufficient due to missing numpy/sqlite-vec dependencies.",
-  "status": "ready",
+  "status": "in_progress",
   "bead_type": "task",
   "parent_id": "B-d7c0d824-review",
   "dependencies": [],
@@ -58,9 +58,12 @@
   },
   "block_reason": "",
   "conflict_risks": "None \u2014 only docs/memory/conventions.md needs a one-line fix; no overlap with other in-flight beads.",
-  "branch_name": "",
-  "worktree_path": "",
-  "lease": null,
+  "branch_name": "feature/b-54edeccf",
+  "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
+  "lease": {
+    "owner": "developer:B-d7c0d824-review-corrective",
+    "expires_at": "2026-04-07T20:55:05.866570+00:00"
+  },
   "retries": 0,
   "execution_history": [
     {
@@ -69,10 +72,48 @@
       "agent_type": "scheduler",
       "summary": "Bead created",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T20:25:07.010165+00:00",
+      "event": "skills_loaded",
+      "agent_type": "developer",
+      "summary": "Loaded 7 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/developer-implementation",
+          "capability/code-edit",
+          "task/corrective-implementation",
+          "task/refactor-safe",
+          "task/migration",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-07T20:25:07.010193+00:00",
+      "event": "started",
+      "agent_type": "developer",
+      "summary": "Worker started",
+      "details": {}
     }
   ],
   "metadata": {
-    "auto_corrective_for": "B-d7c0d824-review"
+    "auto_corrective_for": "B-d7c0d824-review",
+    "execution_root": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-d7c0d824-review-corrective",
+    "workspace_repo_path": "repo",
+    "loaded_skills": [
+      "core/base-orchestrator",
+      "role/developer-implementation",
+      "capability/code-edit",
+      "task/corrective-implementation",
+      "task/refactor-safe",
+      "task/migration",
+      "memory"
+    ],
+    "skill_bundle_hash": "3d67820a7fb8135bc362b2b95d14300da249795bcc32c95f5dd45f36e15acfa1",
+    "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-d7c0d824-review-corrective/home",
+    "runner_backend": "claude"
   },
   "labels": []
 }
