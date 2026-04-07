@@ -1,6 +1,6 @@
 name: agent-memory
 version: 0.1.0
-description: Skill for reading and updating shared institutional memory across beads and agent sessions
+description: Long-term semantic memory for agents via SQLite + sqlite-vec + BAAI/bge-small-en-v1.5 ONNX embeddings
 author: "Renalias, Oscar"
 dependencies:
   apm: []
