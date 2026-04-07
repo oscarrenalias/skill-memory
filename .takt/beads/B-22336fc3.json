@@ -90,6 +90,15 @@
       "agent_type": "developer",
       "summary": "Worker started",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T20:32:43.348295+00:00",
+      "event": "guardrails_applied",
+      "agent_type": "developer",
+      "summary": "Applied guardrails from .takt/agent-runs/B-22336fc3/repo/templates/agents/developer.md",
+      "details": {
+        "template_path": ".takt/agent-runs/B-22336fc3/repo/templates/agents/developer.md"
+      }
     }
   ],
   "metadata": {
@@ -106,7 +115,63 @@
     ],
     "skill_bundle_hash": "3d67820a7fb8135bc362b2b95d14300da249795bcc32c95f5dd45f36e15acfa1",
     "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-22336fc3/home",
-    "runner_backend": "claude"
+    "runner_backend": "claude",
+    "guardrails": {
+      "agent_type": "developer",
+      "template_path": ".takt/agent-runs/B-22336fc3/repo/templates/agents/developer.md",
+      "template_text": "# Developer Guardrails\n\nPrimary responsibility: Implement only the assigned bead inside the existing architecture and file scope.\n\nAllowed actions:\n- Modify code, configuration, or local docs required to complete the assigned bead.\n- Create sub-beads for discovered follow-up work that should be handled separately.\n- Verify your `Python` changes compile and import correctly with a quick syntax check: `python -m py_compile`.\n\nDisallowed actions:\n- Run any test suite \u2014 not even a targeted `pytest` run or any subset. Test execution is exclusively the tester agent's responsibility. Running tests wastes the agent budget and delays the pipeline.\n- Redesign unrelated architecture or broaden scope beyond the assigned bead.\n- Perform final review signoff in place of a review agent.\n- Silently absorb unrelated test, documentation, or planning work that should be handed off.\n\nExpected outputs:\n- Completed or blocked JSON with concise implementation summary.\n- Accurate touched files, changed files, risks, and follow-up handoff fields.",
+      "captured_at": "2026-04-07T20:32:43.348283+00:00"
+    },
+    "worker_prompt_context": {
+      "bead_id": "B-22336fc3",
+      "feature_root_id": "B-266c0a28",
+      "title": "Implement embedding pipeline (_embed)",
+      "agent_type": "developer",
+      "description": "Implement _embed(texts: list[str]) -> np.ndarray: load tokenizer from assets/tokenizer.json, tokenize with max_length=512/padding/truncation, run the ONNX InferenceSession singleton (input nodes: input_ids, attention_mask, token_type_ids; output: last_hidden_state), apply CLS token pooling (output[:, 0, :]), and L2-normalise each vector. Session must be a module-level singleton.",
+      "status": "in_progress",
+      "acceptance_criteria": [
+        "_embed(['hello']) returns ndarray of shape (1, 384)",
+        "L2 norm of each returned vector is \u2248 1.0 (within 1e-5)",
+        "Batch input _embed(['a', 'b']) returns shape (2, 384)",
+        "ONNX session is created once per process, not per call",
+        "_ensure_model() is called before loading the session"
+      ],
+      "dependencies": [
+        "B-2760e5db",
+        "B-2ad17234"
+      ],
+      "linked_docs": [
+        "specs/drafts/agent-memory-core-infrastructure.md"
+      ],
+      "execution_branch_name": "feature/b-266c0a28",
+      "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
+      "expected_files": [
+        "memory.py"
+      ],
+      "expected_globs": [],
+      "touched_files": [],
+      "conflict_risks": "",
+      "handoff_summary": {
+        "completed": "",
+        "remaining": "",
+        "risks": "",
+        "verdict": "",
+        "findings_count": 0,
+        "requires_followup": false,
+        "changed_files": [],
+        "updated_docs": [],
+        "next_action": "",
+        "next_agent": "",
+        "block_reason": "",
+        "expected_files": [],
+        "expected_globs": [],
+        "touched_files": [],
+        "conflict_risks": "",
+        "design_decisions": "",
+        "test_coverage_notes": "",
+        "known_limitations": ""
+      }
+    }
   },
   "labels": []
 }
