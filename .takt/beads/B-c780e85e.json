@@ -105,6 +105,13 @@
       "agent_type": "review",
       "summary": "Review blocked: expected file .claude/skills/agent-memory/memory.py does not exist \u2014 no implementation to review",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T18:41:22.641769+00:00",
+      "event": "corrective_planned",
+      "agent_type": "review",
+      "summary": "Created corrective bead B-c780e85e-corrective for blocked issue",
+      "details": {}
     }
   ],
   "metadata": {
@@ -220,7 +227,8 @@
         "source": "provider",
         "attempt": 1
       }
-    ]
+    ],
+    "auto_corrective_bead_id": "B-c780e85e-corrective"
   },
   "labels": []
 }
