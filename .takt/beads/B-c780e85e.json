@@ -3,7 +3,7 @@
   "title": "Review query and CRUD implementation",
   "agent_type": "review",
   "description": "Review the combined implementation of search, delete, list, and stats commands. Check for correctness of SQL queries, proper transaction handling in delete, accurate distance metric documentation, consistent CLI flag behaviour, and absence of regressions in the add command from spec-a536cb5e.",
-  "status": "blocked",
+  "status": "in_progress",
   "bead_type": "task",
   "parent_id": "B-cb0b48a1",
   "dependencies": [],
@@ -55,11 +55,14 @@
     "test_coverage_notes": "",
     "known_limitations": ""
   },
-  "block_reason": "Expected implementation file .claude/skills/agent-memory/memory.py is absent. The directory exists but contains only a .venv/ and an empty assets/. Both upstream specs (spec-a536cb5e and spec-9f1b7155) are still in planned status with no code committed to the feature branch. This is a developer task, not a review task at this stage.",
+  "block_reason": "",
   "conflict_risks": "No conflicts possible until memory.py is created. When a developer creates it, no existing files will conflict.",
   "branch_name": "feature/b-cb0b48a1",
   "worktree_path": "",
-  "lease": null,
+  "lease": {
+    "owner": "review:B-c780e85e",
+    "expires_at": "2026-04-07T20:30:56.103008+00:00"
+  },
   "retries": 0,
   "execution_history": [
     {
@@ -159,6 +162,29 @@
       "event": "blocked",
       "agent_type": "review",
       "summary": "No implementation to review \u2014 memory.py is still absent; both upstream specs remain in planned status.",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T20:00:56.420027+00:00",
+      "event": "skills_loaded",
+      "agent_type": "review",
+      "summary": "Loaded 6 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/reviewer-signoff",
+          "capability/code-review",
+          "task/corrective-bead-creation",
+          "task/risk-assessment",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-07T20:00:56.420077+00:00",
+      "event": "started",
+      "agent_type": "review",
+      "summary": "Worker started",
       "details": {}
     }
   ],
