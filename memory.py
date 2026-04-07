@@ -41,10 +41,7 @@ from datetime import datetime, timezone
 # ---------------------------------------------------------------------------
 
 _MODEL_URL = "https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/onnx/model.onnx"
-# SHA256 must be verified by downloading the model and running sha256sum.
-# See specs/planned/agent-memory-core-infrastructure.md §Pending Decisions #1.
-# Leave empty to skip verification (insecure; update before production use).
-_MODEL_SHA256 = ""
+_MODEL_SHA256 = "828e1496d7fabb79cfa4dcd84fa38625c0d3d21da474a00f08db0f559940cf35"
 _MODEL_PATH = Path.home() / ".cache" / "agent-memory" / "bge-small-en-v1.5" / "model.onnx"
 
 
