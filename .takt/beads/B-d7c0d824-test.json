@@ -3,7 +3,7 @@
   "title": "Test Test suite: core CRUD and infrastructure tests",
   "agent_type": "tester",
   "description": "Validate implementation for B-d7c0d824",
-  "status": "ready",
+  "status": "in_progress",
   "bead_type": "task",
   "parent_id": "B-d7c0d824",
   "dependencies": [
@@ -59,9 +59,12 @@
   },
   "block_reason": "Deferred due to file-scope conflict with active bead B-1b570ca0",
   "conflict_risks": "None \u2014 tests/test_memory.py is a new file; no overlap with tests/test_ingest_chunking.py.",
-  "branch_name": "",
-  "worktree_path": "",
-  "lease": null,
+  "branch_name": "feature/b-54edeccf",
+  "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
+  "lease": {
+    "owner": "tester:B-d7c0d824-test",
+    "expires_at": "2026-04-07T20:47:21.588273+00:00"
+  },
   "retries": 0,
   "execution_history": [
     {
@@ -91,8 +94,45 @@
       "agent_type": "tester",
       "summary": "Deferred due to file-scope conflict with active bead B-1b570ca0",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T20:17:23.309944+00:00",
+      "event": "skills_loaded",
+      "agent_type": "tester",
+      "summary": "Loaded 6 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/tester-validation",
+          "capability/test-execution",
+          "task/defect-bead-creation",
+          "task/regression-triage",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-07T20:17:23.309973+00:00",
+      "event": "started",
+      "agent_type": "tester",
+      "summary": "Worker started",
+      "details": {}
     }
   ],
-  "metadata": {},
+  "metadata": {
+    "execution_root": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-d7c0d824-test",
+    "workspace_repo_path": "repo",
+    "loaded_skills": [
+      "core/base-orchestrator",
+      "role/tester-validation",
+      "capability/test-execution",
+      "task/defect-bead-creation",
+      "task/regression-triage",
+      "memory"
+    ],
+    "skill_bundle_hash": "09c41b0ce7b733774ac92190a1a2516f6510bcbf848392054d11d9a6cdf8ee61",
+    "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-d7c0d824-test/home",
+    "runner_backend": "claude"
+  },
   "labels": []
 }
