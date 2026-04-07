@@ -1,0 +1,69 @@
+{
+  "bead_id": "B-c780e85e",
+  "title": "Review query and CRUD implementation",
+  "agent_type": "review",
+  "description": "Review the combined implementation of search, delete, list, and stats commands. Check for correctness of SQL queries, proper transaction handling in delete, accurate distance metric documentation, consistent CLI flag behaviour, and absence of regressions in the add command from spec-a536cb5e.",
+  "status": "ready",
+  "bead_type": "task",
+  "parent_id": "B-cb0b48a1",
+  "dependencies": [],
+  "acceptance_criteria": [
+    "All four subcommands are implemented per spec with no undocumented deviations",
+    "Delete uses a single transaction covering both tables",
+    "Distance metric is documented in a comment with correct range and direction",
+    "CLI flags and output formats match the spec exactly",
+    "No regressions in the add command or existing DB schema"
+  ],
+  "linked_docs": [
+    "specs/drafts/agent-memory-query-and-crud-operations.md"
+  ],
+  "feature_root_id": "B-cb0b48a1",
+  "execution_branch_name": "feature/b-cb0b48a1",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1",
+  "expected_files": [
+    ".claude/skills/agent-memory/memory.py"
+  ],
+  "expected_globs": [
+    ".claude/skills/agent-memory/*.py"
+  ],
+  "touched_files": [],
+  "changed_files": [],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-07T18:33:20.294982+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    }
+  ],
+  "metadata": {},
+  "labels": []
+}
