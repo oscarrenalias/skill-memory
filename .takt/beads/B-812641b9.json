@@ -1,0 +1,68 @@
+{
+  "bead_id": "B-812641b9",
+  "title": "Ingest JSON and CSV format support",
+  "agent_type": "developer",
+  "description": "Extend the ingest dispatcher in memory.py with handlers for .json and .csv. JSON: expect a JSON array where each element is either a plain string (used as content) or an object with a required 'content' key and optional 'metadata' object and 'source' string; exit 1 with a descriptive error for invalid input. CSV: require --column NAME flag specifying which column holds the text; all other columns are merged into the chunk's metadata JSON; first row is the header. Add an explicit 'unsupported format' exit-1 path for unknown extensions.",
+  "status": "ready",
+  "bead_type": "task",
+  "parent_id": "B-54edeccf",
+  "dependencies": [],
+  "acceptance_criteria": [
+    "JSON string array [{\"content\":\"a\"},{\"content\":\"b\"}] adds exactly 2 rows",
+    "JSON array of plain strings [\"a\",\"b\"] adds exactly 2 rows",
+    "JSON array with objects lacking 'content' key exits 1 with descriptive error",
+    "CSV with --column text adds one row per data row; other columns appear in metadata JSON",
+    "CSV without --column flag exits 1 with a clear message",
+    "memory.py ingest file.xyz exits 1 with 'unsupported format' message"
+  ],
+  "linked_docs": [
+    "specs/drafts/agent-memory-file-ingest-and-skill-packaging.md"
+  ],
+  "feature_root_id": "B-54edeccf",
+  "execution_branch_name": "feature/b-54edeccf",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
+  "expected_files": [
+    ".claude/skills/agent-memory/memory.py"
+  ],
+  "expected_globs": [],
+  "touched_files": [],
+  "changed_files": [],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-07T18:39:55.290482+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    }
+  ],
+  "metadata": {},
+  "labels": []
+}
