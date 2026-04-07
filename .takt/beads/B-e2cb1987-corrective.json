@@ -1,0 +1,73 @@
+{
+  "bead_id": "B-e2cb1987-corrective",
+  "title": "Corrective fix for B-e2cb1987: Implement stats command",
+  "agent_type": "developer",
+  "description": "Blocked reason: claude -p produced no structured output. is_error=False, stop_reason=end_turn, result='End-to-end confirmed: bootstrap ran, then `stats` on a non-existent DB printed `\"No memory DB found at ...\"` and exited 0. Implementation is complete.'",
+  "status": "ready",
+  "bead_type": "task",
+  "parent_id": "B-e2cb1987",
+  "dependencies": [],
+  "acceptance_criteria": [
+    "Implement the minimum fix required to unblock B-e2cb1987.",
+    "Update tests/docs as needed for the corrective change.",
+    "Leave a handoff summary that states how the parent bead can be retried."
+  ],
+  "linked_docs": [
+    "specs/drafts/agent-memory-query-and-crud-operations.md"
+  ],
+  "feature_root_id": "B-cb0b48a1",
+  "execution_branch_name": "feature/b-cb0b48a1",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1",
+  "expected_files": [
+    ".claude/skills/agent-memory/memory.py"
+  ],
+  "expected_globs": [
+    ".claude/skills/agent-memory/*.py"
+  ],
+  "touched_files": [
+    ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc"
+  ],
+  "changed_files": [
+    ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc"
+  ],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-07T18:49:39.620274+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    }
+  ],
+  "metadata": {
+    "auto_corrective_for": "B-e2cb1987"
+  },
+  "labels": []
+}
