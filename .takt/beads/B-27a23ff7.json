@@ -1,0 +1,68 @@
+{
+  "bead_id": "B-27a23ff7",
+  "title": "Implement DB schema and init command",
+  "agent_type": "developer",
+  "description": "Add the DB path resolution logic (--db flag, AGENT_MEMORY_DB env var, default ~/.local/share/agent-memory/memories.db) and implement the init command: create parent dirs, load sqlite-vec, CREATE TABLE IF NOT EXISTS memories, CREATE VIRTUAL TABLE IF NOT EXISTS memories_vec. Print confirmation message.",
+  "status": "ready",
+  "bead_type": "task",
+  "parent_id": "B-266c0a28",
+  "dependencies": [],
+  "acceptance_criteria": [
+    "./memory.py init creates the memories and memories_vec tables",
+    "Running init twice does not raise an error",
+    "--db /tmp/test.db creates the DB at that path",
+    "AGENT_MEMORY_DB=/tmp/test.db env var is respected",
+    "Default DB path is ~/.local/share/agent-memory/memories.db",
+    "Printed output matches: Initialised memory DB at <path>"
+  ],
+  "linked_docs": [
+    "specs/drafts/agent-memory-core-infrastructure.md"
+  ],
+  "feature_root_id": "B-266c0a28",
+  "execution_branch_name": "feature/b-266c0a28",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
+  "expected_files": [
+    ".claude/skills/agent-memory/memory.py"
+  ],
+  "expected_globs": [],
+  "touched_files": [],
+  "changed_files": [],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-07T18:32:11.838099+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    }
+  ],
+  "metadata": {},
+  "labels": []
+}
