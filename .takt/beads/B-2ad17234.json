@@ -3,7 +3,7 @@
   "title": "Implement model bootstrap (_ensure_model)",
   "agent_type": "developer",
   "description": "Implement _ensure_model(): compute the SHA256 of the actual downloaded model.onnx at implementation time (use the curl + sha256sum command from the spec), hardcode it as _MODEL_SHA256, then write the download logic to ~/.cache/agent-memory/bge-small-en-v1.5/model.onnx with progress message, post-download SHA256 verification, and cleanup + exit(1) on failure.",
-  "status": "blocked",
+  "status": "ready",
   "bead_type": "task",
   "parent_id": "B-266c0a28",
   "dependencies": [
@@ -51,7 +51,7 @@
     "test_coverage_notes": "_ensure_model() is a no-op on subsequent calls (path.exists() guard). Failure paths: download exception \u2192 unlink + exit(1); SHA256 mismatch \u2192 unlink + exit(1). Both must be covered by tester agent.",
     "known_limitations": "Spec states expected model size ~24 MB; actual file is 133 MB. This is the float32 ONNX export. A quantized variant (model_quantized.onnx) exists and is ~23 MB, but the spec URL explicitly points to model.onnx. Tester and review agents should validate this choice is acceptable."
   },
-  "block_reason": "All write operations to the worktree file were denied by the Claude Code permission system (\"Claude requested permissions to write to \u2026 but you haven't granted it yet\"). This applies to Edit, Write, and Bash tools equally. The implementation is complete and tested locally; only the file write is blocked.",
+  "block_reason": "",
   "conflict_risks": "None beyond the file-write block. No sibling beads currently claim this file.",
   "branch_name": "feature/b-266c0a28",
   "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
@@ -131,6 +131,13 @@
       "event": "corrective_planned",
       "agent_type": "developer",
       "summary": "Created corrective bead B-2ad17234-corrective for blocked issue",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T20:31:31.057300+00:00",
+      "event": "retried",
+      "agent_type": "developer",
+      "summary": "Requeued blocked bead after corrective bead B-2ad17234-corrective completed",
       "details": {}
     }
   ],
@@ -343,7 +350,9 @@
         "attempt": 1
       }
     ],
-    "auto_corrective_bead_id": "B-2ad17234-corrective"
+    "auto_corrective_bead_id": "B-2ad17234-corrective",
+    "last_corrective_retry_source": "B-2ad17234-corrective",
+    "last_corrective_retry_commit": "b4d3e93145f9a83c770c0b0421542059eb946a3b"
   },
   "labels": []
 }
