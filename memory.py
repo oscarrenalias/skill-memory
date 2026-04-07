@@ -82,6 +82,69 @@ def _ensure_model() -> Path:
 
 
 # ---------------------------------------------------------------------------
+# Embedding pipeline
+# ---------------------------------------------------------------------------
+
+_ort_session = None
+_embed_tokenizer = None
+
+
+def _get_ort_session():
+    """Return the module-level ONNX InferenceSession singleton, creating it if needed."""
+    global _ort_session
+    if _ort_session is None:
+        import onnxruntime as ort  # noqa: PLC0415
+        model_path = _ensure_model()
+        _ort_session = ort.InferenceSession(str(model_path))
+    return _ort_session
+
+
+def _get_embed_tokenizer():
+    """Return the module-level tokenizer singleton, creating it if needed."""
+    global _embed_tokenizer
+    if _embed_tokenizer is None:
+        from tokenizers import Tokenizer  # noqa: PLC0415
+        tokenizer_path = _SKILL_DIR / "assets" / "tokenizer.json"
+        tok = Tokenizer.from_file(str(tokenizer_path))
+        tok.enable_truncation(max_length=512)
+        tok.enable_padding(pad_id=0, pad_token="[PAD]")
+        _embed_tokenizer = tok
+    return _embed_tokenizer
+
+
+def _embed(texts: list) -> "np.ndarray":
+    """Embed texts using bge-small-en-v1.5 ONNX model.
+
+    Returns float32 ndarray of shape (N, 384), L2-normalised (CLS token pooling).
+    The ONNX session and tokenizer are module-level singletons loaded once per process.
+    """
+    import numpy as np  # noqa: PLC0415
+
+    tokenizer = _get_embed_tokenizer()
+    session = _get_ort_session()
+
+    encodings = tokenizer.encode_batch(texts)
+    input_ids = np.array([enc.ids for enc in encodings], dtype=np.int64)
+    attention_mask = np.array([enc.attention_mask for enc in encodings], dtype=np.int64)
+    token_type_ids = np.array([enc.type_ids for enc in encodings], dtype=np.int64)
+
+    outputs = session.run(
+        ["last_hidden_state"],
+        {
+            "input_ids": input_ids,
+            "attention_mask": attention_mask,
+            "token_type_ids": token_type_ids,
+        },
+    )
+
+    last_hidden_state = outputs[0]  # shape (N, seq_len, 384)
+    cls_embeddings = last_hidden_state[:, 0, :]  # CLS token pooling -> (N, 384)
+
+    norms = np.linalg.norm(cls_embeddings, axis=1, keepdims=True)
+    return (cls_embeddings / norms).astype(np.float32)
+
+
+# ---------------------------------------------------------------------------
 # DB path resolution
 # ---------------------------------------------------------------------------
 
