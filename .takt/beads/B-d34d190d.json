@@ -3,7 +3,7 @@
   "title": "Ingest command skeleton with txt and md chunking",
   "agent_type": "developer",
   "description": "Add the `ingest` subcommand to memory.py. Implement the CLI surface (argparse with --source, --chunk-size, --overlap, --db flags), the dispatcher that routes by file extension, and the chunking logic for .txt (blank-line paragraph boundaries, sentence splitting for oversized paragraphs) and .md (same as .txt but level-2 ## headings are hard chunk boundaries with the heading carried into the next chunk). Wire each chunk into the existing insert/add path. Print progress summary to stderr. Skip chunks shorter than 10 chars and track the skipped count.",
-  "status": "ready",
+  "status": "in_progress",
   "bead_type": "task",
   "parent_id": "B-54edeccf",
   "dependencies": [],
@@ -51,9 +51,12 @@
   },
   "block_reason": "Deferred due to file-scope conflict with active bead B-89f6e836",
   "conflict_risks": "",
-  "branch_name": "",
-  "worktree_path": "",
-  "lease": null,
+  "branch_name": "feature/b-54edeccf",
+  "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
+  "lease": {
+    "owner": "developer:B-d34d190d",
+    "expires_at": "2026-04-07T20:09:16.944651+00:00"
+  },
   "retries": 0,
   "execution_history": [
     {
@@ -132,8 +135,47 @@
       "agent_type": "developer",
       "summary": "Deferred due to file-scope conflict with active bead B-89f6e836",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:39:17.656583+00:00",
+      "event": "skills_loaded",
+      "agent_type": "developer",
+      "summary": "Loaded 7 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/developer-implementation",
+          "capability/code-edit",
+          "task/corrective-implementation",
+          "task/refactor-safe",
+          "task/migration",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-07T19:39:17.656614+00:00",
+      "event": "started",
+      "agent_type": "developer",
+      "summary": "Worker started",
+      "details": {}
     }
   ],
-  "metadata": {},
+  "metadata": {
+    "execution_root": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-d34d190d",
+    "workspace_repo_path": "repo",
+    "loaded_skills": [
+      "core/base-orchestrator",
+      "role/developer-implementation",
+      "capability/code-edit",
+      "task/corrective-implementation",
+      "task/refactor-safe",
+      "task/migration",
+      "memory"
+    ],
+    "skill_bundle_hash": "3d67820a7fb8135bc362b2b95d14300da249795bcc32c95f5dd45f36e15acfa1",
+    "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-d34d190d/home",
+    "runner_backend": "claude"
+  },
   "labels": []
 }
