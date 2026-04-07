@@ -3,7 +3,7 @@
   "title": "Review Test suite: core CRUD and infrastructure tests",
   "agent_type": "review",
   "description": "Review implementation for B-d7c0d824",
-  "status": "blocked",
+  "status": "ready",
   "bead_type": "task",
   "parent_id": "B-d7c0d824",
   "dependencies": [
@@ -72,7 +72,7 @@
     "test_coverage_notes": "Test classes cover: TestInit (idempotent init, both tables), TestAdd (UUID output, both tables, auto-init), TestSearch (ranking, limit, JSON output), TestDelete (both tables, unknown ID exits 1), TestList (newest-first, source filter, limit 0), TestStats (populated DB, missing DB exits 0), TestIngestTxt, TestIngestMd, TestIngestJson, TestIngestCsv, TestSearchIntegration (env-gated).",
     "known_limitations": "Integration tests require AGENT_MEMORY_INTEGRATION_TESTS=1 and the real ONNX model \u2014 intentionally skipped by default and documented."
   },
-  "block_reason": "docs/memory/conventions.md:39 documents `python3 -m unittest discover -s tests/` as the run command, but system Python lacks numpy/sqlite-vec and will produce ImportError rather than test results. The correct invocation is `.venv/bin/pytest` (or `.venv/bin/python -m pytest tests/`). This misleads operators into thinking tests are broken when the environment is simply wrong.",
+  "block_reason": "",
   "conflict_risks": "None \u2014 only docs/memory/conventions.md needs a one-line fix; no overlap with other in-flight beads.",
   "branch_name": "feature/b-54edeccf",
   "worktree_path": "",
@@ -130,6 +130,13 @@
       "event": "corrective_planned",
       "agent_type": "review",
       "summary": "Created corrective bead B-d7c0d824-review-corrective for blocked issue",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T20:25:36.245002+00:00",
+      "event": "retried",
+      "agent_type": "review",
+      "summary": "Requeued blocked bead after corrective bead B-d7c0d824-review-corrective completed",
       "details": {}
     }
   ],
@@ -253,7 +260,9 @@
         "attempt": 1
       }
     ],
-    "auto_corrective_bead_id": "B-d7c0d824-review-corrective"
+    "auto_corrective_bead_id": "B-d7c0d824-review-corrective",
+    "last_corrective_retry_source": "B-d7c0d824-review-corrective",
+    "last_corrective_retry_commit": "5ae5821246278fa9ce8670f663a6dc9fe5f89208"
   },
   "labels": []
 }
