@@ -6,7 +6,9 @@
   "status": "ready",
   "bead_type": "task",
   "parent_id": "B-266c0a28",
-  "dependencies": [],
+  "dependencies": [
+    "B-f40ff1e7"
+  ],
   "acceptance_criteria": [
     "All spec acceptance criteria are covered by at least one test",
     "Tests pass end-to-end against the real memory.py (not mocked)",
