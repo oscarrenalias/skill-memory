@@ -3,7 +3,7 @@
   "title": "Test Bootstrap README.md with APM installation instructions",
   "agent_type": "tester",
   "description": "Validate implementation for B-618cbc46",
-  "status": "in_progress",
+  "status": "done",
   "bead_type": "task",
   "parent_id": "B-618cbc46",
   "dependencies": [
@@ -26,19 +26,19 @@
   ],
   "updated_docs": [],
   "handoff_summary": {
-    "completed": "Validated README.md existence and content structure. Verified APM install URL against actual git remote \u2014 confirmed mismatch.",
-    "remaining": "Fix the APM install command URL in README.md: change `git+https://github.com/oscar-renalias/skill-agent-memory` to `git+https://github.com/oscarrenalias/skill-memory`.",
-    "risks": "Publishing with the wrong install URL means users cannot install the skill via APM without manually correcting the command.",
-    "verdict": "needs_changes",
-    "findings_count": 1,
-    "requires_followup": true,
+    "completed": "Verified README.md APM install URL matches the actual git remote (oscarrenalias/skill-memory). Fix from corrective bead B-618cbc46-test-corrective is in place.",
+    "remaining": "None.",
+    "risks": "None.",
+    "verdict": "approved",
+    "findings_count": 0,
+    "requires_followup": false,
     "changed_files": [
       "README.md"
     ],
     "updated_docs": [],
-    "next_action": "Fix the incorrect APM install URL in README.md \u2014 update `oscar-renalias/skill-agent-memory` to `oscarrenalias/skill-memory` to match the actual git remote.",
-    "next_agent": "developer",
-    "block_reason": "README.md APM install URL does not match the actual git remote. README has `git+https://github.com/oscar-renalias/skill-agent-memory`; actual remote is `https://github.com/oscarrenalias/skill-memory`. Users following the install instructions will get a 404.",
+    "next_action": "None \u2014 bead is complete and approved.",
+    "next_agent": "",
+    "block_reason": "",
     "expected_files": [
       "README.md"
     ],
@@ -48,17 +48,14 @@
     ],
     "conflict_risks": "No conflict risk \u2014 README.md is the only changed file and no sibling beads are modifying it.",
     "design_decisions": "",
-    "test_coverage_notes": "",
+    "test_coverage_notes": "Documentation-only bead; no automated test coverage required. Manual verification confirmed the APM install URL is correct.",
     "known_limitations": ""
   },
   "block_reason": "",
   "conflict_risks": "No conflict risk \u2014 README.md is the only changed file and no sibling beads are modifying it.",
   "branch_name": "feature/b-33389719",
   "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-33389719",
-  "lease": {
-    "owner": "tester:B-618cbc46-test",
-    "expires_at": "2026-04-08T11:26:21.055720+00:00"
-  },
+  "lease": null,
   "retries": 0,
   "execution_history": [
     {
@@ -159,6 +156,13 @@
       "details": {
         "template_path": ".takt/agent-runs/B-618cbc46-test/repo/templates/agents/tester.md"
       }
+    },
+    {
+      "timestamp": "2026-04-08T10:56:42.853614+00:00",
+      "event": "completed",
+      "agent_type": "tester",
+      "summary": "README.md APM install URL is correct. After the corrective bead applied the fix, line 10 now reads `apm install git+https://github.com/oscarrenalias/skill-memory`, matching the actual git remote. No remaining findings.",
+      "details": {}
     }
   ],
   "metadata": {
@@ -231,30 +235,30 @@
       }
     },
     "last_agent_result": {
-      "outcome": "blocked",
-      "summary": "README.md exists and is well-structured, but the APM install URL is incorrect. The README contains `git+https://github.com/oscar-renalias/skill-agent-memory` while the actual remote is `https://github.com/oscarrenalias/skill-memory` \u2014 both the username (hyphenated vs not) and the repo name differ.",
-      "verdict": "needs_changes",
-      "findings_count": 1,
-      "requires_followup": true,
-      "next_agent": "developer",
-      "block_reason": "README.md APM install URL does not match the actual git remote. README has `git+https://github.com/oscar-renalias/skill-agent-memory`; actual remote is `https://github.com/oscarrenalias/skill-memory`. Users following the install instructions will get a 404."
+      "outcome": "completed",
+      "summary": "README.md APM install URL is correct. After the corrective bead applied the fix, line 10 now reads `apm install git+https://github.com/oscarrenalias/skill-memory`, matching the actual git remote. No remaining findings.",
+      "verdict": "approved",
+      "findings_count": 0,
+      "requires_followup": false,
+      "next_agent": "",
+      "block_reason": ""
     },
     "telemetry": {
-      "cost_usd": 0.14758559999999998,
-      "duration_ms": 47547,
-      "duration_api_ms": 41895,
-      "num_turns": 5,
-      "input_tokens": 6,
-      "output_tokens": 2359,
-      "cache_creation_tokens": 24750,
-      "cache_read_tokens": 64567,
+      "cost_usd": 0.0604929,
+      "duration_ms": 20504,
+      "duration_api_ms": 17547,
+      "num_turns": 3,
+      "input_tokens": 5,
+      "output_tokens": 937,
+      "cache_creation_tokens": 8320,
+      "cache_read_tokens": 50743,
       "stop_reason": "end_turn",
-      "session_id": "359d270c-d385-40a9-a366-666470aece68",
+      "session_id": "37e6eb3a-95ac-47fb-8ae8-3ef327423808",
       "permission_denials": [],
-      "prompt_chars": 7156,
-      "prompt_lines": 150,
+      "prompt_chars": 8280,
+      "prompt_lines": 156,
       "source": "provider",
-      "attempt": 1
+      "attempt": 2
     },
     "telemetry_history": [
       {
@@ -273,6 +277,23 @@
         "prompt_lines": 150,
         "source": "provider",
         "attempt": 1
+      },
+      {
+        "cost_usd": 0.0604929,
+        "duration_ms": 20504,
+        "duration_api_ms": 17547,
+        "num_turns": 3,
+        "input_tokens": 5,
+        "output_tokens": 937,
+        "cache_creation_tokens": 8320,
+        "cache_read_tokens": 50743,
+        "stop_reason": "end_turn",
+        "session_id": "37e6eb3a-95ac-47fb-8ae8-3ef327423808",
+        "permission_denials": [],
+        "prompt_chars": 8280,
+        "prompt_lines": 156,
+        "source": "provider",
+        "attempt": 2
       }
     ],
     "auto_corrective_bead_id": "B-618cbc46-test-corrective",
