@@ -3,7 +3,7 @@
   "title": "Test Implement model bootstrap (_ensure_model)",
   "agent_type": "tester",
   "description": "Validate implementation for B-2ad17234",
-  "status": "in_progress",
+  "status": "done",
   "bead_type": "task",
   "parent_id": "B-2ad17234",
   "dependencies": [
@@ -17,47 +17,51 @@
   "execution_branch_name": "feature/b-266c0a28",
   "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
   "expected_files": [
-    "__pycache__/memory.cpython-314.pyc",
-    "memory.py"
+    "tests/test_ensure_model.py"
   ],
   "expected_globs": [],
   "touched_files": [
-    "__pycache__/memory.cpython-314.pyc",
-    "memory.py"
+    "tests/__pycache__/test_ensure_model.cpython-314-pytest-9.0.2.pyc",
+    "tests/test_ensure_model.py"
   ],
   "changed_files": [
-    "__pycache__/memory.cpython-314.pyc",
-    "memory.py"
+    "tests/__pycache__/test_ensure_model.cpython-314-pytest-9.0.2.pyc",
+    "tests/test_ensure_model.py"
   ],
   "updated_docs": [],
   "handoff_summary": {
-    "completed": "",
-    "remaining": "",
-    "risks": "",
-    "verdict": "",
+    "completed": "Wrote tests/test_ensure_model.py with 4 test classes covering: (1) no-op when model already exists, (2) first-call download with SHA256 verification, (3) SHA256 mismatch causes unlink + exit(1), (4) network failure causes unlink + exit(1). All 9 tests pass in 0.20s. Existing tests (test_memory_cli.py, test_db_init.py) still pass with no regressions.",
+    "remaining": "None.",
+    "risks": "None. Tests are pure unit tests using mocks; no real network calls or filesystem side-effects outside temp directories.",
+    "verdict": "approved",
     "findings_count": 0,
     "requires_followup": false,
-    "changed_files": [],
+    "changed_files": [
+      "tests/__pycache__/test_ensure_model.cpython-314-pytest-9.0.2.pyc",
+      "tests/test_ensure_model.py"
+    ],
     "updated_docs": [],
-    "next_action": "",
+    "next_action": "Bead complete. No follow-up required.",
     "next_agent": "",
     "block_reason": "",
-    "expected_files": [],
+    "expected_files": [
+      "tests/test_ensure_model.py"
+    ],
     "expected_globs": [],
-    "touched_files": [],
-    "conflict_risks": "",
-    "design_decisions": "",
-    "test_coverage_notes": "",
-    "known_limitations": ""
+    "touched_files": [
+      "tests/__pycache__/test_ensure_model.cpython-314-pytest-9.0.2.pyc",
+      "tests/test_ensure_model.py"
+    ],
+    "conflict_risks": "None. tests/test_ensure_model.py is a new file; no sibling beads claim it.",
+    "design_decisions": "Used importlib.util.spec_from_file_location to load memory.py with sys.prefix patched, matching the pattern established in test_memory_cli.py. _MODEL_PATH is redirected to a temp directory per-test to avoid touching ~/.cache.",
+    "test_coverage_notes": "9 tests covering: no-op when file exists (2), first download + SHA pass (2), SHA mismatch \u2192 unlink + exit(1) (2), network failure \u2192 unlink + exit(1) (3). All pass without network access or managed venv.",
+    "known_limitations": "The real model file is 133 MB (float32 ONNX); tests use fake byte content and patched SHA256 constants to avoid network dependencies."
   },
-  "block_reason": "Deferred due to file-scope conflict with active bead B-d34d190d-review-corrective",
-  "conflict_risks": "None. No sibling beads claim memory.py.",
+  "block_reason": "",
+  "conflict_risks": "None. tests/test_ensure_model.py is a new file; no sibling beads claim it.",
   "branch_name": "feature/b-266c0a28",
   "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
-  "lease": {
-    "owner": "tester:B-2ad17234-test",
-    "expires_at": "2026-04-08T05:32:52.008265+00:00"
-  },
+  "lease": null,
   "retries": 0,
   "execution_history": [
     {
@@ -196,6 +200,13 @@
       "details": {
         "template_path": ".takt/agent-runs/B-2ad17234-test/repo/templates/agents/tester.md"
       }
+    },
+    {
+      "timestamp": "2026-04-08T05:06:11.488743+00:00",
+      "event": "completed",
+      "agent_type": "tester",
+      "summary": "Created tests/test_ensure_model.py with 9 unit tests covering all four required scenarios for _ensure_model(). All 9 tests pass. No regressions in existing tests.",
+      "details": {}
     }
   ],
   "metadata": {
@@ -264,7 +275,53 @@
         "test_coverage_notes": "",
         "known_limitations": ""
       }
-    }
+    },
+    "last_agent_result": {
+      "outcome": "completed",
+      "summary": "Created tests/test_ensure_model.py with 9 unit tests covering all four required scenarios for _ensure_model(). All 9 tests pass. No regressions in existing tests.",
+      "verdict": "approved",
+      "findings_count": 0,
+      "requires_followup": false,
+      "next_agent": "",
+      "block_reason": ""
+    },
+    "telemetry": {
+      "cost_usd": 0.37902105,
+      "duration_ms": 196526,
+      "duration_api_ms": 184981,
+      "num_turns": 13,
+      "input_tokens": 1369,
+      "output_tokens": 12951,
+      "cache_creation_tokens": 24209,
+      "cache_read_tokens": 299551,
+      "stop_reason": "end_turn",
+      "session_id": "7b15dabf-c5de-4c88-bfc9-f1bae99e9ce7",
+      "permission_denials": [],
+      "prompt_chars": 7565,
+      "prompt_lines": 155,
+      "source": "provider",
+      "attempt": 1
+    },
+    "telemetry_history": [
+      {
+        "cost_usd": 0.37902105,
+        "duration_ms": 196526,
+        "duration_api_ms": 184981,
+        "num_turns": 13,
+        "input_tokens": 1369,
+        "output_tokens": 12951,
+        "cache_creation_tokens": 24209,
+        "cache_read_tokens": 299551,
+        "stop_reason": "end_turn",
+        "session_id": "7b15dabf-c5de-4c88-bfc9-f1bae99e9ce7",
+        "permission_denials": [],
+        "prompt_chars": 7565,
+        "prompt_lines": 155,
+        "source": "provider",
+        "attempt": 1
+      }
+    ],
+    "last_commit": "d2387cf2797bb7662741ecb88035cdff4ba78812"
   },
   "labels": []
 }
