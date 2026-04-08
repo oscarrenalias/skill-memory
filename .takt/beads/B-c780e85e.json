@@ -3,7 +3,7 @@
   "title": "Review query and CRUD implementation",
   "agent_type": "review",
   "description": "Review the combined implementation of search, delete, list, and stats commands. Check for correctness of SQL queries, proper transaction handling in delete, accurate distance metric documentation, consistent CLI flag behaviour, and absence of regressions in the add command from spec-a536cb5e.",
-  "status": "ready",
+  "status": "done",
   "bead_type": "task",
   "parent_id": "B-cb0b48a1",
   "dependencies": [],
@@ -55,7 +55,6 @@
     "test_coverage_notes": "",
     "known_limitations": ""
   },
-  "block_reason": "",
   "conflict_risks": "No conflicts possible until memory.py is created. When a developer creates it, no existing files will conflict.",
   "branch_name": "feature/b-cb0b48a1",
   "worktree_path": "",
@@ -366,5 +365,7 @@
     "last_corrective_retry_source": "B-c780e85e-corrective",
     "last_corrective_retry_commit": "0034ea7ba0baab1386f574eb2977f42d48c458e4"
   },
-  "labels": []
+  "labels": [],
+  "completed_at": "2026-04-07T20:08:00.964846+00:00",
+  "result": "Implementation verified by corrective bead B-c780e85e-corrective. Both spec-a536cb5e and spec-9f1b7155 satisfied. Marked done by operator."
 }

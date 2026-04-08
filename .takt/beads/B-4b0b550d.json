@@ -3,7 +3,7 @@
   "title": "Test query and CRUD commands",
   "agent_type": "tester",
   "description": "Write and run integration tests covering all four new subcommands: search, delete, list, and stats. Tests should use a temporary DB to avoid polluting state. Cover happy paths, edge cases (nonexistent IDs, empty DB for stats, --limit 0 for list), and JSON output shapes.",
-  "status": "blocked",
+  "status": "done",
   "bead_type": "task",
   "parent_id": "B-cb0b48a1",
   "dependencies": [],
@@ -60,7 +60,6 @@
     "test_coverage_notes": "",
     "known_limitations": ""
   },
-  "block_reason": "claude -p produced no structured output. is_error=False, stop_reason=end_turn, result='Confirmed \u2014 the pip install + pytest run completed successfully (exit code 0), consistent with the 22 tests all passing as already reported in the structured verdict.'",
   "conflict_risks": "",
   "branch_name": "feature/b-cb0b48a1",
   "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1",
@@ -423,5 +422,7 @@
     "needs_human_intervention": true,
     "escalation_reason": "Exceeded corrective attempt budget (2) for blocked bead."
   },
-  "labels": []
+  "labels": [],
+  "completed_at": "2026-04-07T19:54:20.150626+00:00",
+  "result": "Tests confirmed passing by agent on multiple runs (22/22). Marked done by operator after repeated structured-output failures unrelated to test correctness."
 }
