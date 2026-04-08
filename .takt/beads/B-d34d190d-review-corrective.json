@@ -3,7 +3,7 @@
   "title": "Corrective fix for B-d34d190d-review: Review Ingest command skeleton with txt and md chunking",
   "agent_type": "developer",
   "description": "Blocked reason: Finding 1: spec AC \"3 paragraphs \u2192 3 rows (each under chunk_size)\" is violated \u2014 implementation merges them into 1 chunk; test was rewritten to match implementation rather than spec. Requires spec amendment or implementation fix. Finding 2: tests/test_memory.py (mandated by spec) does not exist; TestIngestJson and TestIngestCsv are absent; all DB-operation test classes missing. Spec AC \"python3 -m unittest discover -s tests/ passes\" cannot be validated as green for the full required scope.\n\nRemaining work: Finding 1: resolve paragraph-merge vs 3-rows-per-paragraph AC conflict (spec amendment or code change). Finding 2: add TestIngestJson and TestIngestCsv at minimum; confirm whether DB-operation tests are deferred by explicit sign-off or must be added now. Finding 3 (low, non-blocking): update bead expected_files metadata to reflect memory.py at repo root.",
-  "status": "ready",
+  "status": "in_progress",
   "bead_type": "task",
   "parent_id": "B-d34d190d-review",
   "dependencies": [],
@@ -62,9 +62,12 @@
   },
   "block_reason": "Deferred due to file-scope conflict with active bead B-812641b9-docs",
   "conflict_risks": "No conflicts expected. memory.py is at repo root; no other active beads claim this file.",
-  "branch_name": "",
-  "worktree_path": "",
-  "lease": null,
+  "branch_name": "feature/b-54edeccf",
+  "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
+  "lease": {
+    "owner": "developer:B-d34d190d-review-corrective",
+    "expires_at": "2026-04-08T05:27:28.179772+00:00"
+  },
   "retries": 0,
   "execution_history": [
     {
@@ -227,10 +230,48 @@
       "agent_type": "developer",
       "summary": "Deferred due to file-scope conflict with active bead B-812641b9-docs",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T04:57:28.820144+00:00",
+      "event": "skills_loaded",
+      "agent_type": "developer",
+      "summary": "Loaded 7 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/developer-implementation",
+          "capability/code-edit",
+          "task/corrective-implementation",
+          "task/refactor-safe",
+          "task/migration",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-08T04:57:28.820176+00:00",
+      "event": "started",
+      "agent_type": "developer",
+      "summary": "Worker started",
+      "details": {}
     }
   ],
   "metadata": {
-    "auto_corrective_for": "B-d34d190d-review"
+    "auto_corrective_for": "B-d34d190d-review",
+    "execution_root": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-d34d190d-review-corrective",
+    "workspace_repo_path": "repo",
+    "loaded_skills": [
+      "core/base-orchestrator",
+      "role/developer-implementation",
+      "capability/code-edit",
+      "task/corrective-implementation",
+      "task/refactor-safe",
+      "task/migration",
+      "memory"
+    ],
+    "skill_bundle_hash": "3d67820a7fb8135bc362b2b95d14300da249795bcc32c95f5dd45f36e15acfa1",
+    "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-d34d190d-review-corrective/home",
+    "runner_backend": "claude"
   },
   "labels": []
 }
