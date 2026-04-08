@@ -3,7 +3,7 @@
   "title": "Resolve merge conflicts for search/list: add --long flag to show full chunk content",
   "agent_type": "developer",
   "description": "Test gate failed for feature/b-b082bd73.\n\nCommand: .venv/bin/pytest\n\nOutput:\n/bin/sh: .venv/bin/pytest: No such file or directory",
-  "status": "ready",
+  "status": "done",
   "bead_type": "merge-conflict",
   "parent_id": "B-b082bd73",
   "dependencies": [],
@@ -49,6 +49,13 @@
       "event": "created",
       "agent_type": "scheduler",
       "summary": "Bead created",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T09:22:56.710769+00:00",
+      "event": "completed",
+      "agent_type": "developer",
+      "summary": "Resolved: installed pytest manually in worktree venv; updated test_command to auto-install pytest.",
       "details": {}
     }
   ],
