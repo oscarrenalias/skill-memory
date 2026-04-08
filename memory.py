@@ -529,6 +529,12 @@ def cmd_search(args):
             for r in rows
         ]
         print(json.dumps(out, indent=2))
+    elif getattr(args, 'long', False):
+        for r in rows:
+            dist, mem_id, content, source = r[5], r[0], r[1], r[2]
+            print(f"--- [{dist:.3f}] {mem_id}  (source: {source}) ---")
+            print(content)
+            print()
     else:
         for r in rows:
             dist, mem_id, content, source = r[5], r[0], r[1], r[2]
@@ -592,6 +598,12 @@ def cmd_list(args):
             for r in rows
         ]
         print(json.dumps(out, indent=2))
+    elif getattr(args, 'long', False):
+        for r in rows:
+            mem_id, content, source, _, created_at = r
+            print(f"--- {mem_id}  (source: {source})  {created_at} ---")
+            print(content)
+            print()
     else:
         for r in rows:
             mem_id, content, source, _, created_at = r
@@ -680,6 +692,10 @@ def main():
     )
     search_parser.add_argument("--source", metavar="TAG", help="Filter by source tag")
     search_parser.add_argument("--json", action="store_true", help="Output JSON")
+    search_parser.add_argument(
+        "--long", action="store_true",
+        help="Print full chunk content for each result, separated by delimiter lines"
+    )
     search_parser.add_argument("--db", metavar="PATH", help="Override DB path")
     search_parser.set_defaults(func=cmd_search)
 
@@ -696,6 +712,10 @@ def main():
     )
     list_parser.add_argument("--source", metavar="TAG", help="Filter by source tag")
     list_parser.add_argument("--json", action="store_true", help="Output JSON")
+    list_parser.add_argument(
+        "--long", action="store_true",
+        help="Print full chunk content for each result, separated by delimiter lines"
+    )
     list_parser.add_argument("--db", metavar="PATH", help="Override DB path")
     list_parser.set_defaults(func=cmd_list)
 
