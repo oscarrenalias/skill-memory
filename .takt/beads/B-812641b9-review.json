@@ -119,6 +119,13 @@
       "agent_type": "review",
       "summary": "needs_changes: 2 findings \u2014 missing MIN_CHUNK_LEN filter in _ingest_json/_ingest_csv (spec violation) and stale argparse help text",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T04:59:38.741441+00:00",
+      "event": "corrective_planned",
+      "agent_type": "review",
+      "summary": "Created corrective bead B-812641b9-review-corrective for blocked issue",
+      "details": {}
     }
   ],
   "metadata": {
@@ -238,7 +245,8 @@
         "source": "provider",
         "attempt": 1
       }
-    ]
+    ],
+    "auto_corrective_bead_id": "B-812641b9-review-corrective"
   },
   "labels": []
 }
