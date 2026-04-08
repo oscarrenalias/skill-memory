@@ -3,7 +3,7 @@
   "title": "Add --namespace flag to partition memories",
   "agent_type": "developer",
   "description": "Add a --namespace NAME flag (default: 'default') to memory.py that partitions memories within a single DB. Implementation details:\n\n1. Schema: add a 'namespace' TEXT NOT NULL DEFAULT 'default' column to the 'memories' table. The memories_vec table is keyed by rowid so no change needed there. _init_db must be updated to include the column; existing DBs without the column should be migrated with ALTER TABLE ADD COLUMN (idempotent).\n\n2. All commands that read or write memories must respect the namespace:\n   - 'add': INSERT with the namespace value\n   - 'search': add 'AND m.namespace = ?' to the JOIN query\n   - 'delete': verify the row belongs to the namespace before deleting (or just delete by id regardless \u2014 simpler)\n   - 'list': add 'AND namespace = ?' to the SELECT\n   - 'stats': show per-namespace counts\n   - 'ingest': pass namespace through to each chunk insert\n\n3. CLI: add --namespace NAME (default 'default') to the top-level argument parser (before subcommands) so it applies globally, OR add it to each subcommand. Top-level is cleaner. The _resolve_db function already handles --db; add _resolve_namespace similarly.\n\n4. Update SKILL.md to document the flag and the namespace concept.\n\n5. Update tests: existing tests should pass unmodified (they use the default namespace). Add a small set of tests that verify namespace isolation \u2014 i.e. a memory added under namespace A is not returned when searching under namespace B.",
-  "status": "ready",
+  "status": "in_progress",
   "bead_type": "task",
   "parent_id": null,
   "dependencies": [],
@@ -39,9 +39,12 @@
   },
   "block_reason": "",
   "conflict_risks": "",
-  "branch_name": "",
-  "worktree_path": "",
-  "lease": null,
+  "branch_name": "feature/b-37b50a84",
+  "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-37b50a84",
+  "lease": {
+    "owner": "developer:B-37b50a84",
+    "expires_at": "2026-04-08T10:46:28.653065+00:00"
+  },
   "retries": 0,
   "execution_history": [
     {
@@ -57,9 +60,48 @@
       "agent_type": "developer",
       "summary": "Bead requeued",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T10:16:29.209430+00:00",
+      "event": "skills_loaded",
+      "agent_type": "developer",
+      "summary": "Loaded 7 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/developer-implementation",
+          "capability/code-edit",
+          "task/corrective-implementation",
+          "task/refactor-safe",
+          "task/migration",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-08T10:16:29.209447+00:00",
+      "event": "started",
+      "agent_type": "developer",
+      "summary": "Worker started",
+      "details": {}
     }
   ],
-  "metadata": {},
+  "metadata": {
+    "execution_root": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-37b50a84",
+    "workspace_repo_path": "repo",
+    "loaded_skills": [
+      "core/base-orchestrator",
+      "role/developer-implementation",
+      "capability/code-edit",
+      "task/corrective-implementation",
+      "task/refactor-safe",
+      "task/migration",
+      "memory"
+    ],
+    "skill_bundle_hash": "3d67820a7fb8135bc362b2b95d14300da249795bcc32c95f5dd45f36e15acfa1",
+    "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-37b50a84/home",
+    "runner_backend": "claude"
+  },
   "labels": [],
   "recovery_for": null,
   "priority": null
