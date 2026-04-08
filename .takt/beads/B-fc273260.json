@@ -3,7 +3,7 @@
   "title": "Strengthen SKILL.md: frontmatter and agent guidance",
   "agent_type": "developer",
   "description": "Rewrite SKILL.md with two goals:\n\n1. Frontmatter improvements:\n   - Rewrite description to lead with use case, not implementation stack. Target: 'Persist and retrieve knowledge across agent sessions. Use at bead start to search for prior context; use at bead end to store findings, decisions, and gotchas worth remembering in future tasks.' (under 250 chars)\n   - Set user-invocable: true (users should be able to query memory directly)\n   - Keep tools: Bash, disable-model-invocation stays at default (false)\n\n2. Content restructure \u2014 the file is currently too focused on CLI flags and implementation detail, not enough on agent behavior:\n   - Rewrite intro paragraph: focus on WHY this exists and what it enables across sessions, not the tech stack (drop SQLite/BAAI references from intro)\n   - Move 'What NOT to Store' section near the top, right after intro \u2014 it is the most important behavioral guidance\n   - Add concrete paired examples of good vs bad memories (e.g. 'good: a recurring merge conflict pattern and its resolution; bad: the contents of a file you could just read')\n   - Expand 'When to Use This Skill' with richer guidance: what to search for at bead start, how to interpret results (what counts as a strong match vs noise), what to write at bead end and why\n   - Add namespace convention for takt agents: suggest using the feature root bead ID or project name as namespace; one namespace per feature or agent type\n   - Trim 'Getting Started' to one or two lines \u2014 agents don't need to know about .venv bootstrapping\n   - Keep Commands Reference as-is (it is accurate and thorough)",
-  "status": "ready",
+  "status": "in_progress",
   "bead_type": "task",
   "parent_id": null,
   "dependencies": [],
@@ -39,9 +39,12 @@
   },
   "block_reason": "",
   "conflict_risks": "",
-  "branch_name": "",
-  "worktree_path": "",
-  "lease": null,
+  "branch_name": "feature/b-fc273260",
+  "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-fc273260",
+  "lease": {
+    "owner": "developer:B-fc273260",
+    "expires_at": "2026-04-08T13:12:44.711450+00:00"
+  },
   "retries": 0,
   "execution_history": [
     {
@@ -50,9 +53,48 @@
       "agent_type": "scheduler",
       "summary": "Bead created",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T12:42:46.338281+00:00",
+      "event": "skills_loaded",
+      "agent_type": "developer",
+      "summary": "Loaded 7 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/developer-implementation",
+          "capability/code-edit",
+          "task/corrective-implementation",
+          "task/refactor-safe",
+          "task/migration",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-08T12:42:46.338357+00:00",
+      "event": "started",
+      "agent_type": "developer",
+      "summary": "Worker started",
+      "details": {}
     }
   ],
-  "metadata": {},
+  "metadata": {
+    "execution_root": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-fc273260",
+    "workspace_repo_path": "repo",
+    "loaded_skills": [
+      "core/base-orchestrator",
+      "role/developer-implementation",
+      "capability/code-edit",
+      "task/corrective-implementation",
+      "task/refactor-safe",
+      "task/migration",
+      "memory"
+    ],
+    "skill_bundle_hash": "3d67820a7fb8135bc362b2b95d14300da249795bcc32c95f5dd45f36e15acfa1",
+    "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-fc273260/home",
+    "runner_backend": "claude"
+  },
   "labels": [],
   "recovery_for": null,
   "priority": null
