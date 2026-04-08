@@ -1,0 +1,67 @@
+{
+  "bead_id": "B-30d86454-docs",
+  "title": "Document Fix stale DB path in SKILL.md",
+  "agent_type": "documentation",
+  "description": "Update docs for B-30d86454",
+  "status": "ready",
+  "bead_type": "task",
+  "parent_id": "B-30d86454",
+  "dependencies": [
+    "B-30d86454"
+  ],
+  "acceptance_criteria": [],
+  "linked_docs": [],
+  "feature_root_id": "B-30d86454",
+  "execution_branch_name": "feature/b-30d86454",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-30d86454",
+  "expected_files": [
+    "SKILL.md"
+  ],
+  "expected_globs": [],
+  "touched_files": [
+    "SKILL.md"
+  ],
+  "changed_files": [
+    "SKILL.md"
+  ],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "None \u2014 only SKILL.md was changed.",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-08T10:59:26.409202+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    }
+  ],
+  "metadata": {},
+  "labels": [],
+  "recovery_for": null,
+  "priority": null
+}
