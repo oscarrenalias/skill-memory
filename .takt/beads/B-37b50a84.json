@@ -3,7 +3,7 @@
   "title": "Add --namespace flag to partition memories",
   "agent_type": "developer",
   "description": "Add a --namespace NAME flag (default: 'default') to memory.py that partitions memories within a single DB. Implementation details:\n\n1. Schema: add a 'namespace' TEXT NOT NULL DEFAULT 'default' column to the 'memories' table. The memories_vec table is keyed by rowid so no change needed there. _init_db must be updated to include the column; existing DBs without the column should be migrated with ALTER TABLE ADD COLUMN (idempotent).\n\n2. All commands that read or write memories must respect the namespace:\n   - 'add': INSERT with the namespace value\n   - 'search': add 'AND m.namespace = ?' to the JOIN query\n   - 'delete': verify the row belongs to the namespace before deleting (or just delete by id regardless \u2014 simpler)\n   - 'list': add 'AND namespace = ?' to the SELECT\n   - 'stats': show per-namespace counts\n   - 'ingest': pass namespace through to each chunk insert\n\n3. CLI: add --namespace NAME (default 'default') to the top-level argument parser (before subcommands) so it applies globally, OR add it to each subcommand. Top-level is cleaner. The _resolve_db function already handles --db; add _resolve_namespace similarly.\n\n4. Update SKILL.md to document the flag and the namespace concept.\n\n5. Update tests: existing tests should pass unmodified (they use the default namespace). Add a small set of tests that verify namespace isolation \u2014 i.e. a memory added under namespace A is not returned when searching under namespace B.",
-  "status": "ready",
+  "status": "done",
   "bead_type": "task",
   "parent_id": null,
   "dependencies": [],
@@ -12,35 +12,63 @@
   "feature_root_id": "B-37b50a84",
   "execution_branch_name": "feature/b-37b50a84",
   "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-37b50a84",
-  "expected_files": [],
+  "expected_files": [
+    "memory.py",
+    "SKILL.md",
+    "tests/test_namespace.py"
+  ],
   "expected_globs": [],
-  "touched_files": [],
-  "changed_files": [],
-  "updated_docs": [],
+  "touched_files": [
+    "SKILL.md",
+    "memory.py",
+    "tests/test_namespace.py"
+  ],
+  "changed_files": [
+    "SKILL.md",
+    "memory.py",
+    "tests/test_namespace.py"
+  ],
+  "updated_docs": [
+    "SKILL.md"
+  ],
   "handoff_summary": {
-    "completed": "",
-    "remaining": "",
-    "risks": "",
-    "verdict": "",
+    "completed": "Schema: namespace TEXT NOT NULL DEFAULT 'default' column added to memories table in _init_db; ALTER TABLE ADD COLUMN migration for existing DBs (OperationalError caught for idempotency). Helper: _resolve_namespace(namespace_arg) \u2192 'default' fallback. CLI: --namespace NAME (default='default') on top-level parser. Commands: cmd_add inserts with namespace; cmd_search adds AND m.namespace=? to JOIN WHERE; cmd_list rewrites condition builder to always include namespace=?; cmd_stats shows per-namespace GROUP BY breakdown; _ingest_text_chunks/_ingest_json/_ingest_csv all accept namespace param and pass to _insert_chunk; cmd_ingest resolves and passes namespace. All commands use getattr(args,'namespace',None) for backward compat with existing tests. SKILL.md: new Namespaces section + updated command signatures. tests/test_namespace.py: 10 tests covering list isolation, search isolation, default namespace, schema migration idempotency, and stats output.",
+    "remaining": "None \u2014 all bead requirements implemented.",
+    "risks": "sqlite-vec JOIN WHERE clause with AND m.namespace=? has been implemented as the bead specifies; if sqlite-vec's virtual table has constraints on WHERE clause composition, the tester will surface it. Fallback would be Python post-filter (matching how source/threshold filtering is done). Existing TestList inserts rows via direct SQL without namespace \u2014 these correctly get DEFAULT 'default' so tests should pass unmodified.",
+    "verdict": "approved",
     "findings_count": 0,
     "requires_followup": false,
-    "changed_files": [],
-    "updated_docs": [],
-    "next_action": "",
-    "next_agent": "",
+    "changed_files": [
+      "SKILL.md",
+      "memory.py",
+      "tests/test_namespace.py"
+    ],
+    "updated_docs": [
+      "SKILL.md"
+    ],
+    "next_action": "Run tester agent to verify existing tests pass unmodified and new namespace isolation tests pass.",
+    "next_agent": "tester",
     "block_reason": "",
-    "expected_files": [],
+    "expected_files": [
+      "memory.py",
+      "SKILL.md",
+      "tests/test_namespace.py"
+    ],
     "expected_globs": [],
-    "touched_files": [],
-    "conflict_risks": "",
-    "design_decisions": "",
-    "test_coverage_notes": "",
-    "known_limitations": ""
+    "touched_files": [
+      "SKILL.md",
+      "memory.py",
+      "tests/test_namespace.py"
+    ],
+    "conflict_risks": "None \u2014 namespace column is additive (DEFAULT 'default') and all new code uses getattr fallback, so no breaking changes to adjacent beads.",
+    "design_decisions": "Used getattr(args, 'namespace', None) in every command handler so existing test code that constructs argparse.Namespace without 'namespace' key continues to work. Chose top-level --namespace (before subcommand) per bead recommendation. Delete command intentionally ignores namespace (deletes by UUID regardless) per bead spec. Stats shows all namespaces regardless of --namespace flag for full visibility.",
+    "test_coverage_notes": "10 new tests in tests/test_namespace.py: list isolation (same/different namespace), search isolation, default namespace behaviour, schema migration idempotency, DEFAULT column value, two-namespace coexistence, and stats per-namespace output. All require _MEMORY_AVAILABLE (sqlite_vec importable).",
+    "known_limitations": "--namespace must be placed before the subcommand (top-level flag). cmd_delete deletes by UUID without namespace verification by design (simpler, as bead allows). cmd_search with k= may return fewer than k results if top-k candidates span multiple namespaces."
   },
   "block_reason": "",
-  "conflict_risks": "",
-  "branch_name": "",
-  "worktree_path": "",
+  "conflict_risks": "None \u2014 namespace column is additive (DEFAULT 'default') and all new code uses getattr fallback, so no breaking changes to adjacent beads.",
+  "branch_name": "feature/b-37b50a84",
+  "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-37b50a84",
   "lease": null,
   "retries": 0,
   "execution_history": [
@@ -57,9 +85,153 @@
       "agent_type": "developer",
       "summary": "Bead requeued",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T10:16:29.209430+00:00",
+      "event": "skills_loaded",
+      "agent_type": "developer",
+      "summary": "Loaded 7 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/developer-implementation",
+          "capability/code-edit",
+          "task/corrective-implementation",
+          "task/refactor-safe",
+          "task/migration",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-08T10:16:29.209447+00:00",
+      "event": "started",
+      "agent_type": "developer",
+      "summary": "Worker started",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T10:16:29.675625+00:00",
+      "event": "guardrails_applied",
+      "agent_type": "developer",
+      "summary": "Applied guardrails from .takt/agent-runs/B-37b50a84/repo/templates/agents/developer.md",
+      "details": {
+        "template_path": ".takt/agent-runs/B-37b50a84/repo/templates/agents/developer.md"
+      }
+    },
+    {
+      "timestamp": "2026-04-08T10:22:46.431873+00:00",
+      "event": "completed",
+      "agent_type": "developer",
+      "summary": "Implemented --namespace flag to partition memories within a single DB. Added namespace column to schema with idempotent migration, _resolve_namespace helper, top-level --namespace CLI flag, namespace filtering across all commands (add/search/list/ingest/stats), SKILL.md documentation, and namespace isolation tests.",
+      "details": {}
     }
   ],
-  "metadata": {},
+  "metadata": {
+    "execution_root": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-37b50a84",
+    "workspace_repo_path": "repo",
+    "loaded_skills": [
+      "core/base-orchestrator",
+      "role/developer-implementation",
+      "capability/code-edit",
+      "task/corrective-implementation",
+      "task/refactor-safe",
+      "task/migration",
+      "memory"
+    ],
+    "skill_bundle_hash": "3d67820a7fb8135bc362b2b95d14300da249795bcc32c95f5dd45f36e15acfa1",
+    "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-37b50a84/home",
+    "runner_backend": "claude",
+    "guardrails": {
+      "agent_type": "developer",
+      "template_path": ".takt/agent-runs/B-37b50a84/repo/templates/agents/developer.md",
+      "template_text": "# Developer Guardrails\n\nPrimary responsibility: Implement only the assigned bead inside the existing architecture and file scope.\n\nAllowed actions:\n- Modify code, configuration, or local docs required to complete the assigned bead.\n- Create sub-beads for discovered follow-up work that should be handled separately.\n- Verify your `Python` changes compile and import correctly with a quick syntax check: `python -m py_compile`.\n\nDisallowed actions:\n- Run any test suite \u2014 not even a targeted `pytest` run or any subset. Test execution is exclusively the tester agent's responsibility. Running tests wastes the agent budget and delays the pipeline.\n- Redesign unrelated architecture or broaden scope beyond the assigned bead.\n- Perform final review signoff in place of a review agent.\n- Silently absorb unrelated test, documentation, or planning work that should be handed off.\n\nExpected outputs:\n- Completed or blocked JSON with concise implementation summary.\n- Accurate touched files, changed files, risks, and follow-up handoff fields.",
+      "captured_at": "2026-04-08T10:16:29.675615+00:00"
+    },
+    "worker_prompt_context": {
+      "bead_id": "B-37b50a84",
+      "feature_root_id": "B-37b50a84",
+      "title": "Add --namespace flag to partition memories",
+      "agent_type": "developer",
+      "description": "Add a --namespace NAME flag (default: 'default') to memory.py that partitions memories within a single DB. Implementation details:\n\n1. Schema: add a 'namespace' TEXT NOT NULL DEFAULT 'default' column to the 'memories' table. The memories_vec table is keyed by rowid so no change needed there. _init_db must be updated to include the column; existing DBs without the column should be migrated with ALTER TABLE ADD COLUMN (idempotent).\n\n2. All commands that read or write memories must respect the namespace:\n   - 'add': INSERT with the namespace value\n   - 'search': add 'AND m.namespace = ?' to the JOIN query\n   - 'delete': verify the row belongs to the namespace before deleting (or just delete by id regardless \u2014 simpler)\n   - 'list': add 'AND namespace = ?' to the SELECT\n   - 'stats': show per-namespace counts\n   - 'ingest': pass namespace through to each chunk insert\n\n3. CLI: add --namespace NAME (default 'default') to the top-level argument parser (before subcommands) so it applies globally, OR add it to each subcommand. Top-level is cleaner. The _resolve_db function already handles --db; add _resolve_namespace similarly.\n\n4. Update SKILL.md to document the flag and the namespace concept.\n\n5. Update tests: existing tests should pass unmodified (they use the default namespace). Add a small set of tests that verify namespace isolation \u2014 i.e. a memory added under namespace A is not returned when searching under namespace B.",
+      "status": "in_progress",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "linked_docs": [],
+      "execution_branch_name": "feature/b-37b50a84",
+      "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-37b50a84",
+      "expected_files": [],
+      "expected_globs": [],
+      "touched_files": [],
+      "conflict_risks": "",
+      "handoff_summary": {
+        "completed": "",
+        "remaining": "",
+        "risks": "",
+        "verdict": "",
+        "findings_count": 0,
+        "requires_followup": false,
+        "changed_files": [],
+        "updated_docs": [],
+        "next_action": "",
+        "next_agent": "",
+        "block_reason": "",
+        "expected_files": [],
+        "expected_globs": [],
+        "touched_files": [],
+        "conflict_risks": "",
+        "design_decisions": "",
+        "test_coverage_notes": "",
+        "known_limitations": ""
+      }
+    },
+    "last_agent_result": {
+      "outcome": "completed",
+      "summary": "Implemented --namespace flag to partition memories within a single DB. Added namespace column to schema with idempotent migration, _resolve_namespace helper, top-level --namespace CLI flag, namespace filtering across all commands (add/search/list/ingest/stats), SKILL.md documentation, and namespace isolation tests.",
+      "verdict": "approved",
+      "findings_count": 0,
+      "requires_followup": false,
+      "next_agent": "tester",
+      "block_reason": ""
+    },
+    "telemetry": {
+      "cost_usd": 1.1661871500000003,
+      "duration_ms": 374847,
+      "duration_api_ms": 366403,
+      "num_turns": 37,
+      "input_tokens": 1686,
+      "output_tokens": 24429,
+      "cache_creation_tokens": 61293,
+      "cache_read_tokens": 1882818,
+      "stop_reason": "end_turn",
+      "session_id": "0750e525-eeae-448d-b173-5adc6cf7861b",
+      "permission_denials": [],
+      "prompt_chars": 6692,
+      "prompt_lines": 130,
+      "source": "provider",
+      "attempt": 1
+    },
+    "telemetry_history": [
+      {
+        "cost_usd": 1.1661871500000003,
+        "duration_ms": 374847,
+        "duration_api_ms": 366403,
+        "num_turns": 37,
+        "input_tokens": 1686,
+        "output_tokens": 24429,
+        "cache_creation_tokens": 61293,
+        "cache_read_tokens": 1882818,
+        "stop_reason": "end_turn",
+        "session_id": "0750e525-eeae-448d-b173-5adc6cf7861b",
+        "permission_denials": [],
+        "prompt_chars": 6692,
+        "prompt_lines": 130,
+        "source": "provider",
+        "attempt": 1
+      }
+    ],
+    "last_commit": "ff2eaa64a0f7bcc67d8ade44494ab7b4b66aa1f5"
+  },
   "labels": [],
   "recovery_for": null,
   "priority": null
