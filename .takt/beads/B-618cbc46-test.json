@@ -3,7 +3,7 @@
   "title": "Test Bootstrap README.md with APM installation instructions",
   "agent_type": "tester",
   "description": "Validate implementation for B-618cbc46",
-  "status": "ready",
+  "status": "in_progress",
   "bead_type": "task",
   "parent_id": "B-618cbc46",
   "dependencies": [
@@ -55,7 +55,10 @@
   "conflict_risks": "No conflict risk \u2014 README.md is the only changed file and no sibling beads are modifying it.",
   "branch_name": "feature/b-33389719",
   "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-33389719",
-  "lease": null,
+  "lease": {
+    "owner": "tester:B-618cbc46-test",
+    "expires_at": "2026-04-08T11:26:21.055720+00:00"
+  },
   "retries": 0,
   "execution_history": [
     {
@@ -123,6 +126,29 @@
       "event": "retried",
       "agent_type": "tester",
       "summary": "Requeued blocked bead after corrective bead B-618cbc46-test-corrective completed",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T10:56:21.491005+00:00",
+      "event": "skills_loaded",
+      "agent_type": "tester",
+      "summary": "Loaded 6 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/tester-validation",
+          "capability/test-execution",
+          "task/defect-bead-creation",
+          "task/regression-triage",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-08T10:56:21.491029+00:00",
+      "event": "started",
+      "agent_type": "tester",
+      "summary": "Worker started",
       "details": {}
     }
   ],
