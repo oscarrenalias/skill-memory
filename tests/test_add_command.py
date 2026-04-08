@@ -70,7 +70,8 @@ _STUB_FULL = textwrap.dedent(f"""\
         conn.executescript(
             "CREATE TABLE IF NOT EXISTS memories "
             "(id TEXT NOT NULL UNIQUE, content TEXT NOT NULL, source TEXT, "
-            "metadata TEXT NOT NULL DEFAULT '{{}}', created_at TEXT NOT NULL);"
+            "metadata TEXT NOT NULL DEFAULT '{{}}', created_at TEXT NOT NULL, "
+            "namespace TEXT NOT NULL DEFAULT 'default');"
             "CREATE TABLE IF NOT EXISTS memories_vec "
             "(rowid INTEGER PRIMARY KEY, embedding BLOB);"
         )
@@ -111,7 +112,8 @@ _STUB_NO_VEC = textwrap.dedent(f"""\
         conn.execute(
             "CREATE TABLE IF NOT EXISTS memories "
             "(id TEXT NOT NULL UNIQUE, content TEXT NOT NULL, source TEXT, "
-            "metadata TEXT NOT NULL DEFAULT '{{}}', created_at TEXT NOT NULL)"
+            "metadata TEXT NOT NULL DEFAULT '{{}}', created_at TEXT NOT NULL, "
+            "namespace TEXT NOT NULL DEFAULT 'default')"
         )
         conn.commit()
         return conn
