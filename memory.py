@@ -529,7 +529,7 @@ def cmd_search(args):
             for r in rows
         ]
         print(json.dumps(out, indent=2))
-    elif args.long:
+    elif getattr(args, 'long', False):
         for r in rows:
             dist, mem_id, content, source = r[5], r[0], r[1], r[2]
             print(f"--- [{dist:.3f}] {mem_id}  (source: {source}) ---")
@@ -598,7 +598,7 @@ def cmd_list(args):
             for r in rows
         ]
         print(json.dumps(out, indent=2))
-    elif args.long:
+    elif getattr(args, 'long', False):
         for r in rows:
             mem_id, content, source, _, created_at = r
             print(f"--- {mem_id}  (source: {source})  {created_at} ---")
