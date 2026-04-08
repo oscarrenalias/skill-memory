@@ -55,7 +55,7 @@
     "test_coverage_notes": "",
     "known_limitations": ""
   },
-  "block_reason": "",
+  "block_reason": "Deferred due to file-scope conflict with active bead B-2ad17234-test",
   "conflict_risks": "None \u2014 fixes are confined to _ingest_json, _ingest_csv, and one argparse help string in memory.py. No schema changes.",
   "branch_name": "",
   "worktree_path": "",
@@ -67,6 +67,13 @@
       "event": "created",
       "agent_type": "scheduler",
       "summary": "Bead created",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T05:02:51.758104+00:00",
+      "event": "deferred",
+      "agent_type": "developer",
+      "summary": "Deferred due to file-scope conflict with active bead B-2ad17234-test",
       "details": {}
     }
   ],
