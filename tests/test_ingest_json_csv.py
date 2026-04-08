@@ -100,14 +100,14 @@ class TestIngestJson(_BaseIngestTest):
 
     def test_string_array_adds_one_row_per_string(self):
         """JSON array of strings: each string becomes a memory row."""
-        path = self._write_json(["hello", "world", "foo"])
+        path = self._write_json(["hello world!", "lorem ipsum", "enough text here"])
         _ingest_json(path, source="test-src", db_path=self.db_path)
         self.assertEqual(self.mock_insert.call_count, 3)
         # Each call should have the string as the content arg
         contents = [c.args[1] for c in self.mock_insert.call_args_list]
-        self.assertIn("hello", contents)
-        self.assertIn("world", contents)
-        self.assertIn("foo", contents)
+        self.assertIn("hello world!", contents)
+        self.assertIn("lorem ipsum", contents)
+        self.assertIn("enough text here", contents)
 
     def test_string_array_uses_provided_source(self):
         """Source tag flows through to _insert_chunk for string elements."""
@@ -125,14 +125,14 @@ class TestIngestJson(_BaseIngestTest):
 
     def test_object_array_metadata_passed_through(self):
         """JSON object 'metadata' dict is forwarded to _insert_chunk."""
-        path = self._write_json([{"content": "text", "metadata": {"tag": "test"}}])
+        path = self._write_json([{"content": "sufficient length text", "metadata": {"tag": "test"}}])
         _ingest_json(path, source="src", db_path=self.db_path)
         meta_arg = self.mock_insert.call_args.args[3]
         self.assertEqual(meta_arg, {"tag": "test"})
 
     def test_object_array_per_row_source_overrides_default(self):
         """A 'source' key on a JSON object overrides the command-level source."""
-        path = self._write_json([{"content": "text", "source": "row-src"}])
+        path = self._write_json([{"content": "sufficient length text", "source": "row-src"}])
         _ingest_json(path, source="default-src", db_path=self.db_path)
         self.assertEqual(self.mock_insert.call_args.args[2], "row-src")
 
@@ -166,14 +166,14 @@ class TestIngestCsv(_BaseIngestTest):
     def test_happy_path_adds_one_row_per_data_row(self):
         """CSV with --column extracts text from specified column."""
         path = self._write_csv(
-            [{"text": "hello csv", "tag": "a"}, {"text": "world csv", "tag": "b"}],
+            [{"text": "hello csv world", "tag": "a"}, {"text": "world csv entry", "tag": "b"}],
             fieldnames=["text", "tag"],
         )
         _ingest_csv(path, column="text", source="csv-src", db_path=self.db_path)
         self.assertEqual(self.mock_insert.call_count, 2)
         contents = [c.args[1] for c in self.mock_insert.call_args_list]
-        self.assertIn("hello csv", contents)
-        self.assertIn("world csv", contents)
+        self.assertIn("hello csv world", contents)
+        self.assertIn("world csv entry", contents)
 
     def test_other_columns_become_metadata(self):
         """Non-text columns appear in the metadata dict passed to _insert_chunk."""
@@ -196,9 +196,54 @@ class TestIngestCsv(_BaseIngestTest):
 
     def test_source_tag_propagated(self):
         """Source tag is forwarded to _insert_chunk for CSV rows."""
-        path = self._write_csv([{"text": "data"}], fieldnames=["text"])
+        path = self._write_csv([{"text": "sufficient data text"}], fieldnames=["text"])
         _ingest_csv(path, column="text", source="csv-tag", db_path=self.db_path)
         self.assertEqual(self.mock_insert.call_args.args[2], "csv-tag")
+
+    def test_short_content_is_skipped(self):
+        """CSV rows whose content column is shorter than MIN_CHUNK_LEN are skipped."""
+        path = self._write_csv(
+            [{"text": "hi"}, {"text": "long enough content here"}],
+            fieldnames=["text"],
+        )
+        _ingest_csv(path, column="text", source="src", db_path=self.db_path)
+        self.assertEqual(self.mock_insert.call_count, 1)
+        self.assertEqual(self.mock_insert.call_args.args[1], "long enough content here")
+
+    def test_all_short_rows_skipped_adds_zero(self):
+        """CSV where every row is short results in zero inserts."""
+        path = self._write_csv(
+            [{"text": "hi"}, {"text": "bye"}],
+            fieldnames=["text"],
+        )
+        _ingest_csv(path, column="text", source="src", db_path=self.db_path)
+        self.assertEqual(self.mock_insert.call_count, 0)
+
+
+# ---------------------------------------------------------------------------
+# JSON short-chunk skip tests
+# ---------------------------------------------------------------------------
+
+class TestIngestJsonShortChunkFilter(_BaseIngestTest):
+
+    def test_short_strings_are_skipped(self):
+        """JSON strings shorter than MIN_CHUNK_LEN are not inserted."""
+        path = self._write_json(["hi", "long enough content here", "ok"])
+        _ingest_json(path, source="src", db_path=self.db_path)
+        self.assertEqual(self.mock_insert.call_count, 1)
+        self.assertEqual(self.mock_insert.call_args.args[1], "long enough content here")
+
+    def test_all_short_strings_skipped_adds_zero(self):
+        """JSON array of only short strings results in zero inserts."""
+        path = self._write_json(["hi", "bye", "no"])
+        _ingest_json(path, source="src", db_path=self.db_path)
+        self.assertEqual(self.mock_insert.call_count, 0)
+
+    def test_whitespace_only_content_is_skipped(self):
+        """Content that is only whitespace (strips to < MIN_CHUNK_LEN) is skipped."""
+        path = self._write_json(["   ", "sufficient content text"])
+        _ingest_json(path, source="src", db_path=self.db_path)
+        self.assertEqual(self.mock_insert.call_count, 1)
 
 
 # ---------------------------------------------------------------------------

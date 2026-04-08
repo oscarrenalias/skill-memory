@@ -391,18 +391,23 @@ def _ingest_json(file_path, source, db_path):
             )
             sys.exit(1)
 
+    MIN_CHUNK_LEN = 10
     _auto_init(db_path)
     con = _open_db(db_path)
     added = 0
+    skipped = 0
     try:
         with con:
             for rec in records:
+                if len(rec["content"].strip()) < MIN_CHUNK_LEN:
+                    skipped += 1
+                    continue
                 _insert_chunk(con, rec["content"], rec["source"], rec["metadata"])
                 added += 1
     finally:
         con.close()
 
-    print(f"Ingesting {file_path.name}\u2026 {added} rows added.", file=sys.stderr)
+    print(f"Ingesting {file_path.name}\u2026 {added} rows added ({skipped} skipped).", file=sys.stderr)
 
 
 def _ingest_csv(file_path, column, source, db_path):
@@ -424,20 +429,25 @@ def _ingest_csv(file_path, column, source, db_path):
         meta_columns = [f for f in fieldnames if f != column]
         rows = list(reader)
 
+    MIN_CHUNK_LEN = 10
     _auto_init(db_path)
     con = _open_db(db_path)
     added = 0
+    skipped = 0
     try:
         with con:
             for row in rows:
                 content = row[column]
+                if len(content.strip()) < MIN_CHUNK_LEN:
+                    skipped += 1
+                    continue
                 metadata = {col: row[col] for col in meta_columns}
                 _insert_chunk(con, content, source, metadata)
                 added += 1
     finally:
         con.close()
 
-    print(f"Ingesting {file_path.name}\u2026 {added} rows added.", file=sys.stderr)
+    print(f"Ingesting {file_path.name}\u2026 {added} rows added ({skipped} skipped).", file=sys.stderr)
 
 
 def cmd_ingest(args):
@@ -629,7 +639,7 @@ def main():
 
     # ingest
     ingest_parser = subparsers.add_parser("ingest", help="Ingest a file into memory")
-    ingest_parser.add_argument("file", help="Path to file to ingest (.txt or .md)")
+    ingest_parser.add_argument("file", help="Path to file to ingest (.txt, .md, .json, or .csv)")
     ingest_parser.add_argument(
         "--source", metavar="TAG",
         help="Source tag (defaults to file basename)"
