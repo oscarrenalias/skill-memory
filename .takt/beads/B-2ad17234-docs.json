@@ -3,7 +3,7 @@
   "title": "Document Implement model bootstrap (_ensure_model)",
   "agent_type": "documentation",
   "description": "Update docs for B-2ad17234",
-  "status": "in_progress",
+  "status": "done",
   "bead_type": "task",
   "parent_id": "B-2ad17234",
   "dependencies": [
@@ -17,47 +17,51 @@
   "execution_branch_name": "feature/b-266c0a28",
   "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
   "expected_files": [
-    "__pycache__/memory.cpython-314.pyc",
     "memory.py"
   ],
   "expected_globs": [],
   "touched_files": [
-    "__pycache__/memory.cpython-314.pyc",
-    "memory.py"
+    "docs/memory/memory-cli.md"
   ],
   "changed_files": [
-    "__pycache__/memory.cpython-314.pyc",
-    "memory.py"
+    "docs/memory/memory-cli.md"
   ],
-  "updated_docs": [],
+  "updated_docs": [
+    "docs/memory/memory-cli.md"
+  ],
   "handoff_summary": {
-    "completed": "",
-    "remaining": "",
-    "risks": "",
-    "verdict": "",
+    "completed": "Updated docs/memory/memory-cli.md with: (1) a new \\\"Model bootstrap\\\" section covering _ensure_model() \u2014 cache path, SHA256 verification, error behaviour, and first-run message; (2) a full `add` subcommand reference entry moved out of the stub table.",
+    "remaining": "Nothing. Documentation for B-2ad17234 is complete.",
+    "risks": "None. Changes are additive and scoped entirely to the doc file.",
+    "verdict": "approved",
     "findings_count": 0,
     "requires_followup": false,
-    "changed_files": [],
-    "updated_docs": [],
-    "next_action": "",
+    "changed_files": [
+      "docs/memory/memory-cli.md"
+    ],
+    "updated_docs": [
+      "docs/memory/memory-cli.md"
+    ],
+    "next_action": "None required.",
     "next_agent": "",
     "block_reason": "",
-    "expected_files": [],
+    "expected_files": [
+      "memory.py"
+    ],
     "expected_globs": [],
-    "touched_files": [],
-    "conflict_risks": "",
-    "design_decisions": "",
-    "test_coverage_notes": "",
-    "known_limitations": ""
+    "touched_files": [
+      "docs/memory/memory-cli.md"
+    ],
+    "conflict_risks": "None. docs/memory/memory-cli.md is not claimed by any sibling bead.",
+    "design_decisions": "Chose to add a dedicated \\\"Model bootstrap\\\" H2 section (rather than inline notes) so it is easy to link to from the `add` subcommand description and from future subcommands that also trigger embedding.",
+    "test_coverage_notes": "No test changes \u2014 documentation bead only.",
+    "known_limitations": "SHA256 constant in memory.py (828e1496\u2026) was hardcoded by the implementing bead; it has not been independently re-verified by this documentation pass."
   },
-  "block_reason": "Deferred due to file-scope conflict with active bead B-2ad17234-test",
-  "conflict_risks": "None. No sibling beads claim memory.py.",
+  "block_reason": "",
+  "conflict_risks": "None. docs/memory/memory-cli.md is not claimed by any sibling bead.",
   "branch_name": "feature/b-266c0a28",
   "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
-  "lease": {
-    "owner": "documentation:B-2ad17234-docs",
-    "expires_at": "2026-04-08T05:36:13.211737+00:00"
-  },
+  "lease": null,
   "retries": 0,
   "execution_history": [
     {
@@ -203,6 +207,13 @@
       "details": {
         "template_path": ".takt/agent-runs/B-2ad17234-docs/repo/templates/agents/documentation.md"
       }
+    },
+    {
+      "timestamp": "2026-04-08T05:07:16.607682+00:00",
+      "event": "completed",
+      "agent_type": "documentation",
+      "summary": "Added model bootstrap section and promoted `add` from stub to documented subcommand in docs/memory/memory-cli.md",
+      "details": {}
     }
   ],
   "metadata": {
@@ -271,7 +282,53 @@
         "test_coverage_notes": "",
         "known_limitations": ""
       }
-    }
+    },
+    "last_agent_result": {
+      "outcome": "completed",
+      "summary": "Added model bootstrap section and promoted `add` from stub to documented subcommand in docs/memory/memory-cli.md",
+      "verdict": "approved",
+      "findings_count": 0,
+      "requires_followup": false,
+      "next_agent": "",
+      "block_reason": ""
+    },
+    "telemetry": {
+      "cost_usd": 0.1910283,
+      "duration_ms": 61263,
+      "duration_api_ms": 58046,
+      "num_turns": 12,
+      "input_tokens": 82,
+      "output_tokens": 3546,
+      "cache_creation_tokens": 20816,
+      "cache_read_tokens": 198441,
+      "stop_reason": "end_turn",
+      "session_id": "e46174ef-6d38-451a-b633-01842d4ea9f5",
+      "permission_denials": [],
+      "prompt_chars": 6354,
+      "prompt_lines": 149,
+      "source": "provider",
+      "attempt": 1
+    },
+    "telemetry_history": [
+      {
+        "cost_usd": 0.1910283,
+        "duration_ms": 61263,
+        "duration_api_ms": 58046,
+        "num_turns": 12,
+        "input_tokens": 82,
+        "output_tokens": 3546,
+        "cache_creation_tokens": 20816,
+        "cache_read_tokens": 198441,
+        "stop_reason": "end_turn",
+        "session_id": "e46174ef-6d38-451a-b633-01842d4ea9f5",
+        "permission_denials": [],
+        "prompt_chars": 6354,
+        "prompt_lines": 149,
+        "source": "provider",
+        "attempt": 1
+      }
+    ],
+    "last_commit": "1c83198a95b11309ca5894a73dd4edcccd73deb7"
   },
   "labels": []
 }
