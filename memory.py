@@ -150,8 +150,7 @@ def _open_db(db_path: Path) -> sqlite3.Connection:
 
 
 def _auto_init(db_path: Path) -> None:
-    if not db_path.exists():
-        _init_db(db_path)
+    _init_db(db_path)  # always run — idempotent, handles schema migrations
 
 
 def _init_db(db_path: Path) -> None:
@@ -517,6 +516,7 @@ def cmd_search(args):
         sys.exit(0)
 
     namespace = _resolve_namespace(getattr(args, "namespace", None))
+    _auto_init(db_path)
     query_vec = _embed([args.query])[0]
     limit = args.limit
 
@@ -595,9 +595,10 @@ def cmd_list(args):
         print(f"No memory DB found at {db_path}")
         sys.exit(0)
 
+    _auto_init(db_path)
     namespace = _resolve_namespace(getattr(args, "namespace", None))
     limit = args.limit
-    con = sqlite3.connect(db_path)
+    con = _open_db(db_path)
     try:
         conditions = ["namespace = ?"]
         params = [namespace]
