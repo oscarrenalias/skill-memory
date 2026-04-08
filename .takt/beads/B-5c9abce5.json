@@ -3,7 +3,7 @@
   "title": "Resolve merge conflicts for Add --namespace flag to partition memories",
   "agent_type": "developer",
   "description": "Test gate failed for feature/b-37b50a84.\n\nCommand: .venv/bin/pip install --quiet pytest && .venv/bin/pytest\n\nOutput:\n/bin/sh: .venv/bin/pip: No such file or directory",
-  "status": "ready",
+  "status": "done",
   "bead_type": "merge-conflict",
   "parent_id": "B-37b50a84",
   "dependencies": [],
@@ -49,6 +49,13 @@
       "event": "created",
       "agent_type": "scheduler",
       "summary": "Bead created",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T10:24:54.163696+00:00",
+      "event": "completed",
+      "agent_type": "developer",
+      "summary": "Bootstrapped venv in worktree.",
       "details": {}
     }
   ],
