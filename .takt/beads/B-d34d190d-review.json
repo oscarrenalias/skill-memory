@@ -3,7 +3,7 @@
   "title": "Review Ingest command skeleton with txt and md chunking",
   "agent_type": "review",
   "description": "Review implementation for B-d34d190d",
-  "status": "ready",
+  "status": "in_progress",
   "bead_type": "task",
   "parent_id": "B-d34d190d",
   "dependencies": [
@@ -92,7 +92,10 @@
   "conflict_risks": "No conflicts expected. memory.py is at repo root; no other active beads claim this file.",
   "branch_name": "feature/b-54edeccf",
   "worktree_path": "",
-  "lease": null,
+  "lease": {
+    "owner": "review:B-d34d190d-review",
+    "expires_at": "2026-04-08T05:32:52.299941+00:00"
+  },
   "retries": 0,
   "execution_history": [
     {
@@ -153,6 +156,29 @@
       "event": "retried",
       "agent_type": "review",
       "summary": "Requeued blocked bead after corrective bead B-d34d190d-review-corrective completed",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T05:02:52.752269+00:00",
+      "event": "skills_loaded",
+      "agent_type": "review",
+      "summary": "Loaded 6 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/reviewer-signoff",
+          "capability/code-review",
+          "task/corrective-bead-creation",
+          "task/risk-assessment",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-08T05:02:52.752300+00:00",
+      "event": "started",
+      "agent_type": "review",
+      "summary": "Worker started",
       "details": {}
     }
   ],
