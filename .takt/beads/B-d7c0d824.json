@@ -3,7 +3,7 @@
   "title": "Test suite: core CRUD and infrastructure tests",
   "agent_type": "developer",
   "description": "Create .claude/skills/agent-memory/tests/__init__.py (empty) and the skeleton of .claude/skills/agent-memory/tests/test_memory.py. Follow the _TempDirTest base-class pattern from skill-spec-management/tests/test_spec.py: each test chdir's into a fresh tempfile.mkdtemp(). Override DB path via AGENT_MEMORY_DB env var pointing to a temp file. Mock _embed() to return a deterministic random unit vector of shape (N, 384) for all tests by default, with an integration test class guarded by AGENT_MEMORY_INTEGRATION_TESTS=1. Implement test classes: TestInit (idempotent init, tables exist), TestAdd (returns ID, row in both tables, auto-init), TestSearch (most similar text returned, --limit, --json output), TestDelete (removes from both tables, unknown ID exits 1), TestList (newest-first, --source filter, --limit 0 returns all), TestStats (populated DB, missing DB exits 0).",
-  "status": "ready",
+  "status": "done",
   "bead_type": "task",
   "parent_id": "B-54edeccf",
   "dependencies": [
@@ -35,33 +35,56 @@
     "tests/test_memory.py"
   ],
   "expected_globs": [],
-  "touched_files": [],
-  "changed_files": [],
+  "touched_files": [
+    "tests/__init__.py",
+    "tests/__pycache__/__init__.cpython-314.pyc",
+    "tests/__pycache__/test_memory.cpython-314.pyc",
+    "tests/test_memory.py"
+  ],
+  "changed_files": [
+    "tests/__init__.py",
+    "tests/__pycache__/__init__.cpython-314.pyc",
+    "tests/__pycache__/test_memory.cpython-314.pyc",
+    "tests/test_memory.py"
+  ],
   "updated_docs": [],
   "handoff_summary": {
-    "completed": "",
-    "remaining": "",
-    "risks": "",
-    "verdict": "",
+    "completed": "- tests/__init__.py: already existed and is empty (verified)\n- tests/test_memory.py: created (463 lines) with _TempDirTest base, _mock_embed, TestInit, TestAdd, TestSearch, TestDelete, TestList, TestStats, TestSearchIntegration\n- All files pass python3 -m py_compile syntax check",
+    "remaining": "None \u2014 all acceptance criteria addressed in the skeleton.",
+    "risks": "TestSearch.test_most_similar_text_returned_first relies on sqlite_vec's KNN MATCH returning exact-match first; if the virtual table implementation reorders ties this may flake. TestList ordering uses direct SQL inserts with controlled timestamps to avoid same-second race conditions. TestDelete.test_delete_removes_from_memories_vec uses COUNT(*) rather than rowid lookup to avoid sqlite_vec virtual-table filter syntax uncertainty.",
+    "verdict": "approved",
     "findings_count": 0,
     "requires_followup": false,
-    "changed_files": [],
+    "changed_files": [
+      "tests/__init__.py",
+      "tests/__pycache__/__init__.cpython-314.pyc",
+      "tests/__pycache__/test_memory.cpython-314.pyc",
+      "tests/test_memory.py"
+    ],
     "updated_docs": [],
-    "next_action": "",
-    "next_agent": "",
+    "next_action": "Hand off to tester agent to execute the test suite.",
+    "next_agent": "tester",
     "block_reason": "",
-    "expected_files": [],
+    "expected_files": [
+      "tests/__init__.py",
+      "tests/test_memory.py"
+    ],
     "expected_globs": [],
-    "touched_files": [],
-    "conflict_risks": "",
-    "design_decisions": "",
-    "test_coverage_notes": "",
-    "known_limitations": ""
+    "touched_files": [
+      "tests/__init__.py",
+      "tests/__pycache__/__init__.cpython-314.pyc",
+      "tests/__pycache__/test_memory.cpython-314.pyc",
+      "tests/test_memory.py"
+    ],
+    "conflict_risks": "None \u2014 tests/test_memory.py is a new file; no overlap with tests/test_ingest_chunking.py.",
+    "design_decisions": "Used hash-seeded deterministic _mock_embed so identical text always produces the same unit vector (distance \u2248 0 on exact-match search). TestList inserts rows directly via sqlite3 with explicit created_at strings to avoid same-second timestamp collisions. TestDelete checks memories_vec via COUNT(*) rather than rowid WHERE to avoid sqlite_vec virtual table filter quirks.",
+    "test_coverage_notes": "All six acceptance-criteria test classes are implemented. Integration class guards real ONNX model usage. Bootstrap neutralisation mirrors the pattern in test_ingest_chunking.py.",
+    "known_limitations": "Tests require sqlite_vec and numpy to be importable in the test environment; if those are missing all test classes are skipped via @skipUnless(_MEMORY_AVAILABLE). The integration class additionally requires the ONNX model to be cached or downloadable."
   },
   "block_reason": "",
-  "conflict_risks": "",
-  "branch_name": "",
-  "worktree_path": "",
+  "conflict_risks": "None \u2014 tests/test_memory.py is a new file; no overlap with tests/test_ingest_chunking.py.",
+  "branch_name": "feature/b-54edeccf",
+  "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
   "lease": null,
   "retries": 0,
   "execution_history": [
@@ -71,8 +94,173 @@
       "agent_type": "scheduler",
       "summary": "Bead created",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T20:00:56.548104+00:00",
+      "event": "skills_loaded",
+      "agent_type": "developer",
+      "summary": "Loaded 7 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/developer-implementation",
+          "capability/code-edit",
+          "task/corrective-implementation",
+          "task/refactor-safe",
+          "task/migration",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-07T20:00:56.548134+00:00",
+      "event": "started",
+      "agent_type": "developer",
+      "summary": "Worker started",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T20:00:58.157719+00:00",
+      "event": "guardrails_applied",
+      "agent_type": "developer",
+      "summary": "Applied guardrails from .takt/agent-runs/B-d7c0d824/repo/templates/agents/developer.md",
+      "details": {
+        "template_path": ".takt/agent-runs/B-d7c0d824/repo/templates/agents/developer.md"
+      }
+    },
+    {
+      "timestamp": "2026-04-07T20:07:40.824399+00:00",
+      "event": "completed",
+      "agent_type": "developer",
+      "summary": "Created tests/test_memory.py (463 lines) and confirmed tests/__init__.py already exists (empty). The test file follows the _TempDirTest base-class pattern, mocks _embed() with a hash-seeded deterministic unit-vector function, uses AGENT_MEMORY_DB env var throughout, and implements all six required test classes: TestInit, TestAdd, TestSearch, TestDelete, TestList, TestStats. An integration class (TestSearchIntegration) is guarded by AGENT_MEMORY_INTEGRATION_TESTS=1. Both files pass py_compile syntax checks.",
+      "details": {}
     }
   ],
-  "metadata": {},
+  "metadata": {
+    "execution_root": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-d7c0d824",
+    "workspace_repo_path": "repo",
+    "loaded_skills": [
+      "core/base-orchestrator",
+      "role/developer-implementation",
+      "capability/code-edit",
+      "task/corrective-implementation",
+      "task/refactor-safe",
+      "task/migration",
+      "memory"
+    ],
+    "skill_bundle_hash": "3d67820a7fb8135bc362b2b95d14300da249795bcc32c95f5dd45f36e15acfa1",
+    "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-d7c0d824/home",
+    "runner_backend": "claude",
+    "guardrails": {
+      "agent_type": "developer",
+      "template_path": ".takt/agent-runs/B-d7c0d824/repo/templates/agents/developer.md",
+      "template_text": "# Developer Guardrails\n\nPrimary responsibility: Implement only the assigned bead inside the existing architecture and file scope.\n\nAllowed actions:\n- Modify code, configuration, or local docs required to complete the assigned bead.\n- Create sub-beads for discovered follow-up work that should be handled separately.\n- Verify your `Python` changes compile and import correctly with a quick syntax check: `python -m py_compile`.\n\nDisallowed actions:\n- Run any test suite \u2014 not even a targeted `pytest` run or any subset. Test execution is exclusively the tester agent's responsibility. Running tests wastes the agent budget and delays the pipeline.\n- Redesign unrelated architecture or broaden scope beyond the assigned bead.\n- Perform final review signoff in place of a review agent.\n- Silently absorb unrelated test, documentation, or planning work that should be handed off.\n\nExpected outputs:\n- Completed or blocked JSON with concise implementation summary.\n- Accurate touched files, changed files, risks, and follow-up handoff fields.",
+      "captured_at": "2026-04-07T20:00:58.157707+00:00"
+    },
+    "worker_prompt_context": {
+      "bead_id": "B-d7c0d824",
+      "feature_root_id": "B-54edeccf",
+      "title": "Test suite: core CRUD and infrastructure tests",
+      "agent_type": "developer",
+      "description": "Create .claude/skills/agent-memory/tests/__init__.py (empty) and the skeleton of .claude/skills/agent-memory/tests/test_memory.py. Follow the _TempDirTest base-class pattern from skill-spec-management/tests/test_spec.py: each test chdir's into a fresh tempfile.mkdtemp(). Override DB path via AGENT_MEMORY_DB env var pointing to a temp file. Mock _embed() to return a deterministic random unit vector of shape (N, 384) for all tests by default, with an integration test class guarded by AGENT_MEMORY_INTEGRATION_TESTS=1. Implement test classes: TestInit (idempotent init, tables exist), TestAdd (returns ID, row in both tables, auto-init), TestSearch (most similar text returned, --limit, --json output), TestDelete (removes from both tables, unknown ID exits 1), TestList (newest-first, --source filter, --limit 0 returns all), TestStats (populated DB, missing DB exits 0).",
+      "status": "in_progress",
+      "acceptance_criteria": [
+        "tests/__init__.py exists and is empty",
+        "test_memory.py imports succeed without errors",
+        "_TempDirTest base class used; each test method chdir's into fresh temp dir",
+        "AGENT_MEMORY_DB env var used to redirect DB path in all tests",
+        "_embed is mocked to return deterministic (N, 384) unit vector",
+        "TestInit: init is idempotent and tables exist after init",
+        "TestAdd: add returns an ID and row is present in both tables",
+        "TestSearch: returns most similar text, respects --limit, --json output is valid JSON",
+        "TestDelete: removes from both tables; unknown ID exits 1",
+        "TestList: newest-first order, --source filter works, --limit 0 returns all",
+        "TestStats: works on populated DB; exits 0 on missing DB"
+      ],
+      "dependencies": [
+        "B-d34d190d",
+        "B-812641b9"
+      ],
+      "linked_docs": [
+        "specs/drafts/agent-memory-file-ingest-and-skill-packaging.md",
+        ".claude/skills/skill-spec-management/tests/test_spec.py"
+      ],
+      "execution_branch_name": "feature/b-54edeccf",
+      "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
+      "expected_files": [
+        "tests/__init__.py",
+        "tests/test_memory.py"
+      ],
+      "expected_globs": [],
+      "touched_files": [],
+      "conflict_risks": "",
+      "handoff_summary": {
+        "completed": "",
+        "remaining": "",
+        "risks": "",
+        "verdict": "",
+        "findings_count": 0,
+        "requires_followup": false,
+        "changed_files": [],
+        "updated_docs": [],
+        "next_action": "",
+        "next_agent": "",
+        "block_reason": "",
+        "expected_files": [],
+        "expected_globs": [],
+        "touched_files": [],
+        "conflict_risks": "",
+        "design_decisions": "",
+        "test_coverage_notes": "",
+        "known_limitations": ""
+      }
+    },
+    "last_agent_result": {
+      "outcome": "completed",
+      "summary": "Created tests/test_memory.py (463 lines) and confirmed tests/__init__.py already exists (empty). The test file follows the _TempDirTest base-class pattern, mocks _embed() with a hash-seeded deterministic unit-vector function, uses AGENT_MEMORY_DB env var throughout, and implements all six required test classes: TestInit, TestAdd, TestSearch, TestDelete, TestList, TestStats. An integration class (TestSearchIntegration) is guarded by AGENT_MEMORY_INTEGRATION_TESTS=1. Both files pass py_compile syntax checks.",
+      "verdict": "approved",
+      "findings_count": 0,
+      "requires_followup": false,
+      "next_agent": "tester",
+      "block_reason": ""
+    },
+    "telemetry": {
+      "cost_usd": 0.7283671500000002,
+      "duration_ms": 401426,
+      "duration_api_ms": 392090,
+      "num_turns": 18,
+      "input_tokens": 19,
+      "output_tokens": 26782,
+      "cache_creation_tokens": 40673,
+      "cache_read_tokens": 580188,
+      "stop_reason": "end_turn",
+      "session_id": "34b71e7f-f57c-40d9-ad9a-314b0d77b147",
+      "permission_denials": [],
+      "prompt_chars": 6951,
+      "prompt_lines": 145,
+      "source": "provider",
+      "attempt": 1
+    },
+    "telemetry_history": [
+      {
+        "cost_usd": 0.7283671500000002,
+        "duration_ms": 401426,
+        "duration_api_ms": 392090,
+        "num_turns": 18,
+        "input_tokens": 19,
+        "output_tokens": 26782,
+        "cache_creation_tokens": 40673,
+        "cache_read_tokens": 580188,
+        "stop_reason": "end_turn",
+        "session_id": "34b71e7f-f57c-40d9-ad9a-314b0d77b147",
+        "permission_denials": [],
+        "prompt_chars": 6951,
+        "prompt_lines": 145,
+        "source": "provider",
+        "attempt": 1
+      }
+    ],
+    "last_commit": "8ea8a8d964e668a53302215aa9321c3fb2f252d5"
+  },
   "labels": []
 }
