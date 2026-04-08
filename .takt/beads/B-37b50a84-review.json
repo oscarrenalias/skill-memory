@@ -24,11 +24,15 @@
   "expected_globs": [],
   "touched_files": [
     "SKILL.md",
+    "docs/memory/conventions.md",
+    "docs/memory/memory-cli.md",
     "memory.py",
     "tests/test_namespace.py"
   ],
   "changed_files": [
     "SKILL.md",
+    "docs/memory/conventions.md",
+    "docs/memory/memory-cli.md",
     "memory.py",
     "tests/test_namespace.py"
   ],
