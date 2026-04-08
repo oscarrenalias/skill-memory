@@ -1,15 +1,13 @@
 ---
 name: agent-memory
-description: Persist and retrieve knowledge across agent sessions. Use at bead start to search for prior context; use at bead end to store findings, decisions, and gotchas worth remembering in future tasks.
+description: Persist and retrieve knowledge across agent sessions. Use to search for prior context, or to store findings, decisions, and any other information worth knowing at a later point in time. Supports text-based information, can ingest files (markdown, CSV, plain text), and is searchable by semantic similarity.
 tools: Bash
 user-invocable: true
 ---
 
 # agent-memory
 
-This skill exists to break the amnesia of single-session agents. Without it, every bead starts from scratch — rediscovering the same patterns, re-learning the same gotchas, and repeating the same mistakes. With it, agents can accumulate project-wide knowledge that improves their judgment in future beads.
-
-Use this skill to surface relevant context before you start work, and to write down anything you learned that you'd want to know next time.
+This skill is designed to let agents persist and retrieve knowledge across sessions. It provides a simple interface for adding text-based "memories" with optional metadata, and for searching those memories by semantic similarity. Use it to surface relevant context before starting work, and to write down anything you learned that you'd want to know next time.
 
 ## What NOT to Store
 
@@ -17,64 +15,75 @@ These are not worth persisting — they are easily recovered, quickly stale, or 
 
 - File contents or code snippets readable from the repo
 - Git history, recent changes, or who-changed-what (use `git log` instead)
-- Bead-specific task state or in-progress work
+- Task state or in-progress work
 - Information already captured in a spec or design document
 - Details that belong in `CLAUDE.md` or agent guardrail templates
 
 **Good memory:** A recurring merge conflict pattern and how to resolve it. A non-obvious project convention not documented anywhere. A design decision and its rationale.
 
-**Bad memory:** The current contents of `memory.py`. The list of PRs merged this week. The steps you took to complete a bead.
+**Bad memory:** The current contents of `memory.py`. The list of PRs merged this week. The steps you took to complete a feature.
 
-The guiding test: *would knowing this upfront change my approach to a future bead?* If yes, store it. If no, skip it.
+The guiding test: *would knowing this upfront change my approach to a future task?* If yes, store it. If no, skip it.
 
 ## When to Use This Skill
 
-### At bead start — search before reading code
+### When starting: search before doing work
 
-Run a search before diving into the codebase. Prior agents may have stored context that reframes the problem:
+Run a search before diving into a codebase, or starting an activity. Prior agents may have stored context that reframes the problem:
 
 ```bash
-python3 memory.py --namespace takt search "merge conflict resolution"
-python3 memory.py --namespace takt search "namespace conventions"
+python3 memory.py search "merge conflict resolution"
 ```
+
+Content can also be added under namespaces (e.g. `architecture`) to compartmentalise it and keep it scoped to that area. For example, if you're working on a performance-related task, search the `architecture` namespace for any relevant design decisions:
+
+```bash
+python3 memory.py --namespace "architecture" search "performance requirements"
+```
+
+If no results come up, try broadening your query or searching without a namespace to see if related context was stored elsewhere. If no namespace is specified, the `default` namespace is used.
 
 **Interpreting results:** A strong match is a result whose text directly addresses your question — same pattern, same decision space, same file area. Treat distance scores below ~0.8 as potentially relevant; above ~1.2 as noise. Skim the top 3–5 results rather than acting on a single hit. If results look unrelated, your query may be too specific — try broader terms.
 
-### At bead end — write what you'd want to know next time
+### When wrapping up: write what you'd want to know next time
 
 After completing work, add memories for:
-- Non-obvious conventions you discovered (e.g. "always use `--namespace` before the subcommand")
+
+- Non-obvious things you discovered
 - Design decisions and why they were made
 - Patterns that caused errors and how to avoid them
 - Anything that surprised you and would surprise the next agent
+- Any type of information that would change how you'd approach a similar task in the future
 
 ```bash
-python3 memory.py --namespace takt add "The --namespace flag must come before the subcommand name, not after it. Wrong: memory.py add --namespace foo. Right: memory.py --namespace foo add." --source B-abc12def
+python3 memory.py --namespace lessons-learned add "The --namespace flag must come before the subcommand name, not after it. Wrong: memory.py add --namespace foo. Right: memory.py --namespace foo add." --source B-abc12def
 ```
 
 Keep entries focused and self-contained. Each memory should make sense on its own without surrounding context.
 
-## Namespace Conventions for takt Agents
+## Namespace Conventions
 
 Use the `--namespace` flag to partition memories by feature or agent type. This prevents unrelated contexts from polluting search results.
 
+Namespaces are arbitrary strings, including alphanumeric characters, hyphens, and underscores matching this regexp: [a-zA-Z0-9_-]. Here are some recommended conventions:
+
 | Scenario | Recommended namespace |
 |----------|-----------------------|
-| Project-wide agent knowledge | `takt` or the project name |
-| Feature-scoped context | The feature root bead ID (e.g. `B-fc273260`) |
 | Agent-type-specific patterns | `developer`, `tester`, `planner`, etc. |
+| Feature-specific context | `feature-x`, `feature-x`, etc. |
+| General project knowledge | `project`, `general`, or no namespace (defaults to `default`) |
 
-Use one namespace per feature or per agent type — don't mix concerns in the same namespace. Within a feature, all sub-beads should share the feature root bead ID as namespace so they can see each other's findings.
+Use one namespace per feature or per agent type — don't mix concerns in the same namespace. 
 
 ```bash
 # Write under feature namespace
-python3 memory.py --namespace B-fc273260 add "TEXT" --source B-fc273260-docs
+python3 memory.py --namespace feature-1234 add "TEXT"
 
 # Search the feature namespace
-python3 memory.py --namespace B-fc273260 search "QUERY"
+python3 memory.py --namespace feature-1234 search "QUERY"
 
 # Write project-wide knowledge
-python3 memory.py --namespace takt add "TEXT"
+python3 memory.py --namespace project add "TEXT"
 ```
 
 ## Getting Started
@@ -97,7 +106,7 @@ python3 memory.py [--namespace NAME] init [--db PATH]
 python3 memory.py [--namespace NAME] add "TEXT" [--source TAG] [--meta KEY=VALUE ...] [--db PATH]
 ```
 
-Use for short, standalone facts or observations discovered during a bead. `--source` is an optional tag (e.g. a bead ID or filename) for later filtering.
+Use for short, standalone facts or observations discovered work. `--source` is an optional tag (e.g., a filename) for later filtering.
 
 ### `ingest` — Bulk-ingest a file
 
@@ -137,7 +146,7 @@ Returns the top-`N` memories closest to the query vector (default: 5). `--thresh
 python3 memory.py [--namespace NAME] list [--limit N] [--source TAG] [--json] [--db PATH]
 ```
 
-Lists memories newest-first (default limit: 20; `--limit 0` for all). Filter by `--source` to scope to a specific file or bead.
+Lists memories newest-first (default limit: 20; `--limit 0` for all). Filter by `--source` to scope to a specific file, for example.
 
 ### `delete` — Delete a memory
 
