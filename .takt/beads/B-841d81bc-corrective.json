@@ -1,0 +1,73 @@
+{
+  "bead_id": "B-841d81bc-corrective",
+  "title": "Corrective fix for B-841d81bc: Scaffold skill directory and .gitignore",
+  "agent_type": "developer",
+  "description": "Blocked reason: Preparing worktree (checking out 'feature/b-266c0a28')\nfatal: 'feature/b-266c0a28' is already used by worktree at '/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28'",
+  "status": "ready",
+  "bead_type": "task",
+  "parent_id": "B-841d81bc",
+  "dependencies": [],
+  "acceptance_criteria": [
+    "Implement the minimum fix required to unblock B-841d81bc.",
+    "Update tests/docs as needed for the corrective change.",
+    "Leave a handoff summary that states how the parent bead can be retried."
+  ],
+  "linked_docs": [
+    "specs/drafts/agent-memory-core-infrastructure.md"
+  ],
+  "feature_root_id": "B-266c0a28",
+  "execution_branch_name": "feature/b-266c0a28",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
+  "expected_files": [
+    ".claude/skills/agent-memory/.gitignore"
+  ],
+  "expected_globs": [
+    ".claude/skills/agent-memory/**"
+  ],
+  "touched_files": [
+    ".claude/skills/agent-memory/.gitignore"
+  ],
+  "changed_files": [
+    ".claude/skills/agent-memory/.gitignore"
+  ],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-08T05:35:19.140713+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    }
+  ],
+  "metadata": {
+    "auto_corrective_for": "B-841d81bc"
+  },
+  "labels": []
+}
