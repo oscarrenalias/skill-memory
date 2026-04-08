@@ -1,49 +1,85 @@
 ---
 name: agent-memory
-description: Long-term semantic memory for agents — store, search, and retrieve text memories across sessions using SQLite and BAAI/bge-small-en-v1.5 embeddings.
+description: Persist and retrieve knowledge across agent sessions. Use at bead start to search for prior context; use at bead end to store findings, decisions, and gotchas worth remembering in future tasks.
 tools: Bash
 user-invocable: true
 ---
 
 # agent-memory
 
-Long-term semantic memory for agents. Memories are stored in a local SQLite database with vector search backed by `sqlite-vec` and BAAI/bge-small-en-v1.5 ONNX embeddings.
+This skill exists to break the amnesia of single-session agents. Without it, every bead starts from scratch — rediscovering the same patterns, re-learning the same gotchas, and repeating the same mistakes. With it, agents can accumulate project-wide knowledge that improves their judgment in future beads.
 
-## Getting Started
+Use this skill to surface relevant context before you start work, and to write down anything you learned that you'd want to know next time.
 
-`memory.py` lives at the repo root alongside this `SKILL.md`. Run it with:
+## What NOT to Store
 
-```bash
-python3 memory.py <command> [options]
-```
+These are not worth persisting — they are easily recovered, quickly stale, or belong elsewhere:
 
-On first run, `memory.py` bootstraps a local `.venv` with its dependencies (`onnxruntime`, `sqlite-vec`, `tokenizers`, `numpy`). The embedding model is downloaded to `~/.cache/agent-memory/bge-small-en-v1.5/` on first use. The default DB lives at `memories.db` in the same directory as `memory.py` (i.e. the repo root) and is auto-initialised on first write — no explicit `init` needed.
+- File contents or code snippets readable from the repo
+- Git history, recent changes, or who-changed-what (use `git log` instead)
+- Bead-specific task state or in-progress work
+- Information already captured in a spec or design document
+- Details that belong in `CLAUDE.md` or agent guardrail templates
+
+**Good memory:** A recurring merge conflict pattern and how to resolve it. A non-obvious project convention not documented anywhere. A design decision and its rationale.
+
+**Bad memory:** The current contents of `memory.py`. The list of PRs merged this week. The steps you took to complete a bead.
+
+The guiding test: *would knowing this upfront change my approach to a future bead?* If yes, store it. If no, skip it.
 
 ## When to Use This Skill
 
-| Moment | Action |
-|--------|--------|
-| Bead start | `search` for relevant prior context before reading the codebase |
-| Bead end | `add` notable findings, design decisions, or gotchas |
-| After completing a feature | `ingest` the spec or implementation notes for future retrieval |
+### At bead start — search before reading code
 
-## Namespaces
-
-All commands respect a `--namespace NAME` flag (default: `'default'`). Namespaces partition memories within a single DB so that different agents, projects, or concerns can share one file without interference.
+Run a search before diving into the codebase. Prior agents may have stored context that reframes the problem:
 
 ```bash
-python3 memory.py --namespace myproject add "TEXT"
-python3 memory.py --namespace myproject search "QUERY"
-python3 memory.py --namespace myproject list
+python3 memory.py --namespace takt search "merge conflict resolution"
+python3 memory.py --namespace takt search "namespace conventions"
 ```
 
-`--namespace` is a **top-level flag** — it must come before the subcommand name. Memories written under one namespace are invisible when reading under a different namespace.
+**Interpreting results:** A strong match is a result whose text directly addresses your question — same pattern, same decision space, same file area. Treat distance scores below ~0.8 as potentially relevant; above ~1.2 as noise. Skim the top 3–5 results rather than acting on a single hit. If results look unrelated, your query may be too specific — try broader terms.
 
-| Scenario | Recommendation |
-|----------|----------------|
-| Single agent / single project | Use the default namespace |
-| Multiple agents sharing a DB | Assign each agent its own namespace |
-| Temporary scratch space | Use a short-lived namespace and delete when done |
+### At bead end — write what you'd want to know next time
+
+After completing work, add memories for:
+- Non-obvious conventions you discovered (e.g. "always use `--namespace` before the subcommand")
+- Design decisions and why they were made
+- Patterns that caused errors and how to avoid them
+- Anything that surprised you and would surprise the next agent
+
+```bash
+python3 memory.py --namespace takt add "The --namespace flag must come before the subcommand name, not after it. Wrong: memory.py add --namespace foo. Right: memory.py --namespace foo add." --source B-abc12def
+```
+
+Keep entries focused and self-contained. Each memory should make sense on its own without surrounding context.
+
+## Namespace Conventions for takt Agents
+
+Use the `--namespace` flag to partition memories by feature or agent type. This prevents unrelated contexts from polluting search results.
+
+| Scenario | Recommended namespace |
+|----------|-----------------------|
+| Project-wide agent knowledge | `takt` or the project name |
+| Feature-scoped context | The feature root bead ID (e.g. `B-fc273260`) |
+| Agent-type-specific patterns | `developer`, `tester`, `planner`, etc. |
+
+Use one namespace per feature or per agent type — don't mix concerns in the same namespace. Within a feature, all sub-beads should share the feature root bead ID as namespace so they can see each other's findings.
+
+```bash
+# Write under feature namespace
+python3 memory.py --namespace B-fc273260 add "TEXT" --source B-fc273260-docs
+
+# Search the feature namespace
+python3 memory.py --namespace B-fc273260 search "QUERY"
+
+# Write project-wide knowledge
+python3 memory.py --namespace takt add "TEXT"
+```
+
+## Getting Started
+
+Run `python3 memory.py <command> [options]` from the repo root. The DB auto-initialises on first write.
 
 ## Commands Reference
 
@@ -128,12 +164,3 @@ Prints the DB path, total memory count, and file size.
 | CI / ephemeral environments | Set `AGENT_MEMORY_DB` to a temp path |
 
 Prefer the shared default DB for general knowledge that spans projects. Use a project-local DB when memories are scoped to a single repository and should not bleed into other workspaces.
-
-## What NOT to Store
-
-- Bead-specific or ephemeral task state
-- Information that belongs in `CLAUDE.md` or guardrail templates
-- Git history, recent changes, or file contents that are trivially readable from the repo
-- Details already captured in a spec or design document
-
-Mirror the guidance in `docs/memory/conventions.md`: store only what is project-wide, reusable, and likely to change your approach in a future bead if you had known it upfront.
