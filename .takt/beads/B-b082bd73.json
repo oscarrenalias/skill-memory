@@ -50,6 +50,13 @@
       "agent_type": "scheduler",
       "summary": "Bead created",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T09:02:43.555893+00:00",
+      "event": "retried",
+      "agent_type": "developer",
+      "summary": "Bead requeued",
+      "details": {}
     }
   ],
   "metadata": {},
