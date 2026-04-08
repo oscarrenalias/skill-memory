@@ -121,6 +121,13 @@
       "agent_type": "tester",
       "summary": "Worker execution failed: claude -p produced no structured output. is_error=False, stop_reason=end_turn, result='The background task confirmed the same result \u2014 all tests passed (exit code 0). The structured output has already been submitted with `verdict=approved`.'",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T05:35:21.209029+00:00",
+      "event": "corrective_planned",
+      "agent_type": "tester",
+      "summary": "Created corrective bead B-d34d190d-test-corrective for blocked issue",
+      "details": {}
     }
   ],
   "metadata": {
@@ -198,7 +205,8 @@
       "requires_followup": false,
       "next_agent": "",
       "block_reason": "claude -p produced no structured output. is_error=False, stop_reason=end_turn, result='The background task confirmed the same result \u2014 all tests passed (exit code 0). The structured output has already been submitted with `verdict=approved`.'"
-    }
+    },
+    "auto_corrective_bead_id": "B-d34d190d-test-corrective"
   },
   "labels": [],
   "completed_at": "2026-04-07T20:00:47.761281+00:00",

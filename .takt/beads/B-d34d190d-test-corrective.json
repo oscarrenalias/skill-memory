@@ -1,0 +1,76 @@
+{
+  "bead_id": "B-d34d190d-test-corrective",
+  "title": "Corrective fix for B-d34d190d-test: Test Ingest command skeleton with txt and md chunking",
+  "agent_type": "developer",
+  "description": "Blocked reason: claude -p produced no structured output. is_error=False, stop_reason=end_turn, result='The background task confirmed the same result \u2014 all tests passed (exit code 0). The structured output has already been submitted with `verdict=approved`.'",
+  "status": "ready",
+  "bead_type": "task",
+  "parent_id": "B-d34d190d-test",
+  "dependencies": [],
+  "acceptance_criteria": [
+    "Implement the minimum fix required to unblock B-d34d190d-test.",
+    "Update tests/docs as needed for the corrective change.",
+    "Leave a handoff summary that states how the parent bead can be retried."
+  ],
+  "linked_docs": [
+    "specs/drafts/agent-memory-file-ingest-and-skill-packaging.md"
+  ],
+  "feature_root_id": "B-54edeccf",
+  "execution_branch_name": "feature/b-54edeccf",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
+  "expected_files": [
+    ".claude/skills/agent-memory/__pycache__/memory.cpython-314.pyc",
+    ".claude/skills/agent-memory/memory.py"
+  ],
+  "expected_globs": [],
+  "touched_files": [
+    "tests/__pycache__/__init__.cpython-314.pyc",
+    "tests/__pycache__/test_ingest_chunking.cpython-314-pytest-9.0.2.pyc",
+    "tests/test_ingest_chunking.py"
+  ],
+  "changed_files": [
+    "tests/__pycache__/__init__.cpython-314.pyc",
+    "tests/__pycache__/test_ingest_chunking.cpython-314-pytest-9.0.2.pyc",
+    "tests/test_ingest_chunking.py"
+  ],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-08T05:35:20.866034+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    }
+  ],
+  "metadata": {
+    "auto_corrective_for": "B-d34d190d-test"
+  },
+  "labels": []
+}
