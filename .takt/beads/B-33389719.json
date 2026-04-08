@@ -3,7 +3,7 @@
   "title": "README and GitHub CI workflow",
   "agent_type": "planner",
   "description": "Feature root for two tasks: (1) bootstrap README.md with user-facing docs and APM installation instructions, (2) create .github/workflows/test.yml that runs the test suite and creates a version tag on success.",
-  "status": "ready",
+  "status": "in_progress",
   "bead_type": "task",
   "parent_id": null,
   "dependencies": [],
@@ -39,9 +39,12 @@
   },
   "block_reason": "",
   "conflict_risks": "",
-  "branch_name": "",
+  "branch_name": "feature/b-33389719",
   "worktree_path": "",
-  "lease": null,
+  "lease": {
+    "owner": "planner:B-33389719",
+    "expires_at": "2026-04-08T10:02:58.445049+00:00"
+  },
   "retries": 0,
   "execution_history": [
     {
@@ -50,9 +53,44 @@
       "agent_type": "scheduler",
       "summary": "Bead created",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T09:32:58.981884+00:00",
+      "event": "skills_loaded",
+      "agent_type": "planner",
+      "summary": "Loaded 5 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/planner-decomposition",
+          "task/spec-intake",
+          "task/dependency-graphing",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-08T09:32:58.981911+00:00",
+      "event": "started",
+      "agent_type": "planner",
+      "summary": "Worker started",
+      "details": {}
     }
   ],
-  "metadata": {},
+  "metadata": {
+    "execution_root": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-33389719",
+    "workspace_repo_path": "repo",
+    "loaded_skills": [
+      "core/base-orchestrator",
+      "role/planner-decomposition",
+      "task/spec-intake",
+      "task/dependency-graphing",
+      "memory"
+    ],
+    "skill_bundle_hash": "4d45c4f75779903694bd181d54f976f4b7945607f3ce4a3688de0e5ec390067e",
+    "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-33389719/home",
+    "runner_backend": "claude"
+  },
   "labels": [],
   "recovery_for": null,
   "priority": null
