@@ -4,7 +4,7 @@
 common:
   default_runner: claude
   templates_dir: templates/agents
-  test_command: .venv/bin/pip install --quiet pytest && .venv/bin/pytest
+  test_command: python memory.py --help > /dev/null 2>&1; .venv/bin/pip install --quiet pytest && .venv/bin/pytest
   test_timeout_seconds: 900
   agent_types:
     - planner
