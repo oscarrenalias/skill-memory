@@ -450,9 +450,9 @@ class TestSHA256FailurePath(unittest.TestCase):
 class TestEmbeddingShape(unittest.TestCase):
     def test_embed_returns_shape_1_384(self):
         script = textwrap.dedent(f"""\
-            import sys
-            _spec = __import__('importlib').util.spec_from_file_location('memory', {str(MEMORY_PY)!r})
-            _mod = __import__('importlib').util.module_from_spec(_spec)
+            import sys, importlib.util
+            _spec = importlib.util.spec_from_file_location('memory', {str(MEMORY_PY)!r})
+            _mod = importlib.util.module_from_spec(_spec)
             sys.modules['memory'] = _mod
             _spec.loader.exec_module(_mod)
             import numpy as np
