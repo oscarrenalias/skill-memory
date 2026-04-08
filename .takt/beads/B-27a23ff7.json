@@ -3,7 +3,7 @@
   "title": "Implement DB schema and init command",
   "agent_type": "developer",
   "description": "Add the DB path resolution logic (--db flag, AGENT_MEMORY_DB env var, default ~/.local/share/agent-memory/memories.db) and implement the init command: create parent dirs, load sqlite-vec, CREATE TABLE IF NOT EXISTS memories, CREATE VIRTUAL TABLE IF NOT EXISTS memories_vec. Print confirmation message.",
-  "status": "ready",
+  "status": "blocked",
   "bead_type": "task",
   "parent_id": "B-266c0a28",
   "dependencies": [
@@ -50,7 +50,7 @@
     "test_coverage_notes": "",
     "known_limitations": ""
   },
-  "block_reason": "",
+  "block_reason": "Preparing worktree (checking out 'feature/b-266c0a28')\nfatal: 'feature/b-266c0a28' is already used by worktree at '/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28'",
   "conflict_risks": "",
   "branch_name": "",
   "worktree_path": "",
@@ -69,6 +69,13 @@
       "event": "retried",
       "agent_type": "developer",
       "summary": "Bead requeued",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T05:35:24.064600+00:00",
+      "event": "blocked",
+      "agent_type": "developer",
+      "summary": "Preparing worktree (checking out 'feature/b-266c0a28')\nfatal: 'feature/b-266c0a28' is already used by worktree at '/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28'",
       "details": {}
     }
   ],
