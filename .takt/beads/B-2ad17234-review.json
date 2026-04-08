@@ -25,11 +25,17 @@
   "expected_globs": [],
   "touched_files": [
     "__pycache__/memory.cpython-314.pyc",
-    "memory.py"
+    "docs/memory/memory-cli.md",
+    "memory.py",
+    "tests/__pycache__/test_ensure_model.cpython-314-pytest-9.0.2.pyc",
+    "tests/test_ensure_model.py"
   ],
   "changed_files": [
     "__pycache__/memory.cpython-314.pyc",
-    "memory.py"
+    "docs/memory/memory-cli.md",
+    "memory.py",
+    "tests/__pycache__/test_ensure_model.cpython-314-pytest-9.0.2.pyc",
+    "tests/test_ensure_model.py"
   ],
   "updated_docs": [],
   "handoff_summary": {
