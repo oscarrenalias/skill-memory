@@ -75,6 +75,15 @@
       "agent_type": "planner",
       "summary": "Worker started",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T09:32:59.518215+00:00",
+      "event": "guardrails_applied",
+      "agent_type": "planner",
+      "summary": "Applied guardrails from .takt/agent-runs/B-33389719/repo/templates/agents/planner.md",
+      "details": {
+        "template_path": ".takt/agent-runs/B-33389719/repo/templates/agents/planner.md"
+      }
     }
   ],
   "metadata": {
@@ -89,7 +98,50 @@
     ],
     "skill_bundle_hash": "4d45c4f75779903694bd181d54f976f4b7945607f3ce4a3688de0e5ec390067e",
     "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-33389719/home",
-    "runner_backend": "claude"
+    "runner_backend": "claude",
+    "guardrails": {
+      "agent_type": "planner",
+      "template_path": ".takt/agent-runs/B-33389719/repo/templates/agents/planner.md",
+      "template_text": "# Planner Guardrails\n\nPrimary responsibility: Decompose a feature into a parent epic and actionable child beads with clear dependencies and scope.\n\nAllowed actions:\n- Read specifications and repository context.\n- Propose bead structure, dependencies, linked docs, and expected file scope.\n- Create follow-up planning work when decomposition is blocked by missing information.\n\nDisallowed actions:\n- Implement code, tests, docs, or runtime behavior changes.\n- Claim work outside planning scope as completed.\n\nExpected outputs:\n- Structured planning JSON matching the planner schema.\n- Beads with concise, role-appropriate acceptance criteria and file scope.\n\nDeveloper bead sizing:\n- Plan developer beads as a single focused change that should fit within roughly 10 minutes of implementation work.\n- Split broader logical units into dependent developer beads instead of assigning one bead to absorb multiple distinct changes.\n- If a change is likely to touch more than 2-3 functions, span multiple subsystems, or mix unrelated refactors with feature work, break it into smaller dependent beads with explicit ordering.\n\nShared follow-up beads:\n- For features with multiple related implementation beads, create shared tester, documentation, and review beads instead of duplicating that work inside each developer bead.\n- The shared tester bead should depend on the relevant implementation beads it validates.\n- The shared documentation bead should depend on the validated implementation set when docs need to describe the combined result.\n- The shared review bead should depend on the validated implementation set so review happens after the combined changes are ready.",
+      "captured_at": "2026-04-08T09:32:59.518199+00:00"
+    },
+    "worker_prompt_context": {
+      "bead_id": "B-33389719",
+      "feature_root_id": "B-33389719",
+      "title": "README and GitHub CI workflow",
+      "agent_type": "planner",
+      "description": "Feature root for two tasks: (1) bootstrap README.md with user-facing docs and APM installation instructions, (2) create .github/workflows/test.yml that runs the test suite and creates a version tag on success.",
+      "status": "in_progress",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "linked_docs": [],
+      "execution_branch_name": "feature/b-33389719",
+      "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-33389719",
+      "expected_files": [],
+      "expected_globs": [],
+      "touched_files": [],
+      "conflict_risks": "",
+      "handoff_summary": {
+        "completed": "",
+        "remaining": "",
+        "risks": "",
+        "verdict": "",
+        "findings_count": 0,
+        "requires_followup": false,
+        "changed_files": [],
+        "updated_docs": [],
+        "next_action": "",
+        "next_agent": "",
+        "block_reason": "",
+        "expected_files": [],
+        "expected_globs": [],
+        "touched_files": [],
+        "conflict_risks": "",
+        "design_decisions": "",
+        "test_coverage_notes": "",
+        "known_limitations": ""
+      }
+    }
   },
   "labels": [],
   "recovery_for": null,
