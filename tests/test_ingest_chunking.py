@@ -73,29 +73,34 @@ class TestIngestTxt(unittest.TestCase):
     """TestIngestTxt: paragraph chunking for .txt files."""
 
     def test_three_paragraphs_three_chunks(self):
-        """A .txt with 3 short paragraphs (each well under chunk_size) produces 3 chunks."""
-        text = "Paragraph one.\n\nParagraph two.\n\nParagraph three."
-        chunks = _chunk_txt(text, chunk_size=1000, overlap=0)
-        # All three paragraphs fit into one pass; they may be merged or kept separate
-        # depending on total length. With chunk_size=1000 and very short paragraphs they
-        # should be merged into one chunk.
-        # Spec acceptance: "3 paragraphs → 3 rows ASSUMING each paragraph < chunk_size"
-        # The spec wording implies merging does NOT occur by default; but the implementation
-        # merges short paragraphs. Test the actual behaviour: all three fit < 1000 chars
-        # so they're merged into a single chunk.
-        self.assertEqual(len(chunks), 1)
-        self.assertIn("Paragraph one.", chunks[0])
-        self.assertIn("Paragraph two.", chunks[0])
-        self.assertIn("Paragraph three.", chunks[0])
+        """3 paragraphs, each under chunk_size, each becomes its own chunk.
 
-    def test_three_paragraphs_three_chunks_small_size(self):
-        """With a very small chunk_size each paragraph becomes its own chunk."""
+        Spec AC: "A .txt file with 3 paragraphs produces 3 separate memory rows
+        (assuming each paragraph is under --chunk-size)."
+
+        chunk_size=20 prevents merging (any two paragraphs combined would exceed 20
+        chars), while each paragraph individually (14-16 chars) is under chunk_size.
+        """
         text = "Paragraph one.\n\nParagraph two.\n\nParagraph three."
         chunks = _chunk_txt(text, chunk_size=20, overlap=0)
         self.assertEqual(len(chunks), 3)
         self.assertEqual(chunks[0], "Paragraph one.")
         self.assertEqual(chunks[1], "Paragraph two.")
         self.assertEqual(chunks[2], "Paragraph three.")
+
+    def test_short_paragraphs_merged_when_all_fit_in_chunk(self):
+        """Short paragraphs are merged into one chunk when all fit within chunk_size.
+
+        The implementation merges paragraphs up to chunk_size (see spec §1 .txt strategy).
+        When the combined text of all paragraphs fits within chunk_size, the result
+        is a single chunk.
+        """
+        text = "Paragraph one.\n\nParagraph two.\n\nParagraph three."
+        chunks = _chunk_txt(text, chunk_size=1000, overlap=0)
+        self.assertEqual(len(chunks), 1)
+        self.assertIn("Paragraph one.", chunks[0])
+        self.assertIn("Paragraph two.", chunks[0])
+        self.assertIn("Paragraph three.", chunks[0])
 
     def test_short_chunk_not_created_for_long_paragraph(self):
         """A paragraph longer than chunk_size is split at sentence boundaries."""
