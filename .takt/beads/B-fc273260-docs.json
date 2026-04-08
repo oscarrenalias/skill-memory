@@ -3,7 +3,7 @@
   "title": "Document Strengthen SKILL.md: frontmatter and agent guidance",
   "agent_type": "documentation",
   "description": "Update docs for B-fc273260",
-  "status": "ready",
+  "status": "in_progress",
   "bead_type": "task",
   "parent_id": "B-fc273260",
   "dependencies": [
@@ -47,9 +47,12 @@
   },
   "block_reason": "Deferred due to file-scope conflict with active bead B-fc273260-test",
   "conflict_risks": "None \u2014 only SKILL.md was modified; no other bead is known to touch this file.",
-  "branch_name": "",
-  "worktree_path": "",
-  "lease": null,
+  "branch_name": "feature/b-fc273260",
+  "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-fc273260",
+  "lease": {
+    "owner": "documentation:B-fc273260-docs",
+    "expires_at": "2026-04-08T13:16:01.189954+00:00"
+  },
   "retries": 0,
   "execution_history": [
     {
@@ -72,9 +75,46 @@
       "agent_type": "documentation",
       "summary": "Deferred due to file-scope conflict with active bead B-fc273260-test",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T12:46:01.479204+00:00",
+      "event": "skills_loaded",
+      "agent_type": "documentation",
+      "summary": "Loaded 6 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/docs-agent",
+          "capability/docs-edit",
+          "task/release-notes",
+          "task/spec-sync",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-08T12:46:01.479228+00:00",
+      "event": "started",
+      "agent_type": "documentation",
+      "summary": "Worker started",
+      "details": {}
     }
   ],
-  "metadata": {},
+  "metadata": {
+    "execution_root": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-fc273260-docs",
+    "workspace_repo_path": "repo",
+    "loaded_skills": [
+      "core/base-orchestrator",
+      "role/docs-agent",
+      "capability/docs-edit",
+      "task/release-notes",
+      "task/spec-sync",
+      "memory"
+    ],
+    "skill_bundle_hash": "2af4f5a7f6f5668180ed1a8523e0c0606f4a43d4edf9270d7f3b2ccfcb69cdec",
+    "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-fc273260-docs/home",
+    "runner_backend": "claude"
+  },
   "labels": [],
   "recovery_for": null,
   "priority": null
