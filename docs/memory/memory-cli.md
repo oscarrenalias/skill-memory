@@ -35,6 +35,23 @@ agent-memory: first run, installing dependencies…
 
 `.venv/` is listed in `.gitignore` and must never be committed.
 
+## Model bootstrap
+
+The first subcommand that requires embeddings (e.g. `add`) triggers an automatic model download if the ONNX file is absent.
+
+- **Model:** `BAAI/bge-small-en-v1.5` (ONNX variant, ~24 MB)
+- **Cache path:** `~/.cache/agent-memory/bge-small-en-v1.5/model.onnx`
+- **Integrity check:** SHA256 is verified after download. On mismatch the partial file is deleted and the process exits with code 1 and a descriptive error.
+- **Network failure:** The partial file is deleted and the process exits with code 1.
+
+A progress message is printed to `stderr` during the download:
+
+```
+Downloading bge-small-en-v1.5 model…
+```
+
+This is a one-time cost. Subsequent invocations skip the download if the file already exists at the cache path.
+
 ## DB path resolution
 
 Every subcommand resolves the database path in this order (highest priority first):
@@ -77,13 +94,35 @@ Memories:  42
 DB size:   1.3 MB
 ```
 
+### `add`
+
+```
+memory.py add <text> [--source TAG] [--meta KEY=VALUE ...] [--db PATH]
+```
+
+Stores a new memory entry. Auto-initialises the database if it does not yet exist.
+
+| Argument | Description |
+|---|---|
+| `<text>` | Text content to store (required) |
+| `--source TAG` | Optional origin tag or file path |
+| `--meta KEY=VALUE` | Arbitrary metadata key/value pair (repeatable) |
+| `--db PATH` | Override DB path |
+
+The text is embedded via the `bge-small-en-v1.5` ONNX model (model downloaded on first use — see [Model bootstrap](#model-bootstrap)). Both the `memories` and `memories_vec` rows are written in a single transaction.
+
+Output on success:
+
+```
+Added <uuid>
+```
+
 ### Stub subcommands (not yet implemented)
 
 The following subcommands are defined in the parser and will be implemented in subsequent beads. Invoking them currently raises `NotImplementedError`.
 
 | Subcommand | Purpose |
 |---|---|
-| `add <text> [--source TAG] [--meta KEY=VALUE ...] [--db PATH]` | Store a new memory with optional metadata |
 | `search <query> [--limit N] [--threshold F] [--source TAG] [--json] [--db PATH]` | Semantic similarity search over stored memories |
 | `list [--limit N] [--source TAG] [--json] [--db PATH]` | List stored memories |
 | `delete <id> [--db PATH]` | Delete a memory by UUID |
