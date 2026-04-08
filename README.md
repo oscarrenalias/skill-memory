@@ -7,7 +7,7 @@ Long-term semantic memory for agents — store, search, and retrieve text memori
 Install via APM (recommended):
 
 ```bash
-apm install --t claude oscarrenalias/skill-agent-memory#v0.1.4
+apm install --t claude oscarrenalias/skill-memory#v0.1.7
 ```
 
 Please replace v0.1.4 with the right version, check the [GitHub releases page](https://github.com/oscarrenalias/skill-memory/tags) to check the latest available version.
@@ -15,6 +15,24 @@ Please replace v0.1.4 with the right version, check the [GitHub releases page](h
 Alternatively, clone manually and add to your Claude Code skills path.
 
 Upon loading the skill, the model will initialize its own dependencies (it's self-contained but it will pull libraries) as well as initialize the local database.
+
+### Python requirement
+
+`memory.py` requires a Python build compiled with SQLite extension-loading support. If you see `AttributeError: 'sqlite3.Connection' object has no attribute 'enable_load_extension'`, your Python was built without this flag.
+
+**Recommended fix:** use Homebrew Python (macOS) or the official python.org installer:
+
+```bash
+brew install python   # macOS
+```
+
+If you manage Python via **pyenv**, rebuild with:
+
+```bash
+PYTHON_CONFIGURE_OPTS="--enable-loadable-sqlite-extensions" pyenv install 3.x.x
+```
+
+Then re-run `python3 memory.py --help` to re-bootstrap the `.venv` against the new Python.
 
 ## Usage
 
