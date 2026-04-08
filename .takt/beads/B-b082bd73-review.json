@@ -21,10 +21,16 @@
   ],
   "expected_globs": [],
   "touched_files": [
-    "memory.py"
+    "docs/memory/conventions.md",
+    "docs/memory/memory-cli.md",
+    "memory.py",
+    "test_commands.py"
   ],
   "changed_files": [
-    "memory.py"
+    "docs/memory/conventions.md",
+    "docs/memory/memory-cli.md",
+    "memory.py",
+    "test_commands.py"
   ],
   "updated_docs": [],
   "handoff_summary": {
@@ -63,5 +69,7 @@
     }
   ],
   "metadata": {},
-  "labels": []
+  "labels": [],
+  "recovery_for": null,
+  "priority": null
 }
