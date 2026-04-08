@@ -45,7 +45,7 @@
     "test_coverage_notes": "",
     "known_limitations": ""
   },
-  "block_reason": "",
+  "block_reason": "Deferred due to file-scope conflict with active bead B-b082bd73-test",
   "conflict_risks": "None \u2014 only memory.py modified; no overlap with other in-flight beads expected.",
   "branch_name": "",
   "worktree_path": "",
@@ -58,8 +58,17 @@
       "agent_type": "scheduler",
       "summary": "Bead created",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T09:32:58.127987+00:00",
+      "event": "deferred",
+      "agent_type": "documentation",
+      "summary": "Deferred due to file-scope conflict with active bead B-b082bd73-test",
+      "details": {}
     }
   ],
   "metadata": {},
-  "labels": []
+  "labels": [],
+  "recovery_for": null,
+  "priority": null
 }
