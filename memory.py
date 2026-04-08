@@ -61,6 +61,10 @@ def _resolve_db(db_arg):
     return _DEFAULT_DB
 
 
+def _resolve_namespace(namespace_arg):
+    return namespace_arg if namespace_arg else "default"
+
+
 def _format_size(num_bytes):
     for unit in ("B", "KB", "MB", "GB"):
         if num_bytes < 1024:
@@ -151,7 +155,7 @@ def _auto_init(db_path: Path) -> None:
 
 
 def _init_db(db_path: Path) -> None:
-    """Create tables (idempotent)."""
+    """Create tables (idempotent). Migrates existing DBs to add the namespace column."""
     db_path.parent.mkdir(parents=True, exist_ok=True)
     con = _open_db(db_path)
     try:
@@ -161,25 +165,41 @@ def _init_db(db_path: Path) -> None:
                 content    TEXT    NOT NULL,
                 source     TEXT,
                 metadata   TEXT    NOT NULL DEFAULT '{}',
-                created_at TEXT    NOT NULL
+                created_at TEXT    NOT NULL,
+                namespace  TEXT    NOT NULL DEFAULT 'default'
             );
             CREATE VIRTUAL TABLE IF NOT EXISTS memories_vec USING vec0(
                 embedding float[384]
             );
         """)
         con.commit()
+        # Migrate existing DBs that predate the namespace column.
+        try:
+            con.execute(
+                "ALTER TABLE memories ADD COLUMN namespace TEXT NOT NULL DEFAULT 'default'"
+            )
+            con.commit()
+        except sqlite3.OperationalError:
+            pass  # Column already exists — new DB or already migrated.
     finally:
         con.close()
 
 
-def _insert_chunk(con: sqlite3.Connection, content: str, source: str, metadata: dict) -> None:
+def _insert_chunk(
+    con: sqlite3.Connection,
+    content: str,
+    source: str,
+    metadata: dict,
+    namespace: str = "default",
+) -> None:
     """Insert a single chunk into memories and memories_vec within an open connection."""
     embedding = _embed([content])[0]
     mem_id = str(uuid.uuid4())
     created_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     cur = con.execute(
-        "INSERT INTO memories (id, content, source, metadata, created_at) VALUES (?, ?, ?, ?, ?)",
-        (mem_id, content, source, json.dumps(metadata), created_at),
+        "INSERT INTO memories (id, content, source, metadata, created_at, namespace)"
+        " VALUES (?, ?, ?, ?, ?, ?)",
+        (mem_id, content, source, json.dumps(metadata), created_at, namespace),
     )
     rowid = cur.lastrowid
     con.execute(
@@ -283,6 +303,7 @@ def cmd_init(args):
 
 def cmd_add(args):
     db_path = _resolve_db(args.db)
+    namespace = _resolve_namespace(getattr(args, "namespace", None))
     _auto_init(db_path)
 
     meta = {}
@@ -302,8 +323,9 @@ def cmd_add(args):
     try:
         with con:
             cur = con.execute(
-                "INSERT INTO memories (id, content, source, metadata, created_at) VALUES (?, ?, ?, ?, ?)",
-                (mem_id, args.text, args.source, json.dumps(meta), created_at),
+                "INSERT INTO memories (id, content, source, metadata, created_at, namespace)"
+                " VALUES (?, ?, ?, ?, ?, ?)",
+                (mem_id, args.text, args.source, json.dumps(meta), created_at, namespace),
             )
             rowid = cur.lastrowid
             con.execute(
@@ -316,7 +338,7 @@ def cmd_add(args):
     print(f"Added {mem_id}")
 
 
-def _ingest_text_chunks(file_path, ext, chunk_size, overlap, source, db_path):
+def _ingest_text_chunks(file_path, ext, chunk_size, overlap, source, db_path, namespace="default"):
     """Shared logic for .txt and .md ingestion."""
     text = file_path.read_text(encoding="utf-8")
 
@@ -340,7 +362,7 @@ def _ingest_text_chunks(file_path, ext, chunk_size, overlap, source, db_path):
     try:
         with con:
             for chunk in chunks:
-                _insert_chunk(con, chunk, source, {})
+                _insert_chunk(con, chunk, source, {}, namespace)
                 added += 1
     finally:
         con.close()
@@ -348,7 +370,7 @@ def _ingest_text_chunks(file_path, ext, chunk_size, overlap, source, db_path):
     print(f"Ingesting {file_path.name}\u2026 {added} chunks added ({skipped} skipped).", file=sys.stderr)
 
 
-def _ingest_json(file_path, source, db_path):
+def _ingest_json(file_path, source, db_path, namespace="default"):
     """Ingest a JSON file. Expects a top-level array of strings or objects."""
     try:
         data = json.loads(file_path.read_text(encoding="utf-8"))
@@ -408,7 +430,7 @@ def _ingest_json(file_path, source, db_path):
                 if len(rec["content"].strip()) < MIN_CHUNK_LEN:
                     skipped += 1
                     continue
-                _insert_chunk(con, rec["content"], rec["source"], rec["metadata"])
+                _insert_chunk(con, rec["content"], rec["source"], rec["metadata"], namespace)
                 added += 1
     finally:
         con.close()
@@ -416,7 +438,7 @@ def _ingest_json(file_path, source, db_path):
     print(f"Ingesting {file_path.name}\u2026 {added} rows added ({skipped} skipped).", file=sys.stderr)
 
 
-def _ingest_csv(file_path, column, source, db_path):
+def _ingest_csv(file_path, column, source, db_path, namespace="default"):
     """Ingest a CSV file. --column specifies the text column; others become metadata."""
     import csv
 
@@ -448,7 +470,7 @@ def _ingest_csv(file_path, column, source, db_path):
                     skipped += 1
                     continue
                 metadata = {col: row[col] for col in meta_columns}
-                _insert_chunk(con, content, source, metadata)
+                _insert_chunk(con, content, source, metadata, namespace)
                 added += 1
     finally:
         con.close()
@@ -466,11 +488,12 @@ def cmd_ingest(args):
     ext = file_path.suffix.lower()
     source = args.source if args.source else file_path.name
     db_path = _resolve_db(args.db)
+    namespace = _resolve_namespace(getattr(args, "namespace", None))
 
     if ext in (".txt", ".md"):
-        _ingest_text_chunks(file_path, ext, args.chunk_size, args.overlap, source, db_path)
+        _ingest_text_chunks(file_path, ext, args.chunk_size, args.overlap, source, db_path, namespace)
     elif ext == ".json":
-        _ingest_json(file_path, source, db_path)
+        _ingest_json(file_path, source, db_path, namespace)
     elif ext == ".csv":
         if not args.column:
             print(
@@ -478,7 +501,7 @@ def cmd_ingest(args):
                 file=sys.stderr,
             )
             sys.exit(1)
-        _ingest_csv(file_path, args.column, source, db_path)
+        _ingest_csv(file_path, args.column, source, db_path, namespace)
     else:
         print(
             f"Unsupported format: {ext!r}. Supported formats: .txt, .md, .json, .csv",
@@ -493,6 +516,7 @@ def cmd_search(args):
         print(f"No memory DB found at {db_path}. Run: memory.py init")
         sys.exit(0)
 
+    namespace = _resolve_namespace(getattr(args, "namespace", None))
     query_vec = _embed([args.query])[0]
     limit = args.limit
 
@@ -504,9 +528,10 @@ def cmd_search(args):
             JOIN memories m ON m.rowid = v.rowid
             WHERE v.embedding MATCH ?
               AND k = ?
+              AND m.namespace = ?
             ORDER BY v.distance
         """
-        rows = con.execute(sql, (_serialize_vec(query_vec), limit)).fetchall()
+        rows = con.execute(sql, (_serialize_vec(query_vec), limit, namespace)).fetchall()
     finally:
         con.close()
 
@@ -570,14 +595,17 @@ def cmd_list(args):
         print(f"No memory DB found at {db_path}")
         sys.exit(0)
 
+    namespace = _resolve_namespace(getattr(args, "namespace", None))
     limit = args.limit
     con = sqlite3.connect(db_path)
     try:
-        sql = "SELECT id, content, source, metadata, created_at FROM memories"
-        params = []
+        conditions = ["namespace = ?"]
+        params = [namespace]
         if args.source:
-            sql += " WHERE source = ?"
+            conditions.append("source = ?")
             params.append(args.source)
+        sql = "SELECT id, content, source, metadata, created_at FROM memories"
+        sql += " WHERE " + " AND ".join(conditions)
         sql += " ORDER BY created_at DESC"
         if limit > 0:
             sql += " LIMIT ?"
@@ -623,12 +651,19 @@ def cmd_stats(args):
     con = sqlite3.connect(db_path)
     try:
         (count,) = con.execute("SELECT COUNT(*) FROM memories").fetchone()
+        ns_rows = con.execute(
+            "SELECT namespace, COUNT(*) FROM memories GROUP BY namespace ORDER BY namespace"
+        ).fetchall()
     finally:
         con.close()
 
     print(f"DB path:   {db_path}")
     print(f"Memories:  {count}")
     print(f"DB size:   {_format_size(size_bytes)}")
+    if ns_rows:
+        print("Namespaces:")
+        for ns, ns_count in ns_rows:
+            print(f"  {ns}: {ns_count}")
 
 
 def main():
@@ -637,6 +672,12 @@ def main():
         description="agent-memory — long-term semantic memory for agents",
     )
     parser.add_argument("--db", metavar="PATH", help="Override DB path")
+    parser.add_argument(
+        "--namespace",
+        metavar="NAME",
+        default="default",
+        help="Memory namespace to scope reads and writes (default: 'default')",
+    )
 
     subparsers = parser.add_subparsers(dest="command", required=True)
 
