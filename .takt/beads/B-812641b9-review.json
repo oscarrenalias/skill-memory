@@ -3,7 +3,7 @@
   "title": "Review Ingest JSON and CSV format support",
   "agent_type": "review",
   "description": "Review implementation for B-812641b9",
-  "status": "ready",
+  "status": "in_progress",
   "bead_type": "task",
   "parent_id": "B-812641b9",
   "dependencies": [
@@ -75,7 +75,10 @@
   "conflict_risks": "None \u2014 fixes are confined to _ingest_json, _ingest_csv, and one argparse help string in memory.py. No schema changes.",
   "branch_name": "feature/b-54edeccf",
   "worktree_path": "",
-  "lease": null,
+  "lease": {
+    "owner": "review:B-812641b9-review",
+    "expires_at": "2026-04-08T05:46:46.876721+00:00"
+  },
   "retries": 0,
   "execution_history": [
     {
@@ -136,6 +139,29 @@
       "event": "retried",
       "agent_type": "review",
       "summary": "Requeued blocked bead after corrective bead B-812641b9-review-corrective completed",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T05:16:47.277191+00:00",
+      "event": "skills_loaded",
+      "agent_type": "review",
+      "summary": "Loaded 6 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/reviewer-signoff",
+          "capability/code-review",
+          "task/corrective-bead-creation",
+          "task/risk-assessment",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-08T05:16:47.277223+00:00",
+      "event": "started",
+      "agent_type": "review",
+      "summary": "Worker started",
       "details": {}
     }
   ],
