@@ -23,10 +23,12 @@
     ".github/workflows/*.yml"
   ],
   "touched_files": [
-    ".github/workflows/test.yml"
+    ".github/workflows/test.yml",
+    "README.md"
   ],
   "changed_files": [
-    ".github/workflows/test.yml"
+    ".github/workflows/test.yml",
+    "README.md"
   ],
   "updated_docs": [],
   "handoff_summary": {
