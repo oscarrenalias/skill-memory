@@ -17,7 +17,7 @@ Long-term semantic memory for agents. Memories are stored in a local SQLite data
 python3 memory.py <command> [options]
 ```
 
-On first run, `memory.py` bootstraps a local `.venv` with its dependencies (`onnxruntime`, `sqlite-vec`, `tokenizers`, `numpy`). The embedding model is downloaded to `~/.cache/agent-memory/bge-small-en-v1.5/` on first use. The default DB lives at `~/.local/share/agent-memory/memories.db` and is auto-initialised on first write — no explicit `init` needed.
+On first run, `memory.py` bootstraps a local `.venv` with its dependencies (`onnxruntime`, `sqlite-vec`, `tokenizers`, `numpy`). The embedding model is downloaded to `~/.cache/agent-memory/bge-small-en-v1.5/` on first use. The default DB lives at `memories.db` in the same directory as `memory.py` (i.e. the repo root) and is auto-initialised on first write — no explicit `init` needed.
 
 ## When to Use This Skill
 
@@ -123,7 +123,7 @@ Prints the DB path, total memory count, and file size.
 
 | Scenario | Recommendation |
 |----------|----------------|
-| Personal / cross-project context | Use the default (`~/.local/share/agent-memory/memories.db`) |
+| Personal / cross-project context | Use the default (`memories.db` next to `memory.py`) |
 | Project-local context | Pass `--db .agent-memory.db` or set `AGENT_MEMORY_DB=.agent-memory.db` |
 | CI / ephemeral environments | Set `AGENT_MEMORY_DB` to a temp path |
 
