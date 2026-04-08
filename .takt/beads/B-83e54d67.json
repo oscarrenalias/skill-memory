@@ -3,7 +3,7 @@
   "title": "Resolve merge conflicts for agent-memory: query and CRUD operations",
   "agent_type": "developer",
   "description": "Test gate failed for feature/b-cb0b48a1.\n\nCommand: pytest\n\nOutput:\n",
-  "status": "ready",
+  "status": "done",
   "bead_type": "merge-conflict",
   "parent_id": "B-cb0b48a1",
   "dependencies": [],
@@ -49,6 +49,13 @@
       "event": "created",
       "agent_type": "scheduler",
       "summary": "Bead created",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T06:49:20.810908+00:00",
+      "event": "completed",
+      "agent_type": "developer",
+      "summary": "Test gate failure resolved: changed test_command from pytest to .venv/bin/pytest in takt config.",
       "details": {}
     }
   ],
