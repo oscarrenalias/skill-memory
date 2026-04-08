@@ -3,7 +3,7 @@
   "title": "Test search/list: add --long flag to show full chunk content",
   "agent_type": "tester",
   "description": "Validate implementation for B-b082bd73",
-  "status": "ready",
+  "status": "in_progress",
   "bead_type": "task",
   "parent_id": "B-b082bd73",
   "dependencies": [
@@ -47,9 +47,12 @@
   },
   "block_reason": "",
   "conflict_risks": "None \u2014 only memory.py modified; no overlap with other in-flight beads expected.",
-  "branch_name": "",
-  "worktree_path": "",
-  "lease": null,
+  "branch_name": "feature/b-b082bd73",
+  "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-b082bd73",
+  "lease": {
+    "owner": "tester:B-b082bd73-test",
+    "expires_at": "2026-04-08T10:02:58.446963+00:00"
+  },
   "retries": 0,
   "execution_history": [
     {
@@ -58,8 +61,47 @@
       "agent_type": "scheduler",
       "summary": "Bead created",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T09:32:58.768065+00:00",
+      "event": "skills_loaded",
+      "agent_type": "tester",
+      "summary": "Loaded 6 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/tester-validation",
+          "capability/test-execution",
+          "task/defect-bead-creation",
+          "task/regression-triage",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-08T09:32:58.768099+00:00",
+      "event": "started",
+      "agent_type": "tester",
+      "summary": "Worker started",
+      "details": {}
     }
   ],
-  "metadata": {},
-  "labels": []
+  "metadata": {
+    "execution_root": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-b082bd73-test",
+    "workspace_repo_path": "repo",
+    "loaded_skills": [
+      "core/base-orchestrator",
+      "role/tester-validation",
+      "capability/test-execution",
+      "task/defect-bead-creation",
+      "task/regression-triage",
+      "memory"
+    ],
+    "skill_bundle_hash": "09c41b0ce7b733774ac92190a1a2516f6510bcbf848392054d11d9a6cdf8ee61",
+    "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-b082bd73-test/home",
+    "runner_backend": "claude"
+  },
+  "labels": [],
+  "recovery_for": null,
+  "priority": null
 }
