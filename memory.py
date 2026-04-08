@@ -42,7 +42,7 @@ import numpy as np
 import sqlite_vec
 
 
-_DEFAULT_DB = Path.home() / ".local" / "share" / "agent-memory" / "memories.db"
+_DEFAULT_DB = _SKILL_DIR / "memories.db"
 _MODEL_DIR = Path.home() / ".cache" / "agent-memory" / "bge-small-en-v1.5"
 _MODEL_PATH = _MODEL_DIR / "model.onnx"
 _MODEL_URL = "https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/onnx/model.onnx"
