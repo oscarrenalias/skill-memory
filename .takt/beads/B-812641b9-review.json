@@ -3,7 +3,7 @@
   "title": "Review Ingest JSON and CSV format support",
   "agent_type": "review",
   "description": "Review implementation for B-812641b9",
-  "status": "in_progress",
+  "status": "blocked",
   "bead_type": "task",
   "parent_id": "B-812641b9",
   "dependencies": [
@@ -19,54 +19,59 @@
   "execution_branch_name": "feature/b-54edeccf",
   "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
   "expected_files": [
-    "__pycache__/memory.cpython-314.pyc",
     "memory.py",
+    "tests/test_ingest_json_csv.py",
     "tests/__init__.py"
   ],
   "expected_globs": [],
   "touched_files": [
-    "__pycache__/memory.cpython-314.pyc",
     "memory.py",
-    "tests/__init__.py",
-    "tests/__pycache__/test_ingest_json_csv.cpython-314-pytest-9.0.2.pyc",
-    "tests/test_ingest_json_csv.py"
+    "tests/test_ingest_json_csv.py",
+    "tests/__init__.py"
   ],
   "changed_files": [
-    "__pycache__/memory.cpython-314.pyc",
     "memory.py",
-    "tests/__init__.py",
-    "tests/__pycache__/test_ingest_json_csv.cpython-314-pytest-9.0.2.pyc",
-    "tests/test_ingest_json_csv.py"
+    "tests/test_ingest_json_csv.py",
+    "tests/__init__.py"
   ],
   "updated_docs": [],
   "handoff_summary": {
-    "completed": "",
-    "remaining": "",
-    "risks": "",
-    "verdict": "",
-    "findings_count": 0,
-    "requires_followup": false,
-    "changed_files": [],
+    "completed": "Reviewed memory.py (_ingest_json, _ingest_csv, _ingest_text_chunks, cmd_ingest) and tests/test_ingest_json_csv.py against the spec acceptance criteria. JSON dispatch, CSV DictReader logic, eager JSON validation, error-exit paths, and test mocking strategy are all correct.",
+    "remaining": "Two unresolved findings must be fixed before this bead can close. See block_reason for details.",
+    "risks": "Finding 1 is a direct spec violation. If left unfixed, ingest commands on JSON/CSV files will silently insert zero-length or near-empty embeddings and report no skipped count \u2014 inconsistent with txt/md behaviour and contrary to the spec acceptance criterion.",
+    "verdict": "needs_changes",
+    "findings_count": 2,
+    "requires_followup": true,
+    "changed_files": [
+      "memory.py",
+      "tests/test_ingest_json_csv.py",
+      "tests/__init__.py"
+    ],
     "updated_docs": [],
-    "next_action": "",
-    "next_agent": "",
-    "block_reason": "",
-    "expected_files": [],
+    "next_action": "Create a corrective bead targeting: (1) add MIN_CHUNK_LEN=10 filter and skipped-count reporting to _ingest_json and _ingest_csv; (2) update argparse help text at memory.py:633; (3) add tests for short-content filtering in both formats.",
+    "next_agent": "developer",
+    "block_reason": "Finding 1 (High): _ingest_json and _ingest_csv lack the MIN_CHUNK_LEN=10 filter present in _ingest_text_chunks, and their progress messages omit the skipped count. Spec acceptance criterion 6 explicitly requires short chunks to be skipped and counted for all formats. Finding 2 (Low): ingest_parser argument help text at memory.py:633 still says '.txt or .md' \u2014 should include '.json' and '.csv'.",
+    "expected_files": [
+      "memory.py",
+      "tests/test_ingest_json_csv.py",
+      "tests/__init__.py"
+    ],
     "expected_globs": [],
-    "touched_files": [],
-    "conflict_risks": "",
-    "design_decisions": "",
-    "test_coverage_notes": "",
-    "known_limitations": ""
+    "touched_files": [
+      "memory.py",
+      "tests/test_ingest_json_csv.py",
+      "tests/__init__.py"
+    ],
+    "conflict_risks": "None \u2014 fixes are confined to _ingest_json, _ingest_csv, and one argparse help string in memory.py. No schema changes.",
+    "design_decisions": "_ingest_text_chunks correctly centralises the MIN_CHUNK_LEN filter; _ingest_json and _ingest_csv need equivalent filtering added inline (a shared helper is not required but acceptable).",
+    "test_coverage_notes": "test_ingest_json_csv.py has good coverage of the implemented paths but has no tests for short-content filtering (because the filter is absent). A corrective bead should add tests for the filter once the implementation is in place.",
+    "known_limitations": "Empty-string content values in JSON string arrays and CSV content columns are not validated (would be caught by MIN_CHUNK_LEN=10 once finding 1 is fixed, since len('') < 10). No separate finding raised for this."
   },
-  "block_reason": "",
-  "conflict_risks": "None \u2014 changes are confined to cmd_ingest and three new private helpers in memory.py. No shared state or schema changes.",
+  "block_reason": "Finding 1 (High): _ingest_json and _ingest_csv lack the MIN_CHUNK_LEN=10 filter present in _ingest_text_chunks, and their progress messages omit the skipped count. Spec acceptance criterion 6 explicitly requires short chunks to be skipped and counted for all formats. Finding 2 (Low): ingest_parser argument help text at memory.py:633 still says '.txt or .md' \u2014 should include '.json' and '.csv'.",
+  "conflict_risks": "None \u2014 fixes are confined to _ingest_json, _ingest_csv, and one argparse help string in memory.py. No schema changes.",
   "branch_name": "feature/b-54edeccf",
   "worktree_path": "",
-  "lease": {
-    "owner": "review:B-812641b9-review",
-    "expires_at": "2026-04-08T05:27:28.584729+00:00"
-  },
+  "lease": null,
   "retries": 0,
   "execution_history": [
     {
@@ -107,6 +112,13 @@
       "details": {
         "template_path": ".takt/agent-runs/B-812641b9-review/repo/templates/agents/review.md"
       }
+    },
+    {
+      "timestamp": "2026-04-08T04:59:37.975334+00:00",
+      "event": "blocked",
+      "agent_type": "review",
+      "summary": "needs_changes: 2 findings \u2014 missing MIN_CHUNK_LEN filter in _ingest_json/_ingest_csv (spec violation) and stale argparse help text",
+      "details": {}
     }
   ],
   "metadata": {
@@ -181,7 +193,52 @@
         "test_coverage_notes": "",
         "known_limitations": ""
       }
-    }
+    },
+    "last_agent_result": {
+      "outcome": "blocked",
+      "summary": "needs_changes: 2 findings \u2014 missing MIN_CHUNK_LEN filter in _ingest_json/_ingest_csv (spec violation) and stale argparse help text",
+      "verdict": "needs_changes",
+      "findings_count": 2,
+      "requires_followup": true,
+      "next_agent": "developer",
+      "block_reason": "Finding 1 (High): _ingest_json and _ingest_csv lack the MIN_CHUNK_LEN=10 filter present in _ingest_text_chunks, and their progress messages omit the skipped count. Spec acceptance criterion 6 explicitly requires short chunks to be skipped and counted for all formats. Finding 2 (Low): ingest_parser argument help text at memory.py:633 still says '.txt or .md' \u2014 should include '.json' and '.csv'."
+    },
+    "telemetry": {
+      "cost_usd": 0.2890782,
+      "duration_ms": 126412,
+      "duration_api_ms": 120161,
+      "num_turns": 9,
+      "input_tokens": 10,
+      "output_tokens": 6975,
+      "cache_creation_tokens": 29808,
+      "cache_read_tokens": 242144,
+      "stop_reason": "end_turn",
+      "session_id": "7b1fc63f-f8e5-4549-a76e-af85fe1f890e",
+      "permission_denials": [],
+      "prompt_chars": 7285,
+      "prompt_lines": 159,
+      "source": "provider",
+      "attempt": 1
+    },
+    "telemetry_history": [
+      {
+        "cost_usd": 0.2890782,
+        "duration_ms": 126412,
+        "duration_api_ms": 120161,
+        "num_turns": 9,
+        "input_tokens": 10,
+        "output_tokens": 6975,
+        "cache_creation_tokens": 29808,
+        "cache_read_tokens": 242144,
+        "stop_reason": "end_turn",
+        "session_id": "7b1fc63f-f8e5-4549-a76e-af85fe1f890e",
+        "permission_denials": [],
+        "prompt_chars": 7285,
+        "prompt_lines": 159,
+        "source": "provider",
+        "attempt": 1
+      }
+    ]
   },
   "labels": []
 }
