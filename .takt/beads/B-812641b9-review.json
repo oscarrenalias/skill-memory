@@ -25,14 +25,18 @@
   ],
   "expected_globs": [],
   "touched_files": [
+    "__pycache__/memory.cpython-314.pyc",
     "memory.py",
-    "tests/test_ingest_json_csv.py",
-    "tests/__init__.py"
+    "tests/__init__.py",
+    "tests/__pycache__/test_ingest_json_csv.cpython-314-pytest-9.0.2.pyc",
+    "tests/test_ingest_json_csv.py"
   ],
   "changed_files": [
+    "__pycache__/memory.cpython-314.pyc",
     "memory.py",
-    "tests/test_ingest_json_csv.py",
-    "tests/__init__.py"
+    "tests/__init__.py",
+    "tests/__pycache__/test_ingest_json_csv.cpython-314-pytest-9.0.2.pyc",
+    "tests/test_ingest_json_csv.py"
   ],
   "updated_docs": [],
   "handoff_summary": {
