@@ -110,6 +110,13 @@
       "agent_type": "tester",
       "summary": "README.md exists and is well-structured, but the APM install URL is incorrect. The README contains `git+https://github.com/oscar-renalias/skill-agent-memory` while the actual remote is `https://github.com/oscarrenalias/skill-memory` \u2014 both the username (hyphenated vs not) and the repo name differ.",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T10:13:38.309415+00:00",
+      "event": "corrective_planned",
+      "agent_type": "tester",
+      "summary": "Created corrective bead B-618cbc46-test-corrective for blocked issue",
+      "details": {}
     }
   ],
   "metadata": {
@@ -219,7 +226,8 @@
         "source": "provider",
         "attempt": 1
       }
-    ]
+    ],
+    "auto_corrective_bead_id": "B-618cbc46-test-corrective"
   },
   "labels": [],
   "recovery_for": null,
