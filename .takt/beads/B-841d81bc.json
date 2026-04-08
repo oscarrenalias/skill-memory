@@ -67,8 +67,17 @@
       "agent_type": "developer",
       "summary": "Preparing worktree (checking out 'feature/b-266c0a28')\nfatal: 'feature/b-266c0a28' is already used by worktree at '/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28'",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T05:35:19.448041+00:00",
+      "event": "corrective_planned",
+      "agent_type": "developer",
+      "summary": "Created corrective bead B-841d81bc-corrective for blocked issue",
+      "details": {}
     }
   ],
-  "metadata": {},
+  "metadata": {
+    "auto_corrective_bead_id": "B-841d81bc-corrective"
+  },
   "labels": []
 }
