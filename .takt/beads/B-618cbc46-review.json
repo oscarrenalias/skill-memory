@@ -3,7 +3,7 @@
   "title": "Review Bootstrap README.md with APM installation instructions",
   "agent_type": "review",
   "description": "Review implementation for B-618cbc46",
-  "status": "in_progress",
+  "status": "done",
   "bead_type": "task",
   "parent_id": "B-618cbc46",
   "dependencies": [
@@ -26,35 +26,42 @@
   "changed_files": [
     "README.md"
   ],
-  "updated_docs": [],
+  "updated_docs": [
+    "README.md"
+  ],
   "handoff_summary": {
-    "completed": "",
-    "remaining": "",
-    "risks": "",
-    "verdict": "",
+    "completed": "Reviewed README.md. DB path correctly shows `<skill-dir>/memories.db` (aligned with commit 73eabb1 fix). Test command correctly documents `.venv/bin/pytest`. Content is comprehensive: installation, all CLI commands, DB location table, what-to-store guidance, repo layout, and takt workflow.",
+    "remaining": "None.",
+    "risks": "APM install URL (`oscarrenalias/skill-memory`) differs from the design-decision pattern (`oscar-renalias/skill-agent-memory`) in both username format and repo name. This is documented as a known placeholder in the handoff \u2014 no blocking risk, but the URL should be reconciled against the live GitHub remote before the APM install path is relied on by end users.",
+    "verdict": "approved",
     "findings_count": 0,
     "requires_followup": false,
-    "changed_files": [],
-    "updated_docs": [],
-    "next_action": "",
+    "changed_files": [
+      "README.md"
+    ],
+    "updated_docs": [
+      "README.md"
+    ],
+    "next_action": "Bead is complete. No follow-up required.",
     "next_agent": "",
     "block_reason": "",
-    "expected_files": [],
+    "expected_files": [
+      "README.md"
+    ],
     "expected_globs": [],
-    "touched_files": [],
-    "conflict_risks": "",
-    "design_decisions": "",
-    "test_coverage_notes": "",
-    "known_limitations": ""
+    "touched_files": [
+      "README.md"
+    ],
+    "conflict_risks": "No conflict risk \u2014 README.md has no sibling bead overlap.",
+    "design_decisions": "DB path documented as `<skill-dir>/memories.db`, consistent with code change in 73eabb1. APM URL is a placeholder pending confirmation of the live GitHub remote.",
+    "test_coverage_notes": "Test coverage for README content is out of scope for this review bead; tested by B-618cbc46-test.",
+    "known_limitations": "APM install URL (`git+https://github.com/oscarrenalias/skill-memory`) is a placeholder. The design-decision handoff flagged this as needing confirmation against the actual remote; the URL differs in both GitHub username format and repo name from the pattern cited in design decisions."
   },
   "block_reason": "",
-  "conflict_risks": "No conflict risk \u2014 README.md is a new file with no sibling bead overlap.",
+  "conflict_risks": "No conflict risk \u2014 README.md has no sibling bead overlap.",
   "branch_name": "feature/b-33389719",
   "worktree_path": "",
-  "lease": {
-    "owner": "review:B-618cbc46-review",
-    "expires_at": "2026-04-08T11:26:47.229901+00:00"
-  },
+  "lease": null,
   "retries": 0,
   "execution_history": [
     {
@@ -95,6 +102,13 @@
       "details": {
         "template_path": ".takt/agent-runs/B-618cbc46-review/repo/templates/agents/review.md"
       }
+    },
+    {
+      "timestamp": "2026-04-08T10:57:46.448140+00:00",
+      "event": "completed",
+      "agent_type": "review",
+      "summary": "README.md approved \u2014 DB path, test command, and content are correct; APM URL is a documented placeholder.",
+      "details": {}
     }
   ],
   "metadata": {
@@ -161,7 +175,52 @@
         "test_coverage_notes": "",
         "known_limitations": ""
       }
-    }
+    },
+    "last_agent_result": {
+      "outcome": "completed",
+      "summary": "README.md approved \u2014 DB path, test command, and content are correct; APM URL is a documented placeholder.",
+      "verdict": "approved",
+      "findings_count": 0,
+      "requires_followup": false,
+      "next_agent": "",
+      "block_reason": ""
+    },
+    "telemetry": {
+      "cost_usd": 0.1050258,
+      "duration_ms": 58069,
+      "duration_api_ms": 54834,
+      "num_turns": 3,
+      "input_tokens": 5,
+      "output_tokens": 3209,
+      "cache_creation_tokens": 11096,
+      "cache_read_tokens": 50886,
+      "stop_reason": "end_turn",
+      "session_id": "bcb62f02-9230-4c35-8174-e3b776acacaf",
+      "permission_denials": [],
+      "prompt_chars": 6940,
+      "prompt_lines": 148,
+      "source": "provider",
+      "attempt": 1
+    },
+    "telemetry_history": [
+      {
+        "cost_usd": 0.1050258,
+        "duration_ms": 58069,
+        "duration_api_ms": 54834,
+        "num_turns": 3,
+        "input_tokens": 5,
+        "output_tokens": 3209,
+        "cache_creation_tokens": 11096,
+        "cache_read_tokens": 50886,
+        "stop_reason": "end_turn",
+        "session_id": "bcb62f02-9230-4c35-8174-e3b776acacaf",
+        "permission_denials": [],
+        "prompt_chars": 6940,
+        "prompt_lines": 148,
+        "source": "provider",
+        "attempt": 1
+      }
+    ]
   },
   "labels": [],
   "recovery_for": null,
