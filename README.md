@@ -7,12 +7,14 @@ Long-term semantic memory for agents — store, search, and retrieve text memori
 Install via APM (recommended):
 
 ```bash
-apm install git+https://github.com/oscar-renalias/skill-agent-memory
+apm install --t claude oscarrenalias/skill-agent-memory#v0.1.4
 ```
 
-Or clone manually and add to your Claude Code skills path.
+Please replace v0.1.4 with the right version, check the [GitHub releases page](https://github.com/oscarrenalias/skill-memory/tags) to check the latest available version.
 
-On first run, `memory.py` bootstraps a local `.venv` with its dependencies (`onnxruntime`, `sqlite-vec`, `tokenizers`, `numpy`). The embedding model (~33 MB) is downloaded to `~/.cache/agent-memory/bge-small-en-v1.5/` on first use. No explicit initialisation is needed — the DB is auto-created on first write.
+Alternatively, clone manually and add to your Claude Code skills path.
+
+Upon loading the skill, the model will initialize its own dependencies (it's self-contained but it will pull libraries) as well as initialize the local database.
 
 ## Usage
 
@@ -23,6 +25,8 @@ python3 memory.py <command> [options]
 ```
 
 ### Common commands
+
+These should not be required by human operators as the agent will drive everything through the skill. They are only provided here for reference.
 
 ```bash
 # Store a memory
