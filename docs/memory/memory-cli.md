@@ -52,6 +52,48 @@ Downloading bge-small-en-v1.5 model…
 
 This is a one-time cost. Subsequent invocations skip the download if the file already exists at the cache path.
 
+## Embedding pipeline
+
+Embeddings are produced by the `_embed(texts: list) -> np.ndarray` function using the `BAAI/bge-small-en-v1.5` ONNX model.
+
+### Singleton pattern
+
+Two module-level singletons are loaded once per process and reused across all calls:
+
+- **`_get_ort_session()`** — creates the `onnxruntime.InferenceSession` on first call using the model path returned by `_ensure_model()`.
+- **`_get_embed_tokenizer()`** — loads the `tokenizers.Tokenizer` from `assets/tokenizer.json` (bundled next to `memory.py`) on first call, with `max_length=512` truncation and zero-padding enabled.
+
+### Tokenization
+
+Input texts are tokenized in batch via `tokenizer.encode_batch(texts)`. The tokenizer produces three int64 arrays:
+
+| Array | ONNX input name |
+|---|---|
+| `input_ids` | `input_ids` |
+| `attention_mask` | `attention_mask` |
+| `type_ids` | `token_type_ids` |
+
+### Inference and pooling
+
+The ONNX session is run with the three arrays above. The single output node `last_hidden_state` has shape `(N, seq_len, 384)`. The **CLS token** (index 0 of the sequence dimension) is selected:
+
+```
+cls_embeddings = last_hidden_state[:, 0, :]  # shape (N, 384)
+```
+
+This follows the official recommendation from the bge-small-en-v1.5 model card.
+
+### L2 normalisation
+
+Each embedding vector is L2-normalised before returning:
+
+```python
+norms = np.linalg.norm(cls_embeddings, axis=1, keepdims=True)
+return (cls_embeddings / norms).astype(np.float32)
+```
+
+The returned array has shape `(N, 384)` and dtype `float32`. Each row has L2 norm ≈ 1.0, making cosine similarity equivalent to dot product — which is what `sqlite-vec`'s `vec0` index uses for nearest-neighbour search.
+
 ## DB path resolution
 
 Every subcommand resolves the database path in this order (highest priority first):
