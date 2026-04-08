@@ -3,7 +3,7 @@
   "title": "Document Add --namespace flag to partition memories",
   "agent_type": "documentation",
   "description": "Update docs for B-37b50a84",
-  "status": "in_progress",
+  "status": "done",
   "bead_type": "task",
   "parent_id": "B-37b50a84",
   "dependencies": [
@@ -21,44 +21,55 @@
   ],
   "expected_globs": [],
   "touched_files": [
-    "SKILL.md",
-    "memory.py",
-    "tests/test_namespace.py"
+    "docs/memory/conventions.md",
+    "docs/memory/memory-cli.md"
   ],
   "changed_files": [
-    "SKILL.md",
-    "memory.py",
-    "tests/test_namespace.py"
+    "docs/memory/conventions.md",
+    "docs/memory/memory-cli.md"
   ],
-  "updated_docs": [],
+  "updated_docs": [
+    "docs/memory/memory-cli.md",
+    "docs/memory/conventions.md"
+  ],
   "handoff_summary": {
-    "completed": "",
-    "remaining": "",
-    "risks": "",
-    "verdict": "",
+    "completed": "Documented --namespace as a top-level global flag with placement rule and default-value semantics. Updated all subcommand signatures in memory-cli.md to include [--namespace NAME]. Replaced the stale \"Stub subcommands\" section with full reference docs for search, list, and delete. Updated DB schema block to include the namespace column and its migration note. Updated stats example output to show Namespaces: breakdown. Added TestNamespaceIsolation, TestNamespaceSchema, and TestStatsNamespace to the test class table in conventions.md. SKILL.md was already accurate and required no changes.",
+    "remaining": "None.",
+    "risks": "None \u2014 all updates reflect validated, merged implementation. No behaviour was invented.",
+    "verdict": "approved",
     "findings_count": 0,
     "requires_followup": false,
-    "changed_files": [],
-    "updated_docs": [],
-    "next_action": "",
-    "next_agent": "",
+    "changed_files": [
+      "docs/memory/conventions.md",
+      "docs/memory/memory-cli.md"
+    ],
+    "updated_docs": [
+      "docs/memory/memory-cli.md",
+      "docs/memory/conventions.md"
+    ],
+    "next_action": "Proceed to review bead B-37b50a84-review.",
+    "next_agent": "review",
     "block_reason": "",
-    "expected_files": [],
+    "expected_files": [
+      "SKILL.md",
+      "memory.py",
+      "tests/test_namespace.py"
+    ],
     "expected_globs": [],
-    "touched_files": [],
-    "conflict_risks": "",
+    "touched_files": [
+      "docs/memory/conventions.md",
+      "docs/memory/memory-cli.md"
+    ],
+    "conflict_risks": "None \u2014 docs-only changes with no overlap with memory.py or test files.",
     "design_decisions": "",
     "test_coverage_notes": "",
     "known_limitations": ""
   },
-  "block_reason": "Deferred due to file-scope conflict with active bead B-37b50a84-test",
-  "conflict_risks": "None \u2014 namespace column is additive (DEFAULT 'default') and all new code uses getattr fallback, so no breaking changes to adjacent beads.",
+  "block_reason": "",
+  "conflict_risks": "None \u2014 docs-only changes with no overlap with memory.py or test files.",
   "branch_name": "feature/b-37b50a84",
   "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-37b50a84",
-  "lease": {
-    "owner": "documentation:B-37b50a84-docs",
-    "expires_at": "2026-04-08T13:10:38.308127+00:00"
-  },
+  "lease": null,
   "retries": 0,
   "execution_history": [
     {
@@ -106,6 +117,13 @@
       "details": {
         "template_path": ".takt/agent-runs/B-37b50a84-docs/repo/templates/agents/documentation.md"
       }
+    },
+    {
+      "timestamp": "2026-04-08T12:42:37.556486+00:00",
+      "event": "completed",
+      "agent_type": "documentation",
+      "summary": "Updated docs/memory/memory-cli.md and docs/memory/conventions.md to document the --namespace flag, per-namespace stats output, updated DB schema, migration behaviour, and three new test classes.",
+      "details": {}
     }
   ],
   "metadata": {
@@ -174,7 +192,53 @@
         "test_coverage_notes": "",
         "known_limitations": ""
       }
-    }
+    },
+    "last_agent_result": {
+      "outcome": "completed",
+      "summary": "Updated docs/memory/memory-cli.md and docs/memory/conventions.md to document the --namespace flag, per-namespace stats output, updated DB schema, migration behaviour, and three new test classes.",
+      "verdict": "approved",
+      "findings_count": 0,
+      "requires_followup": false,
+      "next_agent": "review",
+      "block_reason": ""
+    },
+    "telemetry": {
+      "cost_usd": 0.3079905,
+      "duration_ms": 117501,
+      "duration_api_ms": 113358,
+      "num_turns": 14,
+      "input_tokens": 12,
+      "output_tokens": 5489,
+      "cache_creation_tokens": 32810,
+      "cache_read_tokens": 341940,
+      "stop_reason": "end_turn",
+      "session_id": "30bc64e4-5cee-460a-9e16-35a138e7687c",
+      "permission_denials": [],
+      "prompt_chars": 6319,
+      "prompt_lines": 150,
+      "source": "provider",
+      "attempt": 1
+    },
+    "telemetry_history": [
+      {
+        "cost_usd": 0.3079905,
+        "duration_ms": 117501,
+        "duration_api_ms": 113358,
+        "num_turns": 14,
+        "input_tokens": 12,
+        "output_tokens": 5489,
+        "cache_creation_tokens": 32810,
+        "cache_read_tokens": 341940,
+        "stop_reason": "end_turn",
+        "session_id": "30bc64e4-5cee-460a-9e16-35a138e7687c",
+        "permission_denials": [],
+        "prompt_chars": 6319,
+        "prompt_lines": 150,
+        "source": "provider",
+        "attempt": 1
+      }
+    ],
+    "last_commit": "ed62bc6f7422847ff1a85b7498471c326c9690af"
   },
   "labels": [],
   "recovery_for": null,
