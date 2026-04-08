@@ -45,7 +45,7 @@
     "test_coverage_notes": "",
     "known_limitations": ""
   },
-  "block_reason": "Deferred due to file-scope conflict with active bead B-30d86454-docs",
+  "block_reason": "Deferred due to file-scope conflict with active bead B-fc273260-test",
   "conflict_risks": "None \u2014 only SKILL.md was modified; no other bead is known to touch this file.",
   "branch_name": "",
   "worktree_path": "",
@@ -64,6 +64,13 @@
       "event": "deferred",
       "agent_type": "documentation",
       "summary": "Deferred due to file-scope conflict with active bead B-30d86454-docs",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T12:45:14.675317+00:00",
+      "event": "deferred",
+      "agent_type": "documentation",
+      "summary": "Deferred due to file-scope conflict with active bead B-fc273260-test",
       "details": {}
     }
   ],
