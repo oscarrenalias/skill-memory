@@ -94,6 +94,15 @@
       "agent_type": "developer",
       "summary": "Worker started",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T10:16:29.249396+00:00",
+      "event": "guardrails_applied",
+      "agent_type": "developer",
+      "summary": "Applied guardrails from .takt/agent-runs/B-618cbc46-test-corrective/repo/templates/agents/developer.md",
+      "details": {
+        "template_path": ".takt/agent-runs/B-618cbc46-test-corrective/repo/templates/agents/developer.md"
+      }
     }
   ],
   "metadata": {
@@ -111,7 +120,58 @@
     ],
     "skill_bundle_hash": "3d67820a7fb8135bc362b2b95d14300da249795bcc32c95f5dd45f36e15acfa1",
     "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-618cbc46-test-corrective/home",
-    "runner_backend": "claude"
+    "runner_backend": "claude",
+    "guardrails": {
+      "agent_type": "developer",
+      "template_path": ".takt/agent-runs/B-618cbc46-test-corrective/repo/templates/agents/developer.md",
+      "template_text": "# Developer Guardrails\n\nPrimary responsibility: Implement only the assigned bead inside the existing architecture and file scope.\n\nAllowed actions:\n- Modify code, configuration, or local docs required to complete the assigned bead.\n- Create sub-beads for discovered follow-up work that should be handled separately.\n- Verify your `Python` changes compile and import correctly with a quick syntax check: `python -m py_compile`.\n\nDisallowed actions:\n- Run any test suite \u2014 not even a targeted `pytest` run or any subset. Test execution is exclusively the tester agent's responsibility. Running tests wastes the agent budget and delays the pipeline.\n- Redesign unrelated architecture or broaden scope beyond the assigned bead.\n- Perform final review signoff in place of a review agent.\n- Silently absorb unrelated test, documentation, or planning work that should be handed off.\n\nExpected outputs:\n- Completed or blocked JSON with concise implementation summary.\n- Accurate touched files, changed files, risks, and follow-up handoff fields.",
+      "captured_at": "2026-04-08T10:16:29.249386+00:00"
+    },
+    "worker_prompt_context": {
+      "bead_id": "B-618cbc46-test-corrective",
+      "feature_root_id": "B-33389719",
+      "title": "Corrective fix for B-618cbc46-test: Test Bootstrap README.md with APM installation instructions",
+      "agent_type": "developer",
+      "description": "Blocked reason: README.md APM install URL does not match the actual git remote. README has `git+https://github.com/oscar-renalias/skill-agent-memory`; actual remote is `https://github.com/oscarrenalias/skill-memory`. Users following the install instructions will get a 404.\n\nRemaining work: Fix the APM install command URL in README.md: change `git+https://github.com/oscar-renalias/skill-agent-memory` to `git+https://github.com/oscarrenalias/skill-memory`.",
+      "status": "in_progress",
+      "acceptance_criteria": [
+        "Implement the minimum fix required to unblock B-618cbc46-test.",
+        "Update tests/docs as needed for the corrective change.",
+        "Leave a handoff summary that states how the parent bead can be retried."
+      ],
+      "dependencies": [],
+      "linked_docs": [],
+      "execution_branch_name": "feature/b-33389719",
+      "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-33389719",
+      "expected_files": [
+        "README.md"
+      ],
+      "expected_globs": [],
+      "touched_files": [
+        "README.md"
+      ],
+      "conflict_risks": "No conflict risk \u2014 README.md is the only changed file and no sibling beads are modifying it.",
+      "handoff_summary": {
+        "completed": "",
+        "remaining": "",
+        "risks": "",
+        "verdict": "",
+        "findings_count": 0,
+        "requires_followup": false,
+        "changed_files": [],
+        "updated_docs": [],
+        "next_action": "",
+        "next_agent": "",
+        "block_reason": "",
+        "expected_files": [],
+        "expected_globs": [],
+        "touched_files": [],
+        "conflict_risks": "",
+        "design_decisions": "",
+        "test_coverage_notes": "",
+        "known_limitations": ""
+      }
+    }
   },
   "labels": [],
   "recovery_for": null,
