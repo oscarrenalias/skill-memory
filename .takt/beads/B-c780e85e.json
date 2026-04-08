@@ -3,7 +3,7 @@
   "title": "Review query and CRUD implementation",
   "agent_type": "review",
   "description": "Review the combined implementation of search, delete, list, and stats commands. Check for correctness of SQL queries, proper transaction handling in delete, accurate distance metric documentation, consistent CLI flag behaviour, and absence of regressions in the add command from spec-a536cb5e.",
-  "status": "blocked",
+  "status": "ready",
   "bead_type": "task",
   "parent_id": "B-cb0b48a1",
   "dependencies": [],
@@ -49,7 +49,7 @@
     "test_coverage_notes": "",
     "known_limitations": ""
   },
-  "block_reason": "Preparing worktree (checking out 'feature/b-cb0b48a1')\nfatal: 'feature/b-cb0b48a1' is already used by worktree at '/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1'",
+  "block_reason": "",
   "conflict_risks": "",
   "branch_name": "",
   "worktree_path": "",
@@ -69,8 +69,18 @@
       "agent_type": "review",
       "summary": "Preparing worktree (checking out 'feature/b-cb0b48a1')\nfatal: 'feature/b-cb0b48a1' is already used by worktree at '/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1'",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T05:35:20.497405+00:00",
+      "event": "retried",
+      "agent_type": "review",
+      "summary": "Requeued blocked bead after corrective bead B-c780e85e-corrective completed",
+      "details": {}
     }
   ],
-  "metadata": {},
+  "metadata": {
+    "last_corrective_retry_source": "B-c780e85e-corrective",
+    "last_corrective_retry_commit": "0034ea7ba0baab1386f574eb2977f42d48c458e4"
+  },
   "labels": []
 }
