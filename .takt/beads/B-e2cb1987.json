@@ -3,7 +3,7 @@
   "title": "Implement stats command",
   "agent_type": "developer",
   "description": "Add the `stats` subcommand to memory.py. Print DB path, total row count via SELECT COUNT(*) FROM memories, and file size via os.path.getsize. If the DB file does not exist, print a descriptive message and exit 0.",
-  "status": "blocked",
+  "status": "ready",
   "bead_type": "task",
   "parent_id": "B-cb0b48a1",
   "dependencies": [],
@@ -46,7 +46,7 @@
     "test_coverage_notes": "",
     "known_limitations": ""
   },
-  "block_reason": "Preparing worktree (checking out 'feature/b-cb0b48a1')\nfatal: 'feature/b-cb0b48a1' is already used by worktree at '/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1'",
+  "block_reason": "",
   "conflict_risks": "",
   "branch_name": "",
   "worktree_path": "",
@@ -66,8 +66,18 @@
       "agent_type": "developer",
       "summary": "Preparing worktree (checking out 'feature/b-cb0b48a1')\nfatal: 'feature/b-cb0b48a1' is already used by worktree at '/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-cb0b48a1'",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T05:35:19.760876+00:00",
+      "event": "retried",
+      "agent_type": "developer",
+      "summary": "Requeued blocked bead after corrective bead B-e2cb1987-corrective completed",
+      "details": {}
     }
   ],
-  "metadata": {},
+  "metadata": {
+    "last_corrective_retry_source": "B-e2cb1987-corrective",
+    "last_corrective_retry_commit": "9d31bee6b15c6c9ff25b09794bb90224a2789ef6"
+  },
   "labels": []
 }
