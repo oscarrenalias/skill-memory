@@ -3,7 +3,7 @@
   "title": "Review Ingest command skeleton with txt and md chunking",
   "agent_type": "review",
   "description": "Review implementation for B-d34d190d",
-  "status": "blocked",
+  "status": "ready",
   "bead_type": "task",
   "parent_id": "B-d34d190d",
   "dependencies": [
@@ -81,7 +81,7 @@
     "test_coverage_notes": "tests/test_ingest_chunking.py covers _chunk_txt, _chunk_md, _chunk_paragraphs, _split_sentences pure functions only. TestIngestJson, TestIngestCsv, TestInit, TestAdd, TestSearch, TestDelete, TestList, TestStats are absent. The spec-mandated tests/test_memory.py does not exist.",
     "known_limitations": "DB-operation tests absent from this bead's test file. Whether they are deferred to a later bead needs explicit decision."
   },
-  "block_reason": "Finding 1: spec AC \"3 paragraphs \u2192 3 rows (each under chunk_size)\" is violated \u2014 implementation merges them into 1 chunk; test was rewritten to match implementation rather than spec. Requires spec amendment or implementation fix. Finding 2: tests/test_memory.py (mandated by spec) does not exist; TestIngestJson and TestIngestCsv are absent; all DB-operation test classes missing. Spec AC \"python3 -m unittest discover -s tests/ passes\" cannot be validated as green for the full required scope.",
+  "block_reason": "",
   "conflict_risks": "No conflicts expected. memory.py is at repo root; no other active beads claim this file.",
   "branch_name": "feature/b-54edeccf",
   "worktree_path": "",
@@ -139,6 +139,13 @@
       "event": "corrective_planned",
       "agent_type": "review",
       "summary": "Created corrective bead B-d34d190d-review-corrective for blocked issue",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T05:02:50.183686+00:00",
+      "event": "retried",
+      "agent_type": "review",
+      "summary": "Requeued blocked bead after corrective bead B-d34d190d-review-corrective completed",
       "details": {}
     }
   ],
@@ -261,7 +268,9 @@
         "attempt": 1
       }
     ],
-    "auto_corrective_bead_id": "B-d34d190d-review-corrective"
+    "auto_corrective_bead_id": "B-d34d190d-review-corrective",
+    "last_corrective_retry_source": "B-d34d190d-review-corrective",
+    "last_corrective_retry_commit": "216fa3f96d501e0d507924d15c5a5e7594c76c8c"
   },
   "labels": []
 }
