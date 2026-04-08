@@ -163,6 +163,15 @@
       "agent_type": "review",
       "summary": "Worker started",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T05:16:48.632388+00:00",
+      "event": "guardrails_applied",
+      "agent_type": "review",
+      "summary": "Applied guardrails from .takt/agent-runs/B-812641b9-review/repo/templates/agents/review.md",
+      "details": {
+        "template_path": ".takt/agent-runs/B-812641b9-review/repo/templates/agents/review.md"
+      }
     }
   ],
   "metadata": {
@@ -183,7 +192,7 @@
       "agent_type": "review",
       "template_path": ".takt/agent-runs/B-812641b9-review/repo/templates/agents/review.md",
       "template_text": "# Review Guardrails\n\nPrimary responsibility: Inspect code, tests, docs, and acceptance criteria for correctness, completeness, and risk.\n\nAllowed actions:\n- Review only the changed files listed in the bead's touched_files and changed_files fields. Do not read unrelated files.\n- Validate acceptance criteria against the implementation and handoff state.\n- Block with a clear recommendation when the bead actually requires implementation work.\n\nEfficiency constraints:\n- Do not run the test suite. Testing is the tester agent's responsibility.\n- Focus on correctness, completeness, and risk \u2014 not style or formatting.\n- Keep the review concise. If there are no findings, say so and approve promptly.\n\nDisallowed actions:\n- Implement feature work, tests, or docs instead of reporting findings.\n- Rewrite architecture or silently fix issues discovered during review.\n- Mark incomplete work as accepted without evidence.\n\nExpected outputs:\n- Return JSON with `outcome` set to `completed` (reviews always complete; use `verdict` for pass/fail) and `summary` as a one-line description of the review result.\n- Return JSON with structured verdict fields for every run: `verdict`, `findings_count`, and `requires_followup`.\n- Treat `verdict` as the review signoff decision: `approved` means the bead can complete, while `needs_changes` means the bead must block for follow-up work.\n- Use `verdict=approved`, `findings_count=0`, and `requires_followup=false` when no unresolved findings remain.\n- Use `verdict=needs_changes`, set `findings_count` to the unresolved finding count, set `requires_followup=true` unless there is a stronger explicit reason not to, and always include `block_reason` when any required fix remains.\n- Keep `completed`, `remaining`, and `risks` as free-form narrative context only. They inform operators, but they do not override the structured verdict or control scheduler state.\n- Review findings ordered by severity, or an explicit statement that no findings were discovered.\n- Clear blocked handoff details when the task belongs to another agent type.",
-      "captured_at": "2026-04-08T04:57:30.442932+00:00"
+      "captured_at": "2026-04-08T05:16:48.632362+00:00"
     },
     "worker_prompt_context": {
       "bead_id": "B-812641b9-review",
@@ -204,8 +213,8 @@
       "execution_branch_name": "feature/b-54edeccf",
       "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
       "expected_files": [
-        "__pycache__/memory.cpython-314.pyc",
         "memory.py",
+        "tests/test_ingest_json_csv.py",
         "tests/__init__.py"
       ],
       "expected_globs": [],
@@ -216,26 +225,38 @@
         "tests/__pycache__/test_ingest_json_csv.cpython-314-pytest-9.0.2.pyc",
         "tests/test_ingest_json_csv.py"
       ],
-      "conflict_risks": "None \u2014 changes are confined to cmd_ingest and three new private helpers in memory.py. No shared state or schema changes.",
+      "conflict_risks": "None \u2014 fixes are confined to _ingest_json, _ingest_csv, and one argparse help string in memory.py. No schema changes.",
       "handoff_summary": {
-        "completed": "",
-        "remaining": "",
-        "risks": "",
-        "verdict": "",
-        "findings_count": 0,
-        "requires_followup": false,
-        "changed_files": [],
+        "completed": "Reviewed memory.py (_ingest_json, _ingest_csv, _ingest_text_chunks, cmd_ingest) and tests/test_ingest_json_csv.py against the spec acceptance criteria. JSON dispatch, CSV DictReader logic, eager JSON validation, error-exit paths, and test mocking strategy are all correct.",
+        "remaining": "Two unresolved findings must be fixed before this bead can close. See block_reason for details.",
+        "risks": "Finding 1 is a direct spec violation. If left unfixed, ingest commands on JSON/CSV files will silently insert zero-length or near-empty embeddings and report no skipped count \u2014 inconsistent with txt/md behaviour and contrary to the spec acceptance criterion.",
+        "verdict": "needs_changes",
+        "findings_count": 2,
+        "requires_followup": true,
+        "changed_files": [
+          "memory.py",
+          "tests/test_ingest_json_csv.py",
+          "tests/__init__.py"
+        ],
         "updated_docs": [],
-        "next_action": "",
-        "next_agent": "",
-        "block_reason": "",
-        "expected_files": [],
+        "next_action": "Create a corrective bead targeting: (1) add MIN_CHUNK_LEN=10 filter and skipped-count reporting to _ingest_json and _ingest_csv; (2) update argparse help text at memory.py:633; (3) add tests for short-content filtering in both formats.",
+        "next_agent": "developer",
+        "block_reason": "Finding 1 (High): _ingest_json and _ingest_csv lack the MIN_CHUNK_LEN=10 filter present in _ingest_text_chunks, and their progress messages omit the skipped count. Spec acceptance criterion 6 explicitly requires short chunks to be skipped and counted for all formats. Finding 2 (Low): ingest_parser argument help text at memory.py:633 still says '.txt or .md' \u2014 should include '.json' and '.csv'.",
+        "expected_files": [
+          "memory.py",
+          "tests/test_ingest_json_csv.py",
+          "tests/__init__.py"
+        ],
         "expected_globs": [],
-        "touched_files": [],
-        "conflict_risks": "",
-        "design_decisions": "",
-        "test_coverage_notes": "",
-        "known_limitations": ""
+        "touched_files": [
+          "memory.py",
+          "tests/test_ingest_json_csv.py",
+          "tests/__init__.py"
+        ],
+        "conflict_risks": "None \u2014 fixes are confined to _ingest_json, _ingest_csv, and one argparse help string in memory.py. No schema changes.",
+        "design_decisions": "_ingest_text_chunks correctly centralises the MIN_CHUNK_LEN filter; _ingest_json and _ingest_csv need equivalent filtering added inline (a shared helper is not required but acceptable).",
+        "test_coverage_notes": "test_ingest_json_csv.py has good coverage of the implemented paths but has no tests for short-content filtering (because the filter is absent). A corrective bead should add tests for the filter once the implementation is in place.",
+        "known_limitations": "Empty-string content values in JSON string arrays and CSV content columns are not validated (would be caught by MIN_CHUNK_LEN=10 once finding 1 is fixed, since len('') < 10). No separate finding raised for this."
       }
     },
     "last_agent_result": {
