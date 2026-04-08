@@ -1,0 +1,65 @@
+{
+  "bead_id": "B-b082bd73-test",
+  "title": "Test search/list: add --long flag to show full chunk content",
+  "agent_type": "tester",
+  "description": "Validate implementation for B-b082bd73",
+  "status": "ready",
+  "bead_type": "task",
+  "parent_id": "B-b082bd73",
+  "dependencies": [
+    "B-b082bd73"
+  ],
+  "acceptance_criteria": [],
+  "linked_docs": [],
+  "feature_root_id": "B-b082bd73",
+  "execution_branch_name": "feature/b-b082bd73",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-b082bd73",
+  "expected_files": [
+    "memory.py"
+  ],
+  "expected_globs": [],
+  "touched_files": [
+    "memory.py"
+  ],
+  "changed_files": [
+    "memory.py"
+  ],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "None \u2014 only memory.py modified; no overlap with other in-flight beads expected.",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-08T09:05:43.471562+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    }
+  ],
+  "metadata": {},
+  "labels": []
+}
