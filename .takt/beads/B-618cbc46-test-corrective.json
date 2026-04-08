@@ -3,7 +3,7 @@
   "title": "Corrective fix for B-618cbc46-test: Test Bootstrap README.md with APM installation instructions",
   "agent_type": "developer",
   "description": "Blocked reason: README.md APM install URL does not match the actual git remote. README has `git+https://github.com/oscar-renalias/skill-agent-memory`; actual remote is `https://github.com/oscarrenalias/skill-memory`. Users following the install instructions will get a 404.\n\nRemaining work: Fix the APM install command URL in README.md: change `git+https://github.com/oscar-renalias/skill-agent-memory` to `git+https://github.com/oscarrenalias/skill-memory`.",
-  "status": "ready",
+  "status": "in_progress",
   "bead_type": "task",
   "parent_id": "B-618cbc46-test",
   "dependencies": [],
@@ -49,9 +49,12 @@
   },
   "block_reason": "Deferred due to file-scope conflict with active bead B-618cbc46-docs",
   "conflict_risks": "No conflict risk \u2014 README.md is the only changed file and no sibling beads are modifying it.",
-  "branch_name": "",
-  "worktree_path": "",
-  "lease": null,
+  "branch_name": "feature/b-33389719",
+  "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-33389719",
+  "lease": {
+    "owner": "developer:B-618cbc46-test-corrective",
+    "expires_at": "2026-04-08T10:46:28.653277+00:00"
+  },
   "retries": 0,
   "execution_history": [
     {
@@ -67,10 +70,48 @@
       "agent_type": "developer",
       "summary": "Deferred due to file-scope conflict with active bead B-618cbc46-docs",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T10:16:28.945464+00:00",
+      "event": "skills_loaded",
+      "agent_type": "developer",
+      "summary": "Loaded 7 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/developer-implementation",
+          "capability/code-edit",
+          "task/corrective-implementation",
+          "task/refactor-safe",
+          "task/migration",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-08T10:16:28.945488+00:00",
+      "event": "started",
+      "agent_type": "developer",
+      "summary": "Worker started",
+      "details": {}
     }
   ],
   "metadata": {
-    "auto_corrective_for": "B-618cbc46-test"
+    "auto_corrective_for": "B-618cbc46-test",
+    "execution_root": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-618cbc46-test-corrective",
+    "workspace_repo_path": "repo",
+    "loaded_skills": [
+      "core/base-orchestrator",
+      "role/developer-implementation",
+      "capability/code-edit",
+      "task/corrective-implementation",
+      "task/refactor-safe",
+      "task/migration",
+      "memory"
+    ],
+    "skill_bundle_hash": "3d67820a7fb8135bc362b2b95d14300da249795bcc32c95f5dd45f36e15acfa1",
+    "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-618cbc46-test-corrective/home",
+    "runner_backend": "claude"
   },
   "labels": [],
   "recovery_for": null,
