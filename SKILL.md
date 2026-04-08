@@ -27,6 +27,24 @@ On first run, `memory.py` bootstraps a local `.venv` with its dependencies (`onn
 | Bead end | `add` notable findings, design decisions, or gotchas |
 | After completing a feature | `ingest` the spec or implementation notes for future retrieval |
 
+## Namespaces
+
+All commands respect a `--namespace NAME` flag (default: `'default'`). Namespaces partition memories within a single DB so that different agents, projects, or concerns can share one file without interference.
+
+```bash
+python3 memory.py --namespace myproject add "TEXT"
+python3 memory.py --namespace myproject search "QUERY"
+python3 memory.py --namespace myproject list
+```
+
+`--namespace` is a **top-level flag** — it must come before the subcommand name. Memories written under one namespace are invisible when reading under a different namespace.
+
+| Scenario | Recommendation |
+|----------|----------------|
+| Single agent / single project | Use the default namespace |
+| Multiple agents sharing a DB | Assign each agent its own namespace |
+| Temporary scratch space | Use a short-lived namespace and delete when done |
+
 ## Commands Reference
 
 ### `init` — Initialise the memory DB
@@ -34,13 +52,13 @@ On first run, `memory.py` bootstraps a local `.venv` with its dependencies (`onn
 Creates the `memories` and `memories_vec` tables. Safe to run multiple times (idempotent).
 
 ```bash
-python3 memory.py init [--db PATH]
+python3 memory.py [--namespace NAME] init [--db PATH]
 ```
 
 ### `add` — Add a single memory
 
 ```bash
-python3 memory.py add "TEXT" [--source TAG] [--meta KEY=VALUE ...] [--db PATH]
+python3 memory.py [--namespace NAME] add "TEXT" [--source TAG] [--meta KEY=VALUE ...] [--db PATH]
 ```
 
 Use for short, standalone facts or observations discovered during a bead. `--source` is an optional tag (e.g. a bead ID or filename) for later filtering.
@@ -48,7 +66,7 @@ Use for short, standalone facts or observations discovered during a bead. `--sou
 ### `ingest` — Bulk-ingest a file
 
 ```bash
-python3 memory.py ingest FILE [--source TAG] [--chunk-size N] [--overlap N] [--column NAME] [--db PATH]
+python3 memory.py [--namespace NAME] ingest FILE [--source TAG] [--chunk-size N] [--overlap N] [--column NAME] [--db PATH]
 ```
 
 Reads `FILE`, splits it into chunks, and inserts each chunk. Use after completing a feature to seed the memory store from documentation or notes.
@@ -72,7 +90,7 @@ Ingesting notes.md… 12 chunks added (0 skipped).
 ### `search` — Semantic search
 
 ```bash
-python3 memory.py search "QUERY" [--limit N] [--threshold F] [--source TAG] [--json] [--db PATH]
+python3 memory.py [--namespace NAME] search "QUERY" [--limit N] [--threshold F] [--source TAG] [--json] [--db PATH]
 ```
 
 Returns the top-`N` memories closest to the query vector (default: 5). `--threshold` is the maximum L2 distance to include (0–2; lower = more similar). `--json` outputs a JSON array.
@@ -80,7 +98,7 @@ Returns the top-`N` memories closest to the query vector (default: 5). `--thresh
 ### `list` — List memories
 
 ```bash
-python3 memory.py list [--limit N] [--source TAG] [--json] [--db PATH]
+python3 memory.py [--namespace NAME] list [--limit N] [--source TAG] [--json] [--db PATH]
 ```
 
 Lists memories newest-first (default limit: 20; `--limit 0` for all). Filter by `--source` to scope to a specific file or bead.
@@ -88,7 +106,7 @@ Lists memories newest-first (default limit: 20; `--limit 0` for all). Filter by 
 ### `delete` — Delete a memory
 
 ```bash
-python3 memory.py delete UUID [--db PATH]
+python3 memory.py [--namespace NAME] delete UUID [--db PATH]
 ```
 
 Removes the memory and its embedding vector by UUID.
@@ -96,7 +114,7 @@ Removes the memory and its embedding vector by UUID.
 ### `stats` — Show DB statistics
 
 ```bash
-python3 memory.py stats [--db PATH]
+python3 memory.py [--namespace NAME] stats [--db PATH]
 ```
 
 Prints the DB path, total memory count, and file size.
