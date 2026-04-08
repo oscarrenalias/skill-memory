@@ -3,7 +3,7 @@
   "title": "Corrective fix for B-618cbc46-test: Test Bootstrap README.md with APM installation instructions",
   "agent_type": "developer",
   "description": "Blocked reason: README.md APM install URL does not match the actual git remote. README has `git+https://github.com/oscar-renalias/skill-agent-memory`; actual remote is `https://github.com/oscarrenalias/skill-memory`. Users following the install instructions will get a 404.\n\nRemaining work: Fix the APM install command URL in README.md: change `git+https://github.com/oscar-renalias/skill-agent-memory` to `git+https://github.com/oscarrenalias/skill-memory`.",
-  "status": "in_progress",
+  "status": "done",
   "bead_type": "task",
   "parent_id": "B-618cbc46-test",
   "dependencies": [],
@@ -26,35 +26,42 @@
   "changed_files": [
     "README.md"
   ],
-  "updated_docs": [],
+  "updated_docs": [
+    "README.md"
+  ],
   "handoff_summary": {
-    "completed": "",
-    "remaining": "",
-    "risks": "",
-    "verdict": "",
+    "completed": "Updated README.md line 10 to use the correct GitHub URL for the APM install command.",
+    "remaining": "None \u2014 the corrective fix is complete. Parent bead B-618cbc46-test can be retried.",
+    "risks": "None. Single-line change in README.md only.",
+    "verdict": "approved",
     "findings_count": 0,
     "requires_followup": false,
-    "changed_files": [],
-    "updated_docs": [],
-    "next_action": "",
-    "next_agent": "",
+    "changed_files": [
+      "README.md"
+    ],
+    "updated_docs": [
+      "README.md"
+    ],
+    "next_action": "Retry parent bead B-618cbc46-test now that the blocking README URL is fixed.",
+    "next_agent": "tester",
     "block_reason": "",
-    "expected_files": [],
+    "expected_files": [
+      "README.md"
+    ],
     "expected_globs": [],
-    "touched_files": [],
-    "conflict_risks": "",
+    "touched_files": [
+      "README.md"
+    ],
+    "conflict_risks": "No conflict risk \u2014 README.md is the only changed file and no sibling beads are modifying it.",
     "design_decisions": "",
     "test_coverage_notes": "",
     "known_limitations": ""
   },
-  "block_reason": "Deferred due to file-scope conflict with active bead B-618cbc46-docs",
+  "block_reason": "",
   "conflict_risks": "No conflict risk \u2014 README.md is the only changed file and no sibling beads are modifying it.",
   "branch_name": "feature/b-33389719",
   "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-33389719",
-  "lease": {
-    "owner": "developer:B-618cbc46-test-corrective",
-    "expires_at": "2026-04-08T10:46:28.653277+00:00"
-  },
+  "lease": null,
   "retries": 0,
   "execution_history": [
     {
@@ -103,6 +110,13 @@
       "details": {
         "template_path": ".takt/agent-runs/B-618cbc46-test-corrective/repo/templates/agents/developer.md"
       }
+    },
+    {
+      "timestamp": "2026-04-08T10:16:54.073721+00:00",
+      "event": "completed",
+      "agent_type": "developer",
+      "summary": "Fixed the APM install URL in README.md: changed `git+https://github.com/oscar-renalias/skill-agent-memory` to `git+https://github.com/oscarrenalias/skill-memory` to match the actual git remote.",
+      "details": {}
     }
   ],
   "metadata": {
@@ -171,7 +185,53 @@
         "test_coverage_notes": "",
         "known_limitations": ""
       }
-    }
+    },
+    "last_agent_result": {
+      "outcome": "completed",
+      "summary": "Fixed the APM install URL in README.md: changed `git+https://github.com/oscar-renalias/skill-agent-memory` to `git+https://github.com/oscarrenalias/skill-memory` to match the actual git remote.",
+      "verdict": "approved",
+      "findings_count": 0,
+      "requires_followup": false,
+      "next_agent": "tester",
+      "block_reason": ""
+    },
+    "telemetry": {
+      "cost_usd": 0.07446164999999999,
+      "duration_ms": 23312,
+      "duration_api_ms": 20921,
+      "num_turns": 5,
+      "input_tokens": 7,
+      "output_tokens": 1097,
+      "cache_creation_tokens": 8379,
+      "cache_read_tokens": 88548,
+      "stop_reason": "end_turn",
+      "session_id": "91a7ee9a-b3dc-4628-b5e1-3e49182733d9",
+      "permission_denials": [],
+      "prompt_chars": 6226,
+      "prompt_lines": 140,
+      "source": "provider",
+      "attempt": 1
+    },
+    "telemetry_history": [
+      {
+        "cost_usd": 0.07446164999999999,
+        "duration_ms": 23312,
+        "duration_api_ms": 20921,
+        "num_turns": 5,
+        "input_tokens": 7,
+        "output_tokens": 1097,
+        "cache_creation_tokens": 8379,
+        "cache_read_tokens": 88548,
+        "stop_reason": "end_turn",
+        "session_id": "91a7ee9a-b3dc-4628-b5e1-3e49182733d9",
+        "permission_denials": [],
+        "prompt_chars": 6226,
+        "prompt_lines": 140,
+        "source": "provider",
+        "attempt": 1
+      }
+    ],
+    "last_commit": "d68ef3515fd1ad9225d72547c84cd5e0ccd97346"
   },
   "labels": [],
   "recovery_for": null,
