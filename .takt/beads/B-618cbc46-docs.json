@@ -3,7 +3,7 @@
   "title": "Document Bootstrap README.md with APM installation instructions",
   "agent_type": "documentation",
   "description": "Update docs for B-618cbc46",
-  "status": "in_progress",
+  "status": "done",
   "bead_type": "task",
   "parent_id": "B-618cbc46",
   "dependencies": [
@@ -24,35 +24,42 @@
   "changed_files": [
     "README.md"
   ],
-  "updated_docs": [],
+  "updated_docs": [
+    "README.md"
+  ],
   "handoff_summary": {
-    "completed": "",
-    "remaining": "",
-    "risks": "",
-    "verdict": "",
-    "findings_count": 0,
+    "completed": "Corrected the DB location table and surrounding prose in README.md to match the actual _DEFAULT_DB = _SKILL_DIR / \"memories.db\" behavior in memory.py (introduced by commit 73eabb1). The README was written after that code fix but still documented the old path.",
+    "remaining": "None.",
+    "risks": "None. README.md is a new file with no sibling bead overlap per the bead's conflict_risks field.",
+    "verdict": "approved",
+    "findings_count": 1,
     "requires_followup": false,
-    "changed_files": [],
-    "updated_docs": [],
-    "next_action": "",
+    "changed_files": [
+      "README.md"
+    ],
+    "updated_docs": [
+      "README.md"
+    ],
+    "next_action": "None required. Documentation is complete and committed.",
     "next_agent": "",
     "block_reason": "",
-    "expected_files": [],
+    "expected_files": [
+      "README.md"
+    ],
     "expected_globs": [],
-    "touched_files": [],
-    "conflict_risks": "",
-    "design_decisions": "",
-    "test_coverage_notes": "",
-    "known_limitations": ""
+    "touched_files": [
+      "README.md"
+    ],
+    "conflict_risks": "None \u2014 README.md is a new file with no sibling bead overlap.",
+    "design_decisions": "The default DB path was changed from ~/.local/share/agent-memory/memories.db to &lt;skill-dir&gt;/memories.db in an earlier code commit (73eabb1). The README, written afterward by bead B-618cbc46, still documented the old path. Fixed to align with the actual code.",
+    "test_coverage_notes": "No test changes needed. DB path resolution is tested via existing test suite.",
+    "known_limitations": "SKILL.md also documents the old ~/.local/share path (line 20) but is outside this bead's changed_files scope. A follow-on bead should correct SKILL.md for consistency."
   },
-  "block_reason": "Deferred due to file-scope conflict with active bead B-618cbc46-test",
-  "conflict_risks": "No conflict risk \u2014 README.md is a new file with no sibling bead overlap.",
+  "block_reason": "",
+  "conflict_risks": "None \u2014 README.md is a new file with no sibling bead overlap.",
   "branch_name": "feature/b-33389719",
   "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-33389719",
-  "lease": {
-    "owner": "documentation:B-618cbc46-docs",
-    "expires_at": "2026-04-08T10:43:45.725639+00:00"
-  },
+  "lease": null,
   "retries": 0,
   "execution_history": [
     {
@@ -107,6 +114,13 @@
       "details": {
         "template_path": ".takt/agent-runs/B-618cbc46-docs/repo/templates/agents/documentation.md"
       }
+    },
+    {
+      "timestamp": "2026-04-08T10:16:13.798853+00:00",
+      "event": "completed",
+      "agent_type": "documentation",
+      "summary": "Fixed README.md default DB path: was ~/.local/share/agent-memory/memories.db (stale), now correctly documents &lt;skill-dir&gt;/memories.db to match memory.py code.",
+      "details": {}
     }
   ],
   "metadata": {
@@ -171,7 +185,52 @@
         "test_coverage_notes": "",
         "known_limitations": ""
       }
-    }
+    },
+    "last_agent_result": {
+      "outcome": "completed",
+      "summary": "Fixed README.md default DB path: was ~/.local/share/agent-memory/memories.db (stale), now correctly documents &lt;skill-dir&gt;/memories.db to match memory.py code.",
+      "verdict": "approved",
+      "findings_count": 1,
+      "requires_followup": false,
+      "next_agent": "",
+      "block_reason": ""
+    },
+    "telemetry": {
+      "cost_usd": 0.36920235000000007,
+      "duration_ms": 146924,
+      "duration_api_ms": 132021,
+      "num_turns": 22,
+      "input_tokens": 23,
+      "output_tokens": 7114,
+      "cache_creation_tokens": 25363,
+      "cache_read_tokens": 557707,
+      "stop_reason": "end_turn",
+      "session_id": "175dbbfa-0901-44de-b1ca-76968c185012",
+      "permission_denials": [],
+      "prompt_chars": 6181,
+      "prompt_lines": 144,
+      "source": "provider",
+      "attempt": 1
+    },
+    "telemetry_history": [
+      {
+        "cost_usd": 0.36920235000000007,
+        "duration_ms": 146924,
+        "duration_api_ms": 132021,
+        "num_turns": 22,
+        "input_tokens": 23,
+        "output_tokens": 7114,
+        "cache_creation_tokens": 25363,
+        "cache_read_tokens": 557707,
+        "stop_reason": "end_turn",
+        "session_id": "175dbbfa-0901-44de-b1ca-76968c185012",
+        "permission_denials": [],
+        "prompt_chars": 6181,
+        "prompt_lines": 144,
+        "source": "provider",
+        "attempt": 1
+      }
+    ]
   },
   "labels": [],
   "recovery_for": null,
