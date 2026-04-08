@@ -4,7 +4,7 @@
 common:
   default_runner: claude
   templates_dir: templates/agents
-  test_command: pytest
+  test_command: .venv/bin/pytest
   test_timeout_seconds: 900
   agent_types:
     - planner
