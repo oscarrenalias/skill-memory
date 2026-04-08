@@ -3,7 +3,7 @@
   "title": "Test Bootstrap README.md with APM installation instructions",
   "agent_type": "tester",
   "description": "Validate implementation for B-618cbc46",
-  "status": "ready",
+  "status": "in_progress",
   "bead_type": "task",
   "parent_id": "B-618cbc46",
   "dependencies": [
@@ -47,9 +47,12 @@
   },
   "block_reason": "Deferred due to file-scope conflict with active bead B-606890e7",
   "conflict_risks": "No conflict risk \u2014 README.md is a new file with no sibling bead overlap.",
-  "branch_name": "",
-  "worktree_path": "",
-  "lease": null,
+  "branch_name": "feature/b-33389719",
+  "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-33389719",
+  "lease": {
+    "owner": "tester:B-618cbc46-test",
+    "expires_at": "2026-04-08T10:42:49.219745+00:00"
+  },
   "retries": 0,
   "execution_history": [
     {
@@ -65,9 +68,46 @@
       "agent_type": "tester",
       "summary": "Deferred due to file-scope conflict with active bead B-606890e7",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T10:12:49.517929+00:00",
+      "event": "skills_loaded",
+      "agent_type": "tester",
+      "summary": "Loaded 6 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/tester-validation",
+          "capability/test-execution",
+          "task/defect-bead-creation",
+          "task/regression-triage",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-08T10:12:49.517951+00:00",
+      "event": "started",
+      "agent_type": "tester",
+      "summary": "Worker started",
+      "details": {}
     }
   ],
-  "metadata": {},
+  "metadata": {
+    "execution_root": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-618cbc46-test",
+    "workspace_repo_path": "repo",
+    "loaded_skills": [
+      "core/base-orchestrator",
+      "role/tester-validation",
+      "capability/test-execution",
+      "task/defect-bead-creation",
+      "task/regression-triage",
+      "memory"
+    ],
+    "skill_bundle_hash": "09c41b0ce7b733774ac92190a1a2516f6510bcbf848392054d11d9a6cdf8ee61",
+    "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-618cbc46-test/home",
+    "runner_backend": "claude"
+  },
   "labels": [],
   "recovery_for": null,
   "priority": null
