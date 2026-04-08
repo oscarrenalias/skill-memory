@@ -48,9 +48,10 @@ _MODEL_URL = "https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/onnx/mo
 # SHA256 verified at implementation time against the official HuggingFace file.
 # The bge-small model is ~24 MB; if the file is significantly larger the wrong
 # variant was downloaded.
-_MODEL_SHA256 = None  # Set to None to skip verification until confirmed at first run
+_MODEL_SHA256 = "828e1496d7fabb79cfa4dcd84fa38625c0d3d21da474a00f08db0f559940cf35"
 
-_session = None  # ONNX InferenceSession singleton
+_ort_session = None  # ONNX InferenceSession singleton
+_embed_tokenizer = None  # tokenizers.Tokenizer singleton
 
 
 def _resolve_db(db_arg):
@@ -76,7 +77,7 @@ def _ensure_model() -> Path:
     """Download ONNX model on first use; verify SHA256 if hash is set."""
     if _MODEL_PATH.exists():
         return _MODEL_PATH
-    _MODEL_DIR.mkdir(parents=True, exist_ok=True)
+    _MODEL_PATH.parent.mkdir(parents=True, exist_ok=True)
     tmp = _MODEL_PATH.with_suffix(".tmp")
     print("agent-memory: Downloading bge-small-en-v1.5 model...", file=sys.stderr)
     try:
@@ -100,12 +101,12 @@ def _ensure_model() -> Path:
 
 def _get_session():
     """Return the ONNX InferenceSession singleton, loading it on first call."""
-    global _session
-    if _session is None:
+    global _ort_session
+    if _ort_session is None:
         import onnxruntime as ort
         model = _ensure_model()
-        _session = ort.InferenceSession(str(model))
-    return _session
+        _ort_session = ort.InferenceSession(str(model))
+    return _ort_session
 
 
 def _embed(texts: list) -> "np.ndarray":
@@ -116,13 +117,15 @@ def _embed(texts: list) -> "np.ndarray":
     monotonically related to cosine distance, giving range [0, 2] (0 = identical,
     2 = opposite). Use --threshold values accordingly (e.g. 0.5 for high similarity).
     """
-    from tokenizers import Tokenizer
+    global _embed_tokenizer
+    if _embed_tokenizer is None:
+        from tokenizers import Tokenizer
+        assets = _SKILL_DIR / "assets"
+        _embed_tokenizer = Tokenizer.from_file(str(assets / "tokenizer.json"))
+        _embed_tokenizer.enable_padding()
+        _embed_tokenizer.enable_truncation(max_length=512)
 
-    assets = _SKILL_DIR / "assets"
-    tokenizer = Tokenizer.from_file(str(assets / "tokenizer.json"))
-    tokenizer.enable_padding()
-    tokenizer.enable_truncation(max_length=512)
-    encodings = tokenizer.encode_batch(texts)
+    encodings = _embed_tokenizer.encode_batch(texts)
     input_ids = np.array([e.ids for e in encodings], dtype=np.int64)
     attention_mask = np.array([e.attention_mask for e in encodings], dtype=np.int64)
     token_type_ids = np.array([e.type_ids for e in encodings], dtype=np.int64)
@@ -143,8 +146,10 @@ def _embed(texts: list) -> "np.ndarray":
     return (embeddings / norms).astype(np.float32)
 
 
-def _serialize_vec(v: "np.ndarray") -> bytes:
-    """Serialize float32 numpy vector to bytes for sqlite-vec."""
+def _serialize_vec(v) -> bytes:
+    """Serialize float32 vector to bytes for sqlite-vec."""
+    if hasattr(v, 'tobytes'):
+        return v.tobytes()
     return struct.pack(f"{len(v)}f", *v.tolist())
 
 
