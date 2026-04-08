@@ -45,7 +45,7 @@
     "test_coverage_notes": "",
     "known_limitations": ""
   },
-  "block_reason": "Deferred due to file-scope conflict with active bead B-606890e7",
+  "block_reason": "Deferred due to file-scope conflict with active bead B-618cbc46-test",
   "conflict_risks": "No conflict risk \u2014 README.md is a new file with no sibling bead overlap.",
   "branch_name": "",
   "worktree_path": "",
@@ -64,6 +64,13 @@
       "event": "deferred",
       "agent_type": "documentation",
       "summary": "Deferred due to file-scope conflict with active bead B-606890e7",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T10:12:48.998979+00:00",
+      "event": "deferred",
+      "agent_type": "documentation",
+      "summary": "Deferred due to file-scope conflict with active bead B-618cbc46-test",
       "details": {}
     }
   ],
