@@ -3,7 +3,7 @@
   "title": "Corrective fix for B-812641b9-review: Review Ingest JSON and CSV format support",
   "agent_type": "developer",
   "description": "Blocked reason: Finding 1 (High): _ingest_json and _ingest_csv lack the MIN_CHUNK_LEN=10 filter present in _ingest_text_chunks, and their progress messages omit the skipped count. Spec acceptance criterion 6 explicitly requires short chunks to be skipped and counted for all formats. Finding 2 (Low): ingest_parser argument help text at memory.py:633 still says '.txt or .md' \u2014 should include '.json' and '.csv'.\n\nRemaining work: Two unresolved findings must be fixed before this bead can close. See block_reason for details.",
-  "status": "ready",
+  "status": "in_progress",
   "bead_type": "task",
   "parent_id": "B-812641b9-review",
   "dependencies": [],
@@ -57,9 +57,12 @@
   },
   "block_reason": "Deferred due to file-scope conflict with active bead B-22336fc3-docs",
   "conflict_risks": "None \u2014 fixes are confined to _ingest_json, _ingest_csv, and one argparse help string in memory.py. No schema changes.",
-  "branch_name": "",
-  "worktree_path": "",
-  "lease": null,
+  "branch_name": "feature/b-54edeccf",
+  "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
+  "lease": {
+    "owner": "developer:B-812641b9-review-corrective",
+    "expires_at": "2026-04-08T05:44:42.640815+00:00"
+  },
   "retries": 0,
   "execution_history": [
     {
@@ -110,10 +113,48 @@
       "agent_type": "developer",
       "summary": "Deferred due to file-scope conflict with active bead B-22336fc3-docs",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T05:14:43.053734+00:00",
+      "event": "skills_loaded",
+      "agent_type": "developer",
+      "summary": "Loaded 7 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/developer-implementation",
+          "capability/code-edit",
+          "task/corrective-implementation",
+          "task/refactor-safe",
+          "task/migration",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-08T05:14:43.053768+00:00",
+      "event": "started",
+      "agent_type": "developer",
+      "summary": "Worker started",
+      "details": {}
     }
   ],
   "metadata": {
-    "auto_corrective_for": "B-812641b9-review"
+    "auto_corrective_for": "B-812641b9-review",
+    "execution_root": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-812641b9-review-corrective",
+    "workspace_repo_path": "repo",
+    "loaded_skills": [
+      "core/base-orchestrator",
+      "role/developer-implementation",
+      "capability/code-edit",
+      "task/corrective-implementation",
+      "task/refactor-safe",
+      "task/migration",
+      "memory"
+    ],
+    "skill_bundle_hash": "3d67820a7fb8135bc362b2b95d14300da249795bcc32c95f5dd45f36e15acfa1",
+    "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-812641b9-review-corrective/home",
+    "runner_backend": "claude"
   },
   "labels": []
 }
