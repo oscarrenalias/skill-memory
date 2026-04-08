@@ -3,7 +3,7 @@
   "title": "Document Implement model bootstrap (_ensure_model)",
   "agent_type": "documentation",
   "description": "Update docs for B-2ad17234",
-  "status": "ready",
+  "status": "in_progress",
   "bead_type": "task",
   "parent_id": "B-2ad17234",
   "dependencies": [
@@ -52,9 +52,12 @@
   },
   "block_reason": "Deferred due to file-scope conflict with active bead B-2ad17234-test",
   "conflict_risks": "None. No sibling beads claim memory.py.",
-  "branch_name": "",
-  "worktree_path": "",
-  "lease": null,
+  "branch_name": "feature/b-266c0a28",
+  "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
+  "lease": {
+    "owner": "documentation:B-2ad17234-docs",
+    "expires_at": "2026-04-08T05:36:13.211737+00:00"
+  },
   "retries": 0,
   "execution_history": [
     {
@@ -168,8 +171,45 @@
       "agent_type": "documentation",
       "summary": "Deferred due to file-scope conflict with active bead B-2ad17234-test",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T05:06:13.542801+00:00",
+      "event": "skills_loaded",
+      "agent_type": "documentation",
+      "summary": "Loaded 6 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/docs-agent",
+          "capability/docs-edit",
+          "task/release-notes",
+          "task/spec-sync",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-08T05:06:13.542829+00:00",
+      "event": "started",
+      "agent_type": "documentation",
+      "summary": "Worker started",
+      "details": {}
     }
   ],
-  "metadata": {},
+  "metadata": {
+    "execution_root": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-2ad17234-docs",
+    "workspace_repo_path": "repo",
+    "loaded_skills": [
+      "core/base-orchestrator",
+      "role/docs-agent",
+      "capability/docs-edit",
+      "task/release-notes",
+      "task/spec-sync",
+      "memory"
+    ],
+    "skill_bundle_hash": "2af4f5a7f6f5668180ed1a8523e0c0606f4a43d4edf9270d7f3b2ccfcb69cdec",
+    "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-2ad17234-docs/home",
+    "runner_backend": "claude"
+  },
   "labels": []
 }
