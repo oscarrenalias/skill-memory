@@ -1,0 +1,71 @@
+{
+  "bead_id": "B-618cbc46-test-corrective",
+  "title": "Corrective fix for B-618cbc46-test: Test Bootstrap README.md with APM installation instructions",
+  "agent_type": "developer",
+  "description": "Blocked reason: README.md APM install URL does not match the actual git remote. README has `git+https://github.com/oscar-renalias/skill-agent-memory`; actual remote is `https://github.com/oscarrenalias/skill-memory`. Users following the install instructions will get a 404.\n\nRemaining work: Fix the APM install command URL in README.md: change `git+https://github.com/oscar-renalias/skill-agent-memory` to `git+https://github.com/oscarrenalias/skill-memory`.",
+  "status": "ready",
+  "bead_type": "task",
+  "parent_id": "B-618cbc46-test",
+  "dependencies": [],
+  "acceptance_criteria": [
+    "Implement the minimum fix required to unblock B-618cbc46-test.",
+    "Update tests/docs as needed for the corrective change.",
+    "Leave a handoff summary that states how the parent bead can be retried."
+  ],
+  "linked_docs": [],
+  "feature_root_id": "B-33389719",
+  "execution_branch_name": "feature/b-33389719",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-33389719",
+  "expected_files": [
+    "README.md"
+  ],
+  "expected_globs": [],
+  "touched_files": [
+    "README.md"
+  ],
+  "changed_files": [
+    "README.md"
+  ],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "No conflict risk \u2014 README.md is the only changed file and no sibling beads are modifying it.",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-08T10:13:38.105682+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    }
+  ],
+  "metadata": {
+    "auto_corrective_for": "B-618cbc46-test"
+  },
+  "labels": [],
+  "recovery_for": null,
+  "priority": null
+}
