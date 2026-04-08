@@ -1,0 +1,92 @@
+{
+  "bead_id": "B-3a022264-docs",
+  "title": "Document Resolve merge conflicts for agent-memory core infrastructure",
+  "agent_type": "documentation",
+  "description": "Update docs for B-3a022264",
+  "status": "ready",
+  "bead_type": "task",
+  "parent_id": "B-3a022264",
+  "dependencies": [
+    "B-3a022264"
+  ],
+  "acceptance_criteria": [],
+  "linked_docs": [],
+  "feature_root_id": "B-266c0a28",
+  "execution_branch_name": "feature/b-266c0a28",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
+  "expected_files": [
+    ".takt/beads/B-1e31b0df.json",
+    ".takt/beads/B-27a23ff7.json",
+    ".takt/beads/B-3a022264.json",
+    ".takt/beads/B-79e7ebf5.json",
+    ".takt/beads/B-841d81bc.json",
+    ".takt/beads/B-89f6e836.json",
+    ".takt/beads/B-9a409587.json",
+    ".takt/beads/B-c780e85e.json",
+    ".takt/beads/B-d34d190d.json",
+    ".takt/beads/B-e2cb1987.json"
+  ],
+  "expected_globs": [],
+  "touched_files": [
+    ".takt/beads/B-1e31b0df.json",
+    ".takt/beads/B-27a23ff7.json",
+    ".takt/beads/B-3a022264.json",
+    ".takt/beads/B-79e7ebf5.json",
+    ".takt/beads/B-841d81bc.json",
+    ".takt/beads/B-89f6e836.json",
+    ".takt/beads/B-9a409587.json",
+    ".takt/beads/B-c780e85e.json",
+    ".takt/beads/B-d34d190d.json",
+    ".takt/beads/B-e2cb1987.json"
+  ],
+  "changed_files": [
+    ".takt/beads/B-1e31b0df.json",
+    ".takt/beads/B-27a23ff7.json",
+    ".takt/beads/B-3a022264.json",
+    ".takt/beads/B-79e7ebf5.json",
+    ".takt/beads/B-841d81bc.json",
+    ".takt/beads/B-89f6e836.json",
+    ".takt/beads/B-9a409587.json",
+    ".takt/beads/B-c780e85e.json",
+    ".takt/beads/B-d34d190d.json",
+    ".takt/beads/B-e2cb1987.json"
+  ],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "Feature branch still diverges from main by 2 commits (both B-3a022264 in_progress). Content-level conflicts are fully resolved. Run git merge main to create a proper merge commit.",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-08T05:44:47.421944+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    }
+  ],
+  "metadata": {},
+  "labels": []
+}
