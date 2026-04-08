@@ -5,7 +5,7 @@ description: "SQLite DB schema, ONNX embedding pipeline, model bootstrap, and in
 dependencies: []
 priority: high
 complexity: high
-status: planned
+status: done
 tags:
 - agent-memory
 - infrastructure

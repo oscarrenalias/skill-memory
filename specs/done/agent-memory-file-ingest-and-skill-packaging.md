@@ -5,7 +5,7 @@ description: "ingest command, SKILL.md agent guidance, apm.yml manifest, and tes
 dependencies: []
 priority: medium
 complexity: medium
-status: planned
+status: done
 tags:
 - agent-memory
 - ingest

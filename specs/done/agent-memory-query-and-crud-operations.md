@@ -6,7 +6,7 @@ dependencies:
 - spec-a536cb5e
 priority: high
 complexity: medium
-status: planned
+status: done
 tags:
 - agent-memory
 - search
