@@ -1,0 +1,69 @@
+{
+  "bead_id": "B-fc273260-review",
+  "title": "Review Strengthen SKILL.md: frontmatter and agent guidance",
+  "agent_type": "review",
+  "description": "Review implementation for B-fc273260",
+  "status": "ready",
+  "bead_type": "task",
+  "parent_id": "B-fc273260",
+  "dependencies": [
+    "B-fc273260",
+    "B-fc273260-test",
+    "B-fc273260-docs"
+  ],
+  "acceptance_criteria": [],
+  "linked_docs": [],
+  "feature_root_id": "B-fc273260",
+  "execution_branch_name": "feature/b-fc273260",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-fc273260",
+  "expected_files": [
+    "SKILL.md"
+  ],
+  "expected_globs": [],
+  "touched_files": [
+    "SKILL.md"
+  ],
+  "changed_files": [
+    "SKILL.md"
+  ],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "None \u2014 only SKILL.md was modified; no other bead is known to touch this file.",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-08T12:44:26.636934+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    }
+  ],
+  "metadata": {},
+  "labels": [],
+  "recovery_for": null,
+  "priority": null
+}
