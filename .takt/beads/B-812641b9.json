@@ -1,0 +1,245 @@
+{
+  "bead_id": "B-812641b9",
+  "title": "Ingest JSON and CSV format support",
+  "agent_type": "developer",
+  "description": "Extend the ingest dispatcher in memory.py with handlers for .json and .csv. JSON: expect a JSON array where each element is either a plain string (used as content) or an object with a required 'content' key and optional 'metadata' object and 'source' string; exit 1 with a descriptive error for invalid input. CSV: require --column NAME flag specifying which column holds the text; all other columns are merged into the chunk's metadata JSON; first row is the header. Add an explicit 'unsupported format' exit-1 path for unknown extensions.",
+  "status": "done",
+  "bead_type": "task",
+  "parent_id": "B-54edeccf",
+  "dependencies": [
+    "B-d34d190d"
+  ],
+  "acceptance_criteria": [
+    "JSON string array [{\"content\":\"a\"},{\"content\":\"b\"}] adds exactly 2 rows",
+    "JSON array of plain strings [\"a\",\"b\"] adds exactly 2 rows",
+    "JSON array with objects lacking 'content' key exits 1 with descriptive error",
+    "CSV with --column text adds one row per data row; other columns appear in metadata JSON",
+    "CSV without --column flag exits 1 with a clear message",
+    "memory.py ingest file.xyz exits 1 with 'unsupported format' message"
+  ],
+  "linked_docs": [
+    "specs/drafts/agent-memory-file-ingest-and-skill-packaging.md"
+  ],
+  "feature_root_id": "B-54edeccf",
+  "execution_branch_name": "feature/b-54edeccf",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
+  "expected_files": [
+    "memory.py"
+  ],
+  "expected_globs": [],
+  "touched_files": [
+    "__pycache__/memory.cpython-314.pyc",
+    "memory.py",
+    "tests/__init__.py"
+  ],
+  "changed_files": [
+    "__pycache__/memory.cpython-314.pyc",
+    "memory.py",
+    "tests/__init__.py"
+  ],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "Added _ingest_json(), _ingest_csv(), and refactored _ingest_text_chunks() helpers. cmd_ingest now dispatches on .txt/.md/.json/.csv and falls through to an explicit unsupported-format sys.exit(1). Added --column argument to the ingest subparser.",
+    "remaining": "",
+    "risks": "csv.DictReader reads the entire file into memory before inserting \u2014 fine for typical memory files but could be slow for very large CSVs. Not a concern for current use case.",
+    "verdict": "approved",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [
+      "__pycache__/memory.cpython-314.pyc",
+      "memory.py",
+      "tests/__init__.py"
+    ],
+    "updated_docs": [],
+    "next_action": "Hand off to tester agent to validate all six acceptance criteria.",
+    "next_agent": "tester",
+    "block_reason": "",
+    "expected_files": [
+      "memory.py"
+    ],
+    "expected_globs": [],
+    "touched_files": [
+      "__pycache__/memory.cpython-314.pyc",
+      "memory.py",
+      "tests/__init__.py"
+    ],
+    "conflict_risks": "None \u2014 changes are confined to cmd_ingest and three new private helpers in memory.py. No shared state or schema changes.",
+    "design_decisions": "Extracted _ingest_text_chunks() to avoid duplicating the chunk/filter/insert loop. CSV uses stdlib csv.DictReader \u2014 no new dependency. JSON validation is eager (all rows checked before any DB write) so the DB is never partially populated on bad input.",
+    "test_coverage_notes": "All six acceptance criteria map to distinct code paths: JSON string branch, JSON object branch, JSON missing-content branch, CSV happy path, CSV no-column branch, unknown-extension branch.",
+    "known_limitations": "CSV column-not-found error is detected only after the file header is read; empty CSV (no header row) yields a generic \"appears to be empty\" message rather than column-specific feedback."
+  },
+  "block_reason": "",
+  "conflict_risks": "None \u2014 changes are confined to cmd_ingest and three new private helpers in memory.py. No shared state or schema changes.",
+  "branch_name": "feature/b-54edeccf",
+  "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-07T18:39:55.290482+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:54:49.951788+00:00",
+      "event": "skills_loaded",
+      "agent_type": "developer",
+      "summary": "Loaded 7 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/developer-implementation",
+          "capability/code-edit",
+          "task/corrective-implementation",
+          "task/refactor-safe",
+          "task/migration",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-07T19:54:49.951824+00:00",
+      "event": "started",
+      "agent_type": "developer",
+      "summary": "Worker started",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T19:54:51.821364+00:00",
+      "event": "guardrails_applied",
+      "agent_type": "developer",
+      "summary": "Applied guardrails from .takt/agent-runs/B-812641b9/repo/templates/agents/developer.md",
+      "details": {
+        "template_path": ".takt/agent-runs/B-812641b9/repo/templates/agents/developer.md"
+      }
+    },
+    {
+      "timestamp": "2026-04-07T19:56:12.726761+00:00",
+      "event": "completed",
+      "agent_type": "developer",
+      "summary": "Extended memory.py ingest dispatcher with .json and .csv handlers, plus explicit unsupported-format exit-1 path. JSON accepts arrays of plain strings or objects with required 'content' key; CSV requires --column NAME and merges all other columns into metadata.",
+      "details": {}
+    }
+  ],
+  "metadata": {
+    "execution_root": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-812641b9",
+    "workspace_repo_path": "repo",
+    "loaded_skills": [
+      "core/base-orchestrator",
+      "role/developer-implementation",
+      "capability/code-edit",
+      "task/corrective-implementation",
+      "task/refactor-safe",
+      "task/migration",
+      "memory"
+    ],
+    "skill_bundle_hash": "3d67820a7fb8135bc362b2b95d14300da249795bcc32c95f5dd45f36e15acfa1",
+    "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-812641b9/home",
+    "runner_backend": "claude",
+    "guardrails": {
+      "agent_type": "developer",
+      "template_path": ".takt/agent-runs/B-812641b9/repo/templates/agents/developer.md",
+      "template_text": "# Developer Guardrails\n\nPrimary responsibility: Implement only the assigned bead inside the existing architecture and file scope.\n\nAllowed actions:\n- Modify code, configuration, or local docs required to complete the assigned bead.\n- Create sub-beads for discovered follow-up work that should be handled separately.\n- Verify your `Python` changes compile and import correctly with a quick syntax check: `python -m py_compile`.\n\nDisallowed actions:\n- Run any test suite \u2014 not even a targeted `pytest` run or any subset. Test execution is exclusively the tester agent's responsibility. Running tests wastes the agent budget and delays the pipeline.\n- Redesign unrelated architecture or broaden scope beyond the assigned bead.\n- Perform final review signoff in place of a review agent.\n- Silently absorb unrelated test, documentation, or planning work that should be handed off.\n\nExpected outputs:\n- Completed or blocked JSON with concise implementation summary.\n- Accurate touched files, changed files, risks, and follow-up handoff fields.",
+      "captured_at": "2026-04-07T19:54:51.821352+00:00"
+    },
+    "worker_prompt_context": {
+      "bead_id": "B-812641b9",
+      "feature_root_id": "B-54edeccf",
+      "title": "Ingest JSON and CSV format support",
+      "agent_type": "developer",
+      "description": "Extend the ingest dispatcher in memory.py with handlers for .json and .csv. JSON: expect a JSON array where each element is either a plain string (used as content) or an object with a required 'content' key and optional 'metadata' object and 'source' string; exit 1 with a descriptive error for invalid input. CSV: require --column NAME flag specifying which column holds the text; all other columns are merged into the chunk's metadata JSON; first row is the header. Add an explicit 'unsupported format' exit-1 path for unknown extensions.",
+      "status": "in_progress",
+      "acceptance_criteria": [
+        "JSON string array [{\"content\":\"a\"},{\"content\":\"b\"}] adds exactly 2 rows",
+        "JSON array of plain strings [\"a\",\"b\"] adds exactly 2 rows",
+        "JSON array with objects lacking 'content' key exits 1 with descriptive error",
+        "CSV with --column text adds one row per data row; other columns appear in metadata JSON",
+        "CSV without --column flag exits 1 with a clear message",
+        "memory.py ingest file.xyz exits 1 with 'unsupported format' message"
+      ],
+      "dependencies": [
+        "B-d34d190d"
+      ],
+      "linked_docs": [
+        "specs/drafts/agent-memory-file-ingest-and-skill-packaging.md"
+      ],
+      "execution_branch_name": "feature/b-54edeccf",
+      "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-54edeccf",
+      "expected_files": [
+        "memory.py"
+      ],
+      "expected_globs": [],
+      "touched_files": [],
+      "conflict_risks": "",
+      "handoff_summary": {
+        "completed": "",
+        "remaining": "",
+        "risks": "",
+        "verdict": "",
+        "findings_count": 0,
+        "requires_followup": false,
+        "changed_files": [],
+        "updated_docs": [],
+        "next_action": "",
+        "next_agent": "",
+        "block_reason": "",
+        "expected_files": [],
+        "expected_globs": [],
+        "touched_files": [],
+        "conflict_risks": "",
+        "design_decisions": "",
+        "test_coverage_notes": "",
+        "known_limitations": ""
+      }
+    },
+    "last_agent_result": {
+      "outcome": "completed",
+      "summary": "Extended memory.py ingest dispatcher with .json and .csv handlers, plus explicit unsupported-format exit-1 path. JSON accepts arrays of plain strings or objects with required 'content' key; CSV requires --column NAME and merges all other columns into metadata.",
+      "verdict": "approved",
+      "findings_count": 0,
+      "requires_followup": false,
+      "next_agent": "tester",
+      "block_reason": ""
+    },
+    "telemetry": {
+      "cost_usd": 0.20621625,
+      "duration_ms": 77862,
+      "duration_api_ms": 68384,
+      "num_turns": 9,
+      "input_tokens": 10,
+      "output_tokens": 4449,
+      "cache_creation_tokens": 20839,
+      "cache_read_tokens": 204350,
+      "stop_reason": "end_turn",
+      "session_id": "729eb5ed-03ed-41fb-9020-49690d5ea18f",
+      "permission_denials": [],
+      "prompt_chars": 6194,
+      "prompt_lines": 136,
+      "source": "provider",
+      "attempt": 1
+    },
+    "telemetry_history": [
+      {
+        "cost_usd": 0.20621625,
+        "duration_ms": 77862,
+        "duration_api_ms": 68384,
+        "num_turns": 9,
+        "input_tokens": 10,
+        "output_tokens": 4449,
+        "cache_creation_tokens": 20839,
+        "cache_read_tokens": 204350,
+        "stop_reason": "end_turn",
+        "session_id": "729eb5ed-03ed-41fb-9020-49690d5ea18f",
+        "permission_denials": [],
+        "prompt_chars": 6194,
+        "prompt_lines": 136,
+        "source": "provider",
+        "attempt": 1
+      }
+    ],
+    "last_commit": "9d985d7f3d0e0a1df4237e5ccba7db6078d35d6c"
+  },
+  "labels": []
+}

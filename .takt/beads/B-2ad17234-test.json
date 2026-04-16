@@ -1,0 +1,327 @@
+{
+  "bead_id": "B-2ad17234-test",
+  "title": "Test Implement model bootstrap (_ensure_model)",
+  "agent_type": "tester",
+  "description": "Validate implementation for B-2ad17234",
+  "status": "done",
+  "bead_type": "task",
+  "parent_id": "B-2ad17234",
+  "dependencies": [
+    "B-2ad17234"
+  ],
+  "acceptance_criteria": [],
+  "linked_docs": [
+    "specs/drafts/agent-memory-core-infrastructure.md"
+  ],
+  "feature_root_id": "B-266c0a28",
+  "execution_branch_name": "feature/b-266c0a28",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
+  "expected_files": [
+    "tests/test_ensure_model.py"
+  ],
+  "expected_globs": [],
+  "touched_files": [
+    "tests/__pycache__/test_ensure_model.cpython-314-pytest-9.0.2.pyc",
+    "tests/test_ensure_model.py"
+  ],
+  "changed_files": [
+    "tests/__pycache__/test_ensure_model.cpython-314-pytest-9.0.2.pyc",
+    "tests/test_ensure_model.py"
+  ],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "Wrote tests/test_ensure_model.py with 4 test classes covering: (1) no-op when model already exists, (2) first-call download with SHA256 verification, (3) SHA256 mismatch causes unlink + exit(1), (4) network failure causes unlink + exit(1). All 9 tests pass in 0.20s. Existing tests (test_memory_cli.py, test_db_init.py) still pass with no regressions.",
+    "remaining": "None.",
+    "risks": "None. Tests are pure unit tests using mocks; no real network calls or filesystem side-effects outside temp directories.",
+    "verdict": "approved",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [
+      "tests/__pycache__/test_ensure_model.cpython-314-pytest-9.0.2.pyc",
+      "tests/test_ensure_model.py"
+    ],
+    "updated_docs": [],
+    "next_action": "Bead complete. No follow-up required.",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [
+      "tests/test_ensure_model.py"
+    ],
+    "expected_globs": [],
+    "touched_files": [
+      "tests/__pycache__/test_ensure_model.cpython-314-pytest-9.0.2.pyc",
+      "tests/test_ensure_model.py"
+    ],
+    "conflict_risks": "None. tests/test_ensure_model.py is a new file; no sibling beads claim it.",
+    "design_decisions": "Used importlib.util.spec_from_file_location to load memory.py with sys.prefix patched, matching the pattern established in test_memory_cli.py. _MODEL_PATH is redirected to a temp directory per-test to avoid touching ~/.cache.",
+    "test_coverage_notes": "9 tests covering: no-op when file exists (2), first download + SHA pass (2), SHA mismatch \u2192 unlink + exit(1) (2), network failure \u2192 unlink + exit(1) (3). All pass without network access or managed venv.",
+    "known_limitations": "The real model file is 133 MB (float32 ONNX); tests use fake byte content and patched SHA256 constants to avoid network dependencies."
+  },
+  "block_reason": "",
+  "conflict_risks": "None. tests/test_ensure_model.py is a new file; no sibling beads claim it.",
+  "branch_name": "feature/b-266c0a28",
+  "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-07T20:32:33.399933+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T20:32:40.961168+00:00",
+      "event": "deferred",
+      "agent_type": "tester",
+      "summary": "Deferred due to file-scope conflict with active bead B-22336fc3",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T20:39:18.585621+00:00",
+      "event": "deferred",
+      "agent_type": "tester",
+      "summary": "Deferred due to file-scope conflict with active bead B-f40ff1e7",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T20:40:09.707147+00:00",
+      "event": "deferred",
+      "agent_type": "tester",
+      "summary": "Deferred due to file-scope conflict with active bead B-a4f7357a",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T20:45:29.234126+00:00",
+      "event": "deferred",
+      "agent_type": "tester",
+      "summary": "Deferred due to file-scope conflict with active bead B-1e31b0df-test",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T20:47:21.444910+00:00",
+      "event": "deferred",
+      "agent_type": "tester",
+      "summary": "Deferred due to file-scope conflict with active bead B-1e31b0df-docs",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T20:49:37.067753+00:00",
+      "event": "deferred",
+      "agent_type": "tester",
+      "summary": "Deferred due to file-scope conflict with active bead B-9a409587-test",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T20:50:57.400884+00:00",
+      "event": "deferred",
+      "agent_type": "tester",
+      "summary": "Deferred due to file-scope conflict with active bead B-9a409587-docs",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T20:59:28.563176+00:00",
+      "event": "deferred",
+      "agent_type": "tester",
+      "summary": "Deferred due to file-scope conflict with active bead B-79e7ebf5-test",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T21:00:28.361703+00:00",
+      "event": "deferred",
+      "agent_type": "tester",
+      "summary": "Deferred due to file-scope conflict with active bead B-79e7ebf5-docs",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T21:01:24.857309+00:00",
+      "event": "deferred",
+      "agent_type": "tester",
+      "summary": "Deferred due to file-scope conflict with active bead B-89f6e836-test",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T21:02:29.542365+00:00",
+      "event": "deferred",
+      "agent_type": "tester",
+      "summary": "Deferred due to file-scope conflict with active bead B-89f6e836-docs",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T21:03:43.646697+00:00",
+      "event": "deferred",
+      "agent_type": "tester",
+      "summary": "Deferred due to file-scope conflict with active bead B-812641b9-test",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T21:05:35.526027+00:00",
+      "event": "deferred",
+      "agent_type": "tester",
+      "summary": "Deferred due to file-scope conflict with active bead B-812641b9-docs",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T04:57:26.680288+00:00",
+      "event": "deferred",
+      "agent_type": "tester",
+      "summary": "Deferred due to file-scope conflict with active bead B-d34d190d-review-corrective",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T05:02:52.569715+00:00",
+      "event": "skills_loaded",
+      "agent_type": "tester",
+      "summary": "Loaded 6 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/tester-validation",
+          "capability/test-execution",
+          "task/defect-bead-creation",
+          "task/regression-triage",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-08T05:02:52.569751+00:00",
+      "event": "started",
+      "agent_type": "tester",
+      "summary": "Worker started",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T05:02:53.859849+00:00",
+      "event": "guardrails_applied",
+      "agent_type": "tester",
+      "summary": "Applied guardrails from .takt/agent-runs/B-2ad17234-test/repo/templates/agents/tester.md",
+      "details": {
+        "template_path": ".takt/agent-runs/B-2ad17234-test/repo/templates/agents/tester.md"
+      }
+    },
+    {
+      "timestamp": "2026-04-08T05:06:11.488743+00:00",
+      "event": "completed",
+      "agent_type": "tester",
+      "summary": "Created tests/test_ensure_model.py with 9 unit tests covering all four required scenarios for _ensure_model(). All 9 tests pass. No regressions in existing tests.",
+      "details": {}
+    }
+  ],
+  "metadata": {
+    "execution_root": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-2ad17234-test",
+    "workspace_repo_path": "repo",
+    "loaded_skills": [
+      "core/base-orchestrator",
+      "role/tester-validation",
+      "capability/test-execution",
+      "task/defect-bead-creation",
+      "task/regression-triage",
+      "memory"
+    ],
+    "skill_bundle_hash": "09c41b0ce7b733774ac92190a1a2516f6510bcbf848392054d11d9a6cdf8ee61",
+    "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-2ad17234-test/home",
+    "runner_backend": "claude",
+    "guardrails": {
+      "agent_type": "tester",
+      "template_path": ".takt/agent-runs/B-2ad17234-test/repo/templates/agents/tester.md",
+      "template_text": "# Tester Guardrails\n\nPrimary responsibility: Add or update automated tests, run validation, and report defects or missing coverage.\n\nAllowed actions:\n- Write or update tests relevant to the assigned bead.\n- Run only the test files related to the bead's changed files, not the full test suite. Use `pytest` to target individual test files. If unsure which tests are relevant, use the bead's expected_files and touched_files fields as a guide.\n- Make minimal test-enablement fixes (e.g. import corrections, fixture setup) only when strictly necessary to run the relevant tests. Do not refactor production code under the guise of test enablement.\n\nDisallowed actions:\n- Run the full test suite instead of targeting specific tests. Always use `pytest` for targeted runs. Running the full suite wastes time and often exceeds the agent timeout.\n- Use `run_in_background` for any Bash commands. All test commands must run synchronously so their output is available before the structured verdict is submitted. Background tasks cause the structured output to be lost, resulting in a failed bead.\n- Implement feature logic beyond minimal test-enablement work.\n- Reframe a feature implementation task as testing work to bypass handoff.\n- Perform review signoff or broad documentation rewrites.\n\nExpected outputs:\n- Return JSON with structured verdict fields for every run: `verdict`, `findings_count`, and `requires_followup`.\n- Treat `verdict` as the tester signoff decision: `approved` means testing can complete, while `needs_changes` means the bead must block for follow-up work.\n- Use `verdict=approved`, `findings_count=0`, and `requires_followup=false` when testing is complete with no unresolved tester-scope findings.\n- Use `verdict=needs_changes`, set `findings_count` to the unresolved defect or coverage gap count, set `requires_followup=true` unless there is a stronger explicit reason not to, and always include `block_reason` when follow-up work is required.\n- Keep `completed`, `remaining`, and `risks` as free-form narrative context only. They inform operators, but they do not override the structured verdict or control scheduler state.\n- Completed or blocked JSON describing test coverage, validation status, and follow-up needs.\n- Precise defect or coverage notes when the bead cannot be completed within tester scope.",
+      "captured_at": "2026-04-08T05:02:53.859829+00:00"
+    },
+    "worker_prompt_context": {
+      "bead_id": "B-2ad17234-test",
+      "feature_root_id": "B-266c0a28",
+      "title": "Test Implement model bootstrap (_ensure_model)",
+      "agent_type": "tester",
+      "description": "Validate implementation for B-2ad17234",
+      "status": "in_progress",
+      "acceptance_criteria": [],
+      "dependencies": [
+        "B-2ad17234"
+      ],
+      "linked_docs": [
+        "specs/drafts/agent-memory-core-infrastructure.md"
+      ],
+      "execution_branch_name": "feature/b-266c0a28",
+      "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
+      "expected_files": [
+        "__pycache__/memory.cpython-314.pyc",
+        "memory.py"
+      ],
+      "expected_globs": [],
+      "touched_files": [
+        "__pycache__/memory.cpython-314.pyc",
+        "memory.py"
+      ],
+      "conflict_risks": "None. No sibling beads claim memory.py.",
+      "handoff_summary": {
+        "completed": "",
+        "remaining": "",
+        "risks": "",
+        "verdict": "",
+        "findings_count": 0,
+        "requires_followup": false,
+        "changed_files": [],
+        "updated_docs": [],
+        "next_action": "",
+        "next_agent": "",
+        "block_reason": "",
+        "expected_files": [],
+        "expected_globs": [],
+        "touched_files": [],
+        "conflict_risks": "",
+        "design_decisions": "",
+        "test_coverage_notes": "",
+        "known_limitations": ""
+      }
+    },
+    "last_agent_result": {
+      "outcome": "completed",
+      "summary": "Created tests/test_ensure_model.py with 9 unit tests covering all four required scenarios for _ensure_model(). All 9 tests pass. No regressions in existing tests.",
+      "verdict": "approved",
+      "findings_count": 0,
+      "requires_followup": false,
+      "next_agent": "",
+      "block_reason": ""
+    },
+    "telemetry": {
+      "cost_usd": 0.37902105,
+      "duration_ms": 196526,
+      "duration_api_ms": 184981,
+      "num_turns": 13,
+      "input_tokens": 1369,
+      "output_tokens": 12951,
+      "cache_creation_tokens": 24209,
+      "cache_read_tokens": 299551,
+      "stop_reason": "end_turn",
+      "session_id": "7b15dabf-c5de-4c88-bfc9-f1bae99e9ce7",
+      "permission_denials": [],
+      "prompt_chars": 7565,
+      "prompt_lines": 155,
+      "source": "provider",
+      "attempt": 1
+    },
+    "telemetry_history": [
+      {
+        "cost_usd": 0.37902105,
+        "duration_ms": 196526,
+        "duration_api_ms": 184981,
+        "num_turns": 13,
+        "input_tokens": 1369,
+        "output_tokens": 12951,
+        "cache_creation_tokens": 24209,
+        "cache_read_tokens": 299551,
+        "stop_reason": "end_turn",
+        "session_id": "7b15dabf-c5de-4c88-bfc9-f1bae99e9ce7",
+        "permission_denials": [],
+        "prompt_chars": 7565,
+        "prompt_lines": 155,
+        "source": "provider",
+        "attempt": 1
+      }
+    ],
+    "last_commit": "d2387cf2797bb7662741ecb88035cdff4ba78812"
+  },
+  "labels": []
+}

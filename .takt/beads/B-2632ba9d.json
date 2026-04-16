@@ -1,0 +1,270 @@
+{
+  "bead_id": "B-2632ba9d",
+  "title": "Implement CLI skeleton and venv bootstrap",
+  "agent_type": "developer",
+  "description": "Create memory.py with the shebang line, the _bootstrap() function that creates .venv/ and installs onnxruntime, sqlite-vec, tokenizers, and numpy, and a minimal argparse skeleton that parses the init and add subcommands (stubs only \u2014 no logic yet). Mark the file executable.",
+  "status": "done",
+  "bead_type": "task",
+  "parent_id": "B-266c0a28",
+  "dependencies": [
+    "B-841d81bc"
+  ],
+  "acceptance_criteria": [
+    "memory.py has shebang #!/usr/bin/env python3 on line 1",
+    "memory.py is executable (chmod +x applied)",
+    "_bootstrap() creates .venv/ and installs the four deps on first run",
+    "_bootstrap() is a no-op when already running inside the managed venv",
+    "Running ./memory.py --help does not error and lists init and add subcommands",
+    "Running ./memory.py with an unknown subcommand exits non-zero"
+  ],
+  "linked_docs": [
+    "specs/drafts/agent-memory-core-infrastructure.md"
+  ],
+  "feature_root_id": "B-266c0a28",
+  "execution_branch_name": "feature/b-266c0a28",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
+  "expected_files": [
+    "memory.py"
+  ],
+  "expected_globs": [],
+  "touched_files": [
+    "memory.py"
+  ],
+  "changed_files": [
+    "memory.py"
+  ],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "memory.py created with: shebang on line 1, _bootstrap() that creates .venv/ and installs four deps (onnxruntime, sqlite-vec, tokenizers, numpy) on first run and is a no-op when already inside the managed venv, argparse skeleton with required subcommands init and add (stub implementations raise NotImplementedError), --help lists both subcommands, unknown subcommand exits non-zero via sub.required=True.",
+    "remaining": "Downstream beads must implement cmd_init (DB schema creation) and cmd_add (embedding + DB insert) logic.",
+    "risks": "Bootstrap uses os.execv to re-exec under the venv Python \u2014 this is an exec replacement, not a subprocess. On Windows the path uses Scripts/python.exe. No known risks for the stub-only scope of this bead.",
+    "verdict": "approved",
+    "findings_count": 0,
+    "requires_followup": true,
+    "changed_files": [
+      "memory.py"
+    ],
+    "updated_docs": [],
+    "next_action": "Implement cmd_init (DB schema) and cmd_add (embedding + insert) in subsequent beads per the spec.",
+    "next_agent": "developer",
+    "block_reason": "",
+    "expected_files": [
+      "memory.py"
+    ],
+    "expected_globs": [],
+    "touched_files": [
+      "memory.py"
+    ],
+    "conflict_risks": "No conflicts expected. memory.py is a new file with no overlap with sibling beads.",
+    "design_decisions": "Used sub.required=True so unknown/missing subcommands exit non-zero automatically. argparse import is placed after _bootstrap() call per spec pattern. cmd_init and cmd_add raise NotImplementedError as stubs.",
+    "test_coverage_notes": "Tester should verify: shebang on line 1, file is executable, --help lists init and add, unknown subcommand exits non-zero, _bootstrap() no-op when sys.prefix contains .venv path.",
+    "known_limitations": "cmd_init and cmd_add are stubs only \u2014 they raise NotImplementedError. Actual DB and embedding logic is out of scope for this bead."
+  },
+  "block_reason": "",
+  "conflict_risks": "No conflicts expected. memory.py is a new file with no overlap with sibling beads.",
+  "branch_name": "feature/b-266c0a28",
+  "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-07T18:32:11.425921+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T18:49:42.911845+00:00",
+      "event": "skills_loaded",
+      "agent_type": "developer",
+      "summary": "Loaded 7 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/developer-implementation",
+          "capability/code-edit",
+          "task/corrective-implementation",
+          "task/refactor-safe",
+          "task/migration",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-07T18:49:42.911875+00:00",
+      "event": "started",
+      "agent_type": "developer",
+      "summary": "Worker started",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-07T18:49:43.642635+00:00",
+      "event": "guardrails_applied",
+      "agent_type": "developer",
+      "summary": "Applied guardrails from .takt/agent-runs/B-2632ba9d/repo/templates/agents/developer.md",
+      "details": {
+        "template_path": ".takt/agent-runs/B-2632ba9d/repo/templates/agents/developer.md"
+      }
+    },
+    {
+      "timestamp": "2026-04-07T18:51:02.627154+00:00",
+      "event": "completed",
+      "agent_type": "developer",
+      "summary": "Created .claude/skills/agent-memory/memory.py with shebang, _bootstrap() function, and argparse skeleton for init/add subcommands. File is marked executable (chmod +x). Syntax verified with py_compile.",
+      "details": {}
+    }
+  ],
+  "metadata": {
+    "execution_root": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-2632ba9d",
+    "workspace_repo_path": "repo",
+    "loaded_skills": [
+      "core/base-orchestrator",
+      "role/developer-implementation",
+      "capability/code-edit",
+      "task/corrective-implementation",
+      "task/refactor-safe",
+      "task/migration",
+      "memory"
+    ],
+    "skill_bundle_hash": "3d67820a7fb8135bc362b2b95d14300da249795bcc32c95f5dd45f36e15acfa1",
+    "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-2632ba9d/home",
+    "runner_backend": "claude",
+    "guardrails": {
+      "agent_type": "developer",
+      "template_path": ".takt/agent-runs/B-2632ba9d/repo/templates/agents/developer.md",
+      "template_text": "# Developer Guardrails\n\nPrimary responsibility: Implement only the assigned bead inside the existing architecture and file scope.\n\nAllowed actions:\n- Modify code, configuration, or local docs required to complete the assigned bead.\n- Create sub-beads for discovered follow-up work that should be handled separately.\n- Verify your `Python` changes compile and import correctly with a quick syntax check: `python -m py_compile`.\n\nDisallowed actions:\n- Run any test suite \u2014 not even a targeted `pytest` run or any subset. Test execution is exclusively the tester agent's responsibility. Running tests wastes the agent budget and delays the pipeline.\n- Redesign unrelated architecture or broaden scope beyond the assigned bead.\n- Perform final review signoff in place of a review agent.\n- Silently absorb unrelated test, documentation, or planning work that should be handed off.\n\nExpected outputs:\n- Completed or blocked JSON with concise implementation summary.\n- Accurate touched files, changed files, risks, and follow-up handoff fields.",
+      "captured_at": "2026-04-07T18:49:43.642624+00:00"
+    },
+    "worker_prompt_context": {
+      "bead_id": "B-2632ba9d",
+      "feature_root_id": "B-266c0a28",
+      "title": "Implement CLI skeleton and venv bootstrap",
+      "agent_type": "developer",
+      "description": "Create memory.py with the shebang line, the _bootstrap() function that creates .venv/ and installs onnxruntime, sqlite-vec, tokenizers, and numpy, and a minimal argparse skeleton that parses the init and add subcommands (stubs only \u2014 no logic yet). Mark the file executable.",
+      "status": "in_progress",
+      "acceptance_criteria": [
+        "memory.py has shebang #!/usr/bin/env python3 on line 1",
+        "memory.py is executable (chmod +x applied)",
+        "_bootstrap() creates .venv/ and installs the four deps on first run",
+        "_bootstrap() is a no-op when already running inside the managed venv",
+        "Running ./memory.py --help does not error and lists init and add subcommands",
+        "Running ./memory.py with an unknown subcommand exits non-zero"
+      ],
+      "dependencies": [
+        "B-841d81bc"
+      ],
+      "linked_docs": [
+        "specs/drafts/agent-memory-core-infrastructure.md"
+      ],
+      "execution_branch_name": "feature/b-266c0a28",
+      "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28",
+      "expected_files": [
+        "memory.py"
+      ],
+      "expected_globs": [],
+      "touched_files": [],
+      "conflict_risks": "",
+      "handoff_summary": {
+        "completed": "",
+        "remaining": "",
+        "risks": "",
+        "verdict": "",
+        "findings_count": 0,
+        "requires_followup": false,
+        "changed_files": [],
+        "updated_docs": [],
+        "next_action": "",
+        "next_agent": "",
+        "block_reason": "",
+        "expected_files": [],
+        "expected_globs": [],
+        "touched_files": [],
+        "conflict_risks": "",
+        "design_decisions": "",
+        "test_coverage_notes": "",
+        "known_limitations": ""
+      }
+    },
+    "last_agent_result": {
+      "outcome": "completed",
+      "summary": "Created .claude/skills/agent-memory/memory.py with shebang, _bootstrap() function, and argparse skeleton for init/add subcommands. File is marked executable (chmod +x). Syntax verified with py_compile.",
+      "verdict": "approved",
+      "findings_count": 0,
+      "requires_followup": true,
+      "next_agent": "developer",
+      "block_reason": ""
+    },
+    "telemetry": {
+      "cost_usd": 0.20044064999999997,
+      "duration_ms": 77755,
+      "duration_api_ms": 70461,
+      "num_turns": 12,
+      "input_tokens": 12,
+      "output_tokens": 4767,
+      "cache_creation_tokens": 16775,
+      "cache_read_tokens": 219978,
+      "stop_reason": "end_turn",
+      "session_id": "fad42073-30dd-42ff-a918-4d7ed68c2df3",
+      "permission_denials": [
+        {
+          "tool_name": "Write",
+          "tool_use_id": "toolu_01Bdpjr2QMewPzVTBdw6xrC9",
+          "tool_input": {
+            "file_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28/.claude/skills/agent-memory/memory.py",
+            "content": "#!/usr/bin/env python3\nimport sys\nimport os\nimport subprocess\nfrom pathlib import Path\n\n_SKILL_DIR = Path(__file__).parent\n_VENV = _SKILL_DIR / \".venv\"\n_DEPS = [\n    \"onnxruntime>=1.17.0\",\n    \"sqlite-vec>=0.1.6\",\n    \"tokenizers>=0.19.0\",\n    \"numpy>=1.24.0\",\n]\n\n\ndef _bootstrap() -> None:\n    if str(_VENV) in sys.prefix:\n        return  # already running inside the managed venv\n    venv_py = _VENV / (\"Scripts/python.exe\" if sys.platform == \"win32\" else \"bin/python\")\n    if not venv_py.exists():\n        print(\"agent-memory: first run, installing dependencies\u2026\", file=sys.stderr)\n        subprocess.check_call([sys.executable, \"-m\", \"venv\", str(_VENV)])\n        subprocess.check_call([str(venv_py), \"-m\", \"pip\", \"install\", \"--quiet\", *_DEPS])\n    os.execv(str(venv_py), [str(venv_py)] + sys.argv)\n\n\n_bootstrap()\n\nimport argparse  # noqa: E402 \u2014 must come after bootstrap\n\n\ndef cmd_init(args: argparse.Namespace) -> None:\n    raise NotImplementedError(\"init not yet implemented\")\n\n\ndef cmd_add(args: argparse.Namespace) -> None:\n    raise NotImplementedError(\"add not yet implemented\")\n\n\ndef main() -> None:\n    parser = argparse.ArgumentParser(\n        prog=\"memory.py\",\n        description=\"agent-memory: semantic long-term memory for Claude agents\",\n    )\n    parser.add_argument(\"--db\", metavar=\"PATH\", help=\"Override DB path\")\n    sub = parser.add_subparsers(dest=\"subcommand\", metavar=\"<subcommand>\")\n    sub.required = True\n\n    # init subcommand\n    p_init = sub.add_parser(\"init\", help=\"Initialise the memory database\")\n    p_init.add_argument(\"--db\", metavar=\"PATH\", help=\"Override DB path\")\n    p_init.set_defaults(func=cmd_init)\n\n    # add subcommand\n    p_add = sub.add_parser(\"add\", help=\"Add a memory entry\")\n    p_add.add_argument(\"text\", help=\"Text content to store\")\n    p_add.add_argument(\"--source\", metavar=\"TAG\", help=\"Optional origin tag or file path\")\n    p_add.add_argument(\"--meta\", metavar=\"KEY=VALUE\", action=\"append\", default=[], help=\"Arbitrary metadata (repeatable)\")\n    p_add.add_argument(\"--db\", metavar=\"PATH\", help=\"Override DB path\")\n    p_add.set_defaults(func=cmd_add)\n\n    args = parser.parse_args()\n    args.func(args)\n\n\nif __name__ == \"__main__\":\n    main()\n"
+          }
+        },
+        {
+          "tool_name": "Write",
+          "tool_use_id": "toolu_01P1yKJXT5WH33Tew9zgFQSC",
+          "tool_input": {
+            "file_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28/.claude/skills/agent-memory/memory.py",
+            "content": "#!/usr/bin/env python3\nimport sys\nimport os\nimport subprocess\nfrom pathlib import Path\n\n_SKILL_DIR = Path(__file__).parent\n_VENV = _SKILL_DIR / \".venv\"\n_DEPS = [\n    \"onnxruntime>=1.17.0\",\n    \"sqlite-vec>=0.1.6\",\n    \"tokenizers>=0.19.0\",\n    \"numpy>=1.24.0\",\n]\n\n\ndef _bootstrap() -> None:\n    if str(_VENV) in sys.prefix:\n        return  # already running inside the managed venv\n    venv_py = _VENV / (\"Scripts/python.exe\" if sys.platform == \"win32\" else \"bin/python\")\n    if not venv_py.exists():\n        print(\"agent-memory: first run, installing dependencies\u2026\", file=sys.stderr)\n        subprocess.check_call([sys.executable, \"-m\", \"venv\", str(_VENV)])\n        subprocess.check_call([str(venv_py), \"-m\", \"pip\", \"install\", \"--quiet\", *_DEPS])\n    os.execv(str(venv_py), [str(venv_py)] + sys.argv)\n\n\n_bootstrap()\n\nimport argparse  # noqa: E402 \u2014 must come after bootstrap\n\n\ndef cmd_init(args: argparse.Namespace) -> None:\n    raise NotImplementedError(\"init not yet implemented\")\n\n\ndef cmd_add(args: argparse.Namespace) -> None:\n    raise NotImplementedError(\"add not yet implemented\")\n\n\ndef main() -> None:\n    parser = argparse.ArgumentParser(\n        prog=\"memory.py\",\n        description=\"agent-memory: semantic long-term memory for Claude agents\",\n    )\n    parser.add_argument(\"--db\", metavar=\"PATH\", help=\"Override DB path\")\n    sub = parser.add_subparsers(dest=\"subcommand\", metavar=\"<subcommand>\")\n    sub.required = True\n\n    # init subcommand\n    p_init = sub.add_parser(\"init\", help=\"Initialise the memory database\")\n    p_init.add_argument(\"--db\", metavar=\"PATH\", help=\"Override DB path\")\n    p_init.set_defaults(func=cmd_init)\n\n    # add subcommand\n    p_add = sub.add_parser(\"add\", help=\"Add a memory entry\")\n    p_add.add_argument(\"text\", help=\"Text content to store\")\n    p_add.add_argument(\"--source\", metavar=\"TAG\", help=\"Optional origin tag or file path\")\n    p_add.add_argument(\"--meta\", metavar=\"KEY=VALUE\", action=\"append\", default=[], help=\"Arbitrary metadata (repeatable)\")\n    p_add.add_argument(\"--db\", metavar=\"PATH\", help=\"Override DB path\")\n    p_add.set_defaults(func=cmd_add)\n\n    args = parser.parse_args()\n    args.func(args)\n\n\nif __name__ == \"__main__\":\n    main()\n"
+          }
+        }
+      ],
+      "prompt_chars": 5888,
+      "prompt_lines": 136,
+      "source": "provider",
+      "attempt": 1
+    },
+    "telemetry_history": [
+      {
+        "cost_usd": 0.20044064999999997,
+        "duration_ms": 77755,
+        "duration_api_ms": 70461,
+        "num_turns": 12,
+        "input_tokens": 12,
+        "output_tokens": 4767,
+        "cache_creation_tokens": 16775,
+        "cache_read_tokens": 219978,
+        "stop_reason": "end_turn",
+        "session_id": "fad42073-30dd-42ff-a918-4d7ed68c2df3",
+        "permission_denials": [
+          {
+            "tool_name": "Write",
+            "tool_use_id": "toolu_01Bdpjr2QMewPzVTBdw6xrC9",
+            "tool_input": {
+              "file_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28/.claude/skills/agent-memory/memory.py",
+              "content": "#!/usr/bin/env python3\nimport sys\nimport os\nimport subprocess\nfrom pathlib import Path\n\n_SKILL_DIR = Path(__file__).parent\n_VENV = _SKILL_DIR / \".venv\"\n_DEPS = [\n    \"onnxruntime>=1.17.0\",\n    \"sqlite-vec>=0.1.6\",\n    \"tokenizers>=0.19.0\",\n    \"numpy>=1.24.0\",\n]\n\n\ndef _bootstrap() -> None:\n    if str(_VENV) in sys.prefix:\n        return  # already running inside the managed venv\n    venv_py = _VENV / (\"Scripts/python.exe\" if sys.platform == \"win32\" else \"bin/python\")\n    if not venv_py.exists():\n        print(\"agent-memory: first run, installing dependencies\u2026\", file=sys.stderr)\n        subprocess.check_call([sys.executable, \"-m\", \"venv\", str(_VENV)])\n        subprocess.check_call([str(venv_py), \"-m\", \"pip\", \"install\", \"--quiet\", *_DEPS])\n    os.execv(str(venv_py), [str(venv_py)] + sys.argv)\n\n\n_bootstrap()\n\nimport argparse  # noqa: E402 \u2014 must come after bootstrap\n\n\ndef cmd_init(args: argparse.Namespace) -> None:\n    raise NotImplementedError(\"init not yet implemented\")\n\n\ndef cmd_add(args: argparse.Namespace) -> None:\n    raise NotImplementedError(\"add not yet implemented\")\n\n\ndef main() -> None:\n    parser = argparse.ArgumentParser(\n        prog=\"memory.py\",\n        description=\"agent-memory: semantic long-term memory for Claude agents\",\n    )\n    parser.add_argument(\"--db\", metavar=\"PATH\", help=\"Override DB path\")\n    sub = parser.add_subparsers(dest=\"subcommand\", metavar=\"<subcommand>\")\n    sub.required = True\n\n    # init subcommand\n    p_init = sub.add_parser(\"init\", help=\"Initialise the memory database\")\n    p_init.add_argument(\"--db\", metavar=\"PATH\", help=\"Override DB path\")\n    p_init.set_defaults(func=cmd_init)\n\n    # add subcommand\n    p_add = sub.add_parser(\"add\", help=\"Add a memory entry\")\n    p_add.add_argument(\"text\", help=\"Text content to store\")\n    p_add.add_argument(\"--source\", metavar=\"TAG\", help=\"Optional origin tag or file path\")\n    p_add.add_argument(\"--meta\", metavar=\"KEY=VALUE\", action=\"append\", default=[], help=\"Arbitrary metadata (repeatable)\")\n    p_add.add_argument(\"--db\", metavar=\"PATH\", help=\"Override DB path\")\n    p_add.set_defaults(func=cmd_add)\n\n    args = parser.parse_args()\n    args.func(args)\n\n\nif __name__ == \"__main__\":\n    main()\n"
+            }
+          },
+          {
+            "tool_name": "Write",
+            "tool_use_id": "toolu_01P1yKJXT5WH33Tew9zgFQSC",
+            "tool_input": {
+              "file_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-266c0a28/.claude/skills/agent-memory/memory.py",
+              "content": "#!/usr/bin/env python3\nimport sys\nimport os\nimport subprocess\nfrom pathlib import Path\n\n_SKILL_DIR = Path(__file__).parent\n_VENV = _SKILL_DIR / \".venv\"\n_DEPS = [\n    \"onnxruntime>=1.17.0\",\n    \"sqlite-vec>=0.1.6\",\n    \"tokenizers>=0.19.0\",\n    \"numpy>=1.24.0\",\n]\n\n\ndef _bootstrap() -> None:\n    if str(_VENV) in sys.prefix:\n        return  # already running inside the managed venv\n    venv_py = _VENV / (\"Scripts/python.exe\" if sys.platform == \"win32\" else \"bin/python\")\n    if not venv_py.exists():\n        print(\"agent-memory: first run, installing dependencies\u2026\", file=sys.stderr)\n        subprocess.check_call([sys.executable, \"-m\", \"venv\", str(_VENV)])\n        subprocess.check_call([str(venv_py), \"-m\", \"pip\", \"install\", \"--quiet\", *_DEPS])\n    os.execv(str(venv_py), [str(venv_py)] + sys.argv)\n\n\n_bootstrap()\n\nimport argparse  # noqa: E402 \u2014 must come after bootstrap\n\n\ndef cmd_init(args: argparse.Namespace) -> None:\n    raise NotImplementedError(\"init not yet implemented\")\n\n\ndef cmd_add(args: argparse.Namespace) -> None:\n    raise NotImplementedError(\"add not yet implemented\")\n\n\ndef main() -> None:\n    parser = argparse.ArgumentParser(\n        prog=\"memory.py\",\n        description=\"agent-memory: semantic long-term memory for Claude agents\",\n    )\n    parser.add_argument(\"--db\", metavar=\"PATH\", help=\"Override DB path\")\n    sub = parser.add_subparsers(dest=\"subcommand\", metavar=\"<subcommand>\")\n    sub.required = True\n\n    # init subcommand\n    p_init = sub.add_parser(\"init\", help=\"Initialise the memory database\")\n    p_init.add_argument(\"--db\", metavar=\"PATH\", help=\"Override DB path\")\n    p_init.set_defaults(func=cmd_init)\n\n    # add subcommand\n    p_add = sub.add_parser(\"add\", help=\"Add a memory entry\")\n    p_add.add_argument(\"text\", help=\"Text content to store\")\n    p_add.add_argument(\"--source\", metavar=\"TAG\", help=\"Optional origin tag or file path\")\n    p_add.add_argument(\"--meta\", metavar=\"KEY=VALUE\", action=\"append\", default=[], help=\"Arbitrary metadata (repeatable)\")\n    p_add.add_argument(\"--db\", metavar=\"PATH\", help=\"Override DB path\")\n    p_add.set_defaults(func=cmd_add)\n\n    args = parser.parse_args()\n    args.func(args)\n\n\nif __name__ == \"__main__\":\n    main()\n"
+            }
+          }
+        ],
+        "prompt_chars": 5888,
+        "prompt_lines": 136,
+        "source": "provider",
+        "attempt": 1
+      }
+    ]
+  },
+  "labels": []
+}

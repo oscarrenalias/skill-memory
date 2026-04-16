@@ -1,0 +1,219 @@
+{
+  "bead_id": "B-30d86454",
+  "title": "Fix stale DB path in SKILL.md",
+  "agent_type": "developer",
+  "description": "Line 20 of SKILL.md still says the default DB lives at ~/.local/share/agent-memory/memories.db. This is wrong \u2014 the default was changed to be relative to memory.py (i.e. the same directory as the script). Update that sentence and the DB Path Conventions table to reflect the actual current default.",
+  "status": "done",
+  "bead_type": "task",
+  "parent_id": null,
+  "dependencies": [],
+  "acceptance_criteria": [],
+  "linked_docs": [],
+  "feature_root_id": "B-30d86454",
+  "execution_branch_name": "feature/b-30d86454",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-30d86454",
+  "expected_files": [
+    "SKILL.md"
+  ],
+  "expected_globs": [],
+  "touched_files": [
+    "SKILL.md"
+  ],
+  "changed_files": [
+    "SKILL.md"
+  ],
+  "updated_docs": [
+    "SKILL.md"
+  ],
+  "handoff_summary": {
+    "completed": "Fixed two stale DB path references in SKILL.md: prose on line 20 and the DB Path Conventions table entry for personal/cross-project context.",
+    "remaining": "",
+    "risks": "None \u2014 documentation-only change with no code impact.",
+    "verdict": "approved",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [
+      "SKILL.md"
+    ],
+    "updated_docs": [
+      "SKILL.md"
+    ],
+    "next_action": "Ready for review agent.",
+    "next_agent": "review",
+    "block_reason": "",
+    "expected_files": [
+      "SKILL.md"
+    ],
+    "expected_globs": [],
+    "touched_files": [
+      "SKILL.md"
+    ],
+    "conflict_risks": "None \u2014 only SKILL.md was changed.",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "None \u2014 only SKILL.md was changed.",
+  "branch_name": "feature/b-30d86454",
+  "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-30d86454",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-08T10:56:13.316473+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T10:58:45.154680+00:00",
+      "event": "skills_loaded",
+      "agent_type": "developer",
+      "summary": "Loaded 7 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/developer-implementation",
+          "capability/code-edit",
+          "task/corrective-implementation",
+          "task/refactor-safe",
+          "task/migration",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-08T10:58:45.154696+00:00",
+      "event": "started",
+      "agent_type": "developer",
+      "summary": "Worker started",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T10:58:46.287681+00:00",
+      "event": "guardrails_applied",
+      "agent_type": "developer",
+      "summary": "Applied guardrails from .takt/agent-runs/B-30d86454/repo/templates/agents/developer.md",
+      "details": {
+        "template_path": ".takt/agent-runs/B-30d86454/repo/templates/agents/developer.md"
+      }
+    },
+    {
+      "timestamp": "2026-04-08T10:59:25.258840+00:00",
+      "event": "completed",
+      "agent_type": "developer",
+      "summary": "Updated SKILL.md to reflect the actual default DB path. Line 20 and the DB Path Conventions table both previously referenced the stale `~/.local/share/agent-memory/memories.db` path; both now correctly state that the default is `memories.db` in the same directory as `memory.py` (the repo root), matching `_DEFAULT_DB = _SKILL_DIR / \"memories.db\"` in memory.py:45.",
+      "details": {}
+    }
+  ],
+  "metadata": {
+    "execution_root": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-30d86454",
+    "workspace_repo_path": "repo",
+    "loaded_skills": [
+      "core/base-orchestrator",
+      "role/developer-implementation",
+      "capability/code-edit",
+      "task/corrective-implementation",
+      "task/refactor-safe",
+      "task/migration",
+      "memory"
+    ],
+    "skill_bundle_hash": "3d67820a7fb8135bc362b2b95d14300da249795bcc32c95f5dd45f36e15acfa1",
+    "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-30d86454/home",
+    "runner_backend": "claude",
+    "guardrails": {
+      "agent_type": "developer",
+      "template_path": ".takt/agent-runs/B-30d86454/repo/templates/agents/developer.md",
+      "template_text": "# Developer Guardrails\n\nPrimary responsibility: Implement only the assigned bead inside the existing architecture and file scope.\n\nAllowed actions:\n- Modify code, configuration, or local docs required to complete the assigned bead.\n- Create sub-beads for discovered follow-up work that should be handled separately.\n- Verify your `Python` changes compile and import correctly with a quick syntax check: `python -m py_compile`.\n\nDisallowed actions:\n- Run any test suite \u2014 not even a targeted `pytest` run or any subset. Test execution is exclusively the tester agent's responsibility. Running tests wastes the agent budget and delays the pipeline.\n- Redesign unrelated architecture or broaden scope beyond the assigned bead.\n- Perform final review signoff in place of a review agent.\n- Silently absorb unrelated test, documentation, or planning work that should be handed off.\n\nExpected outputs:\n- Completed or blocked JSON with concise implementation summary.\n- Accurate touched files, changed files, risks, and follow-up handoff fields.",
+      "captured_at": "2026-04-08T10:58:46.287670+00:00"
+    },
+    "worker_prompt_context": {
+      "bead_id": "B-30d86454",
+      "feature_root_id": "B-30d86454",
+      "title": "Fix stale DB path in SKILL.md",
+      "agent_type": "developer",
+      "description": "Line 20 of SKILL.md still says the default DB lives at ~/.local/share/agent-memory/memories.db. This is wrong \u2014 the default was changed to be relative to memory.py (i.e. the same directory as the script). Update that sentence and the DB Path Conventions table to reflect the actual current default.",
+      "status": "in_progress",
+      "acceptance_criteria": [],
+      "dependencies": [],
+      "linked_docs": [],
+      "execution_branch_name": "feature/b-30d86454",
+      "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-30d86454",
+      "expected_files": [],
+      "expected_globs": [],
+      "touched_files": [],
+      "conflict_risks": "",
+      "handoff_summary": {
+        "completed": "",
+        "remaining": "",
+        "risks": "",
+        "verdict": "",
+        "findings_count": 0,
+        "requires_followup": false,
+        "changed_files": [],
+        "updated_docs": [],
+        "next_action": "",
+        "next_agent": "",
+        "block_reason": "",
+        "expected_files": [],
+        "expected_globs": [],
+        "touched_files": [],
+        "conflict_risks": "",
+        "design_decisions": "",
+        "test_coverage_notes": "",
+        "known_limitations": ""
+      }
+    },
+    "last_agent_result": {
+      "outcome": "completed",
+      "summary": "Updated SKILL.md to reflect the actual default DB path. Line 20 and the DB Path Conventions table both previously referenced the stale `~/.local/share/agent-memory/memories.db` path; both now correctly state that the default is `memories.db` in the same directory as `memory.py` (the repo root), matching `_DEFAULT_DB = _SKILL_DIR / \"memories.db\"` in memory.py:45.",
+      "verdict": "approved",
+      "findings_count": 0,
+      "requires_followup": false,
+      "next_agent": "review",
+      "block_reason": ""
+    },
+    "telemetry": {
+      "cost_usd": 0.1067928,
+      "duration_ms": 36240,
+      "duration_api_ms": 30696,
+      "num_turns": 8,
+      "input_tokens": 9,
+      "output_tokens": 1763,
+      "cache_creation_tokens": 10522,
+      "cache_read_tokens": 136211,
+      "stop_reason": "end_turn",
+      "session_id": "a6bbf8a3-2a87-428e-a7bb-83cc7011236f",
+      "permission_denials": [],
+      "prompt_chars": 5335,
+      "prompt_lines": 123,
+      "source": "provider",
+      "attempt": 1
+    },
+    "telemetry_history": [
+      {
+        "cost_usd": 0.1067928,
+        "duration_ms": 36240,
+        "duration_api_ms": 30696,
+        "num_turns": 8,
+        "input_tokens": 9,
+        "output_tokens": 1763,
+        "cache_creation_tokens": 10522,
+        "cache_read_tokens": 136211,
+        "stop_reason": "end_turn",
+        "session_id": "a6bbf8a3-2a87-428e-a7bb-83cc7011236f",
+        "permission_denials": [],
+        "prompt_chars": 5335,
+        "prompt_lines": 123,
+        "source": "provider",
+        "attempt": 1
+      }
+    ],
+    "last_commit": "4b9342b4dfe2635d131293be97a723d75d414f0d"
+  },
+  "labels": [],
+  "recovery_for": null,
+  "priority": null
+}

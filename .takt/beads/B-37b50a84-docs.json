@@ -1,0 +1,246 @@
+{
+  "bead_id": "B-37b50a84-docs",
+  "title": "Document Add --namespace flag to partition memories",
+  "agent_type": "documentation",
+  "description": "Update docs for B-37b50a84",
+  "status": "done",
+  "bead_type": "task",
+  "parent_id": "B-37b50a84",
+  "dependencies": [
+    "B-37b50a84"
+  ],
+  "acceptance_criteria": [],
+  "linked_docs": [],
+  "feature_root_id": "B-37b50a84",
+  "execution_branch_name": "feature/b-37b50a84",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-37b50a84",
+  "expected_files": [
+    "SKILL.md",
+    "memory.py",
+    "tests/test_namespace.py"
+  ],
+  "expected_globs": [],
+  "touched_files": [
+    "docs/memory/conventions.md",
+    "docs/memory/memory-cli.md"
+  ],
+  "changed_files": [
+    "docs/memory/conventions.md",
+    "docs/memory/memory-cli.md"
+  ],
+  "updated_docs": [
+    "docs/memory/memory-cli.md",
+    "docs/memory/conventions.md"
+  ],
+  "handoff_summary": {
+    "completed": "Documented --namespace as a top-level global flag with placement rule and default-value semantics. Updated all subcommand signatures in memory-cli.md to include [--namespace NAME]. Replaced the stale \"Stub subcommands\" section with full reference docs for search, list, and delete. Updated DB schema block to include the namespace column and its migration note. Updated stats example output to show Namespaces: breakdown. Added TestNamespaceIsolation, TestNamespaceSchema, and TestStatsNamespace to the test class table in conventions.md. SKILL.md was already accurate and required no changes.",
+    "remaining": "None.",
+    "risks": "None \u2014 all updates reflect validated, merged implementation. No behaviour was invented.",
+    "verdict": "approved",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [
+      "docs/memory/conventions.md",
+      "docs/memory/memory-cli.md"
+    ],
+    "updated_docs": [
+      "docs/memory/memory-cli.md",
+      "docs/memory/conventions.md"
+    ],
+    "next_action": "Proceed to review bead B-37b50a84-review.",
+    "next_agent": "review",
+    "block_reason": "",
+    "expected_files": [
+      "SKILL.md",
+      "memory.py",
+      "tests/test_namespace.py"
+    ],
+    "expected_globs": [],
+    "touched_files": [
+      "docs/memory/conventions.md",
+      "docs/memory/memory-cli.md"
+    ],
+    "conflict_risks": "None \u2014 docs-only changes with no overlap with memory.py or test files.",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "None \u2014 docs-only changes with no overlap with memory.py or test files.",
+  "branch_name": "feature/b-37b50a84",
+  "worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-37b50a84",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-08T10:22:47.137059+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T10:58:43.979887+00:00",
+      "event": "deferred",
+      "agent_type": "documentation",
+      "summary": "Deferred due to file-scope conflict with active bead B-37b50a84-test",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T12:40:38.641404+00:00",
+      "event": "skills_loaded",
+      "agent_type": "documentation",
+      "summary": "Loaded 6 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/docs-agent",
+          "capability/docs-edit",
+          "task/release-notes",
+          "task/spec-sync",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-08T12:40:38.641432+00:00",
+      "event": "started",
+      "agent_type": "documentation",
+      "summary": "Worker started",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-08T12:40:38.895340+00:00",
+      "event": "guardrails_applied",
+      "agent_type": "documentation",
+      "summary": "Applied guardrails from .takt/agent-runs/B-37b50a84-docs/repo/templates/agents/documentation.md",
+      "details": {
+        "template_path": ".takt/agent-runs/B-37b50a84-docs/repo/templates/agents/documentation.md"
+      }
+    },
+    {
+      "timestamp": "2026-04-08T12:42:37.556486+00:00",
+      "event": "completed",
+      "agent_type": "documentation",
+      "summary": "Updated docs/memory/memory-cli.md and docs/memory/conventions.md to document the --namespace flag, per-namespace stats output, updated DB schema, migration behaviour, and three new test classes.",
+      "details": {}
+    }
+  ],
+  "metadata": {
+    "execution_root": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-37b50a84-docs",
+    "workspace_repo_path": "repo",
+    "loaded_skills": [
+      "core/base-orchestrator",
+      "role/docs-agent",
+      "capability/docs-edit",
+      "task/release-notes",
+      "task/spec-sync",
+      "memory"
+    ],
+    "skill_bundle_hash": "2af4f5a7f6f5668180ed1a8523e0c0606f4a43d4edf9270d7f3b2ccfcb69cdec",
+    "isolated_home": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/agent-runs/B-37b50a84-docs/home",
+    "runner_backend": "claude",
+    "guardrails": {
+      "agent_type": "documentation",
+      "template_path": ".takt/agent-runs/B-37b50a84-docs/repo/templates/agents/documentation.md",
+      "template_text": "# Documentation Guardrails\n\nPrimary responsibility: Update documentation and examples that explain the assigned behavior without changing runtime feature behavior.\n\nAllowed actions:\n- Edit docs, examples, and explanatory text tied to the assigned bead.\n- Focus only on files listed in the bead's touched_files and changed_files fields. Do not read or modify unrelated documentation.\n- Align documentation with existing code and validated behavior.\n- Identify when implementation or tests must land first and block with a handoff.\n\nDisallowed actions:\n- Change runtime behavior, production code paths, or feature logic.\n- Invent undocumented behavior that is not present in the codebase.\n- Approve code quality or test completeness as a substitute for review.\n- Do not run the test suite. Testing is the tester agent's responsibility.\n\nEfficiency constraints:\n- Do not read the full codebase for context. Focus on the changed files and their immediate surroundings.\n- Keep documentation updates concise and proportional to the change.\n\nExpected outputs:\n- Return JSON with `outcome` set to `completed` (documentation beads always complete; use `verdict` for pass/fail) and `summary` as a one-line description of what was documented.\n- Return JSON with structured verdict fields for every run: `verdict`, `findings_count`, and `requires_followup`.\n- Use `verdict=approved`, `findings_count=0`, and `requires_followup=false` when documentation is complete with no gaps.\n- Use `verdict=needs_changes`, set `findings_count` to the number of unresolved documentation gaps, set `requires_followup=true`, and include `block_reason` when implementation must land first or documentation cannot be completed.\n- Keep `completed`, `remaining`, and `risks` as concise narrative context only; they do not override the structured verdict fields.\n- Accurate updated docs and clear next-agent recommendations when code changes are required first.",
+      "captured_at": "2026-04-08T12:40:38.895325+00:00"
+    },
+    "worker_prompt_context": {
+      "bead_id": "B-37b50a84-docs",
+      "feature_root_id": "B-37b50a84",
+      "title": "Document Add --namespace flag to partition memories",
+      "agent_type": "documentation",
+      "description": "Update docs for B-37b50a84",
+      "status": "in_progress",
+      "acceptance_criteria": [],
+      "dependencies": [
+        "B-37b50a84"
+      ],
+      "linked_docs": [],
+      "execution_branch_name": "feature/b-37b50a84",
+      "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-agent-memory/.takt/worktrees/B-37b50a84",
+      "expected_files": [
+        "SKILL.md",
+        "memory.py",
+        "tests/test_namespace.py"
+      ],
+      "expected_globs": [],
+      "touched_files": [
+        "SKILL.md",
+        "memory.py",
+        "tests/test_namespace.py"
+      ],
+      "conflict_risks": "None \u2014 namespace column is additive (DEFAULT 'default') and all new code uses getattr fallback, so no breaking changes to adjacent beads.",
+      "handoff_summary": {
+        "completed": "",
+        "remaining": "",
+        "risks": "",
+        "verdict": "",
+        "findings_count": 0,
+        "requires_followup": false,
+        "changed_files": [],
+        "updated_docs": [],
+        "next_action": "",
+        "next_agent": "",
+        "block_reason": "",
+        "expected_files": [],
+        "expected_globs": [],
+        "touched_files": [],
+        "conflict_risks": "",
+        "design_decisions": "",
+        "test_coverage_notes": "",
+        "known_limitations": ""
+      }
+    },
+    "last_agent_result": {
+      "outcome": "completed",
+      "summary": "Updated docs/memory/memory-cli.md and docs/memory/conventions.md to document the --namespace flag, per-namespace stats output, updated DB schema, migration behaviour, and three new test classes.",
+      "verdict": "approved",
+      "findings_count": 0,
+      "requires_followup": false,
+      "next_agent": "review",
+      "block_reason": ""
+    },
+    "telemetry": {
+      "cost_usd": 0.3079905,
+      "duration_ms": 117501,
+      "duration_api_ms": 113358,
+      "num_turns": 14,
+      "input_tokens": 12,
+      "output_tokens": 5489,
+      "cache_creation_tokens": 32810,
+      "cache_read_tokens": 341940,
+      "stop_reason": "end_turn",
+      "session_id": "30bc64e4-5cee-460a-9e16-35a138e7687c",
+      "permission_denials": [],
+      "prompt_chars": 6319,
+      "prompt_lines": 150,
+      "source": "provider",
+      "attempt": 1
+    },
+    "telemetry_history": [
+      {
+        "cost_usd": 0.3079905,
+        "duration_ms": 117501,
+        "duration_api_ms": 113358,
+        "num_turns": 14,
+        "input_tokens": 12,
+        "output_tokens": 5489,
+        "cache_creation_tokens": 32810,
+        "cache_read_tokens": 341940,
+        "stop_reason": "end_turn",
+        "session_id": "30bc64e4-5cee-460a-9e16-35a138e7687c",
+        "permission_denials": [],
+        "prompt_chars": 6319,
+        "prompt_lines": 150,
+        "source": "provider",
+        "attempt": 1
+      }
+    ],
+    "last_commit": "ed62bc6f7422847ff1a85b7498471c326c9690af"
+  },
+  "labels": [],
+  "recovery_for": null,
+  "priority": null
+}

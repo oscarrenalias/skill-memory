@@ -1,0 +1,67 @@
+{
+  "bead_id": "B-64e7c3af",
+  "title": "Update .gitignore for new .apm/skills/skill-memory/ paths",
+  "agent_type": "developer",
+  "description": "Add three entries to .gitignore for artefacts generated at the new skill location: .apm/skills/skill-memory/.venv/, .apm/skills/skill-memory/memories.db, and .apm/skills/skill-memory/__pycache__/. Review whether root-level equivalents (.venv/, memories.db, __pycache__/) should be retained or removed.",
+  "status": "ready",
+  "bead_type": "task",
+  "parent_id": "B-5c40fb01",
+  "dependencies": [
+    "B-d4849eef"
+  ],
+  "acceptance_criteria": [
+    ".gitignore contains .apm/skills/skill-memory/.venv/",
+    ".gitignore contains .apm/skills/skill-memory/memories.db",
+    ".gitignore contains .apm/skills/skill-memory/__pycache__/"
+  ],
+  "linked_docs": [],
+  "feature_root_id": "B-5c40fb01",
+  "execution_branch_name": "feature/b-5c40fb01",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-memory/.takt/worktrees/B-5c40fb01",
+  "expected_files": [
+    ".gitignore"
+  ],
+  "expected_globs": [],
+  "touched_files": [],
+  "changed_files": [],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-16T06:26:49.184065+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    }
+  ],
+  "metadata": {},
+  "labels": [],
+  "recovery_for": null,
+  "priority": null
+}

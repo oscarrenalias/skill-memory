@@ -1,0 +1,74 @@
+{
+  "bead_id": "B-d4849eef",
+  "title": "git mv: relocate memory.py, SKILL.md, assets/, README.md to .apm/skills/skill-memory/",
+  "agent_type": "developer",
+  "description": "Create .apm/skills/skill-memory/ directory and use git mv to move memory.py, SKILL.md, assets/ (directory), and README.md from the repo root to the new location. No changes to file contents \u2014 memory.py uses _SKILL_DIR = Path(__file__).parent so all relative paths resolve correctly at the new location.",
+  "status": "ready",
+  "bead_type": "task",
+  "parent_id": "B-5c40fb01",
+  "dependencies": [],
+  "acceptance_criteria": [
+    ".apm/skills/skill-memory/memory.py exists",
+    ".apm/skills/skill-memory/SKILL.md exists",
+    ".apm/skills/skill-memory/assets/ directory exists",
+    ".apm/skills/skill-memory/README.md exists",
+    "memory.py does not exist at repo root",
+    "assets/ does not exist at repo root",
+    "SKILL.md does not exist at repo root",
+    "README.md does not exist at repo root"
+  ],
+  "linked_docs": [],
+  "feature_root_id": "B-5c40fb01",
+  "execution_branch_name": "feature/b-5c40fb01",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-memory/.takt/worktrees/B-5c40fb01",
+  "expected_files": [
+    ".apm/skills/skill-memory/memory.py",
+    ".apm/skills/skill-memory/SKILL.md",
+    ".apm/skills/skill-memory/README.md"
+  ],
+  "expected_globs": [
+    ".apm/skills/skill-memory/assets/**"
+  ],
+  "touched_files": [],
+  "changed_files": [],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-16T06:26:46.963630+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    }
+  ],
+  "metadata": {},
+  "labels": [],
+  "recovery_for": null,
+  "priority": null
+}

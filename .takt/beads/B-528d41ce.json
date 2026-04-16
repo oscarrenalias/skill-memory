@@ -1,0 +1,61 @@
+{
+  "bead_id": "B-528d41ce",
+  "title": "Restructure repo layout \u2014 isolate skill under .apm/skills/skill-memory",
+  "agent_type": "planner",
+  "description": "Move skill artefacts (memory.py, SKILL.md, apm.yml, assets/, README.md) from the repo root to .apm/skills/skill-memory/ so APM installs only the skill, not the full repo scaffolding. Update test path constants, CI workflow, and .gitignore to reflect the new layout, and replace the root apm.yml with a repo-level manifest that uses compilation.exclude.",
+  "status": "done",
+  "bead_type": "epic",
+  "parent_id": null,
+  "dependencies": [],
+  "acceptance_criteria": [],
+  "linked_docs": [
+    "specs/drafts/restructure-repo-layout-isolate-skill-under-apmskillsskill-memory.md"
+  ],
+  "feature_root_id": null,
+  "execution_branch_name": "",
+  "execution_worktree_path": "",
+  "expected_files": [],
+  "expected_globs": [],
+  "touched_files": [],
+  "changed_files": [],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-16T06:26:46.350451+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    }
+  ],
+  "metadata": {},
+  "labels": [],
+  "recovery_for": null,
+  "priority": null
+}
