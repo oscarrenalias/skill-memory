@@ -1,6 +1,7 @@
 {
-  "takt_version": "0.1.12",
+  "takt_version": "0.1.35",
   "installed_at": "2026-04-07T18:00:03.363133+00:00",
+  "upgraded_at": "2026-04-16T06:03:25.009324+00:00",
   "assets": {
     "templates/agents/merge-conflict.md": {
       "sha256": "37b9d67c3e4d10fe2fac0f86cb7ab170c5dec2a0f018264052cc4aa891a99d0f",
@@ -33,37 +34,7 @@
       "user_owned": true
     },
     ".agents/skills/memory/SKILL.md": {
-      "sha256": "ed39d09f15928c15947fba5322ffc29358a8d8cee775e1d802556157d21b0b47",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".agents/skills/task/corrective-bead-creation/SKILL.md": {
-      "sha256": "f95aada72641639da43381b2ce1fa0329bca937dd1fe90d3104fcf544f5688ed",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".agents/skills/task/defect-bead-creation/SKILL.md": {
-      "sha256": "f214506a0b470b7b170aecf8dc39b2614baa29bc4267e96b9bd30e21bfb5a4e5",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".agents/skills/task/dependency-graphing/SKILL.md": {
-      "sha256": "a3dd8841b7c463d231c3fee9122cbaf66a3bfc6b5a3568f44b09b096fa84f031",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".agents/skills/task/spec-sync/SKILL.md": {
-      "sha256": "1d856e5706349dc97a55cfdf91c9af58d62920aed1c00200d5f8e95c42ba160a",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".agents/skills/task/risk-assessment/SKILL.md": {
-      "sha256": "db769eb7c6591047b95183f5c5a8272a93128965a7c6984476e18006d167871c",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".agents/skills/task/release-notes/SKILL.md": {
-      "sha256": "4cde5f37665004e147c3910de3428e6ddc57339b98910ac3d3a1af54114fca51",
+      "sha256": "17e54f7d91bbdec6680a7b6d3fd54e6fe911da36bdc80400f4878c670e867252",
       "source": "bundled",
       "user_owned": false
     },
@@ -73,57 +44,7 @@
       "user_owned": false
     },
     ".agents/skills/task/spec-management/SKILL.md": {
-      "sha256": "2bf69725da6a60b68278b0b36cb27f85b14836a9215d166cf6d9a10b86319ebd",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".agents/skills/task/corrective-implementation/SKILL.md": {
-      "sha256": "dafd5253b116689ba9cbeb2bc45602536c9198c56953b35f5a2f795d46945750",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".agents/skills/task/spec-intake/SKILL.md": {
-      "sha256": "0883e20971f8cb131b27cbb2077ec847c7d7e94f15b3a087a2cee13a3907ba07",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".agents/skills/task/regression-triage/SKILL.md": {
-      "sha256": "0de95ac3c44f7fe60296f0abb798c858156792255aefbafc1a25963d708382c4",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".agents/skills/task/refactor-safe/SKILL.md": {
-      "sha256": "3e84da5bd61d63a1d537e15500c152167a02ad48bfbc40bf7d36b208c7b08873",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".agents/skills/task/migration/SKILL.md": {
-      "sha256": "1423cdfb4c85b3abfbdadffcc7ccab2aaa3fe6c7f7169702287c5f26661955b9",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".agents/skills/task/migration/agents/openai.yaml": {
-      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".agents/skills/task/refactor-safe/agents/openai.yaml": {
-      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".agents/skills/task/regression-triage/agents/openai.yaml": {
-      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".agents/skills/task/spec-intake/agents/openai.yaml": {
-      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".agents/skills/task/corrective-implementation/agents/openai.yaml": {
-      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
+      "sha256": "61321ffb72a3c1c6c9c5fae0fd915990257777d96ae97c431d5b0a39490812b7",
       "source": "bundled",
       "user_owned": false
     },
@@ -132,138 +53,203 @@
       "source": "bundled",
       "user_owned": false
     },
-    ".agents/skills/task/release-notes/agents/openai.yaml": {
-      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".agents/skills/task/risk-assessment/agents/openai.yaml": {
-      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".agents/skills/task/spec-sync/agents/openai.yaml": {
-      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".agents/skills/task/dependency-graphing/agents/openai.yaml": {
-      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".agents/skills/task/defect-bead-creation/agents/openai.yaml": {
-      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".agents/skills/task/corrective-bead-creation/agents/openai.yaml": {
-      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".agents/skills/capability/test-execution/SKILL.md": {
-      "sha256": "a01eb8b1c5f5878ff989ebbcd1ce6c3f4388c8ab113f28ff4331bc59747aef1a",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".agents/skills/capability/docs-edit/SKILL.md": {
-      "sha256": "88fa2c21599d84e96caca472abb8bd8f601d6bda0f4461df67e53d1706ac3ea0",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".agents/skills/capability/code-edit/SKILL.md": {
-      "sha256": "759c1587d8781faf358c00eb114bb8c0a5845a1c3e195383423f49bd44f1eea8",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".agents/skills/capability/code-review/SKILL.md": {
-      "sha256": "5a2c6a356907e27ac3a609557fa521ccb1500858b5c92223489425c8bc11bb68",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".agents/skills/core/base-orchestrator/SKILL.md": {
-      "sha256": "756b759238a515494cb9d077795282fc01bbe2e2aca34094e5548fdbb36b48a7",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".agents/skills/role/scheduler-policy/SKILL.md": {
-      "sha256": "a4991c96b009074a48e4c563119e53f87112f2d2176322dab44e083ea57e7ec0",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".agents/skills/role/reviewer-signoff/SKILL.md": {
-      "sha256": "f0e596009898ced54031691e9b188ad9eb95e9bf66ed06c62aee1bf0cceee906",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".agents/skills/role/docs-agent/SKILL.md": {
-      "sha256": "66a9e27527fda5d943ced654da85a406ef0095eb4105cc3b2874df7204a6a5fc",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".agents/skills/role/tester-validation/SKILL.md": {
-      "sha256": "74a613d1ca49eb8be8ba8edc722bb5cb319c56d7f93cc59ec330f98a63a9f190",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".agents/skills/role/planner-decomposition/SKILL.md": {
-      "sha256": "d16d9a22fdc6879e3993c784c203ba4c437ec3498955dd866646747e83af10e8",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".agents/skills/role/developer-implementation/SKILL.md": {
-      "sha256": "f9f0d9585499f3a705c37baae7ad347544079ab6dd98408308d9c255c857040c",
-      "source": "bundled",
-      "user_owned": false
-    },
     ".claude/skills/takt/SKILL.md": {
-      "sha256": "43fa713dedc956ce12c78abe71e40a3dcb3e3ffb714651e00116b79f0dee56ef",
+      "sha256": "5b512cc0e60e7bf9f321e927b904e630fcb9ac4c69deabcc3bab79b83dd11cb6",
       "source": "bundled",
       "user_owned": false
     },
     ".claude/skills/memory/SKILL.md": {
-      "sha256": "ed39d09f15928c15947fba5322ffc29358a8d8cee775e1d802556157d21b0b47",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".claude/skills/skill-spec-management/apm.yml": {
-      "sha256": "a975c0914d2e3eb0e3ef886d2e19b27db0fa5d7cde772743d19aba7ce7a1b72e",
+      "sha256": "17e54f7d91bbdec6680a7b6d3fd54e6fe911da36bdc80400f4878c670e867252",
       "source": "bundled",
       "user_owned": false
     },
     ".claude/skills/skill-spec-management/spec.py": {
-      "sha256": "28710015c49751a1df9d3813f7b690677c2f294a76b72f0b6238ceb2504a633f",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".claude/skills/skill-spec-management/README.md": {
-      "sha256": "8b7a35fc60e181d9c63d679c818d78d963feed27e740d8d4f7981552dad7b407",
+      "sha256": "0b5f2fc2cfc0a91fc80ff51e5b15d8ff96a2d60a9e0c4a5a1a6ef2a353bd4edf",
       "source": "bundled",
       "user_owned": false
     },
     ".claude/skills/skill-spec-management/SKILL.md": {
-      "sha256": "294404ddab06cdf5cc0b535560332d868178049371a8515f325adbb637a5c3d2",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".claude/skills/skill-spec-management/CLAUDE.md": {
-      "sha256": "10f9c9e62330a77e0edab781699dd8164cd35846aa1f2b8849792a8d810e473f",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".claude/skills/skill-spec-management/tests/test_spec.py": {
-      "sha256": "b6d549d5da967da06b0375f26d956c0e61adbece908c3ac2f4da1e7a6f3bc763",
-      "source": "bundled",
-      "user_owned": false
-    },
-    ".claude/skills/skill-spec-management/tests/__init__.py": {
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256": "5590168f0ce5b3ca7839ef9cb414f183ee37f91622c6adedc9c8afa019c1a96e",
       "source": "bundled",
       "user_owned": false
     },
     ".takt/config.yaml": {
       "sha256": "bcd3bc6ac1932eaf272e02c6231523b99c75c53bfae0d90101e92bd793eb19f7",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/agents/investigator.md": {
+      "sha256": "2e0feeb4d297552b6df6ec60d19f1861210f154669a945b6b87c6b89558563d3",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/capability/code-edit/SKILL.md": {
+      "sha256": "759c1587d8781faf358c00eb114bb8c0a5845a1c3e195383423f49bd44f1eea8",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/capability/code-review/SKILL.md": {
+      "sha256": "5a2c6a356907e27ac3a609557fa521ccb1500858b5c92223489425c8bc11bb68",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/capability/docs-edit/SKILL.md": {
+      "sha256": "88fa2c21599d84e96caca472abb8bd8f601d6bda0f4461df67e53d1706ac3ea0",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/capability/test-execution/SKILL.md": {
+      "sha256": "a01eb8b1c5f5878ff989ebbcd1ce6c3f4388c8ab113f28ff4331bc59747aef1a",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/core/base-orchestrator/SKILL.md": {
+      "sha256": "756b759238a515494cb9d077795282fc01bbe2e2aca34094e5548fdbb36b48a7",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/role/developer-implementation/SKILL.md": {
+      "sha256": "f9f0d9585499f3a705c37baae7ad347544079ab6dd98408308d9c255c857040c",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/role/docs-agent/SKILL.md": {
+      "sha256": "66a9e27527fda5d943ced654da85a406ef0095eb4105cc3b2874df7204a6a5fc",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/role/investigator/SKILL.md": {
+      "sha256": "0cfe37a5d39b7a86a4b557fc2558dbddbe56b37d7b63ce391583e9c8125d1d0c",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/role/planner-decomposition/SKILL.md": {
+      "sha256": "d16d9a22fdc6879e3993c784c203ba4c437ec3498955dd866646747e83af10e8",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/role/reviewer-signoff/SKILL.md": {
+      "sha256": "f0e596009898ced54031691e9b188ad9eb95e9bf66ed06c62aee1bf0cceee906",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/role/scheduler-policy/SKILL.md": {
+      "sha256": "a4991c96b009074a48e4c563119e53f87112f2d2176322dab44e083ea57e7ec0",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/role/tester-validation/SKILL.md": {
+      "sha256": "74a613d1ca49eb8be8ba8edc722bb5cb319c56d7f93cc59ec330f98a63a9f190",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/task/corrective-bead-creation/SKILL.md": {
+      "sha256": "f95aada72641639da43381b2ce1fa0329bca937dd1fe90d3104fcf544f5688ed",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/task/corrective-bead-creation/agents/openai.yaml": {
+      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/task/corrective-implementation/SKILL.md": {
+      "sha256": "dafd5253b116689ba9cbeb2bc45602536c9198c56953b35f5a2f795d46945750",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/task/corrective-implementation/agents/openai.yaml": {
+      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/task/defect-bead-creation/SKILL.md": {
+      "sha256": "f214506a0b470b7b170aecf8dc39b2614baa29bc4267e96b9bd30e21bfb5a4e5",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/task/defect-bead-creation/agents/openai.yaml": {
+      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/task/dependency-graphing/SKILL.md": {
+      "sha256": "a3dd8841b7c463d231c3fee9122cbaf66a3bfc6b5a3568f44b09b096fa84f031",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/task/dependency-graphing/agents/openai.yaml": {
+      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/task/migration/SKILL.md": {
+      "sha256": "1423cdfb4c85b3abfbdadffcc7ccab2aaa3fe6c7f7169702287c5f26661955b9",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/task/migration/agents/openai.yaml": {
+      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/task/refactor-safe/SKILL.md": {
+      "sha256": "3e84da5bd61d63a1d537e15500c152167a02ad48bfbc40bf7d36b208c7b08873",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/task/refactor-safe/agents/openai.yaml": {
+      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/task/regression-triage/SKILL.md": {
+      "sha256": "0de95ac3c44f7fe60296f0abb798c858156792255aefbafc1a25963d708382c4",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/task/regression-triage/agents/openai.yaml": {
+      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/task/release-notes/SKILL.md": {
+      "sha256": "4cde5f37665004e147c3910de3428e6ddc57339b98910ac3d3a1af54114fca51",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/task/release-notes/agents/openai.yaml": {
+      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/task/risk-assessment/SKILL.md": {
+      "sha256": "db769eb7c6591047b95183f5c5a8272a93128965a7c6984476e18006d167871c",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/task/risk-assessment/agents/openai.yaml": {
+      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/task/spec-intake/SKILL.md": {
+      "sha256": "0883e20971f8cb131b27cbb2077ec847c7d7e94f15b3a087a2cee13a3907ba07",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/task/spec-intake/agents/openai.yaml": {
+      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/task/spec-sync/SKILL.md": {
+      "sha256": "1d856e5706349dc97a55cfdf91c9af58d62920aed1c00200d5f8e95c42ba160a",
+      "source": "bundled",
+      "user_owned": false
+    },
+    "templates/skills/task/spec-sync/agents/openai.yaml": {
+      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
       "source": "bundled",
       "user_owned": false
     }

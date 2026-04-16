@@ -1,6 +1,6 @@
 ---
 name: takt
-description: Manage a takt-orchestrated project — beads, specs, scheduler, merges, and common workflows for the operator's Claude Code assistant.
+description: 'MANDATORY: Read this entire skill before taking any action on a takt project. Defines all required CLI commands (always `uv run takt ...`), bead lifecycle rules, spec management, scheduler operation, and merge workflow. Contains a list of forbidden operations — violating them corrupts pipeline state. Non-compliance is not acceptable.'
 tools: Read, Write, Edit, Glob, Grep, Bash
 user-invocable: false
 ---
@@ -72,11 +72,11 @@ uv run takt bead delete <id> --force   # in_progress/done require --force
 ### Running the scheduler
 
 ```bash
-# One cycle — schedule and run eligible beads
-uv run takt --runner claude run --once
+# Schedule and run all eligible beads to quiescence
+uv run takt --runner claude run
 
 # Multiple parallel workers
-uv run takt --runner claude run --once --max-workers 4
+uv run takt --runner claude run --max-workers 4
 
 # Retry a specific bead
 uv run takt retry <bead_id>
@@ -93,11 +93,18 @@ Runner is selected via `--runner` flag, `AGENT_TAKT_RUNNER` env var, or `config.
 # Dry run — prints bead graph as JSON, does NOT create beads
 uv run takt plan specs/drafts/my-spec.md
 
-# Persist — creates beads in storage
+# Persist — creates beads in storage (one-shot)
 uv run takt plan --write specs/drafts/my-spec.md
+
+# Staged workflow — run the LLM once, review, then persist separately
+uv run takt plan --output plan.json specs/drafts/my-spec.md  # save plan JSON for review
+uv run takt plan --from-file plan.json                        # persist without re-running LLM
+rm plan.json                                                  # clean up when done
 ```
 
-**Always use `--write` to persist.** Without it, the planner output is printed but no beads are created.
+**Always use `--write` or `--from-file` to persist.** Without one of these, no beads are created.
+
+Use the staged workflow (`--output` + `--from-file`) when you want to inspect or edit the bead graph before committing it. The operator owns the plan file and is responsible for cleaning it up. `--output` and `--from-file` are mutually exclusive with `--write`.
 
 After persisting, use `spec.py` to transition the spec to `planned`:
 
@@ -116,7 +123,7 @@ Then commit both the beads and the spec status change together.
 uv run takt summary
 
 # Run one scheduler cycle (all eligible beads, up to max-workers in parallel)
-uv run takt --runner claude run --once --max-workers 4
+uv run takt --runner claude run --max-workers 4
 
 # After the cycle, check progress
 uv run takt summary
@@ -147,7 +154,7 @@ This does:
 Do **not** resolve conflicts manually. Let the scheduler handle it:
 
 ```bash
-uv run takt --runner claude run --once --max-workers 4
+uv run takt --runner claude run --max-workers 4
 uv run takt merge <bead_id>   # retry after scheduler resolves the conflict bead
 ```
 
@@ -184,7 +191,7 @@ git commit -m "Move my-spec to done/ after merge"
 
 ## Common Mistakes to Avoid
 
-- **Running `takt plan` without `--write`** — looks like it worked but nothing is persisted
+- **Running `takt plan` without `--write` or `--from-file`** — looks like it worked but nothing is persisted
 - **Moving spec to `planned/` before beads exist** — confusing if beads are later found missing
 - **Moving spec to `done/` before merging** — spec says done but code isn't on main
 - **Using `git merge` instead of `takt merge`** — bypasses rebase + test gate

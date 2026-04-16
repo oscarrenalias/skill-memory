@@ -1,8 +1,8 @@
 ---
 name: spec-management
-description: Canonical workflow for spec lifecycle operations using spec.py — initialization, creation, querying, metadata updates, and status transitions. Also covers writing specs, planning beads, and merging features in codex-agent-orchestration.
+description: This skill supports managing spec files, as part of spec-driven development. The skill exposes functions for creating, listing, showing, and updating spec files. This skill must always be used to create and manage specs, and to update metadata for spec files (description, dependencies, priority, complexity, status, tags, and scope). Editing of the content of spec files, except for the frontmatter fields that the skill manages for the metadata, is outside the scope of this skill and should be done by agents directly in the file. Agents should not edit any frontmatter fields directly in the file, but should use the provided functions to ensure the filesystem and frontmatter stay in sync.
 tools: Read, Write, Edit, Glob, Grep, Bash
-user-invocable: false
+license: MIT
 ---
 
 # spec-management
@@ -41,7 +41,11 @@ If missing, initialise it before doing anything else:
 python3 <spec-py> init
 ```
 
-This creates `specs/drafts/`, `specs/planned/`, and `specs/done/`. Only needs to be done once per project.
+This creates `specs/`, `specs/drafts/`, `specs/planned/`, and `specs/done/`. Only needs to be done once per project.
+
+> **Note:** If `specs/` already exists but is missing its lifecycle subdirectories, the `create` subcommand will create them automatically. `spec init` is only required to create the top-level `specs/` directory itself.
+
+"drafts", "planned", and "done" are the default lifecycle stages, but custom status values are supported. The skill enforces that a spec file lives in the folder matching its `status` frontmatter field, so if you use custom status values, the skill script will enforce the correct folder structure automatically.
 
 ## Invocation
 
@@ -67,6 +71,8 @@ Output: path to the created file and its generated ID (e.g. `spec-a3f19c2b`).
 
 The filename is derived from the title as a slug (lowercase, hyphens, `.md` extension).
 
+If `specs/` exists but the lifecycle subdirectories (`drafts/`, `planned/`, `done/`) are absent, `create` creates them automatically. Running `spec init` beforehand is not required when `specs/` already exists.
+
 ---
 
 ### `list` — List all specs
@@ -87,11 +93,12 @@ Filters can be combined. Legacy specs (no frontmatter) are shown with status `le
 
 ### `show <spec>` — Show spec details
 
-Prints the frontmatter and first 20 lines of body for a spec.
+Prints the frontmatter and first 20 lines of body for a spec. Use `--full` to print the entire body.
 
 ```bash
 python3 <spec-py> show spec-a3f19c2b
 python3 <spec-py> show my-feature
+python3 <spec-py> show --full spec-a3f19c2b
 ```
 
 See [ID and filename resolution](#id-and-filename-resolution) for how `<spec>` is matched.
@@ -119,6 +126,8 @@ Valid values: `draft`, `planned`, `done`.
 Output: new path of the file after the move.
 
 > **Do not use `mv`** to move spec files between folders. `set status` keeps the frontmatter and filesystem location in sync atomically.
+
+Custom status values are supported. The skill will create the necessary folders as needed and enforce that the `status` field matches the folder name.
 
 ---
 
@@ -174,6 +183,28 @@ Fails if the spec already has frontmatter.
 
 ---
 
+### `remove <spec>` — Delete a spec file
+
+Permanently deletes the spec file. Behaviour depends on status:
+
+- **draft** specs are deleted immediately with no confirmation.
+- **planned** or **done** specs prompt for confirmation (`[y/N]`) to prevent accidental deletion.
+
+```bash
+python3 <spec-py> remove spec-a3f19c2b
+python3 <spec-py> remove my-feature
+```
+
+Use `--force` to skip the confirmation prompt (useful in automated or non-interactive contexts):
+
+```bash
+python3 <spec-py> remove --force spec-a3f19c2b
+```
+
+> **Note for agents:** always use `--force` when deleting specs non-interactively, otherwise the confirmation prompt will block execution.
+
+---
+
 ## ID and Filename Resolution
 
 Every subcommand that takes a `<spec>` argument resolves it as follows:
@@ -222,25 +253,15 @@ specs/
 
 **Rule:** A spec lives in exactly one folder. Move it forward only when the transition condition is met.
 
-| Transition | Condition |
-|---|---|
-| drafts → planned | `takt plan --write <spec>` has been run and beads created |
-| planned → done | All beads in the feature tree are `done` AND the feature branch has been merged to main |
-
-Never move a spec to `done/` before merging. Never move to `planned/` before beads are persisted.
-
 ---
 
 ## Writing a Spec
 
-### Required sections
+### Template
 
-1. **Objective** — One paragraph: what problem this solves and why it matters
-2. **Problems to Fix** — Numbered list of specific issues, with current state described concretely
-3. **Changes** — What to build: new files, modified files, new behaviours. Be prescriptive — include function signatures, field names, config keys, CLI flags where known
-4. **Files to Modify** — Table: file path → what changes
-5. **Acceptance Criteria** — Bullet list of verifiable conditions the implementation must satisfy
-6. **Pending Decisions** — Any open questions that must be resolved before planning. Mark resolved decisions inline (strikethrough + resolution)
+A default template is used when creating a new spec with `spec.py create`. The template includes only markdown sections but no frontmatter with metadata, as those will be managed automatically by the skill when initializing the skill.
+
+The default template is `specs/spec-template.md`. You or the user can edit this file to change the default content for new specs depending on the project's needs. The template can include any content but the default version is a good starting point.
 
 ### Good spec practices
 
@@ -254,101 +275,4 @@ Never move a spec to `done/` before merging. Never move to `planned/` before bea
 
 - Implementation details the agent should decide (e.g. variable names, internal algorithm choice)
 - Speculative future features — scope to what's actually being built
-- Duplicate content from CLAUDE.md
-
----
-
-## Planning a Spec (Persisting Beads)
-
-```bash
-# Dry run — prints bead graph as JSON, does NOT create beads
-uv run takt plan specs/drafts/my-spec.md
-
-# Persist — creates beads in storage
-uv run takt plan --write specs/drafts/my-spec.md
-```
-
-**Always use `--write` to persist.** Without it, the planner output is printed but no beads are created.
-
-After persisting, use `spec.py` to transition the spec to `planned`:
-
-```bash
-python3 <spec-py> set status planned spec-a3f19c2b
-```
-
-Then commit both the beads and the spec status change together.
-
----
-
-## Checking Spec / Bead Status
-
-```bash
-# Overall counts
-uv run takt summary
-
-# Scoped to one feature
-uv run takt summary --feature-root <bead_id>
-
-# All beads as table
-uv run takt bead list --plain
-
-# Find the feature root ID for a spec
-uv run takt bead list --plain | grep -i "<spec keyword>"
-```
-
-To find which bead corresponds to a spec, search by title keyword. The feature root bead (where `bead_id == feature_root_id`) is the top-level planner bead.
-
----
-
-## Moving a Spec to Done
-
-Conditions that must ALL be true:
-1. `uv run takt summary --feature-root <id>` shows `ready=0, in_progress=0, blocked=0`
-2. The feature branch has been merged to main via `takt merge <id>`
-3. Tests pass on main
-
-Then use `spec.py` to transition the spec:
-
-```bash
-python3 <spec-py> set status done spec-a3f19c2b
-git add specs/
-git commit -m "Move my-spec to done/ after merge"
-```
-
----
-
-## Merging a Feature
-
-Use `takt merge`, never `git merge` directly:
-
-```bash
-uv run takt merge <bead_id>
-```
-
-This does:
-1. Merges `main` into the feature branch (conflict check)
-2. If conflict: creates a `merge-conflict` bead, exits with instructions
-3. Runs `config.common.test_command` (currently: `uv run python -m unittest discover -s tests`)
-4. If tests fail: creates a `merge-conflict` bead, exits with instructions
-5. If all clear: `git merge --no-ff` into main
-
-If a merge-conflict bead is created, run the scheduler then retry:
-```bash
-uv run takt --runner claude run --once --max-workers 4
-uv run takt merge <bead_id>  # retry
-```
-
-**Flags:**
-- `--skip-rebase` — skip the main-into-feature sync step
-- `--skip-tests` — skip the test gate
-
----
-
-## Common Mistakes to Avoid
-
-- **Running `takt plan` without `--write`** — looks like it worked but nothing is persisted
-- **Moving spec to `planned/` before beads exist** — confusing if beads are later found missing
-- **Moving spec to `done/` before merging** — spec says done but code isn't on main
-- **Using `git merge` instead of `takt merge`** — bypasses rebase + test gate
-- **Using `mv` to move spec files** — use `spec.py set status` instead to keep frontmatter and filesystem in sync
-- **Creating beads inside an already-merged feature tree** — those beads need their own merge cycle; use standalone beads (no `--parent-id`) for fixes to merged features
+- Duplicate content from project-level instructions
