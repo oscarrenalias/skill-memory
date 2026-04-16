@@ -19,7 +19,7 @@ jobs:
           python .apm/skills/skill-memory/memory.py --help
           .apm/skills/skill-memory/.venv/bin/pip install --quiet pytest
       - name: Run tests
-        run: .apm/skills/skill-memory/.venv/bin/pytest tests/ test_commands.py
+        run: .apm/skills/skill-memory/.venv/bin/pytest tests/
 
   tag:
     needs: test

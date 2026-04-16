@@ -100,7 +100,7 @@ templates/         # Takt agent guardrail templates
 ### Running tests
 
 ```bash
-.apm/skills/skill-memory/.venv/bin/pytest tests/ test_commands.py
+.apm/skills/skill-memory/.venv/bin/pytest tests/
 ```
 
 Bootstrap the venv first if it doesn't exist: `python3 .apm/skills/skill-memory/memory.py --help`. The project manages its own virtualenv at `.apm/skills/skill-memory/.venv/`.
