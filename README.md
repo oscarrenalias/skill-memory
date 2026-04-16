@@ -7,7 +7,7 @@ Long-term semantic memory for agents — store, search, and retrieve text memori
 ### Via APM (recommended)
 
 ```bash
-apm install --t claude oscarrenalias/skill-memory
+apm install -t claude oscarrenalias/skill-memory
 ```
 
 Check the [GitHub releases page](https://github.com/oscarrenalias/skill-memory/releases) for the latest version.
