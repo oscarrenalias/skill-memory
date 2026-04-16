@@ -7,15 +7,15 @@
   "bead_type": "task",
   "parent_id": "B-5c40fb01",
   "dependencies": [
-    "B-d4849eef",
-    "B-4e4ef869",
-    "B-b224e1aa",
-    "B-4f956401",
-    "B-eb8424da",
     "B-1578cee1",
-    "B-64e7c3af",
     "B-37569c46",
-    "B-7e5a7f1b"
+    "B-4e4ef869",
+    "B-4f956401",
+    "B-64e7c3af",
+    "B-7e5a7f1b",
+    "B-b224e1aa",
+    "B-d4849eef",
+    "B-eb8424da"
   ],
   "acceptance_criteria": [
     "No remaining references to root-level memory.py in test files, CI, or documentation",
