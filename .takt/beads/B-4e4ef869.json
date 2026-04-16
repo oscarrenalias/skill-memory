@@ -3,7 +3,7 @@
   "title": "Replace root apm.yml and install skill-level apm.yml",
   "agent_type": "developer",
   "description": "Use git mv to move the existing root apm.yml to .apm/skills/skill-memory/apm.yml (preserving git history). Then create a new root apm.yml as the repo-level manifest with name, version, description, author, empty dependencies/scripts, and a compilation.exclude section listing specs/**, tests/**, .takt/**, .claude/**, .agents/**, templates/**, docs/**.",
-  "status": "ready",
+  "status": "in_progress",
   "bead_type": "task",
   "parent_id": "B-5c40fb01",
   "dependencies": [],
@@ -47,9 +47,12 @@
   },
   "block_reason": "",
   "conflict_risks": "",
-  "branch_name": "",
-  "worktree_path": "",
-  "lease": null,
+  "branch_name": "feature/b-5c40fb01",
+  "worktree_path": "/Users/oscar.renalias/Projects/skill-memory/.takt/worktrees/B-5c40fb01",
+  "lease": {
+    "owner": "developer:B-4e4ef869",
+    "expires_at": "2026-04-16T06:58:11.391786+00:00"
+  },
   "retries": 0,
   "execution_history": [
     {
@@ -58,9 +61,48 @@
       "agent_type": "scheduler",
       "summary": "Bead created",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-16T06:28:13.101731+00:00",
+      "event": "skills_loaded",
+      "agent_type": "developer",
+      "summary": "Loaded 7 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/developer-implementation",
+          "capability/code-edit",
+          "task/corrective-implementation",
+          "task/refactor-safe",
+          "task/migration",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-16T06:28:13.101760+00:00",
+      "event": "started",
+      "agent_type": "developer",
+      "summary": "Worker started",
+      "details": {}
     }
   ],
-  "metadata": {},
+  "metadata": {
+    "execution_root": "/Users/oscar.renalias/Projects/skill-memory/.takt/agent-runs/B-4e4ef869",
+    "workspace_repo_path": "repo",
+    "loaded_skills": [
+      "core/base-orchestrator",
+      "role/developer-implementation",
+      "capability/code-edit",
+      "task/corrective-implementation",
+      "task/refactor-safe",
+      "task/migration",
+      "memory"
+    ],
+    "skill_bundle_hash": "2cbacb3ae07c8eee2a6bb3d65b99b3e4df7fa47ac8b10c5c68be4b338a583348",
+    "isolated_home": "/Users/oscar.renalias/Projects/skill-memory/.takt/agent-runs/B-4e4ef869/home",
+    "runner_backend": "claude"
+  },
   "labels": [],
   "recovery_for": null,
   "priority": null
