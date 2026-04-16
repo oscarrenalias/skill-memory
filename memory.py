@@ -13,16 +13,36 @@ _DEPS = [
     "tokenizers>=0.19.0",
     "numpy>=1.24.0",
 ]
+_INSTALLED_STAMP = _VENV / ".deps_installed"
+
+
+def _check_sqlite_extensions() -> None:
+    """Abort early if this Python was built without SQLite extension-loading support."""
+    import sqlite3 as _sqlite3
+    con = _sqlite3.connect(":memory:")
+    try:
+        con.enable_load_extension(True)
+    except AttributeError:
+        sys.exit(
+            "agent-memory: your Python was built without SQLite extension-loading support.\n"
+            "Please reinstall Python with that capability enabled.\n"
+            "  macOS (recommended): brew install python\n"
+            "  Then re-run: python3 memory.py --help"
+        )
+    finally:
+        con.close()
 
 
 def _bootstrap() -> None:
     if str(_VENV) in sys.prefix:
         return  # already running inside the managed venv
+    _check_sqlite_extensions()
     venv_py = _VENV / ("Scripts/python.exe" if sys.platform == "win32" else "bin/python")
-    if not venv_py.exists():
-        print("agent-memory: first run, installing dependencies...", file=sys.stderr)
+    if not venv_py.exists() or not _INSTALLED_STAMP.exists():
+        print("agent-memory: installing dependencies...", file=sys.stderr)
         subprocess.check_call([sys.executable, "-m", "venv", str(_VENV)])
         subprocess.check_call([str(venv_py), "-m", "pip", "install", "--quiet", *_DEPS])
+        _INSTALLED_STAMP.touch()
     os.execv(str(venv_py), [str(venv_py)] + sys.argv)
 
 
