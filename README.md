@@ -14,14 +14,10 @@ Check the [GitHub releases page](https://github.com/oscarrenalias/skill-memory/r
 
 ### Via zip (manual)
 
-Download the latest `skill-memory-vX.Y.Z.zip` from the [GitHub releases page](https://github.com/oscarrenalias/skill-memory/releases), then unzip into your skills directory:
+Download the latest `skill-memory-vX.Y.Z.zip` from the [GitHub releases page](https://github.com/oscarrenalias/skill-memory/releases), then unzip into your agent skills directory:
 
 ```bash
-# Claude Code
-unzip skill-memory-vX.Y.Z.zip -d ~/.claude/skills/
-
-# Codex / .agents
-unzip skill-memory-vX.Y.Z.zip -d ~/.agents/skills/
+unzip skill-memory-vX.Y.Z.zip -d /path/to/your/skills/
 ```
 
 The zip contains a single `skill-memory/` directory — unzipping it directly into your skills folder gives the correct layout with no extra steps.
@@ -36,43 +32,43 @@ Upon loading the skill, the model initialises its own dependencies (self-contain
 brew install python
 ```
 
-Then re-run `python3 memory.py --help` to re-bootstrap the `.venv` against the new Python.
+Then re-run `python3 memory.py --help` from the skill directory to re-bootstrap the `.venv` against the new Python.
 
 ## Usage
 
-When loaded as a skill, the agent drives all commands — no manual invocation is needed. The CLI is documented here for reference and debugging.
+When loaded as a skill, the agent drives all commands — no manual invocation is needed. The CLI is documented here for reference and debugging. Commands below assume you are running from the skill directory, or replace `memory.py` with the full path to it.
 
 ```bash
-python3 ~/.claude/skills/skill-memory/memory.py <command> [options]
+python3 memory.py <command> [options]
 ```
 
 ### Common commands
 
 ```bash
 # Store a memory
-python3 ~/.claude/skills/skill-memory/memory.py add "The auth service uses RS256 JWTs, not HS256." --source myproject
+python3 memory.py add "The auth service uses RS256 JWTs, not HS256." --source myproject
 
 # Search memories
-python3 ~/.claude/skills/skill-memory/memory.py search "authentication token format" --limit 5
+python3 memory.py search "authentication token format" --limit 5
 
 # Ingest a file (splits into chunks automatically)
-python3 ~/.claude/skills/skill-memory/memory.py ingest notes.md --source myproject
+python3 memory.py ingest notes.md --source myproject
 
 # List recent memories
-python3 ~/.claude/skills/skill-memory/memory.py list --limit 20
+python3 memory.py list --limit 20
 
 # Delete a memory by UUID
-python3 ~/.claude/skills/skill-memory/memory.py delete <uuid>
+python3 memory.py delete <uuid>
 
 # Show DB stats
-python3 ~/.claude/skills/skill-memory/memory.py stats
+python3 memory.py stats
 ```
 
 ### DB location
 
 | Scenario | Path |
 |----------|------|
-| Default (cross-project) | `~/.local/share/agent-memory/memories.db` |
+| Default (cross-project) | `memories.db` next to `memory.py` |
 | Project-local | `--db .agent-memory.db` or `AGENT_MEMORY_DB=.agent-memory.db` |
 | CI / ephemeral | Set `AGENT_MEMORY_DB` to a temp path |
 
@@ -80,7 +76,7 @@ Use the default for general knowledge that spans projects. Use a project-local D
 
 ### What to store
 
-Store project-wide, reusable facts that would change your approach in a future session if you had known them upfront. Do **not** store ephemeral task state, git history, or content trivially readable from the repo. See `docs/memory/conventions.md` for full guidance.
+Store project-wide, reusable facts that would change your approach in a future session if you had known them upfront. Do **not** store ephemeral task state, git history, or content trivially readable from the repo.
 
 ---
 
@@ -91,9 +87,11 @@ Store project-wide, reusable facts that would change your approach in a future s
 ```
 .apm/skills/skill-memory/
   memory.py        # Main CLI entry point (bootstraps .venv on first run)
-  SKILL.md         # APM skill manifest and usage reference
-  apm.yml          # APM package metadata
+  SKILL.md         # Skill manifest and usage reference
+  apm.yml          # Skill-level APM package metadata
   assets/          # ONNX tokenizer model files (vocab, config, tokenizer.json)
+README.md          # This file (repo root)
+apm.yml            # Repo-level APM manifest with compilation.exclude (repo root)
 tests/             # pytest test suite
 specs/             # Takt feature specs
 templates/         # Takt agent guardrail templates
