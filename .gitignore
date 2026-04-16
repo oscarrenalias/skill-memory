@@ -9,6 +9,11 @@
 .venv/
 memories.db
 
+# skill-memory (new location under .apm)
+.apm/skills/skill-memory/.venv/
+.apm/skills/skill-memory/memories.db
+.apm/skills/skill-memory/__pycache__/
+
 # Python
 __pycache__/
 *.py[cod]
