@@ -4,6 +4,7 @@
 .takt/telemetry/
 .takt/logs/
 .takt/agent-runs/
+.takt/beads/*.json
 
 # agent-memory
 .venv/
