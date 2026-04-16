@@ -12,7 +12,7 @@ jobs:
       - name: Cache venv
         uses: actions/cache@v5
         with:
-          path: .venv
+          path: .apm/skills/skill-memory/.venv
           key: venv-${{ hashFiles('.apm/skills/skill-memory/memory.py') }}
       - name: Bootstrap venv and install pytest
         run: |
