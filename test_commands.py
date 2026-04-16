@@ -18,7 +18,7 @@ from unittest.mock import patch
 import numpy as np
 
 _SKILL_DIR = Path(__file__).parent
-spec = importlib.util.spec_from_file_location("memory", _SKILL_DIR / "memory.py")
+spec = importlib.util.spec_from_file_location("memory", Path(__file__).parent / ".apm/skills/skill-memory/memory.py")
 mem = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(mem)
 

@@ -45,7 +45,7 @@ try:
     with mock.patch("os.execv", lambda *a, **kw: None), \
          mock.patch("subprocess.check_call", lambda *a, **kw: None):
         _spec = _ilu.spec_from_file_location(
-            "memory", os.path.join(_REPO_ROOT, "memory.py")
+            "memory", os.path.join(_REPO_ROOT, ".apm/skills/skill-memory/memory.py")
         )
         _mem = _ilu.module_from_spec(_spec)
         sys.modules.setdefault("memory", _mem)

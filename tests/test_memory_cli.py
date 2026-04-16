@@ -8,7 +8,7 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
-MEMORY_PY = Path(__file__).parent.parent / "memory.py"
+MEMORY_PY = Path(__file__).parent.parent / ".apm/skills/skill-memory/memory.py"
 
 
 class TestShebang(unittest.TestCase):

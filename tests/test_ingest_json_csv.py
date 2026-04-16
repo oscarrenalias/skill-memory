@@ -31,7 +31,7 @@ with mock.patch.dict('sys.modules', {
     with mock.patch('os.execv', lambda *a, **kw: None):
         import importlib
         repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        spec = importlib.util.spec_from_file_location("memory_jc", os.path.join(repo_root, "memory.py"))
+        spec = importlib.util.spec_from_file_location("memory_jc", os.path.join(repo_root, ".apm/skills/skill-memory/memory.py"))
         _mem = importlib.util.module_from_spec(spec)
         sys.modules['memory_jc'] = _mem
         try:
