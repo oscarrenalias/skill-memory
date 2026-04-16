@@ -175,7 +175,9 @@
     ".takt/beads/B-fc273260.json",
     "apm.yml"
   ],
-  "expected_globs": [],
+  "expected_globs": [
+    ".apm/skills/skill-memory/assets/**"
+  ],
   "touched_files": [
     ".apm/skills/skill-memory/README.md",
     ".apm/skills/skill-memory/SKILL.md",
@@ -490,7 +492,7 @@
     "known_limitations": ""
   },
   "block_reason": "",
-  "conflict_risks": "None. Only apm.yml files were modified; no overlap with other beads expected.",
+  "conflict_risks": "None. Only apm.yml files were modified; no overlap with other beads expected.\nNone. Downstream beads that import memory.py by path will need to reference .apm/skills/skill-memory/memory.py instead of the root.",
   "branch_name": "",
   "worktree_path": "",
   "lease": null,
