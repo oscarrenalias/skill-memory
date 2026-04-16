@@ -1,27 +1,40 @@
 ---
 name: agent-memory
-description: Persist and retrieve knowledge across agent sessions. Use to search for prior context, or to store findings, decisions, and any other information worth knowing at a later point in time. Supports text-based information, can ingest files (markdown, CSV, plain text), and is searchable by semantic similarity.
+description: General-purpose long-term memory for agents. Store and retrieve any information worth remembering across sessions — business context, client knowledge, research findings, decisions, discovered facts, or anything else that would be useful to recall later. Supports text-based information, can ingest files (markdown, CSV, plain text), and is searchable by semantic similarity.
 tools: Bash
 user-invocable: true
 ---
 
 # agent-memory
 
-This skill is designed to let agents persist and retrieve knowledge across sessions. It provides a simple interface for adding text-based "memories" with optional metadata, and for searching those memories by semantic similarity. Use it to surface relevant context before starting work, and to write down anything you learned that you'd want to know next time.
+General-purpose long-term memory for agents. Use it to store any information worth keeping between sessions — there is no restriction on topic or domain. Business context, technical findings, meeting notes, research, decisions, warnings, preferences — if it would be useful to recall later, it belongs here. Provides a simple interface for adding text-based memories with optional metadata and searching them by semantic similarity. Search before starting work; write when you finish.
+
+## Example Use Cases
+
+The scope is intentionally broad and not limited to software development. Here are examples across different domains:
+
+- **Client and stakeholder knowledge** — A client's stated priorities going into a project; a stakeholder who prefers summaries over detail; known constraints a decision-maker has mentioned before.
+- **Business context** — Key figures from a business case; a market assumption underpinning a strategy; a budget constraint that ruled out a particular direction.
+- **Meetings and conversations** — Outcomes and action items from a client meeting; a commitment made verbally that isn't written down elsewhere; context behind a decision that was reached in discussion.
+- **Research and analysis** — Findings from a competitive analysis; a source that turned out to be unreliable; conclusions from a spike or exploratory investigation.
+- **Preferences and working styles** — How a particular person or team prefers to receive information; a communication style that worked well; a format that was explicitly rejected.
+- **Decisions and their rationale** — Why one option was chosen over another; constraints that shaped the outcome; assumptions that were made at the time.
+- **Recurring patterns and warnings** — A mistake that keeps being repeated and how to avoid it; something that looks straightforward but has a hidden catch.
+- **Domain and subject matter knowledge** — A regulatory requirement relevant to a sector; a term that means something specific in a given context; a process quirk particular to an organisation.
 
 ## What NOT to Store
 
 These are not worth persisting — they are easily recovered, quickly stale, or belong elsewhere:
 
-- File contents or code snippets readable from the repo
-- Git history, recent changes, or who-changed-what (use `git log` instead)
-- Task state or in-progress work
-- Information already captured in a spec or design document
-- Details that belong in `CLAUDE.md` or agent guardrail templates
+- Verbatim content from documents or files you can read directly
+- Transient state or in-progress work from the current session
+- Information already captured in a formal, maintained document
+- Step-by-step logs of what you did (that's a task record, not a memory)
+- Raw data that hasn't been interpreted into a finding or conclusion
 
-**Good memory:** A recurring merge conflict pattern and how to resolve it. A non-obvious project convention not documented anywhere. A design decision and its rationale.
+**Good memory:** A client's budget constraint that ruled out a vendor. A decision made in a meeting and the reasoning behind it. A term that means something specific in this organisation. A recurring mistake and how to avoid it.
 
-**Bad memory:** The current contents of `memory.py`. The list of PRs merged this week. The steps you took to complete a feature.
+**Bad memory:** A verbatim transcript of a document you can read directly. A list of tasks completed this session. Information that is already captured in a formal document and won't change.
 
 The guiding test: *would knowing this upfront change my approach to a future task?* If yes, store it. If no, skip it.
 
@@ -88,7 +101,17 @@ python3 memory.py --namespace project add "TEXT"
 
 ## Getting Started
 
-Run `python3 memory.py <command> [options]` from the repo root. The DB auto-initialises on first write.
+Run `python3 memory.py <command> [options]` from the skill directory. The DB auto-initialises on first write.
+
+**First run**: `memory.py` automatically creates a `.venv` in the skill directory and installs its dependencies (`onnxruntime`, `sqlite-vec`, `tokenizers`, `numpy`). This requires internet access and takes about a minute. Subsequent runs are instant.
+
+**If the first run fails** (network timeout, interrupted install): the `.venv` may be left in a partial state. Delete it and retry:
+
+```bash
+rm -rf .venv && python3 memory.py --help
+```
+
+**Python requirement**: `memory.py` checks at startup whether your Python supports SQLite extension-loading. If it doesn't, the process exits immediately with instructions — follow the message shown and do not attempt to work around it.
 
 ## Commands Reference
 
