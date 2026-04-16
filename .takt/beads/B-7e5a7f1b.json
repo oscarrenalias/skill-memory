@@ -168,7 +168,18 @@
     ".takt/beads/B-fc273260-review.json",
     ".takt/beads/B-fc273260-test.json",
     ".takt/beads/B-fc273260.json",
-    "apm.yml"
+    "apm.yml",
+    "test_commands.py",
+    "tests/test_add_command.py",
+    "tests/test_db_init.py",
+    "tests/test_embed.py",
+    "tests/test_ensure_model.py",
+    "tests/test_ingest_chunking.py",
+    "tests/test_ingest_json_csv.py",
+    "tests/test_memory.py",
+    "tests/test_memory_cli.py",
+    "tests/test_namespace.py",
+    "tests/test_tokenizer_assets.py"
   ],
   "expected_globs": [
     ".apm/skills/skill-memory/assets/**"
@@ -317,7 +328,18 @@
     ".takt/beads/B-fc273260-review.json",
     ".takt/beads/B-fc273260-test.json",
     ".takt/beads/B-fc273260.json",
-    "apm.yml"
+    "apm.yml",
+    "test_commands.py",
+    "tests/test_add_command.py",
+    "tests/test_db_init.py",
+    "tests/test_embed.py",
+    "tests/test_ensure_model.py",
+    "tests/test_ingest_chunking.py",
+    "tests/test_ingest_json_csv.py",
+    "tests/test_memory.py",
+    "tests/test_memory_cli.py",
+    "tests/test_namespace.py",
+    "tests/test_tokenizer_assets.py"
   ],
   "changed_files": [
     ".apm/skills/skill-memory/README.md",
@@ -463,7 +485,18 @@
     ".takt/beads/B-fc273260-review.json",
     ".takt/beads/B-fc273260-test.json",
     ".takt/beads/B-fc273260.json",
-    "apm.yml"
+    "apm.yml",
+    "test_commands.py",
+    "tests/test_add_command.py",
+    "tests/test_db_init.py",
+    "tests/test_embed.py",
+    "tests/test_ensure_model.py",
+    "tests/test_ingest_chunking.py",
+    "tests/test_ingest_json_csv.py",
+    "tests/test_memory.py",
+    "tests/test_memory_cli.py",
+    "tests/test_namespace.py",
+    "tests/test_tokenizer_assets.py"
   ],
   "updated_docs": [],
   "handoff_summary": {
@@ -487,7 +520,7 @@
     "known_limitations": ""
   },
   "block_reason": "",
-  "conflict_risks": "None. Only apm.yml files were modified; no overlap with other beads expected.\nNone. Downstream beads that import memory.py by path will need to reference .apm/skills/skill-memory/memory.py instead of the root.",
+  "conflict_risks": "None. Only apm.yml files were modified; no overlap with other beads expected.\nNone. Downstream beads that import memory.py by path will need to reference .apm/skills/skill-memory/memory.py instead of the root.\nNone \u2014 changes are limited to path string literals in test fixture setup; no overlap with other in-flight beads expected.",
   "branch_name": "",
   "worktree_path": "",
   "lease": null,
