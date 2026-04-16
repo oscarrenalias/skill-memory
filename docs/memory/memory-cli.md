@@ -33,7 +33,8 @@ After installation the process re-execs itself under the managed interpreter. Th
 agent-memory: first run, installing dependencies…
 ```
 
-`.venv/` is listed in `.gitignore` and must never be committed.
+`.apm/skills/skill-memory/.venv/` is listed in `.gitignore` and must never be committed.
+The virtualenv is created next to `memory.py` inside `.apm/skills/skill-memory/`.
 
 ## Model bootstrap
 

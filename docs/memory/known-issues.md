@@ -23,3 +23,13 @@ check for unexpected surrounding text in the agent run log.
 All code changes must happen inside the assigned worktree path.
 Never edit files in the main repository root while a bead is in progress in a worktree,
 as this can cause merge conflicts on the feature branch.
+
+## Takt Bead State JSON Files Block Merges
+
+`.takt/beads/*.json` files are runtime state written by the takt scheduler during bead execution.
+They must not be committed — they are excluded by the `.takt/beads/*.json` rule in `.gitignore`.
+The directory itself is preserved in git by `.takt/beads/.gitkeep`.
+
+If these files accumulate as untracked files (e.g., after a bead run where the scheduler's git
+commit step failed), they can prevent `git merge` from completing. The fix is to ensure the
+`.gitignore` rule is in place; once ignored, `git merge` proceeds normally.
