@@ -3,7 +3,7 @@
   "title": "Corrective fix for B-4e4ef869: Replace root apm.yml and install skill-level apm.yml",
   "agent_type": "developer",
   "description": "Blocked reason: Preparing worktree (checking out 'feature/b-5c40fb01')\nfatal: 'feature/b-5c40fb01' is already used by worktree at '/Users/oscar.renalias/Projects/skill-memory/.takt/worktrees/B-5c40fb01'",
-  "status": "ready",
+  "status": "blocked",
   "bead_type": "task",
   "parent_id": "B-4e4ef869",
   "dependencies": [],
@@ -50,7 +50,7 @@
     "test_coverage_notes": "",
     "known_limitations": ""
   },
-  "block_reason": "",
+  "block_reason": "Preparing worktree (checking out 'feature/b-5c40fb01')\nfatal: 'feature/b-5c40fb01' is already used by worktree at '/Users/oscar.renalias/Projects/skill-memory/.takt/worktrees/B-5c40fb01'",
   "conflict_risks": "",
   "branch_name": "",
   "worktree_path": "",
@@ -62,6 +62,13 @@
       "event": "created",
       "agent_type": "scheduler",
       "summary": "Bead created",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-16T06:42:54.979236+00:00",
+      "event": "blocked",
+      "agent_type": "developer",
+      "summary": "Preparing worktree (checking out 'feature/b-5c40fb01')\nfatal: 'feature/b-5c40fb01' is already used by worktree at '/Users/oscar.renalias/Projects/skill-memory/.takt/worktrees/B-5c40fb01'",
       "details": {}
     }
   ],
