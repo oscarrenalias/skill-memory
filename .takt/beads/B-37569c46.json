@@ -175,6 +175,7 @@
     "apm.yml"
   ],
   "expected_globs": [
+    ".apm/skills/skill-memory/assets/**",
     "test_commands.py",
     "tests/**"
   ],
@@ -492,7 +493,7 @@
     "known_limitations": ""
   },
   "block_reason": "",
-  "conflict_risks": "None. Only apm.yml files were modified; no overlap with other beads expected.",
+  "conflict_risks": "None. Only apm.yml files were modified; no overlap with other beads expected.\nNone. Downstream beads that import memory.py by path will need to reference .apm/skills/skill-memory/memory.py instead of the root.",
   "branch_name": "",
   "worktree_path": "",
   "lease": null,
