@@ -3,7 +3,7 @@
   "title": "Update test path constants \u2014 batch 1 (Path-based pattern, 4 files)",
   "agent_type": "developer",
   "description": "Update the path constant in four test files that use `Path(__file__).parent.parent / \"memory.py\"`: tests/test_add_command.py (line 23), tests/test_db_init.py (line 18), tests/test_embed.py (line 23), tests/test_ensure_model.py (line 18). Change each to `Path(__file__).parent.parent / \".apm/skills/skill-memory/memory.py\"`. Only the path string changes \u2014 do not modify test logic.",
-  "status": "ready",
+  "status": "in_progress",
   "bead_type": "task",
   "parent_id": "B-5c40fb01",
   "dependencies": [
@@ -52,9 +52,12 @@
   },
   "block_reason": "",
   "conflict_risks": "",
-  "branch_name": "",
-  "worktree_path": "",
-  "lease": null,
+  "branch_name": "feature/b-5c40fb01",
+  "worktree_path": "/Users/oscar.renalias/Projects/skill-memory/.takt/worktrees/B-5c40fb01",
+  "lease": {
+    "owner": "developer:B-b224e1aa",
+    "expires_at": "2026-04-16T07:00:21.674635+00:00"
+  },
   "retries": 0,
   "execution_history": [
     {
@@ -63,9 +66,48 @@
       "agent_type": "scheduler",
       "summary": "Bead created",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-16T06:30:23.099692+00:00",
+      "event": "skills_loaded",
+      "agent_type": "developer",
+      "summary": "Loaded 7 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/developer-implementation",
+          "capability/code-edit",
+          "task/corrective-implementation",
+          "task/refactor-safe",
+          "task/migration",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-16T06:30:23.099714+00:00",
+      "event": "started",
+      "agent_type": "developer",
+      "summary": "Worker started",
+      "details": {}
     }
   ],
-  "metadata": {},
+  "metadata": {
+    "execution_root": "/Users/oscar.renalias/Projects/skill-memory/.takt/agent-runs/B-b224e1aa",
+    "workspace_repo_path": "repo",
+    "loaded_skills": [
+      "core/base-orchestrator",
+      "role/developer-implementation",
+      "capability/code-edit",
+      "task/corrective-implementation",
+      "task/refactor-safe",
+      "task/migration",
+      "memory"
+    ],
+    "skill_bundle_hash": "2cbacb3ae07c8eee2a6bb3d65b99b3e4df7fa47ac8b10c5c68be4b338a583348",
+    "isolated_home": "/Users/oscar.renalias/Projects/skill-memory/.takt/agent-runs/B-b224e1aa/home",
+    "runner_backend": "claude"
+  },
   "labels": [],
   "recovery_for": null,
   "priority": null
