@@ -31,7 +31,7 @@ with mock.patch.dict('sys.modules', {
         import importlib, types
         # We need to load memory.py from the repo root
         repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        spec = importlib.util.spec_from_file_location("memory", os.path.join(repo_root, "memory.py"))
+        spec = importlib.util.spec_from_file_location("memory", os.path.join(repo_root, ".apm/skills/skill-memory/memory.py"))
         _mem = importlib.util.module_from_spec(spec)
         # Provide mocked heavy deps before exec
         _mem.__dict__.update({})

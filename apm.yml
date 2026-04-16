@@ -1,8 +1,17 @@
-name: agent-memory
+name: skill-memory
 version: 0.1.0
-description: Long-term semantic memory for agents via SQLite + sqlite-vec + BAAI/bge-small-en-v1.5 ONNX embeddings
+description: Repository manifest for the skill-memory project
 author: "Renalias, Oscar"
 dependencies:
   apm: []
   mcp: []
 scripts: {}
+compilation:
+  exclude:
+    - specs/**
+    - tests/**
+    - .takt/**
+    - .claude/**
+    - .agents/**
+    - templates/**
+    - docs/**

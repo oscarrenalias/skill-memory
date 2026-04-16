@@ -20,7 +20,7 @@ import textwrap
 import unittest
 from pathlib import Path
 
-MEMORY_PY = Path(__file__).parent.parent / "memory.py"
+MEMORY_PY = Path(__file__).parent.parent / ".apm/skills/skill-memory/memory.py"
 _VENV_PY = MEMORY_PY.parent / ".venv" / (
     "Scripts/python.exe" if sys.platform == "win32" else "bin/python"
 )

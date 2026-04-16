@@ -6,7 +6,7 @@ and contain the expected structure for a BERT-compatible tokenizer.
 import json
 from pathlib import Path
 
-ASSETS_DIR = Path(__file__).parent.parent / "assets"
+ASSETS_DIR = Path(__file__).parent.parent / ".apm/skills/skill-memory/assets"
 
 REQUIRED_FILES = [
     "special_tokens_map.json",

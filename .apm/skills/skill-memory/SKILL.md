@@ -45,13 +45,13 @@ The guiding test: *would knowing this upfront change my approach to a future tas
 Run a search before diving into a codebase, or starting an activity. Prior agents may have stored context that reframes the problem:
 
 ```bash
-python3 memory.py search "merge conflict resolution"
+python3 .apm/skills/skill-memory/memory.py search "merge conflict resolution"
 ```
 
 Content can also be added under namespaces (e.g. `architecture`) to compartmentalise it and keep it scoped to that area. For example, if you're working on a performance-related task, search the `architecture` namespace for any relevant design decisions:
 
 ```bash
-python3 memory.py --namespace "architecture" search "performance requirements"
+python3 .apm/skills/skill-memory/memory.py --namespace "architecture" search "performance requirements"
 ```
 
 If no results come up, try broadening your query or searching without a namespace to see if related context was stored elsewhere. If no namespace is specified, the `default` namespace is used.
@@ -69,7 +69,7 @@ After completing work, add memories for:
 - Any type of information that would change how you'd approach a similar task in the future
 
 ```bash
-python3 memory.py --namespace lessons-learned add "The --namespace flag must come before the subcommand name, not after it. Wrong: memory.py add --namespace foo. Right: memory.py --namespace foo add." --source B-abc12def
+python3 .apm/skills/skill-memory/memory.py --namespace lessons-learned add "The --namespace flag must come before the subcommand name, not after it. Wrong: memory.py add --namespace foo. Right: memory.py --namespace foo add." --source B-abc12def
 ```
 
 Keep entries focused and self-contained. Each memory should make sense on its own without surrounding context.
@@ -90,28 +90,28 @@ Use one namespace per feature or per agent type — don't mix concerns in the sa
 
 ```bash
 # Write under feature namespace
-python3 memory.py --namespace feature-1234 add "TEXT"
+python3 .apm/skills/skill-memory/memory.py --namespace feature-1234 add "TEXT"
 
 # Search the feature namespace
-python3 memory.py --namespace feature-1234 search "QUERY"
+python3 .apm/skills/skill-memory/memory.py --namespace feature-1234 search "QUERY"
 
 # Write project-wide knowledge
-python3 memory.py --namespace project add "TEXT"
+python3 .apm/skills/skill-memory/memory.py --namespace project add "TEXT"
 ```
 
 ## Getting Started
 
-Run `python3 memory.py <command> [options]` from the skill directory. The DB auto-initialises on first write.
+Run `python3 .apm/skills/skill-memory/memory.py <command> [options]` from the repository root. The DB auto-initialises on first write.
 
-**First run**: `memory.py` automatically creates a `.venv` in the skill directory and installs its dependencies (`onnxruntime`, `sqlite-vec`, `tokenizers`, `numpy`). This requires internet access and takes about a minute. Subsequent runs are instant.
+**First run**: `.apm/skills/skill-memory/memory.py` automatically creates a `.venv` in the skill directory and installs its dependencies (`onnxruntime`, `sqlite-vec`, `tokenizers`, `numpy`). This requires internet access and takes about a minute. Subsequent runs are instant.
 
 **If the first run fails** (network timeout, interrupted install): the `.venv` may be left in a partial state. Delete it and retry:
 
 ```bash
-rm -rf .venv && python3 memory.py --help
+rm -rf .apm/skills/skill-memory/.venv && python3 .apm/skills/skill-memory/memory.py --help
 ```
 
-**Python requirement**: `memory.py` checks at startup whether your Python supports SQLite extension-loading. If it doesn't, the process exits immediately with instructions — follow the message shown and do not attempt to work around it.
+**Python requirement**: `.apm/skills/skill-memory/memory.py` checks at startup whether your Python supports SQLite extension-loading. If it doesn't, the process exits immediately with instructions — follow the message shown and do not attempt to work around it.
 
 ## Commands Reference
 
@@ -120,13 +120,13 @@ rm -rf .venv && python3 memory.py --help
 Creates the `memories` and `memories_vec` tables. Safe to run multiple times (idempotent).
 
 ```bash
-python3 memory.py [--namespace NAME] init [--db PATH]
+python3 .apm/skills/skill-memory/memory.py [--namespace NAME] init [--db PATH]
 ```
 
 ### `add` — Add a single memory
 
 ```bash
-python3 memory.py [--namespace NAME] add "TEXT" [--source TAG] [--meta KEY=VALUE ...] [--db PATH]
+python3 .apm/skills/skill-memory/memory.py [--namespace NAME] add "TEXT" [--source TAG] [--meta KEY=VALUE ...] [--db PATH]
 ```
 
 Use for short, standalone facts or observations discovered work. `--source` is an optional tag (e.g., a filename) for later filtering.
@@ -134,7 +134,7 @@ Use for short, standalone facts or observations discovered work. `--source` is a
 ### `ingest` — Bulk-ingest a file
 
 ```bash
-python3 memory.py [--namespace NAME] ingest FILE [--source TAG] [--chunk-size N] [--overlap N] [--column NAME] [--db PATH]
+python3 .apm/skills/skill-memory/memory.py [--namespace NAME] ingest FILE [--source TAG] [--chunk-size N] [--overlap N] [--column NAME] [--db PATH]
 ```
 
 Reads `FILE`, splits it into chunks, and inserts each chunk. Use after completing a feature to seed the memory store from documentation or notes.
@@ -158,7 +158,7 @@ Ingesting notes.md… 12 chunks added (0 skipped).
 ### `search` — Semantic search
 
 ```bash
-python3 memory.py [--namespace NAME] search "QUERY" [--limit N] [--threshold F] [--source TAG] [--json] [--db PATH]
+python3 .apm/skills/skill-memory/memory.py [--namespace NAME] search "QUERY" [--limit N] [--threshold F] [--source TAG] [--json] [--db PATH]
 ```
 
 Returns the top-`N` memories closest to the query vector (default: 5). `--threshold` is the maximum L2 distance to include (0–2; lower = more similar). `--json` outputs a JSON array.
@@ -166,7 +166,7 @@ Returns the top-`N` memories closest to the query vector (default: 5). `--thresh
 ### `list` — List memories
 
 ```bash
-python3 memory.py [--namespace NAME] list [--limit N] [--source TAG] [--json] [--db PATH]
+python3 .apm/skills/skill-memory/memory.py [--namespace NAME] list [--limit N] [--source TAG] [--json] [--db PATH]
 ```
 
 Lists memories newest-first (default limit: 20; `--limit 0` for all). Filter by `--source` to scope to a specific file, for example.
@@ -174,7 +174,7 @@ Lists memories newest-first (default limit: 20; `--limit 0` for all). Filter by 
 ### `delete` — Delete a memory
 
 ```bash
-python3 memory.py [--namespace NAME] delete UUID [--db PATH]
+python3 .apm/skills/skill-memory/memory.py [--namespace NAME] delete UUID [--db PATH]
 ```
 
 Removes the memory and its embedding vector by UUID.
@@ -182,7 +182,7 @@ Removes the memory and its embedding vector by UUID.
 ### `stats` — Show DB statistics
 
 ```bash
-python3 memory.py [--namespace NAME] stats [--db PATH]
+python3 .apm/skills/skill-memory/memory.py [--namespace NAME] stats [--db PATH]
 ```
 
 Prints the DB path, total memory count, and file size.
@@ -191,7 +191,7 @@ Prints the DB path, total memory count, and file size.
 
 | Scenario | Recommendation |
 |----------|----------------|
-| Personal / cross-project context | Use the default (`memories.db` next to `memory.py`) |
+| Personal / cross-project context | Use the default (`memories.db` next to `.apm/skills/skill-memory/memory.py`) |
 | Project-local context | Pass `--db .agent-memory.db` or set `AGENT_MEMORY_DB=.agent-memory.db` |
 | CI / ephemeral environments | Set `AGENT_MEMORY_DB` to a temp path |
 
