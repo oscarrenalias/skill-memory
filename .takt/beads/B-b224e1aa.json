@@ -3,7 +3,7 @@
   "title": "Update test path constants \u2014 batch 1 (Path-based pattern, 4 files)",
   "agent_type": "developer",
   "description": "Update the path constant in four test files that use `Path(__file__).parent.parent / \"memory.py\"`: tests/test_add_command.py (line 23), tests/test_db_init.py (line 18), tests/test_embed.py (line 23), tests/test_ensure_model.py (line 18). Change each to `Path(__file__).parent.parent / \".apm/skills/skill-memory/memory.py\"`. Only the path string changes \u2014 do not modify test logic.",
-  "status": "in_progress",
+  "status": "done",
   "bead_type": "task",
   "parent_id": "B-5c40fb01",
   "dependencies": [
@@ -27,37 +27,59 @@
     "tests/test_ensure_model.py"
   ],
   "expected_globs": [],
-  "touched_files": [],
-  "changed_files": [],
+  "touched_files": [
+    "tests/test_add_command.py",
+    "tests/test_db_init.py",
+    "tests/test_embed.py",
+    "tests/test_ensure_model.py"
+  ],
+  "changed_files": [
+    "tests/test_add_command.py",
+    "tests/test_db_init.py",
+    "tests/test_embed.py",
+    "tests/test_ensure_model.py"
+  ],
   "updated_docs": [],
   "handoff_summary": {
-    "completed": "",
+    "completed": "Changed MEMORY_PY constant in tests/test_add_command.py:23, tests/test_db_init.py:18, tests/test_embed.py:23, tests/test_ensure_model.py:18 to reference .apm/skills/skill-memory/memory.py.",
     "remaining": "",
-    "risks": "",
-    "verdict": "",
+    "risks": "None. Path-only change; derived constants (_VENV_PY, _VENV_PATH) inherit the new base automatically because they are computed from MEMORY_PY.parent.",
+    "verdict": "approved",
     "findings_count": 0,
     "requires_followup": false,
-    "changed_files": [],
+    "changed_files": [
+      "tests/test_add_command.py",
+      "tests/test_db_init.py",
+      "tests/test_embed.py",
+      "tests/test_ensure_model.py"
+    ],
     "updated_docs": [],
-    "next_action": "",
-    "next_agent": "",
+    "next_action": "Hand off to tester agent for test execution.",
+    "next_agent": "tester",
     "block_reason": "",
-    "expected_files": [],
+    "expected_files": [
+      "tests/test_add_command.py",
+      "tests/test_db_init.py",
+      "tests/test_embed.py",
+      "tests/test_ensure_model.py"
+    ],
     "expected_globs": [],
-    "touched_files": [],
-    "conflict_risks": "",
-    "design_decisions": "",
-    "test_coverage_notes": "",
+    "touched_files": [
+      "tests/test_add_command.py",
+      "tests/test_db_init.py",
+      "tests/test_embed.py",
+      "tests/test_ensure_model.py"
+    ],
+    "conflict_risks": "Sibling batch-2 bead touches a different set of test files; no overlap expected.",
+    "design_decisions": "No design decisions required \u2014 purely mechanical path string substitution as specified.",
+    "test_coverage_notes": "Test logic untouched; only the path constant changed. Downstream tester should verify tests can locate memory.py at the new path.",
     "known_limitations": ""
   },
   "block_reason": "",
-  "conflict_risks": "",
+  "conflict_risks": "Sibling batch-2 bead touches a different set of test files; no overlap expected.",
   "branch_name": "feature/b-5c40fb01",
   "worktree_path": "/Users/oscar.renalias/Projects/skill-memory/.takt/worktrees/B-5c40fb01",
-  "lease": {
-    "owner": "developer:B-b224e1aa",
-    "expires_at": "2026-04-16T07:00:21.674635+00:00"
-  },
+  "lease": null,
   "retries": 0,
   "execution_history": [
     {
@@ -99,6 +121,13 @@
       "details": {
         "template_path": ".takt/agent-runs/B-b224e1aa/repo/templates/agents/developer.md"
       }
+    },
+    {
+      "timestamp": "2026-04-16T06:31:12.136631+00:00",
+      "event": "completed",
+      "agent_type": "developer",
+      "summary": "Updated the MEMORY_PY path constant in four test files from `Path(__file__).parent.parent / \"memory.py\"` to `Path(__file__).parent.parent / \".apm/skills/skill-memory/memory.py\"`. No test logic was modified. All four files pass py_compile syntax check.",
+      "details": {}
     }
   ],
   "metadata": {
@@ -171,7 +200,52 @@
         "test_coverage_notes": "",
         "known_limitations": ""
       }
-    }
+    },
+    "last_agent_result": {
+      "outcome": "completed",
+      "summary": "Updated the MEMORY_PY path constant in four test files from `Path(__file__).parent.parent / \"memory.py\"` to `Path(__file__).parent.parent / \".apm/skills/skill-memory/memory.py\"`. No test logic was modified. All four files pass py_compile syntax check.",
+      "verdict": "approved",
+      "findings_count": 0,
+      "requires_followup": false,
+      "next_agent": "tester",
+      "block_reason": ""
+    },
+    "telemetry": {
+      "cost_usd": 0.1834716,
+      "duration_ms": 40424,
+      "duration_api_ms": 33761,
+      "num_turns": 11,
+      "input_tokens": 7,
+      "output_tokens": 2124,
+      "cache_creation_tokens": 27860,
+      "cache_read_tokens": 149722,
+      "stop_reason": "end_turn",
+      "session_id": "ed5c1ac2-8006-495b-ba2e-a3d24660b0e4",
+      "permission_denials": [],
+      "prompt_chars": 6013,
+      "prompt_lines": 136,
+      "source": "provider",
+      "attempt": 1
+    },
+    "telemetry_history": [
+      {
+        "cost_usd": 0.1834716,
+        "duration_ms": 40424,
+        "duration_api_ms": 33761,
+        "num_turns": 11,
+        "input_tokens": 7,
+        "output_tokens": 2124,
+        "cache_creation_tokens": 27860,
+        "cache_read_tokens": 149722,
+        "stop_reason": "end_turn",
+        "session_id": "ed5c1ac2-8006-495b-ba2e-a3d24660b0e4",
+        "permission_denials": [],
+        "prompt_chars": 6013,
+        "prompt_lines": 136,
+        "source": "provider",
+        "attempt": 1
+      }
+    ]
   },
   "labels": [],
   "recovery_for": null,
