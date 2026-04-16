@@ -3,7 +3,7 @@
   "title": "Review: full review of repo restructure changes",
   "agent_type": "review",
   "description": "Review all changes across the feature: file moves via git mv, both apm.yml files, all test path constant updates across nine test files, CI workflow edits, and .gitignore additions. Confirm no stale root-level path references remain in any file, the distribution exclusion list is complete and correct, and the skill venv/db paths resolve under the new location.",
-  "status": "ready",
+  "status": "in_progress",
   "bead_type": "task",
   "parent_id": "B-5c40fb01",
   "dependencies": [
@@ -591,7 +591,10 @@
   "conflict_risks": "Fix is a single-line change to .github/workflows/test.yml with no overlap with any other in-flight bead.",
   "branch_name": "feature/b-5c40fb01",
   "worktree_path": "",
-  "lease": null,
+  "lease": {
+    "owner": "review:B-0ef0d5dd",
+    "expires_at": "2026-04-16T07:17:11.599849+00:00"
+  },
   "retries": 0,
   "execution_history": [
     {
@@ -652,6 +655,29 @@
       "event": "retried",
       "agent_type": "review",
       "summary": "Requeued blocked bead after corrective bead B-0ef0d5dd-corrective completed",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-16T06:47:13.391696+00:00",
+      "event": "skills_loaded",
+      "agent_type": "review",
+      "summary": "Loaded 6 skill(s) for isolated execution",
+      "details": {
+        "loaded_skills": [
+          "core/base-orchestrator",
+          "role/reviewer-signoff",
+          "capability/code-review",
+          "task/corrective-bead-creation",
+          "task/risk-assessment",
+          "memory"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-04-16T06:47:13.391721+00:00",
+      "event": "started",
+      "agent_type": "review",
+      "summary": "Worker started",
       "details": {}
     }
   ],
