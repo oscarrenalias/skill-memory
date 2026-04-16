@@ -40,7 +40,7 @@ def _bootstrap() -> None:
     venv_py = _VENV / ("Scripts/python.exe" if sys.platform == "win32" else "bin/python")
     if not venv_py.exists() or not _INSTALLED_STAMP.exists():
         print("agent-memory: installing dependencies...", file=sys.stderr)
-        subprocess.check_call([sys.executable, "-m", "venv", str(_VENV)])
+        subprocess.check_call([sys.executable, "-m", "venv", "--clear", str(_VENV)])
         subprocess.check_call([str(venv_py), "-m", "pip", "install", "--quiet", *_DEPS])
         _INSTALLED_STAMP.touch()
     os.execv(str(venv_py), [str(venv_py)] + sys.argv)

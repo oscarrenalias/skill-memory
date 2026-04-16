@@ -7,13 +7,14 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
+        id: setup-python
         with:
-          python-version: '3.x'
+          python-version: '3.12'
       - name: Cache venv
         uses: actions/cache@v5
         with:
           path: .apm/skills/skill-memory/.venv
-          key: venv-${{ hashFiles('.apm/skills/skill-memory/memory.py') }}
+          key: venv-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('.apm/skills/skill-memory/memory.py') }}
       - name: Bootstrap venv and install pytest
         run: |
           python .apm/skills/skill-memory/memory.py --help
