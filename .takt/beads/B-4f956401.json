@@ -6,7 +6,9 @@
   "status": "ready",
   "bead_type": "task",
   "parent_id": "B-5c40fb01",
-  "dependencies": [],
+  "dependencies": [
+    "B-d4849eef"
+  ],
   "acceptance_criteria": [
     "tests/test_ingest_chunking.py path constant references .apm/skills/skill-memory/memory.py",
     "tests/test_ingest_json_csv.py path constant references .apm/skills/skill-memory/memory.py",
