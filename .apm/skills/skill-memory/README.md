@@ -18,7 +18,7 @@ Upon loading the skill, the model will initialize its own dependencies (it's sel
 
 ### Python requirement
 
-`memory.py` requires a Python build compiled with SQLite extension-loading support. If you see `AttributeError: 'sqlite3.Connection' object has no attribute 'enable_load_extension'`, your Python was built without this flag.
+`.apm/skills/skill-memory/memory.py` requires a Python build compiled with SQLite extension-loading support. If you see `AttributeError: 'sqlite3.Connection' object has no attribute 'enable_load_extension'`, your Python was built without this flag.
 
 **Recommended fix:** use Homebrew Python (macOS) or the official python.org installer:
 
@@ -32,14 +32,14 @@ If you manage Python via **pyenv**, rebuild with:
 PYTHON_CONFIGURE_OPTS="--enable-loadable-sqlite-extensions" pyenv install 3.x.x
 ```
 
-Then re-run `python3 memory.py --help` to re-bootstrap the `.venv` against the new Python.
+Then re-run `python3 .apm/skills/skill-memory/memory.py --help` to re-bootstrap the `.venv` against the new Python.
 
 ## Usage
 
-The main interface is `memory.py`:
+The main interface is `.apm/skills/skill-memory/memory.py`:
 
 ```bash
-python3 memory.py <command> [options]
+python3 .apm/skills/skill-memory/memory.py <command> [options]
 ```
 
 ### Common commands
@@ -48,22 +48,22 @@ These should not be required by human operators as the agent will drive everythi
 
 ```bash
 # Store a memory
-python3 memory.py add "The auth service uses RS256 JWTs, not HS256." --source myproject
+python3 .apm/skills/skill-memory/memory.py add "The auth service uses RS256 JWTs, not HS256." --source myproject
 
 # Search memories
-python3 memory.py search "authentication token format" --limit 5
+python3 .apm/skills/skill-memory/memory.py search "authentication token format" --limit 5
 
 # Ingest a file (splits into chunks automatically)
-python3 memory.py ingest notes.md --source myproject
+python3 .apm/skills/skill-memory/memory.py ingest notes.md --source myproject
 
 # List recent memories
-python3 memory.py list --limit 20
+python3 .apm/skills/skill-memory/memory.py list --limit 20
 
 # Delete a memory by UUID
-python3 memory.py delete <uuid>
+python3 .apm/skills/skill-memory/memory.py delete <uuid>
 
 # Show DB stats
-python3 memory.py stats
+python3 .apm/skills/skill-memory/memory.py stats
 ```
 
 ### DB location
@@ -87,10 +87,11 @@ Store project-wide, reusable facts that would change your approach in a future s
 ### Repo layout
 
 ```
-memory.py          # Main CLI entry point (bootstraps .venv on first run)
-SKILL.md           # APM skill manifest and usage reference
-apm.yml            # APM package metadata
-docs/memory/       # conventions.md, known-issues.md, memory-cli.md
+.apm/skills/skill-memory/
+  memory.py        # Main CLI entry point (bootstraps .venv on first run)
+  SKILL.md         # APM skill manifest and usage reference
+  apm.yml          # APM package metadata
+  assets/          # ONNX tokenizer model files (vocab, config, tokenizer.json)
 tests/             # pytest test suite
 specs/             # Takt feature specs
 templates/         # Takt agent guardrail templates
@@ -99,10 +100,10 @@ templates/         # Takt agent guardrail templates
 ### Running tests
 
 ```bash
-.venv/bin/pytest
+.apm/skills/skill-memory/.venv/bin/pytest
 ```
 
-The project manages its own virtualenv at `.venv/`. Use `.venv/bin/pytest` rather than a system-level `pytest`.
+The project manages its own virtualenv at `.apm/skills/skill-memory/.venv/`. Use `.apm/skills/skill-memory/.venv/bin/pytest` rather than a system-level `pytest`.
 
 ### How specs and beads work
 
