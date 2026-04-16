@@ -3,7 +3,7 @@
   "title": "git mv: relocate memory.py, SKILL.md, assets/, README.md to .apm/skills/skill-memory/",
   "agent_type": "developer",
   "description": "Create .apm/skills/skill-memory/ directory and use git mv to move memory.py, SKILL.md, assets/ (directory), and README.md from the repo root to the new location. No changes to file contents \u2014 memory.py uses _SKILL_DIR = Path(__file__).parent so all relative paths resolve correctly at the new location.",
-  "status": "ready",
+  "status": "blocked",
   "bead_type": "task",
   "parent_id": "B-5c40fb01",
   "dependencies": [],
@@ -52,7 +52,7 @@
     "test_coverage_notes": "",
     "known_limitations": ""
   },
-  "block_reason": "",
+  "block_reason": "Preparing worktree (checking out 'feature/b-5c40fb01')\nfatal: 'feature/b-5c40fb01' is already used by worktree at '/Users/oscar.renalias/Projects/skill-memory/.takt/worktrees/B-5c40fb01'",
   "conflict_risks": "",
   "branch_name": "",
   "worktree_path": "",
@@ -64,6 +64,13 @@
       "event": "created",
       "agent_type": "scheduler",
       "summary": "Bead created",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-16T06:42:50.161964+00:00",
+      "event": "blocked",
+      "agent_type": "developer",
+      "summary": "Preparing worktree (checking out 'feature/b-5c40fb01')\nfatal: 'feature/b-5c40fb01' is already used by worktree at '/Users/oscar.renalias/Projects/skill-memory/.takt/worktrees/B-5c40fb01'",
       "details": {}
     }
   ],
