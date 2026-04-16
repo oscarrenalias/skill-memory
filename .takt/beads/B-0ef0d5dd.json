@@ -525,7 +525,7 @@
     "known_limitations": ""
   },
   "block_reason": "",
-  "conflict_risks": "None. Only apm.yml files were modified; no overlap with other beads expected.\nNone. Downstream beads that import memory.py by path will need to reference .apm/skills/skill-memory/memory.py instead of the root.\nNone \u2014 changes are limited to path string literals in test fixture setup; no overlap with other in-flight beads expected.",
+  "conflict_risks": "None. Only apm.yml files were modified; no overlap with other beads expected.\nNone. Downstream beads that import memory.py by path will need to reference .apm/skills/skill-memory/memory.py instead of the root.\nNone \u2014 changes are limited to path string literals in test fixture setup; no overlap with other in-flight beads expected.\nSibling batch-2 bead touches a different set of test files; no overlap expected.",
   "branch_name": "",
   "worktree_path": "",
   "lease": null,
