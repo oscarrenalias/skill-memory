@@ -6,7 +6,9 @@
   "status": "ready",
   "bead_type": "task",
   "parent_id": "B-5c40fb01",
-  "dependencies": [],
+  "dependencies": [
+    "B-d4849eef"
+  ],
   "acceptance_criteria": [
     ".gitignore contains .apm/skills/skill-memory/.venv/",
     ".gitignore contains .apm/skills/skill-memory/memories.db",
