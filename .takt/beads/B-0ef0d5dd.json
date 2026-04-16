@@ -498,6 +498,13 @@
       "agent_type": "review",
       "summary": "Review found 1 blocking issue: CI Cache venv step uses stale `path: .venv` (root) instead of `path: .apm/skills/skill-memory/.venv` (actual skill venv location). All other acceptance criteria pass.",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-16T06:42:02.205504+00:00",
+      "event": "corrective_planned",
+      "agent_type": "review",
+      "summary": "Created corrective bead B-0ef0d5dd-corrective for blocked issue",
+      "details": {}
     }
   ],
   "metadata": {
@@ -966,7 +973,8 @@
         "source": "provider",
         "attempt": 1
       }
-    ]
+    ],
+    "auto_corrective_bead_id": "B-0ef0d5dd-corrective"
   },
   "labels": [],
   "recovery_for": null,
