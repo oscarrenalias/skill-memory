@@ -3,7 +3,7 @@
   "title": "Review: full review of repo restructure changes",
   "agent_type": "review",
   "description": "Review all changes across the feature: file moves via git mv, both apm.yml files, all test path constant updates across nine test files, CI workflow edits, and .gitignore additions. Confirm no stale root-level path references remain in any file, the distribution exclusion list is complete and correct, and the skill venv/db paths resolve under the new location.",
-  "status": "blocked",
+  "status": "ready",
   "bead_type": "task",
   "parent_id": "B-5c40fb01",
   "dependencies": [
@@ -446,7 +446,7 @@
     "test_coverage_notes": "No tests run per guardrails (tester agent responsibility). Static review only.",
     "known_limitations": "test_commands.py:20 defines unused variable `_SKILL_DIR = Path(__file__).parent` after the path update; this is dead code but not a correctness issue and does not warrant a corrective bead."
   },
-  "block_reason": "AC5 not met: CI workflow `Cache venv` step (line 15) caches `path: .venv` (root level) but the skill venv lives at `.apm/skills/skill-memory/.venv/`. Cache never hits. Fix: `path: .apm/skills/skill-memory/.venv`.",
+  "block_reason": "",
   "conflict_risks": "Fix is a single-line change to .github/workflows/test.yml with no overlap with any other in-flight bead.",
   "branch_name": "feature/b-5c40fb01",
   "worktree_path": "",
@@ -504,6 +504,13 @@
       "event": "corrective_planned",
       "agent_type": "review",
       "summary": "Created corrective bead B-0ef0d5dd-corrective for blocked issue",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-16T06:42:49.711476+00:00",
+      "event": "retried",
+      "agent_type": "review",
+      "summary": "Requeued blocked bead after corrective bead B-0ef0d5dd-corrective completed",
       "details": {}
     }
   ],
@@ -974,7 +981,9 @@
         "attempt": 1
       }
     ],
-    "auto_corrective_bead_id": "B-0ef0d5dd-corrective"
+    "auto_corrective_bead_id": "B-0ef0d5dd-corrective",
+    "last_corrective_retry_source": "B-0ef0d5dd-corrective",
+    "last_corrective_retry_commit": ""
   },
   "labels": [],
   "recovery_for": null,
