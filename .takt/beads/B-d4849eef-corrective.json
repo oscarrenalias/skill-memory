@@ -3,7 +3,7 @@
   "title": "Corrective fix for B-d4849eef: git mv: relocate memory.py, SKILL.md, assets/, README.md to .apm/skills/skill-memory/",
   "agent_type": "developer",
   "description": "Blocked reason: Preparing worktree (checking out 'feature/b-5c40fb01')\nfatal: 'feature/b-5c40fb01' is already used by worktree at '/Users/oscar.renalias/Projects/skill-memory/.takt/worktrees/B-5c40fb01'",
-  "status": "ready",
+  "status": "blocked",
   "bead_type": "task",
   "parent_id": "B-d4849eef",
   "dependencies": [],
@@ -55,7 +55,7 @@
     "test_coverage_notes": "",
     "known_limitations": ""
   },
-  "block_reason": "file-scope conflict with in-progress B-d4849eef",
+  "block_reason": "Preparing worktree (checking out 'feature/b-5c40fb01')\nfatal: 'feature/b-5c40fb01' is already used by worktree at '/Users/oscar.renalias/Projects/skill-memory/.takt/worktrees/B-5c40fb01'",
   "conflict_risks": "",
   "branch_name": "",
   "worktree_path": "",
@@ -74,6 +74,13 @@
       "event": "deferred",
       "agent_type": "developer",
       "summary": "file-scope conflict with in-progress B-d4849eef",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-04-16T06:42:55.406208+00:00",
+      "event": "blocked",
+      "agent_type": "developer",
+      "summary": "Preparing worktree (checking out 'feature/b-5c40fb01')\nfatal: 'feature/b-5c40fb01' is already used by worktree at '/Users/oscar.renalias/Projects/skill-memory/.takt/worktrees/B-5c40fb01'",
       "details": {}
     }
   ],
