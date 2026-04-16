@@ -42,3 +42,10 @@ jobs:
             new_tag="v${major}.${minor}.$((patch + 1))"
           fi
           git tag "$new_tag" && git push origin "$new_tag"
+          version="${new_tag#v}"
+          sed -i "s/^version: .*/version: ${version}/" apm.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add apm.yml
+          git commit -m "chore: update apm.yml version to ${new_tag} [skip ci]"
+          git push origin HEAD:main
