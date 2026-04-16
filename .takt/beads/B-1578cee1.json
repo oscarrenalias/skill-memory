@@ -6,7 +6,9 @@
   "status": "ready",
   "bead_type": "task",
   "parent_id": "B-5c40fb01",
-  "dependencies": [],
+  "dependencies": [
+    "B-d4849eef"
+  ],
   "acceptance_criteria": [
     "Cache key uses hashFiles('.apm/skills/skill-memory/memory.py')",
     "Bootstrap step invokes python .apm/skills/skill-memory/memory.py --help",
