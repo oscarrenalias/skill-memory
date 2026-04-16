@@ -72,9 +72,18 @@
       "agent_type": "developer",
       "summary": "Preparing worktree (checking out 'feature/b-5c40fb01')\nfatal: 'feature/b-5c40fb01' is already used by worktree at '/Users/oscar.renalias/Projects/skill-memory/.takt/worktrees/B-5c40fb01'",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-16T06:42:51.529143+00:00",
+      "event": "corrective_planned",
+      "agent_type": "developer",
+      "summary": "Created corrective bead B-d4849eef-corrective for blocked issue",
+      "details": {}
     }
   ],
-  "metadata": {},
+  "metadata": {
+    "auto_corrective_bead_id": "B-d4849eef-corrective"
+  },
   "labels": [],
   "recovery_for": null,
   "priority": null
