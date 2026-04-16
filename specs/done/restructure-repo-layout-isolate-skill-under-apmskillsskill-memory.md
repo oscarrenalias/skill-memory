@@ -5,7 +5,7 @@ description: "Move skill artefacts (memory.py, SKILL.md, apm.yml, assets/) from 
 dependencies: null
 priority: high
 complexity: null
-status: planned
+status: done
 tags:
 - refactor
 - repo-structure
