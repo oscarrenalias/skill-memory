@@ -1,5 +1,5 @@
 name: agent-memory
-version: 0.1.0
+version: 0.1.8
 description: Long-term semantic memory for agents via SQLite + sqlite-vec + BAAI/bge-small-en-v1.5 ONNX embeddings
 author: "Renalias, Oscar"
 dependencies:
