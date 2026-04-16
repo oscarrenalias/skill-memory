@@ -4,66 +4,68 @@ Long-term semantic memory for agents — store, search, and retrieve text memori
 
 ## Installation
 
-Install via APM (recommended):
+### Via APM (recommended)
 
 ```bash
-apm install --t claude oscarrenalias/skill-memory#v0.1.7
+apm install --t claude oscarrenalias/skill-memory
 ```
 
-Please replace v0.1.4 with the right version, check the [GitHub releases page](https://github.com/oscarrenalias/skill-memory/tags) to check the latest available version.
+Check the [GitHub releases page](https://github.com/oscarrenalias/skill-memory/releases) for the latest version.
 
-Alternatively, clone manually and add to your Claude Code skills path.
+### Via zip (manual)
 
-Upon loading the skill, the model will initialize its own dependencies (it's self-contained but it will pull libraries) as well as initialize the local database.
+Download the latest `skill-memory-vX.Y.Z.zip` from the [GitHub releases page](https://github.com/oscarrenalias/skill-memory/releases), then unzip into your skills directory:
+
+```bash
+# Claude Code
+unzip skill-memory-vX.Y.Z.zip -d ~/.claude/skills/
+
+# Codex / .agents
+unzip skill-memory-vX.Y.Z.zip -d ~/.agents/skills/
+```
+
+The zip contains a single `skill-memory/` directory — unzipping it directly into your skills folder gives the correct layout with no extra steps.
+
+Upon loading the skill, the model initialises its own dependencies (self-contained, pulls libraries on first run) and creates the local database automatically.
 
 ### Python requirement
 
-`.apm/skills/skill-memory/memory.py` requires a Python build compiled with SQLite extension-loading support. If you see `AttributeError: 'sqlite3.Connection' object has no attribute 'enable_load_extension'`, your Python was built without this flag.
-
-**Recommended fix:** use Homebrew Python (macOS) or the official python.org installer:
+`memory.py` requires a Python build compiled with SQLite extension-loading support. The script checks this at startup and exits with instructions if the requirement is not met. If you see the error, install Homebrew Python on macOS:
 
 ```bash
-brew install python   # macOS
+brew install python
 ```
 
-If you manage Python via **pyenv**, rebuild with:
-
-```bash
-PYTHON_CONFIGURE_OPTS="--enable-loadable-sqlite-extensions" pyenv install 3.x.x
-```
-
-Then re-run `python3 .apm/skills/skill-memory/memory.py --help` to re-bootstrap the `.venv` against the new Python.
+Then re-run `python3 memory.py --help` to re-bootstrap the `.venv` against the new Python.
 
 ## Usage
 
-The main interface is `.apm/skills/skill-memory/memory.py`:
+When loaded as a skill, the agent drives all commands — no manual invocation is needed. The CLI is documented here for reference and debugging.
 
 ```bash
-python3 .apm/skills/skill-memory/memory.py <command> [options]
+python3 ~/.claude/skills/skill-memory/memory.py <command> [options]
 ```
 
 ### Common commands
 
-These should not be required by human operators as the agent will drive everything through the skill. They are only provided here for reference.
-
 ```bash
 # Store a memory
-python3 .apm/skills/skill-memory/memory.py add "The auth service uses RS256 JWTs, not HS256." --source myproject
+python3 ~/.claude/skills/skill-memory/memory.py add "The auth service uses RS256 JWTs, not HS256." --source myproject
 
 # Search memories
-python3 .apm/skills/skill-memory/memory.py search "authentication token format" --limit 5
+python3 ~/.claude/skills/skill-memory/memory.py search "authentication token format" --limit 5
 
 # Ingest a file (splits into chunks automatically)
-python3 .apm/skills/skill-memory/memory.py ingest notes.md --source myproject
+python3 ~/.claude/skills/skill-memory/memory.py ingest notes.md --source myproject
 
 # List recent memories
-python3 .apm/skills/skill-memory/memory.py list --limit 20
+python3 ~/.claude/skills/skill-memory/memory.py list --limit 20
 
 # Delete a memory by UUID
-python3 .apm/skills/skill-memory/memory.py delete <uuid>
+python3 ~/.claude/skills/skill-memory/memory.py delete <uuid>
 
 # Show DB stats
-python3 .apm/skills/skill-memory/memory.py stats
+python3 ~/.claude/skills/skill-memory/memory.py stats
 ```
 
 ### DB location
@@ -100,10 +102,10 @@ templates/         # Takt agent guardrail templates
 ### Running tests
 
 ```bash
-.apm/skills/skill-memory/.venv/bin/pytest
+.apm/skills/skill-memory/.venv/bin/pytest tests/ test_commands.py
 ```
 
-The project manages its own virtualenv at `.apm/skills/skill-memory/.venv/`. Use `.apm/skills/skill-memory/.venv/bin/pytest` rather than a system-level `pytest`.
+Bootstrap the venv first if it doesn't exist: `python3 .apm/skills/skill-memory/memory.py --help`. The project manages its own virtualenv at `.apm/skills/skill-memory/.venv/`.
 
 ### How specs and beads work
 
