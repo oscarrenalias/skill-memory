@@ -1,0 +1,66 @@
+{
+  "bead_id": "B-1578cee1",
+  "title": "Update .github/workflows/test.yml for new skill path",
+  "agent_type": "developer",
+  "description": "Edit .github/workflows/test.yml to update three locations: (1) cache key \u2014 change hashFiles argument to '.apm/skills/skill-memory/memory.py'; (2) bootstrap step \u2014 change python invocation to 'python .apm/skills/skill-memory/memory.py --help' and pip path to '.apm/skills/skill-memory/.venv/bin/pip install --quiet pytest'; (3) test step \u2014 change pytest invocation to '.apm/skills/skill-memory/.venv/bin/pytest tests/ test_commands.py'.",
+  "status": "ready",
+  "bead_type": "task",
+  "parent_id": "B-5c40fb01",
+  "dependencies": [],
+  "acceptance_criteria": [
+    "Cache key uses hashFiles('.apm/skills/skill-memory/memory.py')",
+    "Bootstrap step invokes python .apm/skills/skill-memory/memory.py --help",
+    "Bootstrap step installs pytest via .apm/skills/skill-memory/.venv/bin/pip",
+    "Test step runs .apm/skills/skill-memory/.venv/bin/pytest tests/ test_commands.py"
+  ],
+  "linked_docs": [],
+  "feature_root_id": "B-5c40fb01",
+  "execution_branch_name": "feature/b-5c40fb01",
+  "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-memory/.takt/worktrees/B-5c40fb01",
+  "expected_files": [
+    ".github/workflows/test.yml"
+  ],
+  "expected_globs": [],
+  "touched_files": [],
+  "changed_files": [],
+  "updated_docs": [],
+  "handoff_summary": {
+    "completed": "",
+    "remaining": "",
+    "risks": "",
+    "verdict": "",
+    "findings_count": 0,
+    "requires_followup": false,
+    "changed_files": [],
+    "updated_docs": [],
+    "next_action": "",
+    "next_agent": "",
+    "block_reason": "",
+    "expected_files": [],
+    "expected_globs": [],
+    "touched_files": [],
+    "conflict_risks": "",
+    "design_decisions": "",
+    "test_coverage_notes": "",
+    "known_limitations": ""
+  },
+  "block_reason": "",
+  "conflict_risks": "",
+  "branch_name": "",
+  "worktree_path": "",
+  "lease": null,
+  "retries": 0,
+  "execution_history": [
+    {
+      "timestamp": "2026-04-16T06:26:48.809620+00:00",
+      "event": "created",
+      "agent_type": "scheduler",
+      "summary": "Bead created",
+      "details": {}
+    }
+  ],
+  "metadata": {},
+  "labels": [],
+  "recovery_for": null,
+  "priority": null
+}
