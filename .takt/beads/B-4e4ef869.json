@@ -85,6 +85,15 @@
       "agent_type": "developer",
       "summary": "Worker started",
       "details": {}
+    },
+    {
+      "timestamp": "2026-04-16T06:28:13.454382+00:00",
+      "event": "guardrails_applied",
+      "agent_type": "developer",
+      "summary": "Applied guardrails from .takt/agent-runs/B-4e4ef869/repo/templates/agents/developer.md",
+      "details": {
+        "template_path": ".takt/agent-runs/B-4e4ef869/repo/templates/agents/developer.md"
+      }
     }
   ],
   "metadata": {
@@ -101,7 +110,58 @@
     ],
     "skill_bundle_hash": "2cbacb3ae07c8eee2a6bb3d65b99b3e4df7fa47ac8b10c5c68be4b338a583348",
     "isolated_home": "/Users/oscar.renalias/Projects/skill-memory/.takt/agent-runs/B-4e4ef869/home",
-    "runner_backend": "claude"
+    "runner_backend": "claude",
+    "guardrails": {
+      "agent_type": "developer",
+      "template_path": ".takt/agent-runs/B-4e4ef869/repo/templates/agents/developer.md",
+      "template_text": "# Developer Guardrails\n\nPrimary responsibility: Implement only the assigned bead inside the existing architecture and file scope.\n\nAllowed actions:\n- Modify code, configuration, or local docs required to complete the assigned bead.\n- Create sub-beads for discovered follow-up work that should be handled separately.\n- Verify your `Python` changes compile and import correctly with a quick syntax check: `python -m py_compile`.\n\nDisallowed actions:\n- Run any test suite \u2014 not even a targeted `pytest` run or any subset. Test execution is exclusively the tester agent's responsibility. Running tests wastes the agent budget and delays the pipeline.\n- Redesign unrelated architecture or broaden scope beyond the assigned bead.\n- Perform final review signoff in place of a review agent.\n- Silently absorb unrelated test, documentation, or planning work that should be handed off.\n\nExpected outputs:\n- Completed or blocked JSON with concise implementation summary.\n- Accurate touched files, changed files, risks, and follow-up handoff fields.",
+      "captured_at": "2026-04-16T06:28:13.454371+00:00"
+    },
+    "worker_prompt_context": {
+      "bead_id": "B-4e4ef869",
+      "feature_root_id": "B-5c40fb01",
+      "title": "Replace root apm.yml and install skill-level apm.yml",
+      "agent_type": "developer",
+      "description": "Use git mv to move the existing root apm.yml to .apm/skills/skill-memory/apm.yml (preserving git history). Then create a new root apm.yml as the repo-level manifest with name, version, description, author, empty dependencies/scripts, and a compilation.exclude section listing specs/**, tests/**, .takt/**, .claude/**, .agents/**, templates/**, docs/**.",
+      "status": "in_progress",
+      "acceptance_criteria": [
+        ".apm/skills/skill-memory/apm.yml exists and contains skill-level metadata",
+        "Root apm.yml exists and contains a compilation.exclude section",
+        "Root apm.yml compilation.exclude covers: specs/**, tests/**, .takt/**, .claude/**, .agents/**, templates/**, docs/**",
+        "Root apm.yml has name: skill-memory and version: 0.1.0"
+      ],
+      "dependencies": [],
+      "linked_docs": [],
+      "execution_branch_name": "feature/b-5c40fb01",
+      "execution_worktree_path": "/Users/oscar.renalias/Projects/skill-memory/.takt/worktrees/B-5c40fb01",
+      "expected_files": [
+        "apm.yml",
+        ".apm/skills/skill-memory/apm.yml"
+      ],
+      "expected_globs": [],
+      "touched_files": [],
+      "conflict_risks": "",
+      "handoff_summary": {
+        "completed": "",
+        "remaining": "",
+        "risks": "",
+        "verdict": "",
+        "findings_count": 0,
+        "requires_followup": false,
+        "changed_files": [],
+        "updated_docs": [],
+        "next_action": "",
+        "next_agent": "",
+        "block_reason": "",
+        "expected_files": [],
+        "expected_globs": [],
+        "touched_files": [],
+        "conflict_risks": "",
+        "design_decisions": "",
+        "test_coverage_notes": "",
+        "known_limitations": ""
+      }
+    }
   },
   "labels": [],
   "recovery_for": null,
