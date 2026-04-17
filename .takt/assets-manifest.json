@@ -1,7 +1,7 @@
 {
-  "takt_version": "0.1.35",
+  "takt_version": "0.1.36",
   "installed_at": "2026-04-07T18:00:03.363133+00:00",
-  "upgraded_at": "2026-04-16T06:03:25.009324+00:00",
+  "upgraded_at": "2026-04-17T06:06:08.869276+00:00",
   "assets": {
     "templates/agents/merge-conflict.md": {
       "sha256": "37b9d67c3e4d10fe2fac0f86cb7ab170c5dec2a0f018264052cc4aa891a99d0f",
@@ -69,7 +69,7 @@
       "user_owned": false
     },
     ".claude/skills/skill-spec-management/SKILL.md": {
-      "sha256": "5590168f0ce5b3ca7839ef9cb414f183ee37f91622c6adedc9c8afa019c1a96e",
+      "sha256": "8349a1b9c6375b5d0594e033bb5b3b57f6b92f83e9c8eae1eca37253e8bd6a27",
       "source": "bundled",
       "user_owned": false
     },
@@ -252,6 +252,36 @@
       "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
       "source": "bundled",
       "user_owned": false
+    },
+    ".claude/agents/spec-reviewer.md": {
+      "sha256": "57bbb50cbd86b407ae2b4de8327c5cfe06430e1955f2ad5dd5a5ee41e7a20502",
+      "source": "bundled",
+      "user_owned": false
+    },
+    ".claude/skills/skill-spec-management/CLAUDE.md.disabled": {
+      "sha256": "10f9c9e62330a77e0edab781699dd8164cd35846aa1f2b8849792a8d810e473f",
+      "source": "user",
+      "user_owned": true
+    },
+    ".claude/skills/skill-spec-management/README.md.disabled": {
+      "sha256": "8b7a35fc60e181d9c63d679c818d78d963feed27e740d8d4f7981552dad7b407",
+      "source": "user",
+      "user_owned": true
+    },
+    ".claude/skills/skill-spec-management/apm.yml.disabled": {
+      "sha256": "a975c0914d2e3eb0e3ef886d2e19b27db0fa5d7cde772743d19aba7ce7a1b72e",
+      "source": "user",
+      "user_owned": true
+    },
+    ".claude/skills/skill-spec-management/tests/__init__.py.disabled": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "user",
+      "user_owned": true
+    },
+    ".claude/skills/skill-spec-management/tests/test_spec.py.disabled": {
+      "sha256": "b6d549d5da967da06b0375f26d956c0e61adbece908c3ac2f4da1e7a6f3bc763",
+      "source": "user",
+      "user_owned": true
     }
   }
 }
