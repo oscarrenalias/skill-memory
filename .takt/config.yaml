@@ -1,85 +1,82 @@
-# agent-takt configuration
-# See docs/multi-backend-agents.md for documentation.
-
-common:
-  default_runner: claude
-  templates_dir: templates/agents
-  test_command: python .apm/skills/skill-memory/memory.py --help > /dev/null 2>&1; .apm/skills/skill-memory/.venv/bin/pip install --quiet pytest && .apm/skills/skill-memory/.venv/bin/pytest
-  test_timeout_seconds: 900
-  agent_types:
-    - planner
-    - developer
-    - tester
-    - documentation
-    - review
-  scheduler:
-    lease_timeout_minutes: 30
-    max_corrective_attempts: 2
-    followup_suffixes:
-      tester: test
-      documentation: docs
-      review: review
-    corrective_suffix: corrective
-    transient_block_patterns:
-      - "high demand"
-      - "internal server error"
-      - "timeout"
-      - "timed out"
-      - "connection reset"
-      - "connection refused"
-      - "temporarily unavailable"
-      - "service unavailable"
-      - "missing bearer"
-      - "unauthorized"
-
-codex:
-  binary: codex
-  skills_dir: .agents
-  flags:
-    - "--skip-git-repo-check"
-    - "--full-auto"
-    - "--color"
-    - "never"
-
 claude:
-  binary: claude
-  skills_dir: .claude
-  flags:
-    - "--dangerously-skip-permissions"
-  timeout_seconds: 900
-  model_default: claude-sonnet-4-6
-  model_by_agent:
-    developer: claude-sonnet-4-6
-    tester: claude-sonnet-4-6
-    planner: claude-sonnet-4-6
-    review: claude-sonnet-4-6
-    documentation: claude-sonnet-4-6
-  allowed_tools_default:
-    - Edit
-    - Write
-    - Read
-    - Bash
-    - Glob
-    - Grep
-    - Skill
-    - ToolSearch
-    - WebSearch
-    - WebFetch
   allowed_tools_by_agent:
     developer:
-      - Agent
-      - NotebookEdit
-      - TaskCreate
-      - TaskUpdate
-      - TaskGet
-      - TaskList
-    tester:
-      - Agent
-      - TaskCreate
-      - TaskUpdate
-      - TaskGet
-      - TaskList
+    - Agent
+    - NotebookEdit
+    - TaskCreate
+    - TaskUpdate
+    - TaskGet
+    - TaskList
+    documentation:
+    - NotebookEdit
     planner: []
     review: []
-    documentation:
-      - NotebookEdit
+    tester:
+    - Agent
+    - TaskCreate
+    - TaskUpdate
+    - TaskGet
+    - TaskList
+  allowed_tools_default:
+  - Edit
+  - Write
+  - Read
+  - Bash
+  - Glob
+  - Grep
+  - Skill
+  - ToolSearch
+  - WebSearch
+  - WebFetch
+  binary: claude
+  flags:
+  - --dangerously-skip-permissions
+  model_by_agent:
+    developer: claude-sonnet-4-6
+    documentation: claude-sonnet-4-6
+    planner: claude-sonnet-4-6
+    review: claude-sonnet-4-6
+    tester: claude-sonnet-4-6
+  model_default: claude-sonnet-4-6
+  skills_dir: .claude
+  timeout_seconds: 900
+codex:
+  binary: codex
+  flags:
+  - --skip-git-repo-check
+  - --full-auto
+  - --color
+  - never
+  skills_dir: .agents
+common:
+  agent_types:
+  - planner
+  - developer
+  - tester
+  - documentation
+  - review
+  default_runner: claude
+  scheduler:
+    corrective_suffix: corrective
+    followup_suffixes:
+      documentation: docs
+      review: review
+      tester: test
+    lease_timeout_minutes: 30
+    max_corrective_attempts: 2
+    max_transient_retries: 5
+    transient_block_patterns:
+    - high demand
+    - internal server error
+    - timeout
+    - timed out
+    - connection reset
+    - connection refused
+    - temporarily unavailable
+    - service unavailable
+    - missing bearer
+    - unauthorized
+  templates_dir: templates/agents
+  test_command: python .apm/skills/skill-memory/memory.py --help > /dev/null 2>&1;
+    .apm/skills/skill-memory/.venv/bin/pip install --quiet pytest && .apm/skills/skill-memory/.venv/bin/pytest
+  test_timeout_seconds: 900

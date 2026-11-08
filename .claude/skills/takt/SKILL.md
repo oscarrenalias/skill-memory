@@ -32,7 +32,7 @@ open → ready → in_progress → done | blocked | handed_off
 - **blocked** — cannot proceed; needs intervention
 - **handed_off** — delegated to a downstream agent
 
-Agent types: `planner`, `developer`, `tester`, `documentation`, `review`. Only `developer`, `tester`, and `documentation` mutate code.
+Agent types: `planner`, `developer`, `tester`, `documentation`, `review`, `defect`. Only `developer`, `tester`, `documentation`, and `defect` mutate code.
 
 ---
 
@@ -44,13 +44,36 @@ Agent types: `planner`, `developer`, `tester`, `documentation`, `review`. Only `
 uv run takt summary                          # counts + next actionable beads
 uv run takt summary --feature-root <id>     # scoped to one feature
 uv run takt bead list --plain               # all beads as table
-uv run takt bead list --label <label>       # filter by label
-uv run takt bead show <id>                  # single bead details (JSON)
+uv run takt bead list --label <label>       # filter by label (repeatable, AND)
+uv run takt bead list --status <status>     # filter by lifecycle status (repeatable, OR)
+uv run takt bead list --agent <agent>       # filter by agent type (repeatable, OR)
+uv run takt bead list --feature-root <id>   # scope to one feature tree
+uv run takt bead show <id>                  # full bead JSON
+uv run takt bead show <id> --field <path>   # project a single field (e.g. status, handoff_summary.completed)
+uv run takt bead history <id>               # formatted execution history (one line per entry)
+uv run takt bead history <id> --limit 5     # last N entries
+uv run takt bead history <id> --event failed --event retried   # filter by event type (repeatable)
 uv run takt bead graph                      # Mermaid diagram of all beads
 uv run takt bead graph --feature-root <id> # scoped to one feature
 uv run takt bead graph --output graph.md   # write diagram to file
 uv run takt tui                             # interactive terminal UI
 ```
+
+Use `bead show <id> --field <path>` whenever you only need a specific value (status, handoff verdict, last event, block reason). It avoids the full JSON dump and is the canonical replacement for `cat .takt/beads/<id>.json | python3 -c "import json, sys; d=json.load(sys.stdin); print(d['handoff_summary']['completed'])"` and similar inline-parsing patterns. The `--field` syntax supports nested paths (`handoff_summary.verdict`) and array indexing including negatives (`execution_history[-1].event`).
+
+### Reading bead state
+
+When you need to inspect a bead's state, prefer the dedicated CLI commands over reading `.takt/beads/<id>.json` directly or shelling out to `python3 -c '...'` for JSON parsing:
+
+| Goal | Use |
+|------|-----|
+| Lifecycle log (chronological) | `uv run takt bead history <id>` |
+| One specific field | `uv run takt bead show <id> --field <path>` |
+| Full JSON for piping | `uv run takt bead show <id>` |
+| Beads matching status / agent | `uv run takt bead list --status ... --agent ... --plain` |
+| Beads in one feature tree | `uv run takt bead list --feature-root <id> --plain` |
+
+`--field` paths use Python-style dotted access with bracket-style array indexing including negative indices: `--field handoff_summary.verdict`, `--field execution_history[-1].event`, `--field expected_files[0]`. Missing paths exit non-zero with a clear stderr message; null values exit zero with an empty line (legitimate "field unset"). Lists and dicts render as pretty JSON; scalars render bare without quotes — clean for shell capture.
 
 ### Creating and managing beads
 
@@ -106,10 +129,10 @@ rm plan.json                                                  # clean up when do
 
 Use the staged workflow (`--output` + `--from-file`) when you want to inspect or edit the bead graph before committing it. The operator owns the plan file and is responsible for cleaning it up. `--output` and `--from-file` are mutually exclusive with `--write`.
 
-After persisting, use `spec.py` to transition the spec to `planned`:
+After persisting, use `takt spec` to transition the spec to `planned`:
 
 ```bash
-python3 <spec-py> set status planned spec-a3f19c2b
+uv run takt spec set status planned spec-a3f19c2b
 ```
 
 Then commit both the beads and the spec status change together.
@@ -130,7 +153,23 @@ uv run takt summary
 uv run takt bead list --plain
 ```
 
-The scheduler auto-creates `-test`, `-docs`, and `-review` child beads when a developer bead completes (unless it is a corrective bead or merge-conflict bead).
+The scheduler auto-creates `-test`, `-docs`, and `-review` child beads when a developer bead completes (unless it is a corrective bead, merge-conflict bead, or defect bead). Defect beads spawn only a single `-review` followup.
+
+**Exception — planner-managed feature trees:** When `takt plan` persists a graph that already contains shared tester, documentation, and review beads covering the whole tree, the scheduler recognises the planner-managed structure and suppresses the per-developer auto-followups. The beads the planner emitted are the final total — they do not seed additional `-test`/`-docs`/`-review` children. Auto-followup creation still runs for standalone developer beads outside a planner-owned tree.
+
+**Recovering from session-limit 429s.** Anthropic session/quota limits (error strings like `session limit`, `usage limit`, and some 429 responses) are **not** in the default `transient_block_patterns`. When one hits mid-run, the affected bead is marked `blocked` and the scheduler spawns a `-corrective` bead that will immediately hit the same limit and burn through `max_corrective_attempts`. Recovery:
+
+```bash
+# Identify the spurious correctives and delete them
+uv run takt bead list --status blocked --plain
+uv run takt bead delete <corrective-id> --force
+
+# After the quota window resets, requeue the originals
+uv run takt retry <original-bead-id>
+uv run takt --runner claude run --max-workers 4
+```
+
+Do **not** add the session-limit string to `transient_block_patterns` — rapid auto-retry won't help a limit that resets hours later; it just burns the retry budget faster. The proper fix (a deferrable-failure class with `not_before` scheduling) is a planned enhancement; manual requeue-after-reset is the clean recovery in the meantime.
 
 ---
 
@@ -164,6 +203,51 @@ uv run takt merge <bead_id>   # retry after scheduler resolves the conflict bead
 
 ---
 
+## Filing a Defect
+
+Use defect beads for post-merge bug fixes. Unlike full specs, defects are filed directly as beads — no planning step required. The defect agent bundles fix + regression test in one bead; the only auto-spawned followup is a `-review` child.
+
+```bash
+# File a defect bead
+uv run takt bead create \
+  --agent defect \
+  --type defect \
+  --title "Fix off-by-one in pagination" \
+  --description "Page 2 returns results starting at index 20 instead of 10."
+
+# Then run the scheduler to dispatch it
+uv run takt --runner claude run
+```
+
+**CLI validation rules (both flags required together):**
+- `--agent defect` requires `--type defect`
+- `--type defect` requires `--agent defect`
+- Any mismatch exits non-zero with a clear error
+
+The defect agent is permitted to run focused tests for the affected module. It must add a regression test that fails without the fix and passes with it. It must not run the full test suite — that happens at `takt merge` time.
+
+On completion, exactly one `-review` bead is auto-created. No `-test` or `-docs` children are spawned.
+
+---
+
+## Architecture Decision Records
+
+ADRs are backward-looking records of cross-cutting architectural decisions; specs are forward-looking feature work. Lifecycle: `draft` -> `approved` or `rejected`; `approved` -> `superseded`.
+
+```bash
+uv run takt adr new "Title" [--related-spec ID] [--tag X]
+uv run takt adr list
+uv run takt adr show <id>
+uv run takt adr approve <id>
+uv run takt adr reject <id>
+uv run takt adr supersede OLD --by NEW
+uv run takt adr validate
+```
+
+When a spec settles a cross-cutting architectural choice or reverses an earlier one, create an ADR linked with --related-spec.
+
+---
+
 ## Moving a Spec to Done
 
 Conditions that must ALL be true:
@@ -171,13 +255,15 @@ Conditions that must ALL be true:
 2. The feature branch has been merged to main via `takt merge <id>`
 3. Tests pass on main
 
-Then use `spec.py` to transition the spec:
+Then use `takt spec` to transition the spec:
 
 ```bash
-python3 <spec-py> set status done spec-a3f19c2b
+uv run takt spec set status done spec-a3f19c2b
 git add specs/
 git commit -m "Move my-spec to done/ after merge"
 ```
+
+If the spec has a `## Requirements` section, `set status done` validates and merges its requirement deltas into `specs/current/<capability>.md` before moving the spec. If any delta is invalid, the command exits 1 and the spec stays where it is — fix the errors (run `uv run takt spec validate <spec>` to see them) and retry. `git add specs/` picks up both the moved spec and any updated capability files under `specs/current/` in the same commit.
 
 ---
 
@@ -196,7 +282,7 @@ git commit -m "Move my-spec to done/ after merge"
 - **Moving spec to `done/` before merging** — spec says done but code isn't on main
 - **Using `git merge` instead of `takt merge`** — bypasses rebase + test gate
 - **Manually resolving merge conflicts without user authorisation** — let the scheduler handle merge-conflict beads; manual git operations corrupt state
-- **Using `mv` to move spec files** — use `spec.py set status` instead to keep frontmatter and filesystem in sync
+- **Using `mv` to move spec files** — use `takt spec set status` instead (see the `spec-management` skill; ADRs have their own `adr-management` skill) to keep frontmatter and filesystem in sync
 - **Creating beads inside an already-merged feature tree** — those beads need their own merge cycle; use standalone beads (no `--parent-id`) for fixes to merged features
 - **Invoking `takt` or `python` without `uv run`** — always prefix commands with `uv run`
 - **Manually marking a developer bead `done`** — developer beads must go through the scheduler to trigger followup beads
